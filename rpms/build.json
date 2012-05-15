@@ -1,0 +1,14 @@
+[
+  {"spec": "rock-runtime-node06/rock-runtime-node06.spec"},
+  {"spec": "rock-runtime-node06-core/rock-runtime-node06-core.spec"},
+  {"spec": "rock-runtime-perl514/rock-runtime-perl514.spec"},
+  {"spec": "rock-runtime-perl514-core/rock-runtime-perl514-core.spec"},
+  {"spec": "rock-runtime-perl514-cpanm/rock-runtime-perl514-cpanm.spec"},
+  {"spec": "rock-runtime-perl514-local-lib/rock-runtime-perl514-local-lib.spec"},
+  {"spec": "rock-runtime-python27/rock-runtime-python27.spec"},
+  {"spec": "rock-runtime-python27-core/rock-runtime-python27-core.spec"},
+  {"spec": "rock-runtime-python27-virtualenv/rock-runtime-python27-virtualenv.spec"},
+  {"spec": "rock-runtime-ruby19/rock-runtime-ruby19.spec"},
+  {"spec": "rock-runtime-ruby19-core/rock-runtime-ruby19-core.spec"},
+  {"spec": "rock-runtime-ruby19-bundler/rock-runtime-ruby19-bundler.spec"}
+]

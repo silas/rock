@@ -1,0 +1,8 @@
+*.bz2
+*.gz
+*.rpm
+*.tgz
+*.zip
+*swp
+.vagrant
+build
