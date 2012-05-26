@@ -49,7 +49,7 @@ This packages contains resources for building %{name} RPMs.
 ./configure \
   --prefix=%{ruby19_rootdir}%{_prefix} \
   --disable-rpath \
-  --enable-shared
+  --disable-shared
 %{__make}
 
 %install

@@ -45,7 +45,7 @@ This packages contains resources for building %{name} RPMs.
   -Dprivlib="%{perl514_rootdir}%{_prefix}/lib/perl5" \
   -Dman1dir="%{perl514_rootdir}%{_mandir}/man1" \
   -Dman3dir="%{perl514_rootdir}%{_mandir}/man3" \
-  -Dlddlflags="-shared $RPM_OPT_FLAGS $RPM_LD_FLAGS" \
+  -Dlddlflags="$RPM_OPT_FLAGS $RPM_LD_FLAGS" \
   -Duseshrplib \
   -Dusethreads \
   -Duseithreads \

@@ -50,10 +50,13 @@ This packages contains resources for building %{name} RPMs.
 %setup -q -n Python-%{version}
 
 %build
+mkdir -p %{buildroot}%{python27_libdir}
 ./configure \
   --prefix=%{python27_rootdir}%{_prefix} \
   --enable-ipv6 \
-  --enable-shared
+  --enable-shared \
+  LDFLAGS="-Wl,-rpath %{buildroot}%{python27_libdir}"
+sed -i 's|-Wl,-rpath %{buildroot}%{python27_libdir}|-Wl,-rpath %{python27_libdir}|g' Makefile
 %{__make}
 
 %install
