@@ -25,7 +25,6 @@ set -i -e "1s|#!/usr/bin/env python||" virtualenv.py
 
 %build
 
-export LD_LIBRARY_PATH="%{python27_rootdir}%{_prefix}/lib:$LD_LIBRARY_PATH"
 export PATH="%{python27_rootdir}%{_bindir}:$PATH"
 
 python setup.py build
@@ -33,7 +32,6 @@ python setup.py build
 %install
 rm -rf %{buildroot}
 
-export LD_LIBRARY_PATH="%{python27_rootdir}%{_prefix}/lib:$LD_LIBRARY_PATH"
 export PATH="%{python27_rootdir}%{_bindir}:$PATH"
 
 python setup.py install --skip-build --root %{buildroot}

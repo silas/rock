@@ -23,7 +23,6 @@ Create and use a local-lib for Perl modules with PERL5LIB.
 %setup -q -n local-lib-%{version}
 
 %build
-export LD_LIBRARY_PATH="%{perl516_rootdir}%{_prefix}/lib:$LD_LIBRARY_PATH"
 export PATH="%{perl516_rootdir}%{_bindir}:$PATH"
 
 perl Makefile.PL
@@ -31,7 +30,6 @@ perl Makefile.PL
 %install
 rm -rf %{buildroot}
 
-export LD_LIBRARY_PATH="%{perl516_rootdir}%{_prefix}/lib:$LD_LIBRARY_PATH"
 export PATH="%{perl516_rootdir}%{_bindir}:$PATH"
 
 make install PERL_INSTALL_ROOT=%{buildroot}

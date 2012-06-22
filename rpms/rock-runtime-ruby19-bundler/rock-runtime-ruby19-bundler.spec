@@ -28,7 +28,6 @@ many machines systematically and repeatably.
 %install
 rm -rf %{buildroot}
 
-export LD_LIBRARY_PATH="%{ruby19_rootdir}%{_prefix}/lib:$LD_LIBRARY_PATH"
 export PATH="%{ruby19_rootdir}%{_bindir}:$PATH"
 
 mkdir -p %{buildroot}%{_bindir}
