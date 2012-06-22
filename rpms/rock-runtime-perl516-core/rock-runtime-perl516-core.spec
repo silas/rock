@@ -2,13 +2,13 @@
 %global __perl_provides ''
 %global __perl_requires ''
 
-%global runtime perl514
-%global perl514_rootdir /opt/rock/runtime/%{runtime}
+%global runtime perl516
+%global perl516_rootdir /opt/rock/runtime/%{runtime}
 
-Name:           rock-runtime-perl514-core
-Version:        5.14.2
+Name:           rock-runtime-perl516-core
+Version:        5.16.0
 Release:        1%{?dist}
-Summary:        A Perl 5.14.x runtime
+Summary:        A Perl 5.16.x runtime
 
 Group:          Development/Languages
 License:        (GPL+ or Artistic) and (GPLv2+ or Artistic) and Copyright Only and MIT and Public Domain and UCD
@@ -39,17 +39,11 @@ This packages contains resources for building %{name} RPMs.
 %setup -q -n perl-%{version}
 
 %build
-./Configure -des -Doptimize="$RPM_OPT_FLAGS" \
-  -Dprefix=%{perl514_rootdir}%{_prefix} \
-  -Dbin="%{perl514_rootdir}%{_bindir}" \
-  -Dprivlib="%{perl514_rootdir}%{_prefix}/lib/perl5" \
-  -Dman1dir="%{perl514_rootdir}%{_mandir}/man1" \
-  -Dman3dir="%{perl514_rootdir}%{_mandir}/man3" \
-  -Dlddlflags="$RPM_OPT_FLAGS $RPM_LD_FLAGS" \
-  -Duseshrplib \
-  -Dusethreads \
-  -Duseithreads \
+./Configure -des \
+  -Doptimize="$RPM_OPT_FLAGS" \
+  -Dprefix=%{perl516_rootdir}%{_prefix} \
   -Dman3ext=3pm
+
 %{__make}
 
 %install
@@ -58,8 +52,11 @@ rm -rf %{buildroot}
 
 mkdir -p %{buildroot}%{_sysconfdir}/rpm
 
-cat >> %{buildroot}%{_sysconfdir}/rpm/macros.rock-perl514 << \EOF
-%%perl514_rootdir %{perl514_rootdir}
+# FIXME: hack to get strip working
+find %{buildroot}%{perl516_rootdir} -type f -exec chmod u+rw {} \;
+
+cat >> %{buildroot}%{_sysconfdir}/rpm/macros.rock-perl516 << \EOF
+%%perl516_rootdir %{perl516_rootdir}
 EOF
 
 %clean
@@ -68,14 +65,12 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root,-)
 %doc Artistic AUTHORS Copying README Changes
-%{perl514_rootdir}%{_bindir}
-%{perl514_rootdir}%{_mandir}
-%{perl514_rootdir}%{_prefix}/lib/perl5
+%{perl516_rootdir}
 
 %files rpmbuild
 %defattr(-,root,root,-)
-%{_sysconfdir}/rpm/macros.rock-perl514
+%{_sysconfdir}/rpm/macros.rock-perl516
 
 %changelog
-* Mon May 14 2012 Silas Sewell <silas@sewell.org> - 5.14.2-1
+* Mon May 14 2012 Silas Sewell <silas@sewell.org> - 5.16.0-1
 - Initial build
