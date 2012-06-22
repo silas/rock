@@ -3,13 +3,14 @@
 %global __ruby_requires ''
 
 Name:           rock-runtime-ruby19-bundler
-Version:        1.1.3
+Version:        1.1.4
 Release:        1%{?dist}
 Summary:        A tool to manage Ruby 1.9.x dependencies
 
 Group:          Development/Languages
 License:        MIT
 URL:            http://gembundler.com
+Source0:        http://rubygems.org/downloads/bundler-%{version}.gem
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 
@@ -32,11 +33,10 @@ export PATH="%{ruby19_rootdir}%{_bindir}:$PATH"
 
 mkdir -p %{buildroot}%{_bindir}
 
-gem install --force --ignore-dependencies --no-rdoc --no-ri \
+gem install --force --ignore-dependencies --no-rdoc --no-ri --local --force \
   --install-dir %{buildroot}%{ruby19_gemdir} \
   --bindir %{buildroot}%{ruby19_rootdir}%{_bindir} \
-  --version '= %{version}' \
-  bundler
+  %{SOURCE0}
 
 rm -fr %{buildroot}%{ruby19_gemdir}/cache
 
@@ -50,5 +50,9 @@ rm -rf %{buildroot}
 %{ruby19_rootdir}%{_bindir}/bundle
 
 %changelog
+* Fri Jun 22 2012 Silas Sewell <silas@sewell.org> - 1.1.4-1
+- Update to 1.1.4
+- Use local install
+
 * Mon May 14 2012 Silas Sewell <silas@sewell.org> - 1.1.3-1
 - Initial build
