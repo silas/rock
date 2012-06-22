@@ -8,6 +8,10 @@
   {"spec": "rock-runtime-python27/rock-runtime-python27.spec"},
   {"spec": "rock-runtime-python27-core/rock-runtime-python27-core.spec"},
   {"spec": "rock-runtime-python27-virtualenv/rock-runtime-python27-virtualenv.spec"},
+  {"spec": "rock-runtime-ruby18/rock-runtime-ruby18.spec"},
+  {"spec": "rock-runtime-ruby18-core/rock-runtime-ruby18-core.spec"},
+  {"spec": "rock-runtime-ruby18-rubygems/rock-runtime-ruby18-rubygems.spec"}
+  {"spec": "rock-runtime-ruby18-bundler/rock-runtime-ruby18-bundler.spec"},
   {"spec": "rock-runtime-ruby19/rock-runtime-ruby19.spec"},
   {"spec": "rock-runtime-ruby19-core/rock-runtime-ruby19-core.spec"},
   {"spec": "rock-runtime-ruby19-bundler/rock-runtime-ruby19-bundler.spec"}
