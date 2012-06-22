@@ -60,7 +60,7 @@ rm -rf %{buildroot}
 
 %changelog
 * Fri Jun 22 2012 Silas Sewell <silas@sewell.org> - 0.6.19-1
-- Version 0.6.19
+- Update to 0.6.19
 
 * Mon May 14 2012 Silas Sewell <silas@sewell.org> - 0.6.17-1
 - Initial build
