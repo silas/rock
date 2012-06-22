@@ -4,7 +4,7 @@
 %global node06_rootdir /opt/rock/runtime/%{runtime}
 
 Name:           rock-runtime-node06-core
-Version:        0.6.17
+Version:        0.6.19
 Release:        1%{?dist}
 Summary:        A Node.js 0.6.x runtime
 
@@ -59,5 +59,8 @@ rm -rf %{buildroot}
 %defattr(-,root,root,-)
 
 %changelog
+* Fri Jun 22 2012 Silas Sewell <silas@sewell.org> - 0.6.19-1
+- Version 0.6.19
+
 * Mon May 14 2012 Silas Sewell <silas@sewell.org> - 0.6.17-1
 - Initial build
