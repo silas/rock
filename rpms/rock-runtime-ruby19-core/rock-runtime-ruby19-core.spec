@@ -20,6 +20,8 @@ URL:            http://ruby-lang.org
 Source0:        http://ftp.ruby-lang.org/pub/ruby/1.9/ruby-%{shortversion}-p%{patch}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
+BuildRequires:  patchelf
+
 BuildRequires:  autoconf
 BuildRequires:  gdbm-devel
 BuildRequires:  ncurses-devel
@@ -48,13 +50,21 @@ This packages contains resources for building %{name} RPMs.
 %build
 ./configure \
   --prefix=%{ruby19_rootdir}%{_prefix} \
-  --disable-rpath \
-  --disable-shared
+  --enable-rpath \
+  --enable-shared
+
 %{__make}
 
 %install
 rm -rf %{buildroot}
+
 %{__make} install DESTDIR=%{buildroot}
+
+patchelf --set-rpath %{ruby19_rootdir}%{_prefix}/lib %{buildroot}%{ruby19_rootdir}%{_bindir}/ruby*
+
+# skip buildroot/rpath check
+export QA_SKIP_BUILD_ROOT=1
+export QA_SKIP_RPATHS=1
 
 mkdir -p %{buildroot}%{_sysconfdir}/rpm
 cat >> %{buildroot}%{_sysconfdir}/rpm/macros.rock-ruby19 << \EOF

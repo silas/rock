@@ -18,6 +18,8 @@ URL:            http://www.python.org
 Source0:        http://www.python.org/ftp/python/%{version}/Python-%{version}.tar.bz2
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
+BuildRequires:  patchelf
+
 BuildRequires:  autoconf
 BuildRequires:  bzip2
 BuildRequires:  bzip2-devel
@@ -51,20 +53,30 @@ This packages contains resources for building %{name} RPMs.
 
 %build
 mkdir -p %{buildroot}%{python27_libdir}
+
 ./configure \
   --prefix=%{python27_rootdir}%{_prefix} \
   --enable-ipv6 \
   --enable-shared \
-  LDFLAGS="-Wl,-rpath %{buildroot}%{python27_libdir}"
-sed -i 's|-Wl,-rpath %{buildroot}%{python27_libdir}|-Wl,-rpath %{python27_libdir}|g' Makefile
+  LDFLAGS="-Wl,-rpath %{buildroot}%{python27_rootdir}/usr/lib"
+
 %{__make}
 
 %install
 rm -rf %{buildroot}
+
 %{__make} install DESTDIR=%{buildroot}
 
 sed -i 's|^#! /usr/local/bin/python|#!/usr/bin/env python|g' \
   %{buildroot}%{python27_rootdir}%{_prefix}/lib/python2.7/cgi.py
+
+sed -i "s|%{buildroot}||g" %{buildroot}%{python27_rootdir}%{_prefix}/lib/python2.7/config/Makefile
+
+patchelf --set-rpath %{python27_rootdir}/usr/lib %{buildroot}%{python27_rootdir}%{_bindir}/python2.7
+
+# skip buildroot/rpath check
+export QA_SKIP_BUILD_ROOT=1
+export QA_SKIP_RPATHS=1
 
 mkdir -p %{buildroot}%{_sysconfdir}/rpm
 cat > %{buildroot}%{_sysconfdir}/rpm/macros.rock-python27 << EOF
