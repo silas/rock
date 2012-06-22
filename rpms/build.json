@@ -1,4 +1,7 @@
 [
+  {"spec": "rock-runtime-node04/rock-runtime-node04.spec"},
+  {"spec": "rock-runtime-node04-core/rock-runtime-node04-core.spec"},
+  {"spec": "rock-runtime-node04-npm/rock-runtime-node04-npm.spec"},
   {"spec": "rock-runtime-node06/rock-runtime-node06.spec"},
   {"spec": "rock-runtime-node06-core/rock-runtime-node06-core.spec"},
   {"spec": "rock-runtime-perl516/rock-runtime-perl516.spec"},
