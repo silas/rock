@@ -1,7 +1,7 @@
 setup:
 	./misc/setup
 
-clean:
+destroy:
 	vagrant destroy -f
 
-.PHONY: build clean
+.PHONY: setup destroy
