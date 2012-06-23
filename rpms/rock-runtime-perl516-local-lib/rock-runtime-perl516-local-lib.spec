@@ -34,18 +34,13 @@ export PATH="%{perl516_rootdir}%{_bindir}:$PATH"
 
 make install PERL_INSTALL_ROOT=%{buildroot}
 
-# probably a way to do this via the above command
-mv %{buildroot}%{perl516_rootdir}%{_prefix}/lib/site_perl/$( perl -e 'print $^V' | cut -c 2- ) \
-   %{buildroot}%{perl516_rootdir}%{_prefix}/lib/perl5
-rm -fr %{buildroot}%{perl516_rootdir}%{_prefix}/lib/site_perl
-
 %clean
 rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
 %doc Changes
-%{perl516_rootdir}%{_prefix}/lib/perl5
+%{perl516_rootdir}%{_prefix}/lib/site_perl/5.16.0
 %{perl516_rootdir}%{_prefix}/man/man3/*.3pm
 
 %changelog
