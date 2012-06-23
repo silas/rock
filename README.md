@@ -1,7 +1,7 @@
-Rock
-====
+Rock Packages
+=============
 
-Rock better runtimes.
+Rock RPM packages.
 
 ## Supported
 

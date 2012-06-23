@@ -4,5 +4,4 @@
 *.tgz
 *.zip
 *swp
-.vagrant
 build
