@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+clone() {
+  name="$1"
+  user="${2:-$USER}"
+  dir="${3:-$name}"
+  if [[ ! -e "$dir" ]]; then
+      git clone "git@github.com:${user}/${name}.git" "$dir"
+  fi
+}
+
+clone rock
+clone rock-packages
+
+vagrant up
