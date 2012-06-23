@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+src_path="$1"
+dst_path="$2"
+
+if [[ ! -f "$src_path/Gemfile.lock" ]]; then
+  echo 'Ruby projects must contain a "Gemfile.lock" file' >&2
+  exit 1
+fi
+
+build-setup "$src_path" "$dst_path"
+
+if ! bundle install --deployment --path "$dst_path" >&2; then
+  exit 1
+fi

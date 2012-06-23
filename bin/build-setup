@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+src_path="$1"
+dst_path="$2"
+
+if [[ -z "$src_path" ]]; then
+  echo 'Code path required.' >&2
+  exit 1
+fi
+
+if [[ -z "$dst_path" ]]; then
+  echo 'Destination path required.' >&2
+  exit 1
+fi
+
+if [[ ! -d "$src_path" ]]; then
+  echo "Code path not found: ${src_path}" >&2
+  exit 1
+fi
+
+if ! cd "$src_path" >&2; then
+  exit 1
+fi
+
+if ! mkdir -p "$dst_path" >&2; then
+  exit 1
+fi

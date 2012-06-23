@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+src_path="$1"
+dst_path="$2"
+
+if [[ ! -f "$src_path/requirements.txt" ]]; then
+  echo 'Python projects must contain a "requirements.txt" file' >&2
+  exit 1
+fi
+
+build-setup "$src_path" "$dst_path"
+
+if [[ ! -f "${dst_path}/bin/activate" ]]; then
+  if ! virtualenv "$dst_path" >&2; then
+    exit 1
+  fi
+fi
+
+if ! (. "${dst_path}/bin/activate" && pip install -r "${src_path}/requirements.txt") >&2; then
+  exit 1
+fi

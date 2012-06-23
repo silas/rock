@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+src_path="$1"
+dst_path="$2"
+
+if [[ ! -f "${src_path}/Makefile.PL" ]]; then
+  echo 'Perl projects must contain a "Makefile.PL" file' >&2
+  exit 1
+fi
+
+build-setup "$src_path" "$dst_path"
+
+if ! cpanm --local-lib "$dst_path" --skip-satisfied --installdeps "$src_path" >&2; then
+  exit 1
+fi
