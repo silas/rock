@@ -5,11 +5,11 @@ Rock better runtimes.
 
 ## Supported
 
-Distributions:
+Distributions
 
  * CentOS / RHEL: 6
 
-Runtimes:
+Runtimes
 
   * Node: 0.4, 0.6
   * Perl: 5.16
