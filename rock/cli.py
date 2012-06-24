@@ -2,21 +2,16 @@ import argparse
 import os
 import sys
 import ops
-
-def setup(args):
-    if args.runtime is None:
-        raise Error('Runtime not found')
+from rock.exceptions import Error
+from rock.project import Project
 
 def build(args):
-    ops.env('PATH', '/opt/rock/runtime/%s/usr/bin' % args.runtime, prepend=True)
-    build = ops.run('rock-build-node . deps', cwd=os.getcwd())
-    if not build:
-        print build.stderr,
+    Project(args.path).build()
 
 def env(args):
-    print 'export PATH="/opt/rock/runtime/%s/usr/bin:$PATH"' % args.runtime
+    print Project(args.path).runtime.env(render='bash')
 
-def main():
+def run():
     parser = argparse.ArgumentParser(prog='rock', description='Rock better runtimes')
 
     # top-level options
@@ -35,7 +30,6 @@ def main():
 
     try:
         args = parser.parse_args()
-        setup(args)
         args.func(args)
     except Error, error:
         sys.stderr.write('%s\n' % error)

@@ -1,36 +1,42 @@
+import os
 import yaml
+import ops
 from rock import exceptions
 from rock import runtime
 
 class Project(object):
 
-    def __init__(self, path, runtime=None):
+    def __init__(self, path, parse=True):
         self.path = path
-        self.runtime = runtime
-        self.parse()
+        self.runtime = None
+        if parse:
+            self.parse()
 
     def parse(self):
         config = {}
+        config_file = os.path.join(self.path, 'rock.yml')
 
         try:
-            with open(self.path) as f:
+            with open(config_file) as f:
                 config = yaml.load(f)
         except Exception, error:
-            raise exceptions.ConfigError('Failed to read configuration file: %s' % self.path)
+            raise exceptions.ConfigError('Failed to read configuration file: %s' % config_file)
 
         if not isinstance(config, dict):
             raise exceptions.ConfigError('Invalid project configuration')
 
         if self.runtime is None:
-            runtime_type = config.get('runtime')
+            runtime_name = config.get('runtime')
 
-            if not isinstance(runtime_type, basestring):
-                raise ConfigError('Invalid runtime: %s' % runtime_type)
+            if not isinstance(runtime_name, basestring):
+                raise ConfigError('Invalid runtime: %s' % runtime_name)
 
-            self.runtime = runtime.Runtime(runtime_type)
+            self.runtime = runtime.Runtime(runtime_name)
 
     def build(self):
-        self.runtime.env_seutp()
-        build = ops.run('rock-build-node ${path} deps', path=self.path, cwd=self.path)
+        self.runtime.env(setup=True)
+
+        build = ops.run('rock-build-${type} ${path}', type=self.runtime.type, path=self.path)
+
         if not build:
-            raise exceptions.Error(build.error.rstrip)
+            raise exceptions.Error(build.error)

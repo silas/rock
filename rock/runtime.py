@@ -1,10 +1,12 @@
 import os
+import ops
 from rock import exceptions
 
 class Runtime(object):
 
     def __init__(self, name):
         self.name = name
+        self.type = name.rstrip('0123456789')
 
     @property
     def path(self):
@@ -12,29 +14,26 @@ class Runtime(object):
 
     @property
     def exists(self):
-        if not hasattr(self, '_exists'):
-            self._exists = os.path.exists(self.path)
-        return self._exists
+        return os.path.exists(self.path)
 
-    def env(self, render=None):
+    def env(self, render=None, setup=False):
         data = {
             'PATH': ( os.path.join(self.path, 'usr', 'bin'), { 'prepend': True } )
         }
+        if setup:
+            for name, value in data.items():
+                ops.env(name, value[0], **value[1])
         if render is None:
             return data
-        elif render == 'bash':
-            text = ''
+        elif render in ['bash', 'sh']:
+            text = []
             for name, value in data.items():
                 if value[1].get('prepend'):
-                    text += 'export %s="%s:$%s;"\n' % (name, value[0], name)
+                    text.append('export %s="%s:$%s";' % (name, value[0], name))
                 elif value[1].get('append'):
-                    text += 'export %s="$%s:%s;"\n' % (name, name, value[0])
+                    text.append('export %s="$%s:%s";' % (name, name, value[0]))
                 else:
-                    text += 'export %s="%s";\n' % (name, value[0])
-            return text
+                    text.append('export %s="%s";' % (name, value[0]))
+            return '\n'.join(text)
         else:
             raise Error('Unknown render format')
-
-    def env_setup(self):
-        for name, value in self.env():
-            ops.env(name, value[0], **value[1])

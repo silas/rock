@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 
-import rock
+from rock import cli
 
-rock.main()
+try:
+    cli.run()
+except KeyboardInterrupt:
+    pass
