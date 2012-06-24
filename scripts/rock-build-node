@@ -8,7 +8,7 @@ if [[ ! -f "${src_path}/package.json" ]]; then
   exit 1
 fi
 
-build-setup "$src_path" "$dst_path"
+rock-build-setup "$src_path" "$dst_path"
 
 if [[ -e "${src_path}/node_modules" && ! -L "${src_path}/node_modules" ]]; then
   echo "node_modules exists and isn't a symbolic link" >&2

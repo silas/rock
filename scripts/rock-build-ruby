@@ -8,7 +8,7 @@ if [[ ! -f "$src_path/Gemfile.lock" ]]; then
   exit 1
 fi
 
-build-setup "$src_path" "$dst_path"
+rock-build-setup "$src_path" "$dst_path"
 
 if ! bundle install --deployment --path "$dst_path" >&2; then
   exit 1
