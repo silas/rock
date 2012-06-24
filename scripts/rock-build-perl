@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-path="${1:$( pwd )}"
+path="${1-$( pwd )}"
 deps_path="${path}/local"
 file_path="${path}/carton.lock"
 
