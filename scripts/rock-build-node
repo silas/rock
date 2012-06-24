@@ -1,26 +1,15 @@
 #!/usr/bin/env bash
 
-src_path="$1"
-dst_path="$2"
+path="${1:$( pwd )}"
+deps_path="${path}/package.json"
 
-if [[ ! -f "${src_path}/package.json" ]]; then
-  echo 'Node projects must contain a "package.json" file' >&2
+if [[ ! -f "$deps_path" ]]; then
+  echo "File not found: ${deps_path}" >&2
   exit 1
 fi
 
-rock-build-setup "$src_path" "$dst_path"
-
-if [[ -e "${src_path}/node_modules" && ! -L "${src_path}/node_modules" ]]; then
-  echo "node_modules exists and isn't a symbolic link" >&2
+if ! cd "$path"; then
   exit 1
-fi
-
-if ! mkdir -p "${dst_path}/node_modules" >&2; then
-  exit 1
-fi
-
-if [[ ! -L "${src_path}/node_modules" ]]; then
-  ln -s "${dst_path}/node_modules" "${src_path}/node_modules"
 fi
 
 if ! npm install >&2 && npm rebuild >&2; then

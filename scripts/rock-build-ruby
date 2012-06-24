@@ -1,15 +1,17 @@
 #!/usr/bin/env bash
 
-src_path="$1"
-dst_path="$2"
+path="${1:$( pwd )}"
+deps_path="${path}/Gemfile.lock"
 
-if [[ ! -f "$src_path/Gemfile.lock" ]]; then
-  echo 'Ruby projects must contain a "Gemfile.lock" file' >&2
+if [[ ! -f "$deps_path" ]]; then
+  echo "File not found: ${deps_path}" >&2
   exit 1
 fi
 
-rock-build-setup "$src_path" "$dst_path"
+if ! cd "$path"; then
+  exit 1
+fi
 
-if ! bundle install --deployment --path "$dst_path" >&2; then
+if ! bundle install --deployment >&2; then
   exit 1
 fi

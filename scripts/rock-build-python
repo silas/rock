@@ -1,21 +1,24 @@
 #!/usr/bin/env bash
 
-src_path="$1"
-dst_path="$2"
+path="${1:$( pwd )}"
+deps_path="${path}/requirements.txt"
+virtualenv_path="${path}/vendor/virtualenv"
 
-if [[ ! -f "$src_path/requirements.txt" ]]; then
-  echo 'Python projects must contain a "requirements.txt" file' >&2
+if [[ ! -f "$deps_path" ]]; then
+  echo "File not found: ${deps_path}" >&2
   exit 1
 fi
 
-rock-build-setup "$src_path" "$dst_path"
+if ! cd "$path"; then
+  exit 1
+fi
 
-if [[ ! -f "${dst_path}/bin/activate" ]]; then
-  if ! virtualenv "$dst_path" >&2; then
+if [[ ! -f "${virtualenv_path}/bin/activate" ]]; then
+  if ! virtualenv "$virtualenv_path" >&2; then
     exit 1
   fi
 fi
 
-if ! (. "${dst_path}/bin/activate" && pip install -r "${src_path}/requirements.txt") >&2; then
+if ! (. "${virtualenv_path}/bin/activate" && pip install -r "$deps_path") >&2; then
   exit 1
 fi
