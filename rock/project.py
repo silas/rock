@@ -4,6 +4,7 @@ import ops
 from rock import exceptions
 from rock import runtime
 
+
 class Project(object):
 
     def __init__(self, path, parse=True):
@@ -20,7 +21,8 @@ class Project(object):
             with open(config_file) as f:
                 config = yaml.load(f)
         except Exception, error:
-            raise exceptions.ConfigError('Failed to read configuration file: %s' % config_file)
+            raise exceptions.ConfigError('Failed to read configuration file: '
+                + config_file)
 
         if not isinstance(config, dict):
             raise exceptions.ConfigError('Invalid project configuration')
@@ -36,7 +38,8 @@ class Project(object):
     def build(self):
         self.runtime.env(setup=True)
 
-        build = ops.run('rock-build-${type} ${path}', type=self.runtime.type, path=self.path)
+        build = ops.run('rock-build-${type} ${path}',
+            type=self.runtime.type, path=self.path)
 
         if not build:
             raise exceptions.Error(build.error)

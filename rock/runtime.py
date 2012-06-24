@@ -2,6 +2,7 @@ import os
 import ops
 from rock import exceptions
 
+
 class Runtime(object):
 
     def __init__(self, name):
@@ -18,7 +19,8 @@ class Runtime(object):
 
     def env(self, render=None, setup=False):
         data = {
-            'PATH': ( os.path.join(self.path, 'usr', 'bin'), { 'prepend': True } )
+            'PATH': (os.path.join(self.path, 'usr', 'bin'),
+                {'prepend': True})
         }
         if setup:
             for name, value in data.items():
