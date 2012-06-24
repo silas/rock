@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 
 path="${1:$( pwd )}"
-deps_path="${path}/package.json"
+deps_path="${path}/node_modules"
+file_path="${path}/package.json"
 
-if [[ ! -f "$deps_path" ]]; then
-  echo "File not found: ${deps_path}" >&2
+if [[ ! -f "$file_path" ]]; then
+  echo "File not found: ${file_path}" >&2
   exit 1
 fi
 
@@ -15,3 +16,5 @@ fi
 if ! npm install >&2 && npm rebuild >&2; then
   exit 1
 fi
+
+echo -n "$deps_path"
