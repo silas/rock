@@ -4,6 +4,7 @@ import ops
 from rock.exceptions import ConfigError
 from rock.build import Build
 from rock.runtime import Runtime
+from rock.test import Test
 
 
 class Project(object):
@@ -37,6 +38,11 @@ class Project(object):
         if build is not None and not isinstance(build, basestring):
             raise ConfigError('Invalid build command: %s' % build)
 
+        test = config.get('test')
+
+        if test is not None and not isinstance(test, basestring):
+            raise ConfigError('Invalid test command: %s' % test)
+
         self.config = config
 
     @property
@@ -48,3 +54,7 @@ class Project(object):
     @property
     def build(self):
         return Build(self)
+
+    @property
+    def test(self):
+        return Test(self)

@@ -14,7 +14,7 @@ class Build(object):
                                           'rock-build-${type} ${path}')
 
         build = ops.run(command, type=self.project.runtime.type,
-                        path=self.project.path)
+                        path=self.project.path, cwd=self.project.path)
 
         if not build:
             raise BuildError(build.stderr.strip())

@@ -14,6 +14,10 @@ def env(args):
     print Project(args.path).runtime.env(render='bash')
 
 
+def test(args):
+    Project(args.path).test()
+
+
 def run():
     parser = argparse.ArgumentParser(prog='rock',
                                      description='Rock better runtimes')
@@ -34,8 +38,15 @@ def run():
         help='output runtime environment variables')
     parser_env.set_defaults(func=env)
 
+    # subcommand: test
+    parser_env = subparsers.add_parser('test', help='test project')
+    parser_env.set_defaults(func=test)
+
     try:
         args = parser.parse_args()
         args.func(args)
     except Error, error:
-        sys.stderr.write('%s\n' % error)
+        message = '%s' % error
+        if message.endswith('\n'):
+            message = message[:-1]
+        ops.exit(1, message)

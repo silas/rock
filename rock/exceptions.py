@@ -8,3 +8,7 @@ class BuildError(Error):
 
 class ConfigError(Error):
     pass
+
+
+class TestError(Error):
+    pass
