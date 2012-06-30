@@ -11,7 +11,7 @@ Distributions
 
 Runtimes
 
-  * Node: 0.4, 0.6
+  * Node: 0.4, 0.6, 0.8
   * Perl: 5.16
   * Python: 2.7
   * Ruby: 1.8, 1.9
