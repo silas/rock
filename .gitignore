@@ -1,4 +1,5 @@
 *swp
 .vagrant
-rock
-rock-packages
+packages
+python-rock
+tests
