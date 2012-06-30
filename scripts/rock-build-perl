@@ -13,7 +13,7 @@ if ! cd "$path"; then
   exit 1
 fi
 
-if ! carton --deployment >&2; then
+if ! carton install --deployment >&2; then
   exit 1
 fi
 
