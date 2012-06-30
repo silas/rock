@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 path="${1-$( pwd )}"
-deps_path="${path}/vendor/virtualenv"
+deps_path="${path}/vendor/bundle"
 file_path="${path}/Gemfile.lock"
 
 if [[ ! -f "$file_path" ]]; then
