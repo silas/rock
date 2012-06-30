@@ -4,6 +4,8 @@
   {"spec": "rock-runtime-node04-npm/rock-runtime-node04-npm.spec"},
   {"spec": "rock-runtime-node06/rock-runtime-node06.spec"},
   {"spec": "rock-runtime-node06-core/rock-runtime-node06-core.spec"},
+  {"spec": "rock-runtime-node08/rock-runtime-node08.spec"},
+  {"spec": "rock-runtime-node08-core/rock-runtime-node08-core.spec"},
   {"spec": "rock-runtime-perl516/rock-runtime-perl516.spec"},
   {"spec": "rock-runtime-perl516-core/rock-runtime-perl516-core.spec"},
   {"spec": "rock-runtime-perl516-cpanm/rock-runtime-perl516-cpanm.spec"},
