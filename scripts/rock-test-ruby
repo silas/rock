@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+set -e
+
+path="${1-$( pwd )}"
+
+cd "$path"
+
+bundle exec rack >&2

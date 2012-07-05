@@ -1,21 +1,18 @@
 import os
 import yaml
 import ops
-from rock.exceptions import ConfigError
-from rock.build import Build
-from rock.runtime import Runtime
-from rock.test import Test
+from rock.exceptions import *
 
 
 class Project(object):
 
-    def __init__(self, path, parse=True):
+    def __init__(self, path, setup=True):
         self.path = path
         self.config = {}
-        if parse:
-            self.parse()
+        if setup:
+            self.setup()
 
-    def parse(self):
+    def setup(self):
         config_file = os.path.join(self.path, 'rock.yml')
 
         try:
@@ -28,33 +25,73 @@ class Project(object):
         if not isinstance(config, dict):
             raise ConfigError('Invalid project configuration')
 
-        runtime_name = config.get('runtime')
+        runtime = config.get('runtime')
 
-        if not isinstance(runtime_name, basestring):
-            raise ConfigError('Invalid runtime: %s' % runtime_name)
+        if not isinstance(runtime, basestring):
+            raise ConfigError('Invalid runtime: %s' % runtime)
+
+        config['runtime_path'] = '/opt/rock/runtime/%s' % runtime
+
+        config['type'] = runtime.rstrip('0123456789')
 
         build = config.get('build')
 
-        if build is not None and not isinstance(build, basestring):
+        if build is None:
+            config['build'] = 'rock-build-%s' % config['type']
+        elif not isinstance(build, basestring):
             raise ConfigError('Invalid build command: %s' % build)
 
         test = config.get('test')
 
-        if test is not None and not isinstance(test, basestring):
+        if test is None:
+            config['test'] = 'rock-test-%s' % config['type']
+        elif not isinstance(test, basestring):
             raise ConfigError('Invalid test command: %s' % test)
 
         self.config = config
 
-    @property
-    def runtime(self):
-        if not hasattr(self, '_runtime'):
-            self._runtime = Runtime(self.config['runtime'])
-        return self._runtime
-
-    @property
     def build(self):
-        return Build(self)
+        self.env(setup=True)
 
-    @property
+        build = ops.run(self.config['build'], cwd=self.path)
+
+        if not build:
+            raise BuildError(build.stderr.strip())
+
+        return build.stdout.strip()
+
+    def env(self, render=None, setup=False):
+        data = {
+            'PATH': (os.path.join(self.config['runtime_path'], 'usr', 'bin'),
+                {'prepend': True})
+        }
+        if setup:
+            for name, value in data.items():
+                ops.env(name, value[0], **value[1])
+        if render is None:
+            return data
+        elif render in ['bash', 'sh']:
+            text = []
+            for name, value in data.items():
+                if value[1].get('prepend'):
+                    text.append('export %s="%s:$%s";' % (name, value[0], name))
+                elif value[1].get('append'):
+                    text.append('export %s="$%s:%s";' % (name, name, value[0]))
+                else:
+                    text.append('export %s="%s";' % (name, value[0]))
+            return '\n'.join(text)
+        else:
+            raise EnvError('Unknown render format')
+
     def test(self):
-        return Test(self)
+        self.env(setup=True)
+
+        command = self.config.get('test')
+
+        if command is None:
+            raise TestError('No test command specified')
+
+        test = ops.run(command, cwd=self.path)
+
+        if not test:
+            raise TestError(test.stdout)

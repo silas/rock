@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 path="${1-$( pwd )}"
 deps_path="${path}/vendor/bundle"
 file_path="${path}/Gemfile.lock"
@@ -9,12 +11,8 @@ if [[ ! -f "$file_path" ]]; then
   exit 1
 fi
 
-if ! cd "$path"; then
-  exit 1
-fi
+cd "$path"
 
-if ! bundle install --deployment >&2; then
-  exit 1
-fi
+bundle install --deployment >&2
 
 echo -n "$deps_path"

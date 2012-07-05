@@ -10,5 +10,9 @@ class ConfigError(Error):
     pass
 
 
+class EnvError(Error):
+    pass
+
+
 class TestError(Error):
     pass

@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 path="${1-$( pwd )}"
 deps_path="${path}/vendor/virtualenv"
 file_path="${path}/requirements.txt"
@@ -9,18 +11,12 @@ if [[ ! -f "$file_path" ]]; then
   exit 1
 fi
 
-if ! cd "$path"; then
-  exit 1
-fi
+cd "$path"
 
 if [[ ! -f "${deps_path}/bin/activate" ]]; then
-  if ! virtualenv "$deps_path" >&2; then
-    exit 1
-  fi
+  virtualenv "$deps_path" >&2
 fi
 
-if ! (. "${deps_path}/bin/activate" && pip install -r "$file_path") >&2; then
-  exit 1
-fi
+(. "${deps_path}/bin/activate" && pip install -r "$file_path") >&2
 
 echo -n "$deps_path"

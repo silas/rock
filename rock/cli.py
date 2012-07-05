@@ -11,7 +11,7 @@ def build(args):
 
 
 def env(args):
-    print Project(args.path).runtime.env(render='bash')
+    print Project(args.path).env(render='bash')
 
 
 def test(args):
