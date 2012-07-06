@@ -5,7 +5,7 @@ yumrepo { 'sewell':
   enabled  => 1,
 }
 
-package { ['brpm', 'python-argparse', 'PyYAML']:
+package { ['brpm', 'git', 'python-argparse', 'PyYAML', 'vim-enhanced']:
   ensure  => present,
   require => Yumrepo['sewell'],
 }
