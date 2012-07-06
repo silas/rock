@@ -1,18 +1,7 @@
 #!/usr/bin/env bash
 
-set -e
+set -ev
 
-path="${1-$( pwd )}"
-deps_path="${path}/local"
-file_path="${path}/carton.lock"
+test -f carton.lock
 
-if [[ ! -f "$file_path" ]]; then
-  echo "File not found: $file_path" >&2
-  exit 1
-fi
-
-cd "$path"
-
-carton install --deployment >&2
-
-echo -n "$deps_path"
+carton install --deployment

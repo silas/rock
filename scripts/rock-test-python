@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
 
-set -e
+set -ev
 
-path="${1-$( pwd )}"
+source ./vendor/virtualenv/bin/activate
 
-cd "$path"
-
-(. "${deps_path}/bin/activate" && nosetests) >&2
+nosetests

@@ -1,19 +1,9 @@
 #!/usr/bin/env bash
 
-set -e
+set -ev
 
-path="${1-$( pwd )}"
-deps_path="${path}/node_modules"
-file_path="${path}/package.json"
+test -f package.json
 
-if [[ ! -f "$file_path" ]]; then
-  echo "File not found: ${file_path}" >&2
-  exit 1
-fi
+npm install
 
-cd "$path"
-
-npm install >&2
-npm rebuild >&2
-
-echo -n "$deps_path"
+npm rebuild

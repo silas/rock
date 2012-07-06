@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
 
-set -e
+set -ev
 
-path="${1-$( pwd )}"
-
-cd "$path"
-
-npm test >&2
+npm test
