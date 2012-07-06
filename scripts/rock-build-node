@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-
-set -ev
-
-test -f package.json
-
-npm install
-
-npm rebuild

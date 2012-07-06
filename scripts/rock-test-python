@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-
-set -ev
-
-source ./vendor/virtualenv/bin/activate
-
-nosetests

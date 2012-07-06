@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-
-set -ev
-
-test -f carton.lock
-
-carton install --deployment
