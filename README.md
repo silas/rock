@@ -1,9 +1,10 @@
 Rock
 ====
 
-Rock better runtime.
+Rock Platform tool.
 
-This is a command line tool for interating with Rock runtimes.
+This is a command line tool that simplifies building, testing, and running
+applications on the Rock Platform.
 
 ## License
 
