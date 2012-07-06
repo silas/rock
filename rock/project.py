@@ -13,7 +13,7 @@ class Project(object):
             self.setup()
 
     def setup(self):
-        config_file = os.path.join(self.path, 'rock.yml')
+        config_file = os.path.join(self.path, '.rock.yml')
 
         try:
             with open(config_file) as f:
