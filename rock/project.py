@@ -50,16 +50,6 @@ class Project(object):
 
         self.config = config
 
-    def build(self):
-        self.env(setup=True)
-
-        build = ops.run(self.config['build'], cwd=self.path)
-
-        if not build:
-            raise BuildError(build.stderr.strip())
-
-        return build.stdout.strip()
-
     def env(self, render=None, setup=False):
         data = {
             'PATH': (os.path.join(self.config['runtime_path'], 'usr', 'bin'),
@@ -83,15 +73,22 @@ class Project(object):
         else:
             raise EnvError('Unknown render format')
 
+    def build(self):
+        self.env(setup=True)
+
+        build = ops.run(self.config['build'], cwd=self.path, stdout=True,
+             stderr=True)
+
+        if not build:
+            raise BuildError(build.stderr.strip())
+
+        return build.stdout.strip()
+
     def test(self):
         self.env(setup=True)
 
-        command = self.config.get('test')
-
-        if command is None:
-            raise TestError('No test command specified')
-
-        test = ops.run(command, cwd=self.path)
+        test = ops.run(self.config['test'], cwd=self.path, stdout=True,
+            stderr=True)
 
         if not test:
             raise TestError(test.stdout)
