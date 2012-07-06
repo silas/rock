@@ -11,5 +11,6 @@ clone() {
 clone ${ROCK_PYTHON-rockplatform/python-rock}
 clone ${ROCK_PACKAGES-rockplatform/packages}
 clone ${ROCK_TESTS-rockplatform/tests}
+clone ${ROCK_TOOLS-rockplatform/tools}
 
 vagrant up

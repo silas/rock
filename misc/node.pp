@@ -16,18 +16,17 @@ exec { 'group_mock_vagrant':
   require => Package['brpm'],
 }
 
-$bashrc = '
-test -f /etc/bashrc && . /etc/bashrc
-test -f /home/vagrant/.bash_local && . /home/vagrant/.bash_local
-
-export PATH="/vagrant/python-rock/scripts:$PATH"
-export PYTHONPATH="/vagrant/python-rock:$PYTHONPATH"
-'
-
 file { '/home/vagrant/.bashrc':
   ensure  => present,
   owner   => 'vagrant',
   group   => 'vagrant',
   mode    => '0644',
-  content => $bashrc,
+  content => '
+    test -f /etc/bashrc && . /etc/bashrc
+    test -f /home/vagrant/.bash_local && . /home/vagrant/.bash_local
+
+    export PATH="/vagrant/python-rock/scripts:$PATH"
+    export PATH="/vagrant/tools/src:$PATH"
+    export PYTHONPATH="/vagrant/python-rock:$PYTHONPATH"
+  ',
 }
