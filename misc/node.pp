@@ -15,3 +15,19 @@ exec { 'group_mock_vagrant':
   unless  => '/usr/bin/id -G --name vagrant | grep mock &>/dev/null',
   require => Package['brpm'],
 }
+
+$bashrc = '
+test -f /etc/bashrc && . /etc/bashrc
+test -f /home/vagrant/.bash_local && . /home/vagrant/.bash_local
+
+export PATH="/vagrant/python-rock/scripts:$PATH"
+export PYTHONPATH="/vagrant/python-rock:$PYTHONPATH"
+'
+
+file { '/home/vagrant/.bashrc':
+  ensure  => present,
+  owner   => 'vagrant',
+  group   => 'vagrant',
+  mode    => '0644',
+  content => $bashrc,
+}
