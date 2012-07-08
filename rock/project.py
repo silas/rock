@@ -50,16 +50,16 @@ class Project(object):
 
         self.config = config
 
-    def env(self, render=None, setup=False):
+    def env(self, render=None):
         data = {
             'PATH': (os.path.join(self.config['runtime_path'], 'usr', 'bin'),
                 {'prepend': True})
         }
-        if setup:
-            for name, value in data.items():
-                ops.env(name, value[0], **value[1])
         if render is None:
-            return data
+            env = ops.Env()
+            for name, value in data.items():
+                env(name, value[0], **value[1])
+            return env()
         elif render in ['bash', 'sh']:
             text = []
             for name, value in data.items():
@@ -73,22 +73,24 @@ class Project(object):
         else:
             raise EnvError('Unknown render format')
 
-    def build(self):
-        self.env(setup=True)
+    def run(self, command, **kwargs):
+        run_kwargs = {
+            'cwd': self.path,
+            'env': self.env(),
+            'stdout': True,
+            'stderr': True,
+        }
+        run_kwargs.update(kwargs)
+        return ops.run(command, **run_kwargs)
 
-        build = ops.run(self.config['build'], cwd=self.path, stdout=True,
-             stderr=True)
+    def build(self):
+        build = self.run(self.config['build'])
 
         if not build:
-            raise BuildError(build.stderr.strip())
-
-        return build.stdout.strip()
+            raise BuildError()
 
     def test(self):
-        self.env(setup=True)
-
-        test = ops.run(self.config['test'], cwd=self.path, stdout=True,
-            stderr=True)
+        test = self.run(self.config['test'])
 
         if not test:
-            raise TestError(test.stdout)
+            raise TestError()
