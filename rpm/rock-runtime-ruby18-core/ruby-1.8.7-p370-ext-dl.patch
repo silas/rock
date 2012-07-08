@@ -1,0 +1,22 @@
+diff -up ruby-1.8.7-p370/ext/dl/depend.orig ruby-1.8.7-p370/ext/dl/depend
+--- ruby-1.8.7-p370/ext/dl/depend.orig	2012-07-08 14:05:00.634976947 -0400
++++ ruby-1.8.7-p370/ext/dl/depend	2012-07-08 14:05:03.894988315 -0400
+@@ -32,15 +32,15 @@ handle.o: dl.h
+ 
+ call.func: $(srcdir)/mkcall.rb ./dlconfig.rb
+ 	@echo "Generating call.func"
+-	@$(RUBY) $(srcdir)/mkcall.rb > $@
++	@$(RUBY) $(srcdir)/mkcall.rb | tee $@
+ 
+ callback.func: $(srcdir)/mkcallback.rb ./dlconfig.rb
+ 	@echo "Generating callback.func"
+-	@$(RUBY) $(srcdir)/mkcallback.rb > $@
++	@$(RUBY) $(srcdir)/mkcallback.rb | tee $@
+ 
+ cbtable.func: $(srcdir)/mkcbtable.rb ./dlconfig.rb
+ 	@echo "Generating cbtable.func"
+-	@$(RUBY) $(srcdir)/mkcbtable.rb > $@
++	@$(RUBY) $(srcdir)/mkcbtable.rb | tee $@
+ 
+ debug:
+ 	$(MAKE) CPPFLAGS="$(CPPFLAGS) -DDEBUG"
