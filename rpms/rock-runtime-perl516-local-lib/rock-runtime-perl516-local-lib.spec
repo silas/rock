@@ -1,6 +1,8 @@
-%global __find_provides ''
-%global __perl_provides ''
-%global __perl_requires ''
+%global __find_provides %{nil}
+%global __perl_provides %{nil}
+%global __perl_requires %{nil}
+%global __provides_exclude .*
+%global __requires_exclude perl
 
 Name:           rock-runtime-perl516-local-lib
 Version:        1.008004
@@ -34,6 +36,8 @@ export PATH="%{perl516_rootdir}%{_bindir}:$PATH"
 
 make install PERL_INSTALL_ROOT=%{buildroot}
 
+rm -fr %{buildroot}%{perl516_rootdir}%{_prefix}/man
+
 %clean
 rm -rf %{buildroot}
 
@@ -41,7 +45,6 @@ rm -rf %{buildroot}
 %defattr(-,root,root,-)
 %doc Changes
 %{perl516_rootdir}%{_prefix}/lib/site_perl/5.16.0
-%{perl516_rootdir}%{_prefix}/man/man3/*.3pm
 
 %changelog
 * Mon May 14 2012 Silas Sewell <silas@sewell.org> - 1.008004-1

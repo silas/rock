@@ -1,4 +1,5 @@
-%global __find_provides ''
+%global __find_provides %{nil}
+%global __provides_exclude .*
 
 Name:           rock-runtime-node04-npm
 Version:        1.0.106

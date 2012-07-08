@@ -1,6 +1,8 @@
-%global __find_provides ''
-%global __ruby_provides ''
-%global __ruby_requires ''
+%global __find_provides %{nil}
+%global __ruby_provides %{nil}
+%global __ruby_requires %{nil}
+%global __provides_exclude .*
+%global __requires_exclude ruby
 
 Name:           rock-runtime-ruby19-bundler
 Version:        1.1.4

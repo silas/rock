@@ -1,4 +1,5 @@
-%global __find_provides ''
+%global __find_provides %{nil}
+%global __provides_exclude .*
 
 %global runtime node04
 %global node04_rootdir /opt/rock/runtime/%{runtime}

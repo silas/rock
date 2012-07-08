@@ -1,6 +1,8 @@
-%global __find_provides ''
-%global __python_provides ''
-%global __python_requires ''
+%global __find_provides %{nil}
+%global __python_provides %{nil}
+%global __python_requires %{nil}
+%global __provides_exclude .*
+%global __requires_exclude python
 
 Name:           rock-runtime-python27-virtualenv
 Version:        1.7.1.2

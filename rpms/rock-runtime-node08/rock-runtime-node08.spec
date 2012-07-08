@@ -1,3 +1,6 @@
+%global __find_provides %{nil}
+%global __provides_exclude .*
+
 Name:           rock-runtime-node08
 Version:        1
 Release:        1%{?dist}

@@ -1,6 +1,8 @@
-%global __find_provides ''
-%global __python_provides ''
-%global __python_requires ''
+%global __find_provides %{nil}
+%global __python_provides %{nil}
+%global __python_requires %{nil}
+%global __provides_exclude .*
+%global __requires_exclude python
 
 %global runtime python27
 %global python27_rootdir /opt/rock/runtime/%{runtime}

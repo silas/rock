@@ -1,3 +1,6 @@
+%global __find_provides %{nil}
+%global __provides_exclude .*
+
 Name:           rock-runtime-perl516
 Version:        1
 Release:        1%{?dist}

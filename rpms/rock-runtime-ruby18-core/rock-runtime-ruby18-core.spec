@@ -1,13 +1,15 @@
-%global __find_provides ''
-%global __ruby_provides ''
-%global __ruby_requires ''
+%global __find_provides %{nil}
+%global __ruby_provides %{nil}
+%global __ruby_requires %{nil}
+%global __provides_exclude .*
+%global __requires_exclude ruby
 
 %global runtime ruby18
 %global ruby18_rootdir /opt/rock/runtime/%{runtime}
 %global ruby18_gemdir %{ruby18_rootdir}%{_prefix}/lib/ruby/gems/1.8
 
 %global shortversion 1.8.7
-%global patch 358
+%global patch 370
 
 Name:           rock-runtime-ruby18-core
 Version:        %{shortversion}.%{patch}
@@ -18,6 +20,7 @@ Group:          Development/Languages
 License:        Ruby or BSD
 URL:            http://ruby-lang.org
 Source0:        http://ftp.ruby-lang.org/pub/ruby/1.8/ruby-%{shortversion}-p%{patch}.tar.gz
+Patch0:         ruby-%{shortversion}-p%{patch}-ext-dl.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  patchelf
@@ -46,6 +49,7 @@ This packages contains resources for building %{name} RPMs.
 
 %prep
 %setup -q -n ruby-%{shortversion}-p%{patch}
+%patch0 -p1
 
 %build
 ./configure \
@@ -88,5 +92,8 @@ rm -rf %{buildroot}
 %{_sysconfdir}/rpm/macros.rock-ruby18
 
 %changelog
+* Sat Jul 07 2012 Silas Sewell <silas@sewell.org> - 1.8.7.370-1
+- Update to patch 370
+
 * Fri Jun 22 2012 Silas Sewell <silas@sewell.org> - 1.8.7.358-1
 - Initial build

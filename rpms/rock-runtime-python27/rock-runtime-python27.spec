@@ -1,3 +1,6 @@
+%global __find_provides %{nil}
+%global __provides_exclude .*
+
 Name:           rock-runtime-python27
 Version:        1
 Release:        1%{?dist}

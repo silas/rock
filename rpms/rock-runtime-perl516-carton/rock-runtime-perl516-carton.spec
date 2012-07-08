@@ -1,6 +1,8 @@
-%global __find_provides ''
-%global __perl_provides ''
-%global __perl_requires ''
+%global __find_provides %{nil}
+%global __perl_provides %{nil}
+%global __perl_requires %{nil}
+%global __provides_exclude .*
+%global __requires_exclude perl
 
 Name:           rock-runtime-perl516-carton
 Version:        1.5014

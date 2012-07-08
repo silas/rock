@@ -1,6 +1,8 @@
-%global __find_provides ''
-%global __perl_provides ''
-%global __perl_requires ''
+%global __find_provides %{nil}
+%global __perl_provides %{nil}
+%global __perl_requires %{nil}
+%global __provides_exclude .*
+%global __requires_exclude perl
 
 %global runtime perl516
 %global perl516_rootdir /opt/rock/runtime/%{runtime}
@@ -48,6 +50,7 @@ This packages contains resources for building %{name} RPMs.
 
 %install
 rm -rf %{buildroot}
+
 %{__make} install DESTDIR=%{buildroot}
 
 mkdir -p %{buildroot}%{_sysconfdir}/rpm
@@ -55,7 +58,10 @@ mkdir -p %{buildroot}%{_sysconfdir}/rpm
 # FIXME: hack to get strip working
 find %{buildroot}%{perl516_rootdir} -type f -exec chmod u+rw {} \;
 
-cat >> %{buildroot}%{_sysconfdir}/rpm/macros.rock-perl516 << \EOF
+# Remove .0 files
+find %{buildroot} -name '*.0' -type f -delete
+
+cat > %{buildroot}%{_sysconfdir}/rpm/macros.rock-perl516 << EOF
 %%perl516_rootdir %{perl516_rootdir}
 EOF
 
