@@ -1,6 +1,6 @@
 yumrepo { 'sewell':
   descr    => 'sewell',
-  baseurl  => 'http://dl.sewell.org/yum/epel/6/x86_64/',
+  baseurl  => 'http://dl.sewell.org/rpm/el/6/x86_64/',
   gpgcheck => 0,
   enabled  => 1,
 }
