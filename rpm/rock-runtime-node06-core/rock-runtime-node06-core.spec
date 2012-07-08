@@ -1,5 +1,5 @@
-%global __find_provides %{nil}
-%global __provides_exclude .*
+%filter_from_provides /.*/d
+%filter_setup
 
 %global runtime node06
 %global node06_rootdir /opt/rock/runtime/%{runtime}

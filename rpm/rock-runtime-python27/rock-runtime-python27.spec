@@ -1,5 +1,5 @@
-%global __find_provides %{nil}
-%global __provides_exclude .*
+%filter_from_provides /.*/d
+%filter_setup
 
 Name:           rock-runtime-python27
 Version:        1

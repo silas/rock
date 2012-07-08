@@ -1,8 +1,6 @@
-%global __find_provides %{nil}
-%global __ruby_provides %{nil}
-%global __ruby_requires %{nil}
-%global __provides_exclude .*
-%global __requires_exclude ruby
+%filter_from_provides /.*/d
+%filter_from_requires /^ruby.*/d; /^libruby.*/d
+%filter_setup
 
 Name:           rock-runtime-ruby18-bundler
 Version:        1.1.4

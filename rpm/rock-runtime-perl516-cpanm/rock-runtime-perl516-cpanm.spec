@@ -1,8 +1,6 @@
-%global __find_provides %{nil}
-%global __perl_provides %{nil}
-%global __perl_requires %{nil}
-%global __provides_exclude .*
-%global __requires_exclude perl
+%filter_from_provides /.*/d
+%filter_from_requires /^perl.*/d
+%filter_setup
 
 Name:           rock-runtime-perl516-cpanm
 Version:        1.5014
