@@ -4,5 +4,6 @@ Vagrant::Config.run do |config|
   config.vm.provision :puppet do |puppet|
     puppet.manifests_path = 'misc'
     puppet.manifest_file = 'node.pp'
+    puppet.module_path = 'misc/modules'
   end
 end

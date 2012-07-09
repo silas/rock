@@ -30,3 +30,7 @@ file { '/home/vagrant/.bashrc':
     export PYTHONPATH="/vagrant/python-rock:$PYTHONPATH"
   ',
 }
+
+class { 'rock': release => 0 }
+
+rock::runtime { ['node04', 'node06', 'node08', 'perl516', 'python27', 'ruby18', 'ruby19']: }

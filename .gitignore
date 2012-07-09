@@ -1,5 +1,6 @@
 *swp
 .vagrant
+modules
 packages
 python-rock
 tests
