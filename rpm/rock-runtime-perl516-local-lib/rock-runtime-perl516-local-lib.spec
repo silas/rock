@@ -12,6 +12,7 @@ License:        GPL+ or Artistic
 URL:            http://search.cpan.org/~apeiron/local-lib
 Source0:        http://search.cpan.org/CPAN/authors/id/A/AP/APEIRON/local-lib-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+BuildArch:      noarch
 
 BuildRequires:  rock-runtime-perl516-core-rpmbuild
 Requires:       rock-runtime-perl516-core

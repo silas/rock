@@ -12,6 +12,7 @@ License:        MIT
 URL:            http://www.virtualenv.org
 Source0:        http://pypi.python.org/packages/source/v/virtualenv/virtualenv-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+BuildArch:      noarch
 
 BuildRequires:  rock-runtime-python27-core-rpmbuild
 Requires:       rock-runtime-python27-core

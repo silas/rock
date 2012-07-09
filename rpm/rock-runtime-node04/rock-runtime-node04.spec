@@ -9,6 +9,7 @@ Summary:        node04 runtime for rock
 Group:          Development/Languages
 License:        MIT
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+BuildArch:      noarch
 
 Requires:       rock-runtime-node04-core
 Requires:       rock-runtime-node04-npm

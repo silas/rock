@@ -12,6 +12,7 @@ License:        (GPL+ or Artistic) and (GPLv2+ or Artistic) and Copyright Only a
 URL:            http://search.cpan.org/~miyagawa/App-cpanminus
 Source0:        https://raw.github.com/miyagawa/cpanminus/%{version}/cpanm
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+BuildArch:      noarch
 
 BuildRequires:  rock-runtime-perl516-core-rpmbuild
 Requires:       rock-runtime-perl516-core
