@@ -22,7 +22,7 @@ URL:            http://getcomposer.org
 # cp composer.phar LICENSE ../composer-%{version}-%{pre}
 # cd ..
 # tar -cjf composer-%{version}-%{pre}.tar.bz2 composer-%{version}-%{pre}
-Source0:        composer-%{version}-%{pre}.tar.bz2
+Source0:        https://github.com/downloads/rockplatform/packages/composer-%{version}-%{pre}.tar.bz2
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 
