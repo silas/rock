@@ -10,37 +10,37 @@ def build(args):
     Project(args.path).build()
 
 
-def env(args):
-    print Project(args.path).env(render='bash')
+def run(args):
+    Project(args.path).run()
 
 
 def test(args):
     Project(args.path).test()
 
 
-def run():
+def main():
     parser = argparse.ArgumentParser(prog='rock',
-                                     description='Rock better runtimes')
+        description='Rock better runtimes')
 
     # top-level options
     parser.add_argument('--path', help='set project path', default=os.getcwd())
 
     # subcommands
     subparsers = parser.add_subparsers(help='subcommands',
-                                       description='valid subcommands')
+        description='valid subcommands')
 
     # subcommand: build
-    parser_env = subparsers.add_parser('build', help='build project')
-    parser_env.set_defaults(func=build)
+    parser_build = subparsers.add_parser('build', help='build project')
+    parser_build.set_defaults(func=build)
 
-    # subcommand: env
-    parser_env = subparsers.add_parser('env',
-        help='output runtime environment variables')
-    parser_env.set_defaults(func=env)
+    # subcommand: run
+    parser_run = subparsers.add_parser('run',
+        help='run command in environment')
+    parser_run.set_defaults(func=run)
 
     # subcommand: test
-    parser_env = subparsers.add_parser('test', help='test project')
-    parser_env.set_defaults(func=test)
+    parser_test = subparsers.add_parser('test', help='test project')
+    parser_test.set_defaults(func=test)
 
     try:
         args = parser.parse_args()

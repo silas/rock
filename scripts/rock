@@ -2,7 +2,8 @@
 
 from rock import cli
 
+
 try:
-    cli.run()
+    cli.main()
 except KeyboardInterrupt:
     pass
