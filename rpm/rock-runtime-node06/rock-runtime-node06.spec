@@ -3,7 +3,7 @@
 
 Name:           rock-runtime-node06
 Version:        1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        node06 runtime for rock
 
 Group:          Development/Languages
@@ -11,7 +11,8 @@ License:        MIT
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 
-Requires:       rock-runtime-node06-core
+BuildRequires:  rock-runtime-node06-core-rpmbuild
+Requires:       rock-runtime-node06-core >= 0.6.18-2
 
 %description
 node06 runtime for rock.
@@ -23,12 +24,23 @@ node06 runtime for rock.
 %install
 rm -rf %{buildroot}
 
+mkdir -p %{buildroot}%{node06_rootdir}
+
+cat > %{buildroot}%{node06_rootdir}/env << EOF
+export PATH="%{node06_rootdir}/usr/bin:\${PATH}"
+EOF
+
 %clean
 rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
+%{node06_rootdir}/env
 
 %changelog
+* Tue Jul 10 2012 Silas Sewell <silas@sewell.org> - 1-2
+- Add env file
+- Add explicit requires
+
 * Mon May 14 2012 Silas Sewell <silas@sewell.org> - 1-1
 - Initial build

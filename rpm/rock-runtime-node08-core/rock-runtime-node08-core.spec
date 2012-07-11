@@ -37,11 +37,19 @@ This packages contains resources for building %{name} RPMs.
 
 %build
 ./configure --prefix=%{node08_rootdir}%{_prefix}
+
 %{__make}
 
 %install
 rm -rf %{buildroot}
+
 %{__make} install DESTDIR=%{buildroot}
+
+mkdir -p %{buildroot}%{_sysconfdir}/rpm
+
+cat > %{buildroot}%{_sysconfdir}/rpm/macros.rock-node08 << EOF
+%%node08_rootdir %{node08_rootdir}
+EOF
 
 %clean
 rm -rf %{buildroot}
@@ -59,10 +67,12 @@ rm -rf %{buildroot}
 
 %files rpmbuild
 %defattr(-,root,root,-)
+%{_sysconfdir}/rpm/macros.rock-node08
 
 %changelog
 * Tue Jul 10 2012 Silas Sewell <silas@sewell.org> - 0.8.1-2
 - Add man requirement
+- Add rpm macro
 
 * Sat Jun 30 2012 Silas Sewell <silas@sewell.org> - 0.8.1-1
 - Initial build

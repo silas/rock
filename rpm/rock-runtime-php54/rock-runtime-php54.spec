@@ -3,7 +3,7 @@
 
 Name:           rock-runtime-php54
 Version:        1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        php54 runtime for rock
 
 Group:          Development/Languages
@@ -11,8 +11,9 @@ License:        MIT
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 
-Requires:       rock-runtime-php54-composer
-Requires:       rock-runtime-php54-core
+BuildRequires:  rock-runtime-php54-core-rpmbuild
+Requires:       rock-runtime-php54-composer >= 1.0.0-0.1
+Requires:       rock-runtime-php54-core >= 5.4.3-1
 
 %description
 php54 runtime for rock.
@@ -24,12 +25,23 @@ php54 runtime for rock.
 %install
 rm -rf %{buildroot}
 
+mkdir -p %{buildroot}%{php54_rootdir}
+
+cat > %{buildroot}%{php54_rootdir}/env << EOF
+export PATH="%{php54_rootdir}/usr/bin:\${PATH}"
+EOF
+
 %clean
 rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
+%{php54_rootdir}/env
 
 %changelog
+* Tue Jul 10 2012 Silas Sewell <silas@sewell.org> - 1-2
+- Add env file
+- Add explicit requires
+
 * Sun Jul 08 2012 Silas Sewell <silas@sewell.org> - 1-1
 - Initial build

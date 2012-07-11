@@ -42,10 +42,12 @@ This packages contains resources for building %{name} RPMs.
 
 %install
 rm -rf %{buildroot}
+
 %{__make} install DESTDIR=%{buildroot}
 
 mkdir -p %{buildroot}%{_sysconfdir}/rpm
-cat >> %{buildroot}%{_sysconfdir}/rpm/macros.rock-node04 << \EOF
+
+cat > %{buildroot}%{_sysconfdir}/rpm/macros.rock-node04 << EOF
 %%node04_rootdir %{node04_rootdir}
 EOF
 

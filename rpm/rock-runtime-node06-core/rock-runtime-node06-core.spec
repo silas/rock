@@ -37,11 +37,19 @@ This packages contains resources for building %{name} RPMs.
 
 %build
 ./configure --prefix=%{node06_rootdir}%{_prefix}
+
 %{__make}
 
 %install
 rm -rf %{buildroot}
+
 %{__make} install DESTDIR=%{buildroot}
+
+mkdir -p %{buildroot}%{_sysconfdir}/rpm
+
+cat > %{buildroot}%{_sysconfdir}/rpm/macros.rock-node06 << EOF
+%%node06_rootdir %{node06_rootdir}
+EOF
 
 %clean
 rm -rf %{buildroot}
@@ -59,10 +67,12 @@ rm -rf %{buildroot}
 
 %files rpmbuild
 %defattr(-,root,root,-)
+%{_sysconfdir}/rpm/macros.rock-node06
 
 %changelog
 * Tue Jul 10 2012 Silas Sewell <silas@sewell.org> - 0.6.18-2
 - Add man requirement
+- Add rpm macro
 
 * Fri Jun 22 2012 Silas Sewell <silas@sewell.org> - 0.6.19-1
 - Update to 0.6.19
