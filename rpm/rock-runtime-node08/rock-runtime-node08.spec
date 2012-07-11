@@ -24,10 +24,10 @@ node08 runtime for rock.
 %install
 rm -rf %{buildroot}
 
-mkdir -p %{buildroot}%{node06_rootdir}
+mkdir -p %{buildroot}%{node08_rootdir}
 
-cat > %{buildroot}%{node06_rootdir}/env << EOF
-export PATH="%{node06_rootdir}/usr/bin:\${PATH}"
+cat > %{buildroot}%{node08_rootdir}/env << EOF
+export PATH="%{node08_rootdir}/usr/bin:\${PATH}"
 EOF
 
 %clean
@@ -35,7 +35,7 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
-%{node06_rootdir}/env
+%{node08_rootdir}/env
 
 %changelog
 * Tue Jul 10 2012 Silas Sewell <silas@sewell.org> - 1-2

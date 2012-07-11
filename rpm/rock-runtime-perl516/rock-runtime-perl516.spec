@@ -11,6 +11,7 @@ License:        MIT
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 
+BuildRequires:  rock-runtime-perl516-core-rpmbuild
 Requires:       rock-runtime-perl516-core >= 5.16.0-1
 Requires:       rock-runtime-perl516-cpanm >= 1.5014-1
 Requires:       rock-runtime-perl516-local-lib >= 1.008004-1

@@ -11,7 +11,7 @@ License:        MIT
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 
-Requires:       rock-runtime-ruby18-core-rpmbuild
+BuildRequires:  rock-runtime-ruby18-core-rpmbuild
 Requires:       rock-runtime-ruby18-bundler >= 1.1.4-1
 Requires:       rock-runtime-ruby18-core >= 1.8.7.370-1
 Requires:       rock-runtime-ruby18-rubygems >= 1.8.24-1
