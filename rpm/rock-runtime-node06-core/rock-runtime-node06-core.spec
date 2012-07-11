@@ -6,7 +6,7 @@
 
 Name:           rock-runtime-node06-core
 Version:        0.6.19
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A Node.js 0.6.x runtime
 
 Group:          Development/Languages
@@ -17,6 +17,7 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  libevent-devel
 BuildRequires:  openssl-devel
+Requires:       man
 
 %description
 Node is an evented I/O framework for the V8 JavaScript engine.
@@ -60,6 +61,9 @@ rm -rf %{buildroot}
 %defattr(-,root,root,-)
 
 %changelog
+* Tue Jul 10 2012 Silas Sewell <silas@sewell.org> - 0.6.18-2
+- Add man requirement
+
 * Fri Jun 22 2012 Silas Sewell <silas@sewell.org> - 0.6.19-1
 - Update to 0.6.19
 
