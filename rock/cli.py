@@ -6,15 +6,15 @@ from rock.exceptions import Error
 from rock.project import Project
 
 
-def build(args):
+def build(args, extra):
     Project(args.path).build()
 
 
-def run(args):
-    Project(args.path).run()
+def run(args, extra):
+    Project(args.path).run(' '.join(extra))
 
 
-def test(args):
+def test(args, extra):
     Project(args.path).test()
 
 
@@ -23,11 +23,10 @@ def main():
         description='Rock better runtimes')
 
     # top-level options
-    parser.add_argument('--path', help='set project path', default=os.getcwd())
+    parser.add_argument('--path', help='project path', default=os.getcwd())
 
     # subcommands
-    subparsers = parser.add_subparsers(help='subcommands',
-        description='valid subcommands')
+    subparsers = parser.add_subparsers(title='subcommands')
 
     # subcommand: build
     parser_build = subparsers.add_parser('build', help='build project')
@@ -35,7 +34,7 @@ def main():
 
     # subcommand: run
     parser_run = subparsers.add_parser('run',
-        help='run command in environment')
+        help='run command', add_help=False)
     parser_run.set_defaults(func=run)
 
     # subcommand: test
@@ -43,8 +42,8 @@ def main():
     parser_test.set_defaults(func=test)
 
     try:
-        args = parser.parse_args()
-        args.func(args)
+        args, extra = parser.parse_known_args()
+        args.func(args, extra)
     except Error, error:
         message = '%s' % error
         if message.endswith('\n'):

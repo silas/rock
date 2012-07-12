@@ -30,7 +30,7 @@ class Project(object):
         if not isinstance(runtime, basestring):
             raise ConfigError('Invalid runtime: %s' % runtime)
 
-        config['runtime_path'] = '/opt/rock/runtime/%s' % runtime
+        config['runtime_path'] = os.path.join('/', 'opt', 'rock', 'runtime', runtime)
 
         config['type'] = runtime.rstrip('0123456789')
 
@@ -51,6 +51,8 @@ class Project(object):
         self.config = config
 
     def run(self, command, **kwargs):
+        command = 'source %s ; %s' % (
+            os.path.join(self.config['runtime_path'], 'env'), command)
         run_kwargs = {
             'cwd': self.path,
             'stdout': True,
