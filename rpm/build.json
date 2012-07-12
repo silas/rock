@@ -23,5 +23,6 @@
   {"spec": "rock-runtime-ruby18/rock-runtime-ruby18.spec"},
   {"spec": "rock-runtime-ruby19-core/rock-runtime-ruby19-core.spec"},
   {"spec": "rock-runtime-ruby19-bundler/rock-runtime-ruby19-bundler.spec"},
-  {"spec": "rock-runtime-ruby19/rock-runtime-ruby19.spec"}
+  {"spec": "rock-runtime-ruby19/rock-runtime-ruby19.spec"},
+  {"spec": "rock/rock.spec"}
 ]
