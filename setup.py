@@ -18,6 +18,9 @@ setup(
     license='MIT',
     url='https://github.com/rockplatform/python-rock',
     packages=['rock'],
+    package_data={'rock': [
+        'data/runtime/*.yml',
+    ]},
     scripts=['scripts/rock'],
     install_requires=[
         'PyYAML',
