@@ -15,11 +15,14 @@ class Project(object):
     def setup(self):
         config = {}
 
+        # parse project
+
         path = os.path.join(self.path, '.rock.yml')
 
         try:
             with open(path) as f:
                 config = yaml.load(f)
+                config.update(self.config)
         except Exception, error:
             raise ConfigError('Failed to read configuration file: '
                 + path)
@@ -29,21 +32,33 @@ class Project(object):
         if not isinstance(runtime, basestring):
             raise ConfigError('Invalid runtime: %s' % runtime)
 
+        # parse global config
+
+        mount = '/'
+
         config['type'] = config['runtime'].rstrip('0123456789')
-        config['runtime_root'] = os.path.join('/opt', 'rock', 'runtime', config['runtime'])
+        config['runtime_root'] = os.path.join(mount, 'opt', 'rock', 'runtime',
+            config['runtime'])
         config['runtime_env'] = os.path.join(config['runtime_root'], 'env')
 
-        path = os.path.dirname(__file__)
-        path = os.path.join(path, 'runtime', '%s.yml' % config['type'])
+        runtime_path = ['runtime', '%s.yml' % config['type']]
 
-        if os.path.exists(path):
-            try:
-                with open(path) as f:
-                    tmp_config = yaml.load(f)
-                    tmp_config.update(config)
-                    config = tmp_config
-            except Exception, error:
-                print 'Failed to parse: %s' % path
+        data_path = []
+        data_path.append(os.path.join(os.path.dirname(__file__), 'data',
+            *runtime_path))
+        data_path.append(os.path.join(mount, 'etc', 'rock', *runtime_path))
+
+        for path in data_path:
+            if os.path.exists(path):
+                try:
+                    with open(path) as f:
+                        tmp_config = yaml.load(f)
+                        tmp_config.update(config)
+                        config = tmp_config
+                except Exception, error:
+                    raise ConfigError('Failed to parse "%s": %s' % (path, error))
+
+        # validate
 
         for name in ('build', 'test'):
             value = config.get(name)
@@ -51,19 +66,22 @@ class Project(object):
             if not isinstance(name, basestring):
                 raise ConfigError('Invalid %s: %s' % (name, value))
 
-        config['verbose'] = any([
-            self.config.get('verbose'),
-            config.get('verbose'),
-        ])
+        # finish
 
         self.config = config
 
     def execute(self, command):
         with utils.Shell(stdout=sys.stdout, stderr=sys.stderr) as s:
+            # import runtime environment
             s.run('source ' + self.config['runtime_env'])
-            s.run('set -e')
-            if self.config['verbose']:
-                s.run('set -v')
+            # exit with error if any one command fails
+            s.run('set -o errexit')
+            # print commands as they're run
+            s.run('set -o verbose')
+            # don't execute commands, just print them
+            if self.config['dry_run']:
+                s.run('set -o noexec')
+            # run command and wait for results
             s.run(command)
             s.wait()
             if s.code > 0:
