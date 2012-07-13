@@ -2,22 +2,21 @@ build: |
 
   test -f ./requirements.txt
 
-  if [[ ! -f ./vendor/bin/activate ]]; then
-    virtualenv ./vendor
-  fi
+  test -f ./venv/bin/activate || \
+    virtualenv --distribute --no-site-packages ./venv
 
-  source ./vendor/bin/activate 2>/dev/null
+  source ./venv/bin/activate 2>/dev/null
 
   pip install -r ./requirements.txt
 
 test: |
 
-  source ./vendor/bin/activate 2>/dev/null
+  source ./venv/bin/activate 2>/dev/null
 
-  nosetests
+  ./venv/bin/nosetests
 
 run: |
 
-  source ./vendor/bin/activate
+  source ./venv/bin/activate 2>/dev/null
 
   {command}

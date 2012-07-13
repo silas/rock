@@ -58,29 +58,24 @@ class Project(object):
 
         self.config = config
 
-    def run(self, name):
-        if name not in self.config:
-            raise ConfigError('%s not found' % name.capitalize())
-
-        kwargs = {}
-
-        if self.config['verbose']:
-            kwargs['stdout'] = sys.stdout
-            kwargs['stderr'] = sys.stderr
-
-        with utils.Shell(**kwargs) as s:
+    def execute(self, command):
+        with utils.Shell(stdout=sys.stdout, stderr=sys.stderr) as s:
             s.run('source ' + self.config['runtime_env'])
-            s.run('set -ev')
-            s.run(self.config[name])
+            s.run('set -e')
+            if self.config['verbose']:
+                s.run('set -v')
+            s.run(command)
             s.wait()
             if s.code > 0:
-                text = '\nFailed to %s' % name
-                if not self.config['verbose'] and s.data[0] is not None:
-                    text = '%s\n%s' % (s.data[0].rstrip(), text)
-                raise RunError(text)
+                raise RunError()
 
     def build(self):
-        self.run('build')
+        self.execute(self.config['build'])
+
+    def run(self, command):
+        if 'run' in self.config:
+            command = str.format(self.config['run'], command=command)
+        self.execute(command)
 
     def test(self):
-        self.run('test')
+        self.execute(self.config['test'])

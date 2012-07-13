@@ -28,7 +28,7 @@ def main():
 
     # top-level options
     parser.add_argument('--path', help='project path', default=os.getcwd())
-    parser.add_argument('--verbose', action='store_true', help='show all output')
+    parser.add_argument('-v', '--verbose', action='store_true', help='show all output')
 
     # subcommands
     subparsers = parser.add_subparsers(title='subcommands')
