@@ -22,7 +22,6 @@ setup(
     install_requires=[
         'PyYAML',
         'argparse',
-        'ops>=0.4.5',
     ],
     classifiers=[
         'Intended Audience :: Developers',

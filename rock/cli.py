@@ -1,21 +1,25 @@
 import argparse
 import os
 import sys
-import ops
 from rock.exceptions import Error
 from rock.project import Project
 
+def project(args):
+    return Project(args.path, config={
+        'verbose': args.verbose,
+    })
+
 
 def build(args, extra):
-    Project(args.path).build()
+    project(args).build()
 
 
 def run(args, extra):
-    Project(args.path).run(' '.join(extra))
+    project(args).run(' '.join(extra))
 
 
 def test(args, extra):
-    Project(args.path).test()
+    project(args).test()
 
 
 def main():
@@ -24,6 +28,7 @@ def main():
 
     # top-level options
     parser.add_argument('--path', help='project path', default=os.getcwd())
+    parser.add_argument('--verbose', action='store_true', help='show all output')
 
     # subcommands
     subparsers = parser.add_subparsers(title='subcommands')
@@ -46,6 +51,6 @@ def main():
         args.func(args, extra)
     except Error, error:
         message = '%s' % error
-        if message.endswith('\n'):
-            message = message[:-1]
-        ops.exit(1, message)
+        if not message.endswith('\n'):
+            message += '\n'
+        parser.exit(1, message)

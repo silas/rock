@@ -1,0 +1,13 @@
+build: |
+
+  test -f ./Gemfile.lock
+
+  bundle install --deployment
+
+test: |
+
+  bundle exec rack
+
+run: |
+
+  bundle exec {command}

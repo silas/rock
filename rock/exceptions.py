@@ -2,6 +2,10 @@ class Error(Exception):
     pass
 
 
+class RunError(Error):
+    pass
+
+
 class BuildError(Error):
     pass
 

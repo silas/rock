@@ -1,74 +1,86 @@
 import os
+import sys
 import yaml
-import ops
-from rock.exceptions import *
+from rock import utils
+from rock.exceptions import ConfigError, RunError
 
 
 class Project(object):
 
-    def __init__(self, path, setup=True):
+    def __init__(self, path, config=None):
         self.path = path
-        self.config = {}
-        if setup:
-            self.setup()
+        self.config = config or {}
+        self.setup()
 
     def setup(self):
-        config_file = os.path.join(self.path, '.rock.yml')
+        config = {}
+
+        path = os.path.join(self.path, '.rock.yml')
 
         try:
-            with open(config_file) as f:
+            with open(path) as f:
                 config = yaml.load(f)
         except Exception, error:
             raise ConfigError('Failed to read configuration file: '
-                + config_file)
-
-        if not isinstance(config, dict):
-            raise ConfigError('Invalid project configuration')
+                + path)
 
         runtime = config.get('runtime')
 
         if not isinstance(runtime, basestring):
             raise ConfigError('Invalid runtime: %s' % runtime)
 
-        config['runtime_path'] = os.path.join('/', 'opt', 'rock', 'runtime', runtime)
+        config['type'] = config['runtime'].rstrip('0123456789')
+        config['runtime_root'] = os.path.join('/opt', 'rock', 'runtime', config['runtime'])
+        config['runtime_env'] = os.path.join(config['runtime_root'], 'env')
 
-        config['type'] = runtime.rstrip('0123456789')
+        path = os.path.dirname(__file__)
+        path = os.path.join(path, 'runtime', '%s.yml' % config['type'])
 
-        build = config.get('build')
+        if os.path.exists(path):
+            try:
+                with open(path) as f:
+                    tmp_config = yaml.load(f)
+                    tmp_config.update(config)
+                    config = tmp_config
+            except Exception, error:
+                print 'Failed to parse: %s' % path
 
-        if build is None:
-            config['build'] = 'rock-build-%s' % config['type']
-        elif not isinstance(build, basestring):
-            raise ConfigError('Invalid build command: %s' % build)
+        for name in ('build', 'test'):
+            value = config.get(name)
 
-        test = config.get('test')
+            if not isinstance(name, basestring):
+                raise ConfigError('Invalid %s: %s' % (name, value))
 
-        if test is None:
-            config['test'] = 'rock-test-%s' % config['type']
-        elif not isinstance(test, basestring):
-            raise ConfigError('Invalid test command: %s' % test)
+        config['verbose'] = any([
+            self.config.get('verbose'),
+            config.get('verbose'),
+        ])
 
         self.config = config
 
-    def run(self, command, **kwargs):
-        command = 'source %s ; %s' % (
-            os.path.join(self.config['runtime_path'], 'env'), command)
-        run_kwargs = {
-            'cwd': self.path,
-            'stdout': True,
-            'stderr': True,
-        }
-        run_kwargs.update(kwargs)
-        return ops.run(command, **run_kwargs)
+    def run(self, name):
+        if name not in self.config:
+            raise ConfigError('%s not found' % name.capitalize())
+
+        kwargs = {}
+
+        if self.config['verbose']:
+            kwargs['stdout'] = sys.stdout
+            kwargs['stderr'] = sys.stderr
+
+        with utils.Shell(**kwargs) as s:
+            s.run('source ' + self.config['runtime_env'])
+            s.run('set -ev')
+            s.run(self.config[name])
+            s.wait()
+            if s.code > 0:
+                text = '\nFailed to %s' % name
+                if not self.config['verbose'] and s.data[0] is not None:
+                    text = '%s\n%s' % (s.data[0].rstrip(), text)
+                raise RunError(text)
 
     def build(self):
-        build = self.run(self.config['build'])
-
-        if not build:
-            raise BuildError()
+        self.run('build')
 
     def test(self):
-        test = self.run(self.config['test'])
-
-        if not test:
-            raise TestError()
+        self.run('test')

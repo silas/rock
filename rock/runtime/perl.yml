@@ -1,0 +1,13 @@
+build: |
+
+  test -f ./carton.lock
+
+  carton install --deployment
+
+test: |
+
+  carton exec -Ilib -- prove
+
+run: |
+
+  carton exec -Ilib -- {command}

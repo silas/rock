@@ -1,0 +1,11 @@
+build: |
+
+  test -f ./package.json
+
+  npm install
+
+  npm rebuild
+
+test: |
+
+  npm test

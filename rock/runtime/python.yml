@@ -1,0 +1,23 @@
+build: |
+
+  test -f ./requirements.txt
+
+  if [[ ! -f ./vendor/bin/activate ]]; then
+    virtualenv ./vendor
+  fi
+
+  source ./vendor/bin/activate 2>/dev/null
+
+  pip install -r ./requirements.txt
+
+test: |
+
+  source ./vendor/bin/activate 2>/dev/null
+
+  nosetests
+
+run: |
+
+  source ./vendor/bin/activate
+
+  {command}
