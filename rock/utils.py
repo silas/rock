@@ -29,7 +29,6 @@ class Shell(object):
 
     def wait(self):
         if self.code < 0:
-            self.process.stdin.flush()
             self.data = self.process.communicate()
             self.code = self.process.returncode
         return self.code
