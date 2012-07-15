@@ -73,7 +73,7 @@ class Project(object):
     def execute(self, command):
         with utils.Shell(stdout=sys.stdout, stderr=sys.stderr) as s:
             # import runtime environment
-            s.run('source ' + self.config['runtime_env'])
+            s.run("source '%s'" % self.config['runtime_env'])
             # exit with error if any one command fails
             s.run('set -o errexit')
             # print commands as they're run
