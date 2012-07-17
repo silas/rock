@@ -1,5 +1,4 @@
 import os
-import sys
 import yaml
 from rock import utils
 from rock.exceptions import ConfigError, RunError
@@ -70,8 +69,8 @@ class Project(object):
 
         self.config = config
 
-    def execute(self, command):
-        with utils.Shell(stdout=sys.stdout, stderr=sys.stderr) as s:
+    def execute(self, command, **kwargs):
+        with utils.Shell(**kwargs) as s:
             # import runtime environment
             s.run('source ' + self.config['runtime_env'])
             # exit with error if any one command fails
@@ -93,7 +92,7 @@ class Project(object):
     def run(self, command):
         if 'run' in self.config:
             command = str.format(self.config['run'], command=command)
-        self.execute(command)
+        self.execute(command, stdin=True)
 
     def test(self):
         self.execute(self.config['test'])
