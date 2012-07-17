@@ -6,4 +6,4 @@ build: |
 
 test: |
 
-  ./vendor/bin/phpunit --bootstrap ./vendor/autoload.php ./tests
+  php -c ${PHP_INI-.} ./vendor/bin/phpunit --bootstrap ./vendor/autoload.php ${TEST_PATH-./tests}
