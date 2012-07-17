@@ -12,6 +12,10 @@ def build(args, extra):
     project(args).build()
 
 
+def env(args, extra):
+    print "source '%s';" % project(args).config['runtime_env']
+
+
 def run(args, extra):
     project(args).run(' '.join(extra))
 
@@ -34,6 +38,10 @@ def main():
     # project: build
     parser_build = project.add_parser('build', help='build project')
     parser_build.set_defaults(func=build)
+
+    # project: env
+    parser_env = project.add_parser('env', help='output evalable environment')
+    parser_env.set_defaults(func=env)
 
     # project: run
     parser_run = project.add_parser('run',
