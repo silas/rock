@@ -2,8 +2,7 @@ build: |
 
   test -f ./requirements.txt
 
-  test -f ./venv/bin/activate || \
-    virtualenv --distribute --no-site-packages ./venv
+  test -f ./venv/bin/activate || virtualenv --distribute ./venv
 
   source ./venv/bin/activate 2>/dev/null
 
