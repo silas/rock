@@ -3,7 +3,7 @@
 
 Name:           rock-runtime-python27
 Version:        1
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        python27 runtime for rock
 
 Group:          Development/Languages
@@ -13,7 +13,7 @@ BuildArch:      noarch
 
 BuildRequires:  rock-runtime-python27-core-rpmbuild
 Requires:       rock-runtime-python27-core >= 2.7.3-1
-Requires:       rock-runtime-python27-virtualenv >= 1.7.1.2-1
+Requires:       rock-runtime-python27-virtualenv >= 1.7.2-1
 
 %description
 python27 runtime for rock.
@@ -39,6 +39,9 @@ rm -rf %{buildroot}
 %{python27_rootdir}/env
 
 %changelog
+* Wed Jul 18 2012 Silas Sewell <silas@sewell.org> - 1-3
+- Update to virtualenv 1.7.2
+
 * Tue Jul 10 2012 Silas Sewell <silas@sewell.org> - 1-2
 - Add env file
 - Add explicit requires

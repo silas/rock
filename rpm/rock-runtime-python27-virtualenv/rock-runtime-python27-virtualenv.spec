@@ -3,7 +3,7 @@
 %filter_setup
 
 Name:           rock-runtime-python27-virtualenv
-Version:        1.7.1.2
+Version:        1.7.2
 Release:        1%{?dist}
 Summary:        A tool to manage Python 2.7.x dependencies
 
@@ -43,9 +43,12 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root,-)
 %doc PKG-INFO AUTHORS.txt LICENSE.txt
-%{python27_rootdir}/%{_bindir}/virtualenv
+%{python27_rootdir}/%{_bindir}/virtualenv*
 %{python27_sitedir}/virtualenv*
 
 %changelog
+* Tue Jul 17 2012 Silas Sewell <silas@sewell.org> - 1.7.2-1
+- Update 1.7.2
+
 * Mon May 14 2012 Silas Sewell <silas@sewell.org> - 1.7.1.2-1
 - Initial build
