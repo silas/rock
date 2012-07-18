@@ -1,5 +1,5 @@
 Name:           rock
-Version:        0.0.2
+Version:        0.0.3
 Release:        1%{?dist}
 Summary:        Application manage tool for Rock Platform
 
@@ -12,7 +12,6 @@ BuildArch:      noarch
 BuildRequires:  python-devel
 Requires:       PyYAML
 Requires:       python-argparse
-Requires:       python-ops
 
 %description
 This is a command line tool that simplifies building, testing, and running
@@ -35,5 +34,8 @@ applications on the Rock Platform.
 %{python_sitelib}/%{name}-%{version}-py*.egg-info
 
 %changelog
+* Wed Jul 18 2012 Silas Sewell <silas@sewell.org> - 0.0.3-1
+- Update to 0.0.3
+
 * Wed Jul 11 2012 Silas Sewell <silas@sewell.org> - 0.0.2-1
 - Initial build
