@@ -22,7 +22,7 @@ class Shell(object):
             shell=False,
             close_fds=True,
         )
-        return self 
+        return self
 
     def __exit__(self, type, value, traceback):
         self.wait()
