@@ -10,10 +10,11 @@
 
 %global runtime php54
 %global php54_rootdir /opt/rock/runtime/%{runtime}
+%global php54_libdir %{php54_rootdir}%{_prefix}/lib
 
 Name:           rock-runtime-php54-core
 Version:        5.4.4
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A PHP 5.4.x runtime
 
 Group:          Development/Languages
@@ -187,10 +188,16 @@ rm -rf %{buildroot}
 
 %{__make} install INSTALL_ROOT=%{buildroot}
 
-rm -fr %{php54_rootdir}/%{junk} \
-       %{php54_rootdir}%{_prefix}/lib/php/%{junk}
+find %{buildroot}%{php54_rootdir} -name '*.a' -delete
+
+for name in json phar; do
+  echo "extension=${name}.so" >> %{buildroot}%{php54_libdir}/php.ini
+done
+
+rm -fr %{php54_rootdir}/%{junk} %{php54_libdir}/php/%{junk}
 
 mkdir -p %{buildroot}%{_sysconfdir}/rpm
+
 cat > %{buildroot}%{_sysconfdir}/rpm/macros.rock-php54 << EOF
 %%php54_rootdir %{php54_rootdir}
 EOF
@@ -208,5 +215,9 @@ rm -rf %{buildroot}
 %{_sysconfdir}/rpm/macros.rock-php54
 
 %changelog
+* Mon Jul 16 2012 Silas Sewell <silas@sewell.org> - 5.4.3-2
+- Load json and phar modules via php.ini
+- Remove '*.a' files
+
 * Sun Jul 08 2012 Silas Sewell <silas@sewell.org> - 5.4.3-1
 - Initial build

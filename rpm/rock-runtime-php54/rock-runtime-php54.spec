@@ -3,7 +3,7 @@
 
 Name:           rock-runtime-php54
 Version:        1
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        php54 runtime for rock
 
 Group:          Development/Languages
@@ -13,7 +13,7 @@ BuildArch:      noarch
 
 BuildRequires:  rock-runtime-php54-core-rpmbuild
 Requires:       rock-runtime-php54-composer >= 1.0.0-0.1
-Requires:       rock-runtime-php54-core >= 5.4.3-1
+Requires:       rock-runtime-php54-core >= 5.4.3-2
 
 %description
 php54 runtime for rock.
@@ -39,6 +39,9 @@ rm -rf %{buildroot}
 %{php54_rootdir}/env
 
 %changelog
+* Tue Jul 17 2012 Silas Sewell <silas@sewell.org> - 1-3
+- Fix various issues with core package
+
 * Tue Jul 10 2012 Silas Sewell <silas@sewell.org> - 1-2
 - Add env file
 - Add explicit requires
