@@ -1,3 +1,6 @@
+env:
+  PATH: ./bin:./vendor/bin:${PATH}
+
 build: |
 
   test -f ./composer.lock
@@ -7,3 +10,11 @@ build: |
 test: |
 
   php -c ${PHP_INI-.} ./vendor/bin/phpunit --bootstrap ./vendor/autoload.php ${TEST_PATH-./tests}
+
+tool: |
+
+  composer.phar {args}
+
+run: |
+
+  php -c ${PHP_INI-.} {args}

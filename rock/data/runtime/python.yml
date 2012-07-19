@@ -1,3 +1,6 @@
+env:
+  PATH: ./bin:./venv/bin:${PATH}
+
 build: |
 
   test -f ./requirements.txt
@@ -14,8 +17,14 @@ test: |
 
   ./venv/bin/nosetests
 
+tool: |
+
+  source ./venv/bin/activate 2>/dev/null
+
+  pip {args}
+
 run: |
 
   source ./venv/bin/activate 2>/dev/null
 
-  {command}
+  python {args}

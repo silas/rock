@@ -1,6 +1,9 @@
+env:
+  PATH: ./bin:./node_modules/.bin:${PATH}
+
 build: |
 
-  test -f ./package.json
+  test -f ./npm-shrinkwrap.json
 
   npm install
 
@@ -9,3 +12,11 @@ build: |
 test: |
 
   npm test
+
+tool: |
+
+  npm {args}
+
+run: |
+
+  node {args}

@@ -1,4 +1,3 @@
-import os
 import subprocess
 import sys
 from rock.exceptions import RunError
@@ -32,7 +31,7 @@ class Shell(object):
 
     def wait(self):
         if self.code < 0:
-            if self.stdin and not os.isatty(0):
+            if self.stdin and not sys.stdin.isatty():
                 for data in self.stdin:
                     self.process.stdin.write(data)
             self.data = self.process.communicate()

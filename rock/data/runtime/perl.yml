@@ -1,3 +1,6 @@
+env:
+  PATH: ./bin:./local/bin:${PATH}
+
 build: |
 
   test -f ./carton.lock
@@ -8,6 +11,10 @@ test: |
 
   carton exec -Ilib -- prove
 
+tool: |
+
+  carton {args}
+
 run: |
 
-  carton exec -Ilib -- {command}
+  carton exec -Ilib -- {args}

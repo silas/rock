@@ -24,6 +24,10 @@ def test(args, extra):
     project(args).test()
 
 
+def tool(args, extra):
+    project(args).tool(' '.join(extra))
+
+
 def main():
     parser = argparse.ArgumentParser(prog='rock',
         description='Rock better runtimes')
@@ -45,12 +49,17 @@ def main():
 
     # project: run
     parser_run = project.add_parser('run',
-        help='run command', add_help=False)
+        help='run project file', add_help=False)
     parser_run.set_defaults(func=run)
 
     # project: test
     parser_test = project.add_parser('test', help='test project')
     parser_test.set_defaults(func=test)
+
+    # project: tool
+    parser_tool = project.add_parser('tool',
+        help='build tool', add_help=False)
+    parser_tool.set_defaults(func=tool)
 
     try:
         args, extra = parser.parse_known_args()

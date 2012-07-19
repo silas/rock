@@ -59,7 +59,7 @@ class Project(object):
 
         # validate
 
-        for name in ('build', 'test'):
+        for name in ('build', 'test', 'tool'):
             value = config.get(name)
 
             if not isinstance(name, basestring):
@@ -91,8 +91,12 @@ class Project(object):
 
     def run(self, command):
         if 'run' in self.config:
-            command = str.format(self.config['run'], command=command)
+            command = str.format(self.config['run'], args=command)
         self.execute(command, stdin=True)
 
     def test(self):
         self.execute(self.config['test'])
+
+    def tool(self, args):
+        command = str.format(self.config['tool'], args=args)
+        self.execute(command, stdin=True)

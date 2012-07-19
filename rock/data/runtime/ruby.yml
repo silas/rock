@@ -8,6 +8,10 @@ test: |
 
   bundle exec rack
 
+tool: |
+
+  bundle {args}
+
 run: |
 
-  bundle exec {command}
+  bundle exec {args}
