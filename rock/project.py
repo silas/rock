@@ -7,8 +7,7 @@ from rock.exceptions import ConfigError
 
 class Project(object):
 
-    def __init__(self, path, config):
-        self.path = path
+    def __init__(self, config):
         self.config = config
         self.parse()
 
@@ -30,7 +29,7 @@ class Project(object):
         project_config = {}
 
         # parse project
-        path = os.path.join(self.path, '.rock.yml')
+        path = os.path.join(self.config['path'], '.rock.yml')
         try:
             with open(path) as f:
                 project_config = yaml.load(f)
@@ -63,7 +62,7 @@ class Project(object):
         data_path.append(os.path.join(mount, 'etc', 'rock', *runtime_path))
 
         # inject project path so configuration files can set absolute paths
-        config = {'env': {'PROJECT_PATH': self.path}}
+        config = {'env': {'PROJECT_PATH': self.config['path']}}
 
         # read non-project configuration files
         for path in data_path:

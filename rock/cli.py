@@ -5,7 +5,7 @@ from rock.exceptions import Error
 from rock.project import Project
 
 def project(args):
-    config = {}
+    config = {'path': args.path}
     if args.verbose:
         config['verbose'] = True
     if args.dry_run:
@@ -13,7 +13,7 @@ def project(args):
         config['verbose'] = True
     if args.runtime:
         config['runtime'] = args.runtime
-    return Project(args.path, config)
+    return Project(config)
 
 def build(args, extra):
     project(args).build()
