@@ -15,13 +15,16 @@ class Project(object):
         if 'env' in src:
             # ensure env is a dict of strings
             if not (isinstance(src['env'], dict) or
-                    all(map(lambda v: isinstance(v, basestring), src['env'].values()))):
-                raise ConfigError('env must be an associative array of strings')
+                    all(map(lambda v: isinstance(v, basestring),
+                    src['env'].values()))):
+                raise ConfigError('env must be an associative array of ' +
+                    'strings')
             if 'env' not in dst:
                 dst['env'] = {}
             # evaluate env variables
             for name, value in src['env'].items():
-                dst['env'][name] = string.Template(src['env'][name]).safe_substitute(**dst['env'])
+                dst['env'][name] = string.Template(
+                    src['env'][name]).safe_substitute(**dst['env'])
             del src['env']
         dst.update(src)
 
@@ -44,19 +47,21 @@ class Project(object):
             project_config.get('runtime'))
 
         if not isinstance(project_config['runtime'], basestring):
-            raise ConfigError('Invalid runtime: %s' % project_config['runtime'])
+            raise ConfigError('Invalid runtime: ' +
+                project_config['runtime'])
 
         # set defaults
         mount = '/'
         project_config['type'] = project_config['runtime'].rstrip('0123456789')
-        project_config['runtime_root'] = os.path.join(mount, 'opt', 'rock', 'runtime',
-            project_config['runtime'])
+        project_config['runtime_root'] = os.path.join(mount, 'opt', 'rock',
+            'runtime', project_config['runtime'])
 
         runtime_path = ['runtime', '%s.yml' % project_config['type']]
 
         # list of possible configuration files
         data_path = []
-        data_path.append(os.path.join(project_config['runtime_root'], 'rock.yml'))
+        data_path.append(os.path.join(project_config['runtime_root'],
+            'rock.yml'))
         data_path.append(os.path.join(os.path.dirname(__file__), 'data',
             *runtime_path))
         data_path.append(os.path.join(mount, 'etc', 'rock', *runtime_path))
@@ -71,7 +76,8 @@ class Project(object):
                     with open(path) as f:
                         self.merge_config(yaml.load(f), config)
                 except Exception, error:
-                    raise ConfigError('Failed to parse "%s": %s' % (path, error))
+                    raise ConfigError('Failed to parse "%s": %s' %
+                        (path, error))
 
         # merge non-project configuration into project configuration
         self.merge_config(project_config, config)

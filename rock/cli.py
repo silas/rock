@@ -4,6 +4,7 @@ import sys
 from rock.exceptions import Error
 from rock.project import Project
 
+
 def project(args):
     config = {'path': args.path}
     if args.verbose:
@@ -14,6 +15,7 @@ def project(args):
     if args.runtime:
         config['runtime'] = args.runtime
     return Project(config)
+
 
 def build(args, extra):
     project(args).build()
@@ -55,7 +57,8 @@ def main():
 
     # project options
     project_options = parser.add_argument_group('project options')
-    project_options.add_argument('--path', help='set path', default=os.getcwd())
+    project_options.add_argument('--path', help='set path',
+        default=os.getcwd())
     project_options.add_argument('--runtime', help='set runtime')
 
     # project commands
