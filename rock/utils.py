@@ -4,6 +4,8 @@ from rock.exceptions import RunError
 
 class Shell(object):
 
+    path = ['/usr/bin/env', 'bash']
+
     def __init__(self, stdin=None, stdout=None, stderr=None):
         self.process = None
         self.code = -1
@@ -14,7 +16,7 @@ class Shell(object):
 
     def __enter__(self):
         self.process = subprocess.Popen(
-            ['/usr/bin/env', 'bash'],
+            self.path,
             stdin=subprocess.PIPE,
             stdout=self.stdout,
             stderr=self.stderr,
@@ -26,8 +28,8 @@ class Shell(object):
     def __exit__(self, type, value, traceback):
         self.wait()
 
-    def run(self, command):
-        self.process.stdin.write('%s\n' % command)
+    def run(self, text):
+        self.process.stdin.write('%s\n' % text)
 
     def wait(self):
         if self.code < 0:

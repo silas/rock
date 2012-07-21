@@ -1,5 +1,16 @@
 env:
-  PATH: ./bin:./local/bin:${PATH}
+  PATH: "${PROJECT_PATH}/bin:${PROJECT_PATH}/local/bin:${PATH}"
+  BUILD_PATH: "${PROJECT_PATH}/local"
+  PERL_LOCAL_LIB_ROOT: "${PROJECT_PATH}/local"
+  PERL_MB_OPT: "--install_base ${PROJECT_PATH}/local"
+  PERL_MM_OPT: "INSTALL_BASE=${PROJECT_PATH}/local"
+  PERL5LIB: "${PROJECT_PATH}/lib:${PROJECT_PATH}/lib/perl5/x86_64-linux:${PROJECT_PATH}/local/lib/perl5"
+
+setup: |
+
+  if [[ -f ./cpanfile ]]; then
+    carton install
+  fi
 
 build: |
 
@@ -9,12 +20,8 @@ build: |
 
 test: |
 
-  carton exec -Ilib -- prove
+  prove
 
-tool: |
+clean: |
 
-  carton {args}
-
-run: |
-
-  carton exec -Ilib -- {args}
+  rm -fr ${BUILD_PATH}

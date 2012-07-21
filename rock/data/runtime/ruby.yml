@@ -1,3 +1,13 @@
+env:
+  PATH: "${PROJECT_PATH}/bin:${PROJECT_PATH}/vendor/bundle/ruby/${RUBY_ABI}/bin:${PATH}"
+  BUILD_PATH: "${PROJECT_PATH}/vendor/bundle"
+
+setup: |
+
+  if [[ -f ./Gemfile ]]; then
+    bundle install --path=${BUILD_PATH}
+  fi
+
 build: |
 
   test -f ./Gemfile.lock
@@ -6,12 +16,8 @@ build: |
 
 test: |
 
-  bundle exec rack
+  rake
 
-tool: |
+clean: |
 
-  bundle {args}
-
-run: |
-
-  bundle exec {args}
+  rm -fr ${BUILD_PATH} ${PROJECT_PATH}/.bundle

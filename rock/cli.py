@@ -12,12 +12,21 @@ def build(args, extra):
     project(args).build()
 
 
+def clean(args, extra):
+    project(args).clean()
+
+
 def env(args, extra):
-    print "source '%s';" % project(args).config['runtime_env']
+    for name, value in project(args).config['env'].items():
+        print 'export %s="%s"' % (name, value)
 
 
 def run(args, extra):
     project(args).run(' '.join(extra))
+
+
+def setup(args, extra):
+    project(args).setup()
 
 
 def test(args, extra):
@@ -43,8 +52,12 @@ def main():
     parser_build = project.add_parser('build', help='build project')
     parser_build.set_defaults(func=build)
 
+    # project: clean
+    parser_clean = project.add_parser('clean', help='clean project')
+    parser_clean.set_defaults(func=clean)
+
     # project: env
-    parser_env = project.add_parser('env', help='output evalable environment')
+    parser_env = project.add_parser('env', help='display environment variables')
     parser_env.set_defaults(func=env)
 
     # project: run
@@ -52,14 +65,13 @@ def main():
         help='run project file', add_help=False)
     parser_run.set_defaults(func=run)
 
+    # project: setup
+    parser_setup = project.add_parser('setup', help='setup project')
+    parser_setup.set_defaults(func=setup)
+
     # project: test
     parser_test = project.add_parser('test', help='test project')
     parser_test.set_defaults(func=test)
-
-    # project: tool
-    parser_tool = project.add_parser('tool',
-        help='build tool', add_help=False)
-    parser_tool.set_defaults(func=tool)
 
     try:
         args, extra = parser.parse_known_args()

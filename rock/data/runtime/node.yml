@@ -1,5 +1,12 @@
 env:
-  PATH: ./bin:./node_modules/.bin:${PATH}
+  PATH: "${PROJECT_PATH}/bin:${PROJECT_PATH}/node_modules/.bin:${PATH}"
+  BUILD_PATH: "${PROJECT_PATH}/node_modules"
+
+setup: |
+
+  if [[ -f ./package.json ]]; then
+    npm install
+  fi
 
 build: |
 
@@ -13,10 +20,6 @@ test: |
 
   npm test
 
-tool: |
+clean: |
 
-  npm {args}
-
-run: |
-
-  node {args}
+  rm -fr ${BUILD_PATH}

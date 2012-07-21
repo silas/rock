@@ -1,5 +1,14 @@
 env:
-  PATH: ./bin:./vendor/bin:${PATH}
+  PATH: "${PROJECT_PATH}/bin:${PROJECT_PATH}/vendor/bin:${PATH}"
+  BUILD_PATH: "${PROJECT_PATH}/vendor"
+  TEST_PATH: "${PROJECT_PATH}/tests"
+  PHP_INI: "${PROJECT_PATH}"
+
+setup: |
+
+  if [[ -f ./composer.json ]]; then
+    composer.phar install
+  fi
 
 build: |
 
@@ -9,12 +18,8 @@ build: |
 
 test: |
 
-  php -c ${PHP_INI-.} ./vendor/bin/phpunit --bootstrap ./vendor/autoload.php ${TEST_PATH-./tests}
+  php -c ${PHP_INI} ${BUILD_PATH}/bin/phpunit
 
-tool: |
+clean: |
 
-  composer.phar {args}
-
-run: |
-
-  php -c ${PHP_INI-.} {args}
+  rm -fr ${BUILD_PATH}

@@ -1,4 +1,5 @@
 import os
+import string
 import yaml
 from rock import utils
 from rock.exceptions import ConfigError, RunError
@@ -9,10 +10,24 @@ class Project(object):
     def __init__(self, path, config=None):
         self.path = path
         self.config = config or {}
-        self.setup()
+        self.parse()
 
-    def setup(self):
-        config = {}
+    def merge_config(self, src, dst):
+        if 'env' in src:
+            # ensure env is a dict of strings
+            if not (isinstance(src['env'], dict) or
+                    all(map(lambda v: isinstance(v, basestring), src['env'].values()))):
+                raise ConfigError('env must be an associative array of strings')
+            if 'env' not in dst:
+                dst['env'] = {}
+            # evaluate env variables
+            for name, value in src['env'].items():
+                dst['env'][name] = string.Template(src['env'][name]).safe_substitute(**dst['env'])
+            del src['env']
+        dst.update(src)
+
+    def parse(self):
+        project_config = {}
 
         # parse project
 
@@ -20,13 +35,13 @@ class Project(object):
 
         try:
             with open(path) as f:
-                config = yaml.load(f)
-                config.update(self.config)
+                project_config = yaml.load(f)
+                project_config.update(self.config)
         except Exception, error:
             raise ConfigError('Failed to read configuration file: '
                 + path)
 
-        runtime = config.get('runtime')
+        runtime = project_config.get('runtime')
 
         if not isinstance(runtime, basestring):
             raise ConfigError('Invalid runtime: %s' % runtime)
@@ -35,44 +50,45 @@ class Project(object):
 
         mount = '/'
 
-        config['type'] = config['runtime'].rstrip('0123456789')
-        config['runtime_root'] = os.path.join(mount, 'opt', 'rock', 'runtime',
-            config['runtime'])
-        config['runtime_env'] = os.path.join(config['runtime_root'], 'env')
+        project_config['type'] = project_config['runtime'].rstrip('0123456789')
+        project_config['runtime_root'] = os.path.join(mount, 'opt', 'rock', 'runtime',
+            project_config['runtime'])
 
-        runtime_path = ['runtime', '%s.yml' % config['type']]
+        runtime_path = ['runtime', '%s.yml' % project_config['type']]
 
+        # list of possible configuration files
         data_path = []
+        data_path.append(os.path.join(project_config['runtime_root'], 'rock.yml'))
         data_path.append(os.path.join(os.path.dirname(__file__), 'data',
             *runtime_path))
         data_path.append(os.path.join(mount, 'etc', 'rock', *runtime_path))
 
+        config = {'env': {'PROJECT_PATH': self.path}}
+
+        # read non-project configuration files
         for path in data_path:
             if os.path.exists(path):
                 try:
                     with open(path) as f:
-                        tmp_config = yaml.load(f)
-                        tmp_config.update(config)
-                        config = tmp_config
+                        self.merge_config(yaml.load(f), config)
                 except Exception, error:
                     raise ConfigError('Failed to parse "%s": %s' % (path, error))
 
-        # validate
+        # merge non-project configuration into project configuration
+        self.merge_config(project_config, config)
 
-        for name in ('build', 'test', 'tool'):
+        # validate
+        for name in ('build', 'setup', 'test'):
             value = config.get(name)
 
             if not isinstance(name, basestring):
                 raise ConfigError('Invalid %s: %s' % (name, value))
 
         # finish
-
         self.config = config
 
     def execute(self, command, **kwargs):
         with utils.Shell(**kwargs) as s:
-            # import runtime environment
-            s.run("source '%s'" % self.config['runtime_env'])
             # exit with error if any one command fails
             s.run('set -o errexit')
             # print commands as they're run
@@ -80,6 +96,9 @@ class Project(object):
             # don't execute commands, just print them
             if self.config['dry_run']:
                 s.run('set -o noexec')
+            # setup environment variables
+            for name, value in self.config['env'].items():
+                s.run('export %s="%s"' % (name, value))
             # run command and wait for results
             s.run(command)
             s.wait()
@@ -89,14 +108,14 @@ class Project(object):
     def build(self):
         self.execute(self.config['build'])
 
+    def clean(self):
+        self.execute(self.config['clean'])
+
     def run(self, command):
-        if 'run' in self.config:
-            command = str.format(self.config['run'], args=command)
         self.execute(command, stdin=True)
+
+    def setup(self):
+        self.execute(self.config['setup'])
 
     def test(self):
         self.execute(self.config['test'])
-
-    def tool(self, args):
-        command = str.format(self.config['tool'], args=args)
-        self.execute(command, stdin=True)
