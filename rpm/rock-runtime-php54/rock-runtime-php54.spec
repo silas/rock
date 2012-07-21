@@ -3,7 +3,7 @@
 
 Name:           rock-runtime-php54
 Version:        1
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        php54 runtime for rock
 
 Group:          Development/Languages
@@ -27,8 +27,9 @@ rm -rf %{buildroot}
 
 mkdir -p %{buildroot}%{php54_rootdir}
 
-cat > %{buildroot}%{php54_rootdir}/env << EOF
-export PATH="%{php54_rootdir}/usr/bin:\${PATH}"
+cat > %{buildroot}%{php54_rootdir}/rock.yml << EOF
+env:
+  PATH: "%{php54_rootdir}/usr/bin:\${PATH}"
 EOF
 
 %clean
@@ -36,9 +37,12 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
-%{php54_rootdir}/env
+%{php54_rootdir}/rock.yml
 
 %changelog
+* Fri Jul 20 2012 Silas Sewell <silas@sewell.org> - 1-4
+- Convert env to rock.yml
+
 * Tue Jul 17 2012 Silas Sewell <silas@sewell.org> - 1-3
 - Fix various issues with core package
 

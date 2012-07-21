@@ -3,7 +3,7 @@
 
 Name:           rock-runtime-node04
 Version:        1
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        node04 runtime for rock
 
 Group:          Development/Languages
@@ -27,8 +27,9 @@ rm -rf %{buildroot}
 
 mkdir -p %{buildroot}%{node04_rootdir}
 
-cat > %{buildroot}%{node04_rootdir}/env << EOF
-export PATH="%{node04_rootdir}/usr/bin:\${PATH}"
+cat > %{buildroot}%{node04_rootdir}/rock.yml << EOF
+env:
+  PATH: "%{node04_rootdir}/usr/bin:\${PATH}"
 EOF
 
 %clean
@@ -36,9 +37,12 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
-%{node04_rootdir}/env
+%{node04_rootdir}/rock.yml
 
 %changelog
+* Fri Jul 20 2012 Silas Sewell <silas@sewell.org> - 1-3
+- Convert env to rock.yml
+
 * Tue Jul 10 2012 Silas Sewell <silas@sewell.org> - 1-2
 - Add env file
 - Add explicit requires

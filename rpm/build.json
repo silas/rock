@@ -1,4 +1,5 @@
 [
+  {"spec": "rock-devtools/rock-devtools.spec"},
   {"spec": "rock-runtime-node04-core/rock-runtime-node04-core.spec"},
   {"spec": "rock-runtime-node04-npm/rock-runtime-node04-npm.spec"},
   {"spec": "rock-runtime-node04/rock-runtime-node04.spec"},

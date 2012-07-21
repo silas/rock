@@ -3,7 +3,7 @@
 
 Name:           rock-runtime-node06
 Version:        1
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        node06 runtime for rock
 
 Group:          Development/Languages
@@ -26,8 +26,9 @@ rm -rf %{buildroot}
 
 mkdir -p %{buildroot}%{node06_rootdir}
 
-cat > %{buildroot}%{node06_rootdir}/env << EOF
-export PATH="%{node06_rootdir}/usr/bin:\${PATH}"
+cat > %{buildroot}%{node06_rootdir}/rock.yml << EOF
+env:
+  PATH: "%{node06_rootdir}/usr/bin:\${PATH}"
 EOF
 
 %clean
@@ -35,9 +36,12 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
-%{node06_rootdir}/env
+%{node06_rootdir}/rock.yml
 
 %changelog
+* Fri Jul 20 2012 Silas Sewell <silas@sewell.org> - 1-3
+- Convert env to rock.yml
+
 * Tue Jul 10 2012 Silas Sewell <silas@sewell.org> - 1-2
 - Add env file
 - Add explicit requires

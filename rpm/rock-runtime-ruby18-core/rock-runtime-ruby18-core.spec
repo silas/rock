@@ -4,14 +4,15 @@
 
 %global runtime ruby18
 %global ruby18_rootdir /opt/rock/runtime/%{runtime}
-%global ruby18_gemdir %{ruby18_rootdir}%{_prefix}/lib/ruby/gems/1.8
+%global ruby18_abi 1.8
+%global ruby18_gemdir %{ruby18_rootdir}%{_prefix}/lib/ruby/gems/%{ruby18_abi}
 
 %global shortversion 1.8.7
 %global patch 370
 
 Name:           rock-runtime-ruby18-core
 Version:        %{shortversion}.%{patch}
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A Ruby 1.8.x runtime
 
 Group:          Development/Languages
@@ -71,6 +72,7 @@ export QA_SKIP_RPATHS=1
 mkdir -p %{buildroot}%{_sysconfdir}/rpm
 cat >> %{buildroot}%{_sysconfdir}/rpm/macros.rock-ruby18 << \EOF
 %%ruby18_rootdir %{ruby18_rootdir}
+%%ruby18_abi %{ruby18_abi}
 %%ruby18_gemdir %{ruby18_gemdir}
 EOF
 
@@ -83,13 +85,16 @@ rm -rf %{buildroot}
 %{ruby18_rootdir}%{_bindir}
 %{ruby18_rootdir}%{_mandir}
 %{ruby18_rootdir}%{_prefix}/lib/libruby*
-%{ruby18_rootdir}%{_prefix}/lib/ruby/1.8
+%{ruby18_rootdir}%{_prefix}/lib/ruby/%{ruby18_abi}
 
 %files rpmbuild
 %defattr(-,root,root,-)
 %{_sysconfdir}/rpm/macros.rock-ruby18
 
 %changelog
+* Fri Jul 20 2012 Silas Sewell <silas@sewell.org> - 1.8.7.370-2
+- Add ruby18_abi to rpmbuild
+
 * Sat Jul 07 2012 Silas Sewell <silas@sewell.org> - 1.8.7.370-1
 - Update to patch 370
 
