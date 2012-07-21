@@ -5,8 +5,15 @@ from rock.exceptions import Error
 from rock.project import Project
 
 def project(args):
-    return Project(args.path, config={ 'dry_run': args.dry_run })
-
+    config = {}
+    if args.verbose:
+        config['verbose'] = True
+    if args.dry_run:
+        config['dry_run'] = True
+        config['verbose'] = True
+    if args.runtime:
+        config['runtime'] = args.runtime
+    return Project(args.path, config)
 
 def build(args, extra):
     project(args).build()
@@ -33,17 +40,23 @@ def test(args, extra):
     project(args).test()
 
 
-def tool(args, extra):
-    project(args).tool(' '.join(extra))
-
-
 def main():
-    parser = argparse.ArgumentParser(prog='rock',
-        description='Rock better runtimes')
+    description = """
+    rock helps you build, test and run your app in the Rock Platform.
+    """
 
-    # top-level options
-    parser.add_argument('--path', help='project path', default=os.getcwd())
-    parser.add_argument('--dry-run', action='store_true', help="display but don't run commands")
+    parser = argparse.ArgumentParser(prog='rock', description=description)
+
+    # general options
+    parser.add_argument('--dry-run', action='store_true',
+        help="show commands, but don't run")
+    parser.add_argument('--verbose', action='store_true',
+        help='show run commands')
+
+    # project options
+    project_options = parser.add_argument_group('project options')
+    project_options.add_argument('--path', help='set path', default=os.getcwd())
+    project_options.add_argument('--runtime', help='set runtime')
 
     # project commands
     project = parser.add_subparsers(title='project')
@@ -57,7 +70,7 @@ def main():
     parser_clean.set_defaults(func=clean)
 
     # project: env
-    parser_env = project.add_parser('env', help='display environment variables')
+    parser_env = project.add_parser('env', help='show environment variables')
     parser_env.set_defaults(func=env)
 
     # project: run

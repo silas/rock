@@ -2,14 +2,14 @@ import os
 import string
 import yaml
 from rock import utils
-from rock.exceptions import ConfigError, RunError
+from rock.exceptions import ConfigError
 
 
 class Project(object):
 
-    def __init__(self, path, config=None):
+    def __init__(self, path, config):
         self.path = path
-        self.config = config or {}
+        self.config = config
         self.parse()
 
     def merge_config(self, src, dst):
@@ -30,26 +30,25 @@ class Project(object):
         project_config = {}
 
         # parse project
-
         path = os.path.join(self.path, '.rock.yml')
-
         try:
             with open(path) as f:
                 project_config = yaml.load(f)
                 project_config.update(self.config)
         except Exception, error:
-            raise ConfigError('Failed to read configuration file: '
-                + path)
+            if 'runtime' not in self.config:
+                raise ConfigError('Failed to read configuration file: '
+                    + path)
 
-        runtime = project_config.get('runtime')
+        # cli option overrides project config
+        project_config['runtime'] = self.config.get('runtime',
+            project_config.get('runtime'))
 
-        if not isinstance(runtime, basestring):
-            raise ConfigError('Invalid runtime: %s' % runtime)
+        if not isinstance(project_config['runtime'], basestring):
+            raise ConfigError('Invalid runtime: %s' % project_config['runtime'])
 
-        # parse global config
-
+        # set defaults
         mount = '/'
-
         project_config['type'] = project_config['runtime'].rstrip('0123456789')
         project_config['runtime_root'] = os.path.join(mount, 'opt', 'rock', 'runtime',
             project_config['runtime'])
@@ -63,6 +62,7 @@ class Project(object):
             *runtime_path))
         data_path.append(os.path.join(mount, 'etc', 'rock', *runtime_path))
 
+        # inject project path so configuration files can set absolute paths
         config = {'env': {'PROJECT_PATH': self.path}}
 
         # read non-project configuration files
@@ -84,26 +84,24 @@ class Project(object):
             if not isinstance(name, basestring):
                 raise ConfigError('Invalid %s: %s' % (name, value))
 
-        # finish
+        # done
         self.config = config
 
-    def execute(self, command, **kwargs):
-        with utils.Shell(**kwargs) as s:
-            # exit with error if any one command fails
-            s.run('set -o errexit')
+    def execute(self, command):
+        with utils.shell() as s:
             # print commands as they're run
-            s.run('set -o verbose')
+            if self.config.get('verbose'):
+                s.write('set -o verbose')
             # don't execute commands, just print them
-            if self.config['dry_run']:
-                s.run('set -o noexec')
+            if self.config.get('dry_run'):
+                s.write('set -o noexec')
+            # exit with error if any one command fails
+            s.write('set -o errexit\n')
             # setup environment variables
             for name, value in self.config['env'].items():
-                s.run('export %s="%s"' % (name, value))
+                s.write('export %s="%s"' % (name, value))
             # run command and wait for results
-            s.run(command)
-            s.wait()
-            if s.code > 0:
-                raise RunError()
+            s.write(command)
 
     def build(self):
         self.execute(self.config['build'])
@@ -112,7 +110,7 @@ class Project(object):
         self.execute(self.config['clean'])
 
     def run(self, command):
-        self.execute(command, stdin=True)
+        self.execute(command)
 
     def setup(self):
         self.execute(self.config['setup'])
