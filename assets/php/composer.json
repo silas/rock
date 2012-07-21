@@ -1,0 +1,6 @@
+{
+    "require": {
+        "EHER/PHPUnit": "*",
+        "dflydev/markdown": "*"
+    }
+}
