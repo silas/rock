@@ -2,15 +2,19 @@ env:
   PATH: "${PROJECT_PATH}/bin:${PROJECT_PATH}/vendor/bundle/ruby/${RUBY_ABI}/bin:${PATH}"
   BUILD_PATH: "${PROJECT_PATH}/vendor/bundle"
 
-setup: |
-
-  if [[ -f ./Gemfile ]]; then
-    bundle install --path=${BUILD_PATH}
-  fi
-
 build: |
 
-  test -f ./Gemfile.lock
+  if [[ -f ./Gemfile || -f ./Gemfile.lock ]]; then
+    bundle install --path=${BUILD_PATH}
+  else
+    warn 'no "Gemfile" or "Gemfile.lock" file found'
+  fi
+
+build_deployment: |
+
+  if [[ ! -f ./Gemfile.lock ]]; then
+    die 'no "Gemfile.lock" file found'
+  fi
 
   bundle install --deployment
 

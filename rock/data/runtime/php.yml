@@ -4,15 +4,19 @@ env:
   TEST_PATH: "${PROJECT_PATH}/tests"
   PHP_INI: "${PROJECT_PATH}"
 
-setup: |
+build: |
 
   if [[ -f ./composer.json ]]; then
     composer.phar install
+  else
+    warn 'no "composer.json" file found'
   fi
 
-build: |
+build_deployment: |
 
-  test -f ./composer.lock
+  if [[ ! -f ./composer.lock ]]; then
+    die 'no "composer.lock" file found'
+  fi
 
   composer.phar install
 

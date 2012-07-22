@@ -18,11 +18,11 @@ def project(args):
 
 
 def build(args, extra):
-    project(args).build()
+    project(args).build(*extra)
 
 
 def clean(args, extra):
-    project(args).clean()
+    project(args).clean(*extra)
 
 
 def env(args, extra):
@@ -31,15 +31,11 @@ def env(args, extra):
 
 
 def run(args, extra):
-    project(args).run(' '.join(extra))
-
-
-def setup(args, extra):
-    project(args).setup()
+    project(args).run(extra)
 
 
 def test(args, extra):
-    project(args).test()
+    project(args).test(*extra)
 
 
 def main():
@@ -80,10 +76,6 @@ def main():
     parser_run = project.add_parser('run',
         help='run project file', add_help=False)
     parser_run.set_defaults(func=run)
-
-    # project: setup
-    parser_setup = project.add_parser('setup', help='setup project')
-    parser_setup.set_defaults(func=setup)
 
     # project: test
     parser_test = project.add_parser('test', help='test project')

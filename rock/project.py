@@ -83,7 +83,7 @@ class Project(object):
         self.merge_config(project_config, config)
 
         # validate
-        for name in ('build', 'setup', 'test'):
+        for name in ('build', 'test'):
             value = config.get(name)
 
             if not isinstance(name, basestring):
@@ -94,6 +94,9 @@ class Project(object):
 
     def execute(self, command):
         with utils.shell() as s:
+            # declare builtin functions
+            s.write('warn() { echo "$@" >&2; }')
+            s.write('die() { warn "$@"; exit 1; }')
             # print commands as they're run
             if self.config.get('verbose'):
                 s.write('set -o verbose')
@@ -108,17 +111,23 @@ class Project(object):
             # run command and wait for results
             s.write(command)
 
-    def build(self):
-        self.execute(self.config['build'])
+    def execute_type(self, name, *args):
+        section = '%s_%s' % (name, args[0]) if len(args) > 0 else name
+        if section not in self.config:
+            raise ConfigError('section not found: %s' % section)
+        self.execute(self.config[section])
 
-    def clean(self):
-        self.execute(self.config['clean'])
+    def build(self, *args):
+        self.execute_type('build', *args)
 
-    def run(self, command):
-        self.execute(command)
+    def clean(self, *args):
+        self.execute_type('clean', *args)
 
-    def setup(self):
-        self.execute(self.config['setup'])
+    def run(self, args):
+        if len(args) > 0 and 'run_%s' % args[0] in self.config:
+            self.execute_type('run', args[0])
+        else:
+            self.execute(' '.join(args))
 
-    def test(self):
-        self.execute(self.config['test'])
+    def test(self, *args):
+        self.execute_type('test', *args)

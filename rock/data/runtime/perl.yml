@@ -6,15 +6,19 @@ env:
   PERL_MM_OPT: "INSTALL_BASE=${PROJECT_PATH}/local"
   PERL5LIB: "${PROJECT_PATH}/lib:${PROJECT_PATH}/lib/perl5/x86_64-linux:${PROJECT_PATH}/local/lib/perl5"
 
-setup: |
+build: |
 
   if [[ -f ./cpanfile ]]; then
     carton install
+  else
+    warn 'no "cpanfile" file found'
   fi
 
-build: |
+build_deployment: |
 
-  test -f ./carton.lock
+  if [[ ! -f ./carton.lock ]]; then
+    die 'no "carton.lock" file found'
+  fi
 
   carton install --deployment
 

@@ -3,19 +3,25 @@ env:
   BUILD_PATH: "${PROJECT_PATH}/venv"
   TEST_PATH: "${PROJECT_PATH}/tests"
 
-setup: |
+build: |
 
   test -f ${BUILD_PATH}/bin/activate || virtualenv --distribute ${BUILD_PATH}
 
   if [[ -f ./requirements.txt ]]; then
     pip install -r ./requirements.txt
+  else
+    warn 'no "requirements.txt" file found'
   fi
 
-build: |
+build_deployment: |
 
-  test -f ./requirements.txt
+  if [[ ! -f ./requirements.txt ]]; then
+    die 'no "requirements.txt" file found'
+  fi
 
-  test -f ${BUILD_PATH}/bin/activate || virtualenv --distribute ${BUILD_PATH}
+  if [[ ! -f ${BUILD_PATH}/bin/activate ]]; then
+    virtualenv --distribute ${BUILD_PATH}
+  fi
 
   pip install -r ./requirements.txt
 

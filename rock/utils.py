@@ -1,5 +1,5 @@
-import os
 import StringIO
+import os
 
 
 class shell(object):
@@ -12,4 +12,4 @@ class shell(object):
         os.execl('/usr/bin/bash', 'bash', '-c', self.stdin.getvalue())
 
     def write(self, text):
-        self.stdin.write('%s\n' % text)
+        self.stdin.write(text + '\n')

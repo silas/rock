@@ -2,15 +2,19 @@ env:
   PATH: "${PROJECT_PATH}/bin:${PROJECT_PATH}/node_modules/.bin:${PATH}"
   BUILD_PATH: "${PROJECT_PATH}/node_modules"
 
-setup: |
+build: |
 
   if [[ -f ./package.json ]]; then
     npm install
+  else
+    warn 'no "package.json" file found'
   fi
 
-build: |
+build_deployment: |
 
-  test -f ./npm-shrinkwrap.json
+  if [[ ! -f ./npm-shrinkwrap.json ]]; then
+    die 'no "npm-shrinkwrap.json" file found'
+  fi
 
   npm install
 
