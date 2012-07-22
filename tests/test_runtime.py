@@ -30,13 +30,13 @@ class RuntimeTestCase(unittest.TestCase):
                 dst_path=w.path)
             with open(w.join('.rock.yml'), 'w+') as f:
                 f.write('runtime: {name}'.format(name=name))
-            self.assertRun('rock setup', cwd=w.path)
+            self.assertRun('rock build', cwd=w.path)
             self.assertRun('rock test', cwd=w.path)
             if hooks.get('post_test'):
                 hooks['post_test'](self, w=w)
             self.assertRun('rock clean', cwd=w.path)
             self.assertNotRun('rock test', cwd=w.path)
-            self.assertRun('rock build', cwd=w.path)
+            self.assertRun('rock build deployment', cwd=w.path)
             self.assertRun('rock test', cwd=w.path)
 
 #    def test_node04(self):
