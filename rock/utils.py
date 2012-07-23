@@ -9,7 +9,7 @@ class shell(object):
         return self
 
     def __exit__(self, type, value, traceback):
-        os.execl('/usr/bin/bash', 'bash', '-c', self.stdin.getvalue())
+        os.execl('/usr/bin/env', 'bash', 'bash', '-c', self.stdin.getvalue())
 
     def write(self, text):
         self.stdin.write(text + '\n')
