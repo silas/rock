@@ -5,7 +5,7 @@ long_description = """
 This is a command line tool that simplifies building, testing, and running
 applications on the Rock Platform.
 
-See http://rockplatform.org for more information.
+See http://www.rockplatform.org for more information.
 """
 
 setup(
