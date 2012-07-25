@@ -16,7 +16,7 @@ setup(
     author='Silas Sewell',
     author_email='silas@sewell.org',
     license='MIT',
-    url='https://github.com/rockplatform/python-rock',
+    url='https://github.com/rockplatform/rock',
     packages=['rock'],
     package_data={'rock': [
         'data/runtime/*.yml',
