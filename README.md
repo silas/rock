@@ -7,9 +7,9 @@ This is the rock development environment.
 
 Ensure you have the following requirements installed:
 
-    * [Git](http://git-scm.com/)
-    * [VirtualBox](https://www.virtualbox.org/)
-    * [Vagrant](http://vagrantup.com/)
+ * [Git](http://git-scm.com/)
+ * [VirtualBox](https://www.virtualbox.org/)
+ * [Vagrant](http://vagrantup.com/)
 
 Clone repository:
 
