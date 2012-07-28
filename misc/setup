@@ -10,7 +10,7 @@ clone() {
 
 mkdir -p misc/modules
 
-clone ${ROCK_PYTHON-rockplatform/python-rock}
+clone ${ROCK_PYTHON-rockplatform/rock}
 clone ${ROCK_PACKAGES-rockplatform/packages}
 clone ${ROCK_PUPPET-rockplatform/puppet-rock} misc/modules/rock
 clone ${ROCK_TESTS-rockplatform/tests}

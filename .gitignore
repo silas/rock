@@ -2,6 +2,6 @@
 .vagrant
 modules
 packages
-python-rock
+rock
 tests
 tools
