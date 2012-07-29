@@ -23,6 +23,10 @@ Run setup script:
 
     ./misc/setup
 
+Up vagrant:
+
+    vagrant up
+
 ## License
 
 This work is licensed under the MIT License (see the LICENSE file).
