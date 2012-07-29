@@ -1,5 +1,5 @@
 Name:           rock
-Version:        0.1.0
+Version:        0.1.1
 Release:        1%{?dist}
 Summary:        Application manage tool for Rock Platform
 
@@ -34,6 +34,10 @@ applications on the Rock Platform.
 %{python_sitelib}/%{name}-%{version}-py*.egg-info
 
 %changelog
+* Mon Jul 23 2012 Silas Sewell <silas@sewell.org> - 0.1.1-1
+- Update to 0.1.1
+- Use env instead of straight bash
+
 * Mon Jul 23 2012 Silas Sewell <silas@sewell.org> - 0.1.0-1
 - Update to 0.1.0
 
