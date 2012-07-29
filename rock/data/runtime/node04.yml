@@ -1,0 +1,29 @@
+env:
+  PATH: "${PROJECT_PATH}/bin:${PROJECT_PATH}/node_modules/.bin:${PATH}"
+  BUILD_PATH: "${PROJECT_PATH}/node_modules"
+
+build: |
+
+  if [[ -f ./package.json ]]; then
+    npm install
+  else
+    warn 'no "package.json" file found'
+  fi
+
+build_deployment: |
+
+  if [[ ! -f ./package.json ]]; then
+    die 'no "package.json" file found'
+  fi
+
+  npm install
+
+  npm rebuild
+
+test: |
+
+  npm test
+
+clean: |
+
+  rm -fr ${BUILD_PATH}
