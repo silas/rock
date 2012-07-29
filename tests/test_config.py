@@ -8,6 +8,7 @@ env_path = os.path.join(tests_path, 'assets', 'env')
 project_path = os.path.join(tests_path, 'assets', 'project')
 data_path = os.path.join(tests_path, 'assets', 'data')
 
+
 class ConfigTestCase(unittest.TestCase):
 
     def setup_test(self):

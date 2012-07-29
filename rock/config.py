@@ -49,12 +49,14 @@ class Config(object):
     def project(self):
         if not hasattr(self, '_project_merge'):
             if 'path' in self._project:
-                data = self.parse(os.path.join(self._project['path'], '.rock.yml'))
+                data = self.parse(os.path.join(self._project['path'],
+                    '.rock.yml'))
                 data.update(self._project)
                 self._project = data
             if 'runtime' in self._project:
                 if 'runtime_type' not in self._project:
-                    self._project['runtime_type'] = self._project['runtime'].rstrip('0123456789')
+                    self._project['runtime_type'] = self._project['runtime']. \
+                        rstrip('0123456789')
             self._project_merge = True
         return copy.deepcopy(self._project)
 
