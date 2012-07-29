@@ -39,8 +39,8 @@ class RuntimeTestCase(unittest.TestCase):
             self.assertRun('rock build deployment', cwd=w.path)
             self.assertRun('rock test', cwd=w.path)
 
-#    def test_node04(self):
-#        self.runtime('node04')
+    def test_node04(self):
+        self.runtime('node04')
 
     def test_node06(self):
         self.runtime('node06', post_test=node_hook)
