@@ -1,0 +1,20 @@
+env:
+  PATH: "${PROJECT_PATH}/bindir:${PATH}"
+  BUILD_PATH: "build_path"
+  TEST_PATH: "test_path"
+
+build: |
+
+  build
+
+build_deployment: |
+
+  build deployment
+
+test: |
+
+  test
+
+clean: |
+
+  clean

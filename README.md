@@ -1,5 +1,4 @@
-Rock
-====
+# Rock [![Build Status](https://secure.travis-ci.org/rockplatform/rock.png)](http://travis-ci.org/rockplatform/rock)
 
 Rock Platform tool.
 

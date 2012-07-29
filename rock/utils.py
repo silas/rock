@@ -2,7 +2,7 @@ import StringIO
 import os
 
 
-class shell(object):
+class Shell(object):
 
     def __enter__(self):
         self.stdin = StringIO.StringIO()

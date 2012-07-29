@@ -1,0 +1,2 @@
+env:
+  PATH: /opt/rock/runtime/test123/usr/bin:${PATH}
