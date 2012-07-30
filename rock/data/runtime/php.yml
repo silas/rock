@@ -22,8 +22,10 @@ build_deployment: |
 
 test: |
 
-  php -c ${PHP_INI} ${BUILD_PATH}/bin/phpunit
+  php -c "${PHP_INI}" "${BUILD_PATH}/bin/phpunit"
 
 clean: |
 
-  rm -fr ${BUILD_PATH}
+  if [[ -d "${BUILD_PATH}" ]]; then
+    rm -fr "${BUILD_PATH}"
+  fi

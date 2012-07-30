@@ -24,4 +24,10 @@ test: |
 
 clean: |
 
-  rm -fr ${BUILD_PATH} ${PROJECT_PATH}/.bundle
+  if [[ -d "${BUILD_PATH}" ]]; then
+    rm -fr "${BUILD_PATH}"
+  fi
+
+  if [[ -d "${PROJECT_PATH}/.bundle" ]]; then
+    rm -fr "${PROJECT_PATH}/.bundle"
+  fi

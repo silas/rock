@@ -28,4 +28,6 @@ test: |
 
 clean: |
 
-  rm -fr ${BUILD_PATH}
+  if [[ -d "${BUILD_PATH}" ]]; then
+    rm -fr "${BUILD_PATH}"
+  fi
