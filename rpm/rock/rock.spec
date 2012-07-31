@@ -1,27 +1,32 @@
 Name:           rock
-Version:        0.1.1
+Version:        0.2.0
 Release:        1%{?dist}
-Summary:        Application manage tool for Rock Platform
+Summary:        Build, test and run tool
 
 Group:          Development/Languages
 License:        MIT
-URL:            https://github.com/rockplatform/python-rock
+URL:            https://github.com/rockplatform/rock
 Source0:        http://pypi.python.org/packages/source/r/rock/rock-%{version}.tar.gz
 BuildArch:      noarch
 
+BuildRequires:  PyYAML
+BUildRequires:  python-argparse
 BuildRequires:  python-devel
+BuildRequires:  python-nose
 Requires:       PyYAML
 Requires:       python-argparse
 
 %description
-This is a command line tool that simplifies building, testing, and running
-applications on the Rock Platform.
+This is a build, test and run tool for the Rock Platform.
 
 %prep
 %setup -q
 
 %build
 %{__python} setup.py build
+
+%check
+nosetests
 
 %install
 %{__python} setup.py install -O1 --skip-build --root %{buildroot}
@@ -34,6 +39,9 @@ applications on the Rock Platform.
 %{python_sitelib}/%{name}-%{version}-py*.egg-info
 
 %changelog
+* Mon Jul 30 2012 Silas Sewell <silas@sewell.org> - 0.2.0-1
+- Update to 0.2.0
+
 * Mon Jul 23 2012 Silas Sewell <silas@sewell.org> - 0.1.1-1
 - Update to 0.1.1
 - Use env instead of straight bash
