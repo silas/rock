@@ -1,0 +1,4 @@
+auto: true
+markdown: kramdown
+safe: true
+server_port: 8000

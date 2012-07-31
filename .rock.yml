@@ -1,0 +1,3 @@
+runtime: ruby18
+
+run_web: jekyll --server
