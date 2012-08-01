@@ -17,7 +17,7 @@ class Config(object):
     def parse(self, path, require_exists=True, require_parses=True):
         if not os.path.isfile(path):
             if require_exists:
-                raise ConfigError('not found:' + path)
+                raise ConfigError('not found: ' + path)
             else:
                 return None
         try:
