@@ -56,7 +56,7 @@ title: Getting Started with Node
         var port = parseInt(process.env.HTTP_PORT);
 
         if (port) {
-            server.set('port', port);
+          server.set('port', port);
         }
 
         server.listen(server.get('port'));
@@ -150,10 +150,10 @@ title: Getting Started with Node
 
         $ rock run npm shrinkwrap
 
- 1. Clean, build and test
+ 1. Clean project root, run deployment build, and run tests to ensure build worked
 
         $ rock clean
         $ rock build deployment
         $ rock test
 
- 1. You should track `npm-shrinkwrap.json` in version control
+ 1. Add `npm-shrinkwrap.json` to version control system
