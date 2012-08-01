@@ -5,7 +5,7 @@ title: Getting Started
 
 # Getting Started
 
-Pick a runtime type for a brief walkthrough on setting up a basic project.
+Pick a runtime type for a walkthrough of setting up a project.
 
  * [Node](/getting-started/node/)
  * [Perl](/getting-started/perl/)

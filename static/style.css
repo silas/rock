@@ -67,3 +67,8 @@ header hr {
 h1, h2, h3, h4, h5 {
   color: #444;
 }
+
+code {
+  background-color: ghostWhite;
+  padding: 0.2em 0.5em;
+}
