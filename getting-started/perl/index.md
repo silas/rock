@@ -143,7 +143,7 @@ title: Getting Started with Perl
         $ rock test frontpage
         OK
 
- 1. Clean project root, run deployment build, and run tests to ensure build worked
+ 1. Clean project root, run deployment build and run tests to ensure build worked
 
         $ rock clean
         $ rock build deployment
