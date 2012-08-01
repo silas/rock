@@ -43,8 +43,19 @@ class Project(object):
         self.execute_type('clean', *args)
 
     def run(self, args):
-        if len(args) > 0 and 'run_%s' % args[0] in self.config:
-            self.execute_type('run', args[0])
+        run_name = 'run_%s' % args[0]
+        if len(args) == 1 and run_name in self.config:
+            section = self.config[run_name]
+            if isinstance(section, dict):
+                import pipes, sys
+                from .process import ProcessManager
+                pm = ProcessManager()
+                for name, value in section.items():
+                    pm.add_process(name, '%s run %s' %
+                        (sys.argv[0], pipes.quote(value)))
+                pm.loop()
+            else:
+                self.execute(self.config[section])
         else:
             self.execute(' '.join(args))
 
