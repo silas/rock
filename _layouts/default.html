@@ -4,9 +4,21 @@
     <meta charset="utf-8">
 
     <title>{% if page.title %}{{ page.title }} - {% endif %}Rock Platform</title> 
+    <link href="/static/style.css" rel="stylesheet" type="text/css" >
+    <link href="://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet" type="text/css">
   </head> 
  
   <body> 
-    {{ content }}
+    <header class="container">
+      <a href="/" id="logo">Rock Platform</a>
+      <ul>
+        <li><a href="/getting-started/">Getting Started</a></li>
+        <li><a href="https://github.com/rockplatform">Code</a></li>
+      </ul>
+      <hr>
+    </header>
+    <div class="container">
+      {{ content }}
+    </div>
   </body> 
 </html>
