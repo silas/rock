@@ -1,6 +1,6 @@
 yumrepo { 'sewell':
   descr    => 'sewell',
-  baseurl  => 'http://dl.sewell.org/rpm/el/6/x86_64/',
+  baseurl  => 'http://dl.sewell.org/rpm/sewell/el/6/x86_64/',
   gpgcheck => 0,
   enabled  => 1,
 }
@@ -33,4 +33,4 @@ file { '/home/vagrant/.bashrc':
 
 class { 'rock': release => 0 }
 
-rock::runtime { ['node04', 'node06', 'node08', 'perl516', 'python27', 'ruby18', 'ruby19']: }
+rock::runtime { ['node04', 'node06', 'node08', 'perl516', 'php54', 'python27', 'ruby18', 'ruby19']: }
