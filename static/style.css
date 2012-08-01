@@ -60,6 +60,10 @@ header hr {
 #logo {
   font-size: 2em;
   font-weight: bold;
-  color: #495961;
+  color: #333;
   text-decoration: none;
+}
+
+h1, h2, h3, h4, h5 {
+  color: #444;
 }
