@@ -10,11 +10,11 @@ title: Getting Started with Node
         $ mkdir node-example
         $ cd node-example
 
- 1. Create `.rock.yml` file
+ 1. Create `.rock.yml`
 
         runtime: node08
 
- 1. Create `package.json` file
+ 1. Create `package.json`
 
         {
           "name": "helloworld",
@@ -30,7 +30,7 @@ title: Getting Started with Node
 
         $ rock build
 
- 1. Create `server.js` file
+ 1. Create `server.js`
 
         var express = require('express');
         var app = express();
@@ -45,9 +45,9 @@ title: Getting Started with Node
 
  1. Create `bin` directory
 
-        mkdir bin
+        $ mkdir bin
 
- 1. Create `bin/hello-world` file
+ 1. Create `bin/hello-world`
 
         #!/usr/bin/env node
 
@@ -73,19 +73,19 @@ title: Getting Started with Node
         Listening on port 8000
         ^C
 
- 1. Next update `package.json` to include a run alias that defaults to port 9000
+ 1. Update `package.json` to include a run alias that defaults to port 9000
 
         runtime: node08
 
         run_web: HTTP_PORT=${HTTP_PORT-9000} hello-world
 
- 1. Run `web` alias and kill it using Ctrl+C
+ 1. Run `web` and kill it using Ctrl+C
 
         $ rock run web
         Listening on port 9000
         ^C
 
- 1. Create `test.js` file
+ 1. Create `test.js`
 
         var assert = require('assert');
         var server = require('./server');
@@ -146,11 +146,11 @@ title: Getting Started with Node
         $ rock test frontpage
         OK
 
- 1. Deployment builds require a `npm-shrinkwrap.json` file
+ 1. Create deployment build requirements
 
         $ rock run npm shrinkwrap
 
- 1. Try a clean, build and test
+ 1. Clean, build and test
 
         $ rock clean
         $ rock build deployment
