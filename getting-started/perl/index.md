@@ -5,4 +5,146 @@ title: Getting Started with Perl
 
 # Getting Started with Perl
 
-Coming soon...
+ 1. Create and switch to project directory
+
+        $ mkdir perl-example
+        $ cd perl-example
+
+ 1. Create `.rock.yml`
+
+        runtime: perl516
+
+ 1. Create `cpanfile`
+
+        requires 'Dancer';
+
+ 1. Build project
+
+        $ rock build
+
+ 1. Create `lib` directory
+
+        $ mkdir lib
+
+ 1. Create `lib/HelloWorld.pm`
+
+        use strict;
+        use warnings;
+
+        use Dancer qw{get setting};
+
+        setting('port', 8000);
+
+        get '/' => sub {
+            'Hello World'
+        };
+
+        1;
+
+ 1. Create `bin` directory
+
+        $ mkdir bin
+
+ 1. Create `bin/hello-world`
+
+        #!/usr/bin/env perl
+
+        use strict;
+        use warnings;
+
+        use Dancer qw{dance setting};
+
+        use HelloWorld ();
+
+        my $port = defined $ENV{HTTP_PORT} ? int($ENV{HTTP_PORT}) : 0;
+
+        if ($port) {
+            setting('port', $port);
+        }
+
+        dance;
+
+ 1. Make it executable
+
+        $ chmod 755 bin/hello-world
+
+ 1. Start `hello-world` and kill it using Ctrl+C
+
+        $ rock run hello-world
+        >> Dancer 1.3098 server 9820 listening on http://0.0.0.0:8000
+        == Entering the development dance floor ...
+        ^C
+
+ 1. Update `.rock.yml` to include a run alias that defaults to port 9000
+
+        runtime: perl516
+
+        run_web: HTTP_PORT=${HTTP_PORT-9000} hello-world
+
+ 1. Run `web` and kill it using Ctrl+C
+
+        $ rock run web
+        >> Dancer 1.3098 server 9821 listening on http://0.0.0.0:9000
+        == Entering the development dance floor ...
+        ^C
+
+ 1. Create `t` directory
+
+        $ mkdir t
+
+ 1. Create `t/01_port.t`
+
+        use Test::More tests => 2;
+
+        use strict;
+        use warnings;
+
+        use_ok 'HelloWorld';
+
+        is setting('port'), 8000;
+
+ 1. Run tests
+
+        $ rock test
+        t/01_port.t .. ok   
+        All tests successful.
+        Files=1, Tests=2,  0 wallclock secs ( 0.02 usr  0.00 sys +  0.10 cusr  0.01 csys =  0.13 CPU)
+        Result: PASS
+
+ 1. Update `.rock.yml` to include a simple frontpage test
+
+        runtime: perl516
+
+        run_web: HTTP_PORT=${HTTP_PORT-9000} hello-world
+
+        test_frontpage: |
+
+          # start server
+          rock run web &>/dev/null &
+
+          # give it a little time to start
+          sleep 0.2
+
+          # get frontpage body
+          body="$( curl -s 'http://127.0.0.1:9000/' )"
+
+          # kill server
+          kill %1
+
+          # check response body
+          if [[ "$body" != 'Hello World' ]]; then
+            die "ERROR: '$body' != 'Hello World'"
+          else
+            echo 'OK'
+          fi
+
+ 1. Run `frontpage` tests
+
+        $ rock test frontpage
+        OK
+
+ 1. Clean project root, run deployment build, and run tests to ensure build worked
+
+        $ rock clean
+        $ rock build deployment
+        $ rock test
