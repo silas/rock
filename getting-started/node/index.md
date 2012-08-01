@@ -73,7 +73,7 @@ title: Getting Started with Node
         Listening on port 8000
         ^C
 
- 1. Update `package.json` to include a run alias that defaults to port 9000
+ 1. Update `.rock.yml` to include a run alias that defaults to port 9000
 
         runtime: node08
 
@@ -123,7 +123,7 @@ title: Getting Started with Node
         test_frontpage: |
 
           # start server
-          rock run web >/dev/null &
+          rock run web &>/dev/null &
 
           # give it a little time to start
           sleep 0.2
@@ -155,5 +155,3 @@ title: Getting Started with Node
         $ rock clean
         $ rock build deployment
         $ rock test
-
- 1. Add `npm-shrinkwrap.json` to version control system
