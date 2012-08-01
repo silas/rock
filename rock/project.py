@@ -23,10 +23,15 @@ class Project(object):
             if self.config.get('dry_run'):
                 s.write('set -o noexec')
             # exit with error if any one command fails
-            s.write('set -o errexit\n')
+            s.write('set -o errexit')
             # setup environment variables
-            for name, value in self.config['env'].items():
-                s.write('export %s="%s"' % (name, value))
+            if self.config.get('env'):
+                # blank line before exports
+                s.write('')
+                for name, value in self.config['env'].items():
+                    s.write('export %s="%s"' % (name, value))
+            # blank line before command
+            s.write('')
             # run command and wait for results
             s.write(command)
 
@@ -43,7 +48,7 @@ class Project(object):
         self.execute_type('clean', *args)
 
     def run(self, args):
-        run_name = 'run_%s' % args[0]
+        run_name = 'run_%s' % args[0] if args else ''
         if len(args) == 1 and run_name in self.config:
             section = self.config[run_name]
             if isinstance(section, dict):
@@ -55,7 +60,7 @@ class Project(object):
                         (sys.argv[0], pipes.quote(value)))
                 pm.loop()
             else:
-                self.execute(self.config[section])
+                self.execute(section)
         else:
             self.execute(' '.join(args))
 
