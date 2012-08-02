@@ -45,11 +45,15 @@ title: Getting Started with PHP
             return 'Hello World';
         }
 
-        $app = new Slim();
+        function app() {
+            $app = new Slim();
 
-        $app->get('/', function () {
-            echo greeting();
-        });
+            $app->get('/', function () {
+                echo greeting();
+            });
+
+            return $app;
+        }
 
  1. Create `public/index.php`
 
@@ -57,7 +61,7 @@ title: Getting Started with PHP
 
         require __DIR__ . '/web.php';
 
-        $app->run();
+        app()->run();
 
  1. Create `bin` directory
 
@@ -118,7 +122,7 @@ title: Getting Started with PHP
         require __DIR__ . '/../public/web.php';
 
         class Test extends PHPUnit_Framework_TestCase {
-            public function testSample() {
+            public function testGreeting() {
                 $this->assertEquals('Hello World', greeting());
             }
         }
@@ -128,7 +132,7 @@ title: Getting Started with PHP
         $ rock test
         PHPUnit 3.6.10 by Sebastian Bergmann.
 
-        Configuration read from /home/ssewell/Desktop/projects/php-example/phpunit.xml
+        Configuration read from /home/vagrant/php-example/phpunit.xml
 
         .
 
