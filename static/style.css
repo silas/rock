@@ -72,3 +72,7 @@ code {
   background-color: ghostWhite;
   padding: 0.2em 0.5em;
 }
+
+p.tagline {
+  float: right;
+}
