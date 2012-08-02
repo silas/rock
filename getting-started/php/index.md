@@ -151,8 +151,8 @@ title: Getting Started with PHP
           # start server
           rock run &>/dev/null &
 
-          # give it a little time to start
-          sleep 0.2
+          # give it a second to start
+          sleep 1
 
           # get frontpage body
           body="$( curl -s 'http://127.0.0.1:9000/' )"
