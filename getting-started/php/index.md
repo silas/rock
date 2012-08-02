@@ -71,7 +71,7 @@ title: Getting Started with PHP
 
         #!/usr/bin/env bash
 
-        exec php -S "${HTTP_HOST-127.0.0.1}:${HTTP_PORT-8000}" -c "${PROJECT_PATH}/php.ini" -t "${PROJECT_PATH}/public
+        exec php -S "${HTTP_HOST-127.0.0.1}:${HTTP_PORT-8000}" -c "${PROJECT_PATH}/php.ini" -t "${PROJECT_PATH}/public"
 
  1. Make it executable
 
