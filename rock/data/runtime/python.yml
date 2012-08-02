@@ -2,6 +2,7 @@ env:
   PATH: "${PROJECT_PATH}/scripts:${PROJECT_PATH}/bin:${PROJECT_PATH}/venv/bin:${PATH}"
   BUILD_PATH: "${PROJECT_PATH}/venv"
   TEST_PATH: "${PROJECT_PATH}/tests"
+  PYTHONPATH: "${PROJECT_PATH}:${PYTHONPATH}"
 
 build: |
 
