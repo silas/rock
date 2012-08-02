@@ -22,13 +22,20 @@ a:hover {
   text-decoration: underline;
 }
 
+h1, h2, h3, h4, h5 {
+  color: #444;
+}
+
 h1 {
-  color: #333;
   font-size: 1.4em;
 }
 
+h2 {
+  font-size: 1.3em;
+}
+
 .container {
-  width: 1200px;
+  width: 940px;
   margin: auto;
   padding: 0 1em 0 1em;
 }
@@ -64,15 +71,11 @@ header hr {
   text-decoration: none;
 }
 
-h1, h2, h3, h4, h5 {
-  color: #444;
+p.tagline {
+  float: right;
 }
 
 code {
   background-color: ghostWhite;
   padding: 0.2em 0.5em;
-}
-
-p.tagline {
-  float: right;
 }

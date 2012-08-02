@@ -5,6 +5,9 @@ title: Getting Started with Ruby
 
 # Getting Started with Ruby
 
+This guide walks you through setting up a basic Ruby web application with
+tests.
+
  1. Create and switch to project directory
 
         $ mkdir ruby-example

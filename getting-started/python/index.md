@@ -5,6 +5,9 @@ title: Getting Started with Python
 
 # Getting Started with Python
 
+This guide walks you through setting up a basic Python web application with
+tests.
+
  1. Create and switch to project directory
 
         $ mkdir python-example

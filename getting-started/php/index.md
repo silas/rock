@@ -5,6 +5,8 @@ title: Getting Started with PHP
 
 # Getting Started with PHP
 
+This guide walks you through setting up a basic PHP web application with tests.
+
  1. Create and switch to project directory
 
         $ mkdir php-example

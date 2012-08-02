@@ -5,6 +5,9 @@ title: Getting Started with Node
 
 # Getting Started with Node
 
+This guide walks you through setting up a basic Node.js web application with
+tests.
+
  1. Create and switch to project directory
 
         $ mkdir node-example

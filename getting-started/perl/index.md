@@ -5,6 +5,9 @@ title: Getting Started with Perl
 
 # Getting Started with Perl
 
+This guide walks you through setting up a basic Perl web application with
+tests.
+
  1. Create and switch to project directory
 
         $ mkdir perl-example
