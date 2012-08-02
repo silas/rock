@@ -1,9 +1,12 @@
 import os
+import pipes
 import string
+import sys
 import yaml
 from rock.config import Config
-from rock.utils import Shell
 from rock.exceptions import ConfigError
+from rock.process import ProcessManager
+from rock.utils import Shell
 
 
 class Project(object):
@@ -33,13 +36,28 @@ class Project(object):
             # blank line before command
             s.write('')
             # run command and wait for results
-            s.write(command)
+            if isinstance(command, (list, tuple)):
+                s.write(' '.join(command))
+            else:
+                s.write(command)
 
     def execute_type(self, name, *args):
         section = '%s_%s' % (name, args[0]) if len(args) > 0 else name
         if section not in self.config:
             raise ConfigError('section not found: %s' % section)
         self.execute(self.config[section])
+
+    def execute_section(self, name):
+        section = self.config.get(name)
+
+        if isinstance(section, dict):
+            pm = ProcessManager()
+            for name, value in section.items():
+                pm.add_process(name, '%s run %s' %
+                    (sys.argv[0], pipes.quote(value)))
+            pm.loop()
+        else:
+            self.execute(section)
 
     def build(self, *args):
         self.execute_type('build', *args)
@@ -48,21 +66,12 @@ class Project(object):
         self.execute_type('clean', *args)
 
     def run(self, args):
-        run_name = 'run_%s' % args[0] if args else ''
-        if len(args) == 1 and run_name in self.config:
-            section = self.config[run_name]
-            if isinstance(section, dict):
-                import pipes, sys
-                from .process import ProcessManager
-                pm = ProcessManager()
-                for name, value in section.items():
-                    pm.add_process(name, '%s run %s' %
-                        (sys.argv[0], pipes.quote(value)))
-                pm.loop()
-            else:
-                self.execute(section)
+        if len(args) == 0 and 'run' in self.config:
+            self.execute_section('run')
+        elif len(args) == 1 and 'run_%s' % args[0] in self.config:
+            self.execute_section('run_%s' % args[0])
         else:
-            self.execute(' '.join(args))
+            self.execute(args)
 
     def test(self, *args):
         self.execute_type('test', *args)
