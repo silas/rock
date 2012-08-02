@@ -28,15 +28,19 @@ title: Getting Started with Perl
 
  1. Create `lib/HelloWorld.pm`
 
+        package HelloWorld;
+
         use strict;
         use warnings;
 
         use Dancer qw{get setting};
 
-        setting('port', 8000);
+        sub greeting {
+            return 'Hello World';
+        }
 
         get '/' => sub {
-            'Hello World'
+            greeting
         };
 
         1;
@@ -58,9 +62,7 @@ title: Getting Started with Perl
 
         my $port = defined $ENV{HTTP_PORT} ? int($ENV{HTTP_PORT}) : 0;
 
-        if ($port) {
-            setting('port', $port);
-        }
+        setting('port', $port || 8000);
 
         dance;
 
@@ -101,7 +103,7 @@ title: Getting Started with Perl
 
         use_ok 'HelloWorld';
 
-        is setting('port'), 8000;
+        is HelloWorld::greeting(), 'Hello World';
 
  1. Run tests
 

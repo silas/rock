@@ -33,13 +33,16 @@ title: Getting Started with Node
  1. Create `server.js`
 
         var express = require('express');
+
         var app = express();
 
-        app.get('/', function(req, res){
-          res.send('Hello World');
-        });
+        app.greeting = function() {
+            return 'Hello World';
+        }
 
-        app.set('port', 8000);
+        app.get('/', function(req, res) {
+          res.send(app.greeting());
+        });
 
         module.exports = app;
 
@@ -53,15 +56,11 @@ title: Getting Started with Node
 
         var server = require('../server');
 
-        var port = parseInt(process.env.HTTP_PORT);
+        var port = parseInt(process.env.HTTP_PORT) || 8000;
 
-        if (port) {
-          server.set('port', port);
-        }
+        server.listen(port);
 
-        server.listen(server.get('port'));
-
-        console.log('Listening on port ' + server.get('port'));
+        console.log('Listening on port ' + port);
 
  1. Make it executable
 
@@ -90,7 +89,7 @@ title: Getting Started with Node
         var assert = require('assert');
         var server = require('./server');
 
-        assert.equal(server.get('port'), 8000);
+        assert.equal(server.greeting(), 'Hello World');
 
  1. Update `package.json` to include test script
 
