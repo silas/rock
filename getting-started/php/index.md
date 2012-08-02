@@ -90,11 +90,11 @@ title: Getting Started with PHP
 
         runtime: php54
 
-        run_web: HTTP_PORT=${HTTP_PORT-9000} hello-world
+        run: HTTP_PORT=${HTTP_PORT-9000} hello-world
 
- 1. Run `web` and kill it using Ctrl+C
+ 1. Run and kill it using Ctrl+C
 
-        $ rock run web
+        $ rock run
         PHP 5.4.4 Development Server started at Wed Aug  1 18:05:00 2012
         Listening on 127.0.0.1:9000
         Document root is /home/vagrant/php-example/public
@@ -144,12 +144,12 @@ title: Getting Started with PHP
 
         runtime: php54
 
-        run_web: HTTP_PORT=${HTTP_PORT-9000} hello-world
+        run: HTTP_PORT=${HTTP_PORT-9000} hello-world
 
         test_frontpage: |
 
           # start server
-          rock run web &>/dev/null &
+          rock run &>/dev/null &
 
           # give it a little time to start
           sleep 0.2

@@ -37,7 +37,7 @@ title: Getting Started with Node
         var app = express();
 
         app.greeting = function() {
-            return 'Hello World';
+          return 'Hello World';
         }
 
         app.get('/', function(req, res) {
@@ -76,11 +76,11 @@ title: Getting Started with Node
 
         runtime: node08
 
-        run_web: HTTP_PORT=${HTTP_PORT-9000} hello-world
+        run: HTTP_PORT=${HTTP_PORT-9000} hello-world
 
- 1. Run `web` and kill it using Ctrl+C
+ 1. Run and kill it using Ctrl+C
 
-        $ rock run web
+        $ rock run
         Listening on port 9000
         ^C
 
@@ -117,12 +117,12 @@ title: Getting Started with Node
 
         runtime: node08
 
-        run_web: HTTP_PORT=${HTTP_PORT-9000} hello-world
+        run: HTTP_PORT=${HTTP_PORT-9000} hello-world
 
         test_frontpage: |
 
           # start server
-          rock run web &>/dev/null &
+          rock run &>/dev/null &
 
           # give it a little time to start
           sleep 0.2

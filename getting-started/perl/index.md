@@ -81,11 +81,11 @@ title: Getting Started with Perl
 
         runtime: perl516
 
-        run_web: HTTP_PORT=${HTTP_PORT-9000} hello-world
+        run: HTTP_PORT=${HTTP_PORT-9000} hello-world
 
- 1. Run `web` and kill it using Ctrl+C
+ 1. Run and kill it using Ctrl+C
 
-        $ rock run web
+        $ rock run
         >> Dancer 1.3098 server 9821 listening on http://0.0.0.0:9000
         == Entering the development dance floor ...
         ^C
@@ -117,12 +117,12 @@ title: Getting Started with Perl
 
         runtime: perl516
 
-        run_web: HTTP_PORT=${HTTP_PORT-9000} hello-world
+        run: HTTP_PORT=${HTTP_PORT-9000} hello-world
 
         test_frontpage: |
 
           # start server
-          rock run web &>/dev/null &
+          rock run &>/dev/null &
 
           # give it a little time to start
           sleep 0.2
