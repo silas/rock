@@ -9,8 +9,8 @@ title: Install (Enterprise Linux)
 
         $ sudo cat << EOF > /etc/yum.repos.d/rock.repo
         [rock]
-        name=EL $releasever - $basearch - Rock
-        baseurl=http://dl.rockplatform.org/rp0/rpm/el/$releasever/$basearch
+        name=EL \$releasever - \$basearch - Rock
+        baseurl=http://dl.rockplatform.org/rp0/rpm/el/\$releasever/\$basearch
         gpgcheck=0
         EOF
 
