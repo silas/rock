@@ -14,7 +14,7 @@ title: Install (Enterprise Linux)
         gpgcheck=0
         EOF
 
- 1. Install `rock` and runtimes
+ 1. Install `rock` and runtimes (also see [Puppet module](https://github.com/rockplatform/puppet-rock))
 
         $ sudo yum install -y \
             rock \
