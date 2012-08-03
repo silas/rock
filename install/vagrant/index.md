@@ -15,6 +15,10 @@ title: Install (Vagrant)
           config.vm.provision :shell, :inline => "yum update -y rock 'rock-*'"
         end
 
+ 1. Up Vagrant box
+
+        $ vagrant up
+
  1. Log into box
 
         $ vagrant ssh
