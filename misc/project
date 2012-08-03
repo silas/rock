@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+for path in $( find . -mindepth 2 -name .git -type d ); do
+  path=$( dirname $path )
+  pushd "$path" &>/dev/null
+    echo "################################################################################"
+    echo "# ${path:2}"
+    echo "################################################################################"
+    "$@"
+  popd &>/dev/null
+done
