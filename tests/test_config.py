@@ -17,14 +17,8 @@ class ConfigTestCase(unittest.TestCase):
         self.path = os.path.join(project_path, 'simple')
         return Config({'path': self.path})
 
-    def test_project(self):
-        c = self.setup_test().project()
-        self.assertEqual(c['path'], self.path)
-        self.assertEqual(c['runtime'], 'test123')
-        self.assertEqual(c['runtime_type'], 'test')
-
-    def test_full(self):
-        c = self.setup_test().full()
+    def test_values(self):
+        c = self.setup_test()
         self.assertEqual(c['path'], self.path)
         self.assertEqual(c['runtime'], 'test123')
         self.assertEqual(c['runtime_type'], 'test')

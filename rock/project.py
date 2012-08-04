@@ -12,7 +12,7 @@ from rock.utils import Shell
 class Project(object):
 
     def __init__(self, config):
-        self.config = Config(config).full()
+        self.config = Config(config)
 
     def execute(self, command):
         with Shell() as s:
