@@ -133,7 +133,7 @@ class ProcessManager(object):
         self._init_printers()
 
         for proc in self.processes:
-            print("started with pid {}".format(proc.pid), file=proc.printer)
+            print("started with pid {0:d}".format(proc.pid), file=proc.printer)
 
         while self._process_count() > 0:
             try:
