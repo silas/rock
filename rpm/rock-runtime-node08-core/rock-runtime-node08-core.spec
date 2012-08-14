@@ -5,8 +5,8 @@
 %global node08_rootdir /opt/rock/runtime/%{runtime}
 
 Name:           rock-runtime-node08-core
-Version:        0.8.1
-Release:        2%{?dist}
+Version:        0.8.6
+Release:        1%{?dist}
 Summary:        A Node.js 0.8.x runtime
 
 Group:          Development/Languages
@@ -45,6 +45,8 @@ rm -rf %{buildroot}
 
 %{__make} install DESTDIR=%{buildroot}
 
+rm -f %{buildroot}%{node08_rootdir}%{_prefix}/lib/dtrace/node.d
+
 mkdir -p %{buildroot}%{_sysconfdir}/rpm
 
 cat > %{buildroot}%{_sysconfdir}/rpm/macros.rock-node08 << EOF
@@ -70,6 +72,9 @@ rm -rf %{buildroot}
 %{_sysconfdir}/rpm/macros.rock-node08
 
 %changelog
+* Fri Aug 10 2012 Silas Sewell <silas@sewell.org> - 0.8.6-1
+- Update to 0.8.6
+
 * Tue Jul 10 2012 Silas Sewell <silas@sewell.org> - 0.8.1-2
 - Add man requirement
 - Add rpm macro

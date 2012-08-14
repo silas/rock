@@ -13,15 +13,14 @@
 %global php54_libdir %{php54_rootdir}%{_prefix}/lib
 
 Name:           rock-runtime-php54-core
-Version:        5.4.4
-Release:        2%{?dist}
+Version:        5.4.5
+Release:        1%{?dist}
 Summary:        A PHP 5.4.x runtime
 
 Group:          Development/Languages
 License:        PHP
 URL:            http://www.php.net
 Source0:        http://us.php.net/distributions/php-%{version}.tar.bz2
-Patch0:         php-5.4.4-shebang.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  bison
@@ -106,7 +105,6 @@ This packages contains resources for building %{name} RPMs.
 
 %prep
 %setup -q -n php-%{version}
-%patch0 -p1
 
 %build
 ./configure \
@@ -215,6 +213,9 @@ rm -rf %{buildroot}
 %{_sysconfdir}/rpm/macros.rock-php54
 
 %changelog
+* Fri Aug 10 2012 Silas Sewell <silas@sewell.org> - 5.4.5-1
+- Update to 5.4.5
+
 * Mon Jul 16 2012 Silas Sewell <silas@sewell.org> - 5.4.3-2
 - Load json and phar modules via php.ini
 - Remove '*.a' files

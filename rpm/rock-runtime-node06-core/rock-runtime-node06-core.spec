@@ -5,8 +5,8 @@
 %global node06_rootdir /opt/rock/runtime/%{runtime}
 
 Name:           rock-runtime-node06-core
-Version:        0.6.19
-Release:        2%{?dist}
+Version:        0.6.21
+Release:        1%{?dist}
 Summary:        A Node.js 0.6.x runtime
 
 Group:          Development/Languages
@@ -70,6 +70,9 @@ rm -rf %{buildroot}
 %{_sysconfdir}/rpm/macros.rock-node06
 
 %changelog
+* Fri Aug 10 2012 Silas Sewell <silas@sewell.org> - 0.6.21-1
+- Update 0.6.21
+
 * Tue Jul 10 2012 Silas Sewell <silas@sewell.org> - 0.6.18-2
 - Add man requirement
 - Add rpm macro
