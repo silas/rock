@@ -27,6 +27,8 @@ class Project(object):
                 s.write('set -o noexec')
             # exit with error if any one command fails
             s.write('set -o errexit')
+            # switch to project directory
+            s.write('cd ' + pipes.quote(self.config['path']))
             # setup environment variables
             if self.config.get('env'):
                 # blank line before exports
