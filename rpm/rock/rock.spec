@@ -1,5 +1,5 @@
 Name:           rock
-Version:        0.3.1
+Version:        0.5.0
 Release:        1%{?dist}
 Summary:        Build, test and run tool
 
@@ -13,6 +13,7 @@ BuildRequires:  PyYAML
 BUildRequires:  python-argparse
 BuildRequires:  python-devel
 BuildRequires:  python-nose
+BuildRequires:  python-unittest2
 Requires:       PyYAML
 Requires:       python-argparse
 
@@ -39,6 +40,12 @@ nosetests
 %{python_sitelib}/%{name}-%{version}-py*.egg-info
 
 %changelog
+* Sat Aug 19 2012 Silas Sewell <silas@sewell.org> - 0.5.0-1
+- Update to 0.5.0
+
+* Fri Aug 18 2012 Silas Sewell <silas@sewell.org> - 0.4.0-1
+- Update to 0.4.0
+
 * Mon Aug 06 2012 Silas Sewell <silas@sewell.org> - 0.3.1-1
 - Update to 0.3.1
 
