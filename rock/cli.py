@@ -48,7 +48,7 @@ def main():
     # general options
     parser.add_argument('--dry-run', action='store_true',
         help="show commands, but don't run")
-    parser.add_argument('--verbose', action='store_true',
+    parser.add_argument('-v', '--verbose', action='store_true',
         help='show run commands')
 
     # project options
