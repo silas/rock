@@ -40,9 +40,9 @@ class Config(collections.Mapping):
             # ensure env is a dict of strings
             if (not isinstance(src['env'], dict) or
                 not all(map(lambda v: isinstance(v, basestring),
-                    src['env'].values()))):
+                        src['env'].values()))):
                 raise ConfigError('env must be an associative array of ' +
-                    'strings')
+                                  'strings')
             # evaluate env variables
             for name, value in src['env'].items():
                 dst['env'][name] = string.Template(
@@ -57,29 +57,33 @@ class Config(collections.Mapping):
                     src[name] = PARENT_RE.sub('', src[name])
                 elif isinstance(src[name], dict):
                     for subname in src[name]:
-                        if isinstance(src[name][subname], basestring):
-                            src[name][subname] = PARENT_RE.sub('',
-                                src[name][subname])
+                        value = src[name][subname]
+                        if isinstance(value, basestring):
+                            src[name][subname] = PARENT_RE.sub('', value)
                 dst[name] = src[name]
             elif isinstance(src[name], basestring):
                 if not isinstance(dst[name], basestring):
                     raise ConfigError('unable to merge "%s" into "str"' %
-                        type(dst[name]).__name__)
+                                      type(dst[name]).__name__)
                 dst[name] = PARENT_RE.sub(dst[name], src[name])
             elif isinstance(src[name], dict):
                 dst_is_dict = isinstance(dst[name], dict)
                 for subname in src[name]:
                     if isinstance(dst[name], basestring):
                         src[name][subname] = PARENT_RE.sub(dst[name],
-                            src[name][subname])
+                                                           src[name][subname])
                     elif dst_is_dict:
                         if subname in dst[name]:
                             src[name][subname] = PARENT_RE.sub(
-                                dst[name][subname], src[name][subname])
+                                dst[name][subname],
+                                src[name][subname],
+                            )
                             del dst[name][subname]
                         else:
-                            src[name][subname] = PARENT_RE.sub('',
-                                src[name][subname])
+                            src[name][subname] = PARENT_RE.sub(
+                                '',
+                                src[name][subname],
+                            )
                 if dst_is_dict:
                     src[name].update(dst[name])
                 dst[name] = src[name]
@@ -94,7 +98,7 @@ class Config(collections.Mapping):
         data = {}
         # runtime
         yml_path = ('path' in self._data and
-            os.path.join(self._data['path'], '.rock.yml'))
+                    os.path.join(self._data['path'], '.rock.yml'))
         if yml_path and os.path.isfile(yml_path):
             data = self.parse(yml_path)
             if not isinstance(data, dict):
@@ -110,7 +114,7 @@ class Config(collections.Mapping):
                 raise ConfigError('%s is required' % name)
         # paths
         runtime_path = os.path.join(self.MOUNT, 'opt', 'rock', 'runtime',
-            data['runtime'])
+                                    data['runtime'])
         etc_path = os.path.join(self.MOUNT, 'etc', 'rock', 'runtime')
         runtime_type_yml = data['runtime_type'] + '.yml'
         runtime_yml = data['runtime'] + '.yml'
@@ -119,15 +123,15 @@ class Config(collections.Mapping):
             raise ConfigError("runtime path doesn't exist")
         # configs
         runtime_config = self.parse(os.path.join(runtime_path,
-            'rock.yml'))
+                                    'rock.yml'))
         rock_type_config = self.parse(os.path.join(self.DATA, 'runtime',
-            runtime_type_yml), require_exists=False)
+                                      runtime_type_yml), require_exists=False)
         rock_config = self.parse(os.path.join(self.DATA, 'runtime',
-            runtime_yml), require_exists=False)
+                                 runtime_yml), require_exists=False)
         etc_type_config = self.parse(os.path.join(etc_path,
-            runtime_type_yml), require_exists=False)
+                                     runtime_type_yml), require_exists=False)
         etc_config = self.parse(os.path.join(etc_path, runtime_yml),
-            require_exists=False)
+                                require_exists=False)
         # merge
         self._data = {
             'env': {

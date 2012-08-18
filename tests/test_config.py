@@ -1,5 +1,8 @@
 import os
-import unittest
+try:
+    import unittest2 as unittest
+except:
+    import unittest
 from rock.config import Config
 from rock.exceptions import ConfigError
 
