@@ -1,11 +1,16 @@
 env:
   PATH: "${PROJECT_PATH}/bin:${PROJECT_PATH}/node_modules/.bin:${PATH}"
   BUILD_PATH: "${PROJECT_PATH}/node_modules"
+  ROCK_NPM_INSTALL: "install"
+  ROCK_NPM_REBUILD: "rebuild"
+  ROCK_NPM_INSTALL_DEPLOYMENT: "install"
+  ROCK_NPM_REBUILD_DEPLOYMENT: "rebuild"
 
 build: |
 
   if [[ -f ./package.json ]]; then
-    npm install
+    npm ${ROCK_NPM_INSTALL}
+    npm ${ROCK_NPM_REBUILD}
   else
     warn 'no "package.json" file found'
   fi
@@ -16,9 +21,9 @@ build_deployment: |
     die 'no "npm-shrinkwrap.json" file found'
   fi
 
-  npm install
+  npm ${ROCK_NPM_INSTALL_DEPLOYMENT}
 
-  npm rebuild
+  npm ${ROCK_NPM_REBUILD_DEPLOYMENT}
 
 test: |
 

@@ -3,11 +3,13 @@ env:
   BUILD_PATH: "${PROJECT_PATH}/vendor"
   TEST_PATH: "${PROJECT_PATH}/tests"
   PHP_INI: "${PROJECT_PATH}"
+  ROCK_COMPOSER_INSTALL: "install"
+  ROCK_COMPOSER_INSTALL_DEPLOYMENT: "install"
 
 build: |
 
   if [[ -f ./composer.json ]]; then
-    composer.phar install
+    composer.phar ${ROCK_COMPOSER_INSTALL}
   else
     warn 'no "composer.json" file found'
   fi
@@ -18,7 +20,7 @@ build_deployment: |
     die 'no "composer.lock" file found'
   fi
 
-  composer.phar install
+  composer.phar ${ROCK_COMPOSER_INSTALL_DEPLOYMENT}
 
 test: |
 

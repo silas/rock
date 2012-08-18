@@ -3,13 +3,19 @@ env:
   BUILD_PATH: "${PROJECT_PATH}/venv"
   TEST_PATH: "${PROJECT_PATH}/tests"
   PYTHONPATH: "${PROJECT_PATH}:${PYTHONPATH}"
+  ROCK_PIP_INSTALL: "install -r ./requirements.txt"
+  ROCK_PIP_INSTALL_DEPLOYMENT: "install -r ./requirements.txt"
+  ROCK_VIRTUALENV: "--distribute \"${BUILD_PATH}\""
+  ROCK_VIRTUALENV_DEPLOYMENT: "--distribute \"${BUILD_PATH}\""
 
 build: |
 
-  test -f ${BUILD_PATH}/bin/activate || virtualenv --distribute ${BUILD_PATH}
+  if [[ ! -f "${BUILD_PATH}/bin/activate" ]]; then
+    virtualenv ${ROCK_VIRTUALENV}
+  fi
 
   if [[ -f ./requirements.txt ]]; then
-    pip install -r ./requirements.txt
+    pip ${ROCK_PIP_INSTALL}
   else
     warn 'no "requirements.txt" file found'
   fi
@@ -20,15 +26,15 @@ build_deployment: |
     die 'no "requirements.txt" file found'
   fi
 
-  if [[ ! -f ${BUILD_PATH}/bin/activate ]]; then
-    virtualenv --distribute ${BUILD_PATH}
+  if [[ ! -f "${BUILD_PATH}/bin/activate" ]]; then
+    virtualenv ${ROCK_VIRTUALENV_DEPLOYMENT}
   fi
 
-  pip install -r ./requirements.txt
+  pip ${ROCK_PIP_INSTALL_DEPLOYMENT}
 
 test: |
 
-  python -m unittest discover ${TEST_PATH}
+  python -m unittest discover "${TEST_PATH}"
 
 clean: |
 

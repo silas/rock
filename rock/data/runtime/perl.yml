@@ -5,11 +5,13 @@ env:
   PERL_MB_OPT: "--install_base ${PROJECT_PATH}/local"
   PERL_MM_OPT: "INSTALL_BASE=${PROJECT_PATH}/local"
   PERL5LIB: "${PROJECT_PATH}/lib:${PROJECT_PATH}/lib/perl5/x86_64-linux:${PROJECT_PATH}/local/lib/perl5"
+  ROCK_CARTON_INSTALL: "install"
+  ROCK_CARTON_INSTALL_DEPLOYMENT: "install --deployment"
 
 build: |
 
   if [[ -f ./cpanfile ]]; then
-    carton install
+    carton ${ROCK_CARTON_INSTALL}
   else
     warn 'no "cpanfile" file found'
   fi
@@ -20,7 +22,7 @@ build_deployment: |
     die 'no "carton.lock" file found'
   fi
 
-  carton install --deployment
+  carton ${ROCK_CARTON_INSTALL_DEPLOYMENT}
 
 test: |
 

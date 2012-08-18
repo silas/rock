@@ -2,11 +2,13 @@ env:
   PATH: "${PROJECT_PATH}/bin:${PROJECT_PATH}/vendor/bundle/ruby/${RUBY_ABI}/bin:${PATH}"
   BUILD_PATH: "${PROJECT_PATH}/vendor/bundle"
   RUBYLIB: "${PROJECT_PATH}/lib:${RUBYLIB}"
+  ROCK_BUNDLE_INSTALL: "install --path=\"${BUILD_PATH}\""
+  ROCK_BUNDLE_INSTALL_DEPLOYMENT: "install --deployment"
 
 build: |
 
   if [[ -f ./Gemfile || -f ./Gemfile.lock ]]; then
-    bundle install --path=${BUILD_PATH}
+    bundle ${ROCK_BUNDLE_INSTALL}
   else
     warn 'no "Gemfile" or "Gemfile.lock" file found'
   fi
@@ -17,7 +19,7 @@ build_deployment: |
     die 'no "Gemfile.lock" file found'
   fi
 
-  bundle install --deployment
+  bundle ${ROCK_BUNDLE_INSTALL_DEPLOYMENT}
 
 test: |
 
