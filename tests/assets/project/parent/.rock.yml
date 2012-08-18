@@ -1,0 +1,14 @@
+runtime: parent123
+
+test_str_to_str: "pre-{{ parent }}-post"
+
+test_str_to_dict:
+  one: "pre1-{{ parent }}-post1"
+  two: "pre2-{{ parent }}-post2"
+
+test_dict_to_dict:
+  one: "pre1-{{ parent }}-post1"
+  two: "pre2-{{ parent }}-post2"
+  four: "pre4-simple4-post4"
+
+test_parent2: "{{ parent }}2"

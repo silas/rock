@@ -1,9 +1,14 @@
 import collections
 import copy
 import os
+import re
 import string
 import yaml
 from rock.exceptions import ConfigError
+
+
+PARENT_RE = re.compile(r'\{\{\s*parent\s*\}\}', re.MULTILINE)
+TEMPLATE_RE = re.compile(r'^(?:build|clean|run|test)(?:_.+)?$')
 
 
 class Config(collections.Mapping):
@@ -33,22 +38,57 @@ class Config(collections.Mapping):
             return dst
         if 'env' in src:
             # ensure env is a dict of strings
-            if not (isinstance(src['env'], dict) or
-                    all(map(lambda v: isinstance(v, basestring),
+            if (not isinstance(src['env'], dict) or
+                not all(map(lambda v: isinstance(v, basestring),
                     src['env'].values()))):
                 raise ConfigError('env must be an associative array of ' +
                     'strings')
-            if 'env' not in dst:
-                dst['env'] = {}
             # evaluate env variables
             for name, value in src['env'].items():
                 dst['env'][name] = string.Template(
                     src['env'][name]).safe_substitute(**dst['env'])
             del src['env']
+        # parent tag to build, clean, run and test
+        for name in src.keys():
+            if not TEMPLATE_RE.match(name):
+                continue
+            if name not in dst:
+                if isinstance(src[name], basestring):
+                    src[name] = PARENT_RE.sub('', src[name])
+                elif isinstance(src[name], dict):
+                    for subname in src[name]:
+                        if isinstance(src[name][subname], basestring):
+                            src[name][subname] = PARENT_RE.sub('',
+                                src[name][subname])
+                dst[name] = src[name]
+            elif isinstance(src[name], basestring):
+                if not isinstance(dst[name], basestring):
+                    raise ConfigError('unable to merge "%s" into "str"' %
+                        type(dst[name]).__name__)
+                dst[name] = PARENT_RE.sub(dst[name], src[name])
+            elif isinstance(src[name], dict):
+                dst_is_dict = isinstance(dst[name], dict)
+                for subname in src[name]:
+                    if isinstance(dst[name], basestring):
+                        src[name][subname] = PARENT_RE.sub(dst[name],
+                            src[name][subname])
+                    elif dst_is_dict:
+                        if subname in dst[name]:
+                            src[name][subname] = PARENT_RE.sub(
+                                dst[name][subname], src[name][subname])
+                            del dst[name][subname]
+                        else:
+                            src[name][subname] = PARENT_RE.sub('',
+                                src[name][subname])
+                if dst_is_dict:
+                    src[name].update(dst[name])
+                dst[name] = src[name]
+            del src[name]
         dst.update(src)
 
     def setup(self):
-        if self._setup: return
+        if self._setup:
+            return
         self._setup = True
         # setup configuration
         data = {}
@@ -57,6 +97,8 @@ class Config(collections.Mapping):
             os.path.join(self._data['path'], '.rock.yml'))
         if yml_path and os.path.isfile(yml_path):
             data = self.parse(yml_path)
+            if not isinstance(data, dict):
+                raise ConfigError('.rock.yml syntax error')
             data.update(self._data)
         else:
             data = copy.deepcopy(self._data)
@@ -114,7 +156,7 @@ class Config(collections.Mapping):
 
     def __iter__(self, *args, **kwargs):
         self.setup()
-        return self._data.__getitem__(*args, **kwargs)
+        return self._data.__iter__(*args, **kwargs)
 
     def __len__(self, *args, **kwargs):
         self.setup()
