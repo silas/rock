@@ -166,7 +166,7 @@ class ProcessManager(object):
         for proc in self.processes:
             if proc.poll() is None:
                 print("sending SIGTERM to pid {0:d}".format(proc.pid),
-                    file=self.system_printer)
+                      file=self.system_printer)
                 proc.terminate()
 
         def kill(signum, frame):
@@ -174,7 +174,7 @@ class ProcessManager(object):
             for proc in self.processes:
                 if proc.poll() is None:
                     print("sending SIGKILL to pid {0:d}".format(proc.pid),
-                        file=self.system_printer)
+                          file=self.system_printer)
                     proc.kill()
 
         signal.signal(signal.SIGALRM, kill)

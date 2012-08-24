@@ -1,0 +1,8 @@
+test_str_to_str: simple1
+test_str_to_dict: simple2
+
+test_dict_to_dict:
+ one: simple1
+ three: simple3
+
+test_parent1: "{{ parent }}1"

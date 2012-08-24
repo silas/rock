@@ -1,1 +1,6 @@
 runtime: test123
+
+build: |
+  pre
+  {{ parent }}
+  post

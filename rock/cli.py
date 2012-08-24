@@ -47,14 +47,14 @@ def main():
 
     # general options
     parser.add_argument('--dry-run', action='store_true',
-        help="show commands, but don't run")
+                        help="show commands, but don't run")
     parser.add_argument('-v', '--verbose', action='store_true',
-        help='show run commands')
+                        help='show run commands')
 
     # project options
     project_options = parser.add_argument_group('project options')
     project_options.add_argument('--path', help='set path',
-        default=os.getcwd())
+                                 default=os.getcwd())
     project_options.add_argument('--runtime', help='set runtime')
 
     # project commands
@@ -73,8 +73,8 @@ def main():
     parser_env.set_defaults(func=env)
 
     # project: run
-    parser_run = project.add_parser('run',
-        help='run project file', add_help=False)
+    parser_run = project.add_parser('run', help='run project file',
+                                    add_help=False)
     parser_run.set_defaults(func=run)
 
     # project: test

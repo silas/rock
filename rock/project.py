@@ -56,7 +56,7 @@ class Project(object):
             pm = ProcessManager()
             for name, value in section.items():
                 pm.add_process(name, '%s run %s' %
-                    (sys.argv[0], pipes.quote(value)))
+                               (sys.argv[0], pipes.quote(value)))
             pm.loop()
         else:
             self.execute(section)
