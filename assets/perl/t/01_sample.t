@@ -3,6 +3,6 @@ use warnings;
 
 use Test::More tests => 1;
 
-use Sample 'convert';
+use Sample;
 
-is convert('# Test'), "<h1>Test</h1>\n";
+is Sample::convert('# Test'), "<h1>Test</h1>\n";

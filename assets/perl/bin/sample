@@ -1,0 +1,5 @@
+#!/usr/bin/env perl
+
+use Sample;
+
+print(Sample::convert($ARGV[0]) . "\n");

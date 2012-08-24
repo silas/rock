@@ -12,12 +12,14 @@ class RuntimeTestCase(unittest.TestCase):
     def assertRun(self, *args, **kwargs):
         kwargs['combine'] = True
         r = ops.run(*args, **kwargs)
-        self.assertTrue(r, '\n\n' + r.stdout)
+        self.assertTrue(r, '\n\n' + r.stdout + '\n\n' + r.stderr)
+        return r
 
     def assertNotRun(self, *args, **kwargs):
         kwargs['combine'] = True
         r = ops.run(*args, **kwargs)
-        self.assertFalse(r, '\n\n' + r.stdout)
+        self.assertFalse(r, '\n\n' + r.stdout + '\n\n' + r.stderr)
+        return r
 
     def runtime(self, name, **hooks):
         root = name.rstrip('0123456789')
@@ -31,6 +33,8 @@ class RuntimeTestCase(unittest.TestCase):
             with open(w.join('.rock.yml'), 'w+') as f:
                 f.write('runtime: {name}'.format(name=name))
             self.assertRun('rock build', cwd=w.path)
+            result = self.assertRun('rock run sample test', cwd=w.path)
+            self.assertEquals(result.stdout.rstrip(), '<p>test</p>')
             self.assertRun('rock test', cwd=w.path)
             if hooks.get('post_test'):
                 hooks['post_test'](self, w=w)

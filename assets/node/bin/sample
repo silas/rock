@@ -1,0 +1,5 @@
+#!/usr/bin/env node
+
+var sample = require('../sample')
+
+console.log(sample.convert(process.argv[2]))

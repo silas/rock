@@ -1,5 +1,7 @@
 <?php
 
+require 'vendor/autoload.php';
+
 use dflydev\markdown\MarkdownParser;
 
 function convert($text) {

@@ -1,3 +1,5 @@
+package Sample;
+
 use strict;
 use warnings;
 
