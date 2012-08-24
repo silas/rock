@@ -33,4 +33,6 @@ file { '/home/vagrant/.bashrc':
 
 class { 'rock': release => 0 }
 
-rock::runtime { ['node04', 'node06', 'node08', 'perl516', 'php54', 'python27', 'ruby18', 'ruby19']: }
+rock::runtime { ['node04', 'node06', 'node08', 'perl516', 'php54', 'python27', 'ruby18', 'ruby19']:
+  autoupgrade => true,
+}

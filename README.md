@@ -11,21 +11,27 @@ Ensure you have the following requirements installed:
  * [VirtualBox](https://www.virtualbox.org/)
  * [Vagrant](http://vagrantup.com/)
 
-Clone repository:
+ 1. Clone repository
 
-    git clone git://github.com/rockplatform/dev.git rock
+        git clone git://github.com/rockplatform/dev.git rock
 
-Switch to rock directory:
+ 1. Switch to rock directory
 
-    cd rock
+        cd rock
 
-Run setup script:
+ 1. Run setup script
 
-    ./misc/setup
+        ./misc/setup
 
-Up vagrant:
+ 1. Up vagrant
 
-    vagrant up
+        vagrant up
+
+## Tips
+
+Run a command in all project directories
+
+    ./misc/project git status
 
 ## License
 
