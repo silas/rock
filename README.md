@@ -5,11 +5,13 @@ This is the rock development environment.
 
 ## Getting Started
 
-Ensure you have the following requirements installed:
+Ensure you have the following requirements installed
 
  * [Git](http://git-scm.com/)
  * [VirtualBox](https://www.virtualbox.org/)
  * [Vagrant](http://vagrantup.com/)
+
+Then do the following
 
  1. Clone repository
 
