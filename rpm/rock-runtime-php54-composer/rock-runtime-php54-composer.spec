@@ -20,6 +20,7 @@ BuildArch:      noarch
 
 BuildRequires:  rock-runtime-php54-core-rpmbuild
 Requires:       rock-runtime-php54-core
+Requires:       unzip
 
 %description
 Composer is a package manager tracking local dependencies of your projects and
@@ -48,6 +49,7 @@ rm -rf %{buildroot}
 %changelog
 * Thu Aug 23 2012 Silas Sewell <silas@sewell.org> - 1.0.0-0.2.alpha5
 - Update to alpha5
+- Unzip requirement
 
 * Sun Jul 08 2012 Silas Sewell <silas@sewell.org> - 1.0.0-0.1.alpha4
 - Initial build
