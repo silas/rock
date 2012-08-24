@@ -13,7 +13,7 @@
 %global php54_libdir %{php54_rootdir}%{_prefix}/lib
 
 Name:           rock-runtime-php54-core
-Version:        5.4.5
+Version:        5.4.6
 Release:        1%{?dist}
 Summary:        A PHP 5.4.x runtime
 
@@ -213,6 +213,9 @@ rm -rf %{buildroot}
 %{_sysconfdir}/rpm/macros.rock-php54
 
 %changelog
+* Thu Aug 23 2012 Silas Sewell <silas@sewell.org> - 5.4.6-1
+- Update to 5.4.6
+
 * Fri Aug 10 2012 Silas Sewell <silas@sewell.org> - 5.4.5-1
 - Update to 5.4.5
 

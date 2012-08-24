@@ -3,7 +3,7 @@
 
 Name:           rock-runtime-php54
 Version:        1
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        php54 runtime for rock
 
 Group:          Development/Languages
@@ -12,8 +12,8 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 
 BuildRequires:  rock-runtime-php54-core-rpmbuild
-Requires:       rock-runtime-php54-composer >= 1.0.0-0.1
-Requires:       rock-runtime-php54-core >= 5.4.3-2
+Requires:       rock-runtime-php54-composer >= 1.0.0-0.2
+Requires:       rock-runtime-php54-core >= 5.4.6-1
 
 %description
 php54 runtime for rock.
@@ -40,6 +40,10 @@ rm -rf %{buildroot}
 %{php54_rootdir}/rock.yml
 
 %changelog
+* Thu Aug 23 2012 Silas Sewell <silas@sewell.org> - 1-5
+- Composer 1.0.0 alpha5
+- PHP 5.4.6
+
 * Fri Jul 20 2012 Silas Sewell <silas@sewell.org> - 1-4
 - Convert env to rock.yml
 
