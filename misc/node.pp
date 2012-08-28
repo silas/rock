@@ -1,3 +1,6 @@
+$release = 0
+$ensure = 'latest'
+
 yumrepo { 'sewell':
   descr    => 'sewell',
   baseurl  => 'http://dl.sewell.org/rpm/sewell/el/6/x86_64/',
@@ -6,13 +9,14 @@ yumrepo { 'sewell':
 }
 
 package { ['brpm', 'git', 'python-argparse', 'PyYAML', 'vim-enhanced']:
-  ensure  => present,
+  ensure  => $ensure,
   require => Yumrepo['sewell'],
 }
 
 exec { 'group_mock_vagrant':
-  command => '/usr/sbin/usermod -a -G mock vagrant',
-  unless  => '/usr/bin/id -G --name vagrant | grep mock &>/dev/null',
+  command => 'usermod -a -G mock vagrant',
+  unless  => 'id -G --name vagrant | grep mock &>/dev/null',
+  path    => $::path,
   require => Package['brpm'],
 }
 
@@ -31,8 +35,20 @@ file { '/home/vagrant/.bashrc':
   ',
 }
 
-class { 'rock': release => 0 }
+class { 'rock': release => $release }
 
-rock::runtime { ['node04', 'node06', 'node08', 'perl516', 'php54', 'python27', 'ruby18', 'ruby19']:
-  autoupgrade => true,
+rock::runtime { [
+  'node04',
+  'node06',
+  'node08',
+  'perl516',
+  'php54',
+  'python27',
+  'ruby18',
+  'ruby19',
+]: ensure => $ensure }
+
+package { 'rock':
+  ensure  => $ensure,
+  require => Class['rock'],
 }
