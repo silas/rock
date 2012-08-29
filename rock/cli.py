@@ -3,6 +3,7 @@ import os
 import sys
 from rock.exceptions import Error
 from rock.project import Project
+from rock.runtime import list as runtime_list
 
 
 def project(args):
@@ -28,6 +29,11 @@ def clean(args, extra):
 def env(args, extra):
     for name, value in project(args).config['env'].items():
         print 'export %s="%s"' % (name, value)
+
+
+def runtime(args, extra):
+    for r in runtime_list():
+        print r.name
 
 
 def run(args, extra):
@@ -71,6 +77,11 @@ def main():
     # project: env
     parser_env = project.add_parser('env', help='show environment variables')
     parser_env.set_defaults(func=env)
+
+    # runtime
+    parser_runtime = project.add_parser('runtime', help='list runtimes',
+                                        add_help=False)
+    parser_runtime.set_defaults(func=runtime)
 
     # project: run
     parser_run = project.add_parser('run', help='run project file',
