@@ -1,14 +1,10 @@
 import helper
 import os
-try:
-    import unittest2 as unittest
-except:
-    import unittest
 from rock.config import Config
 from rock.exceptions import ConfigError
 
 
-class ConfigTestCase(unittest.TestCase):
+class ConfigTestCase(helper.unittest.TestCase):
 
     def setup_test(self, name='simple', data='test', config=None):
         helper.setenv(data=data)

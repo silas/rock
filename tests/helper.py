@@ -1,4 +1,8 @@
 import os
+try:
+    import unittest2 as unittest
+except:
+    import unittest
 from rock.config import Config
 
 

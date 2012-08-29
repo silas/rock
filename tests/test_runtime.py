@@ -1,13 +1,8 @@
 import helper
-import os
-try:
-    import unittest2 as unittest
-except:
-    import unittest
 from rock import runtime
 
 
-class RuntimeTestCase(unittest.TestCase):
+class RuntimeTestCase(helper.unittest.TestCase):
 
     def setUp(self):
         helper.setenv()
