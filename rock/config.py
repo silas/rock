@@ -13,14 +13,25 @@ TEMPLATE_RE = re.compile(r'^(?:build|clean|run|test)(?:_.+)?$')
 
 class Config(collections.Mapping):
 
-    MOUNT = '/'
-    DATA = os.path.join(os.path.dirname(__file__), 'data')
-
     def __init__(self, data):
         self._data = data
         self._setup = False
 
-    def parse(self, path, require_exists=True, require_parses=True):
+    @staticmethod
+    def data_path(*args):
+        return os.path.join(*(os.path.dirname(__file__), 'data') + args)
+
+    @staticmethod
+    def mount_path(*args):
+        return os.path.join(*('/',) + args)
+
+    @staticmethod
+    def runtime(*args, **kwargs):
+        from rock.runtime import Runtime
+        return Runtime(*args, **kwargs)
+
+    @staticmethod
+    def parse(path, require_exists=True, require_parses=True):
         if not os.path.isfile(path):
             if require_exists:
                 raise ConfigError('not found: ' + path)
@@ -33,7 +44,8 @@ class Config(collections.Mapping):
             if require_parses:
                 raise ConfigError('parse error: ' + path)
 
-    def merge(self, src, dst):
+    @staticmethod
+    def merge(src, dst):
         if src is None:
             return dst
         if 'env' in src:
@@ -112,22 +124,21 @@ class Config(collections.Mapping):
         for name in ('path', 'runtime', 'runtime_type'):
             if name not in data:
                 raise ConfigError('%s is required' % name)
+        # runtime
+        runtime = self.runtime(data['runtime'])
         # paths
-        runtime_path = os.path.join(self.MOUNT, 'opt', 'rock', 'runtime',
-                                    data['runtime'])
-        etc_path = os.path.join(self.MOUNT, 'etc', 'rock', 'runtime')
+        etc_path = self.mount_path('etc', 'rock', 'runtime')
         runtime_type_yml = data['runtime_type'] + '.yml'
         runtime_yml = data['runtime'] + '.yml'
         # ensure runtime exists
-        if not os.path.isdir(runtime_path):
+        if not os.path.isdir(runtime.path()):
             raise ConfigError("runtime path doesn't exist")
-        # configs
-        runtime_config = self.parse(os.path.join(runtime_path,
-                                    'rock.yml'))
-        rock_type_config = self.parse(os.path.join(self.DATA, 'runtime',
+        # parse configs
+        runtime_config = self.parse(runtime.path('rock.yml'))
+        rock_type_config = self.parse(self.data_path('runtime',
                                       runtime_type_yml), require_exists=False)
-        rock_config = self.parse(os.path.join(self.DATA, 'runtime',
-                                 runtime_yml), require_exists=False)
+        rock_config = self.parse(self.data_path('runtime', runtime_yml),
+                                 require_exists=False)
         etc_type_config = self.parse(os.path.join(etc_path,
                                      runtime_type_yml), require_exists=False)
         etc_config = self.parse(os.path.join(etc_path, runtime_yml),

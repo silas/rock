@@ -1,3 +1,4 @@
+import helper
 import os
 try:
     import unittest2 as unittest
@@ -6,19 +7,12 @@ except:
 from rock.config import Config
 from rock.exceptions import ConfigError
 
-tests_path = os.path.join(os.path.dirname(__file__))
-
-env_path = os.path.join(tests_path, 'assets', 'env')
-project_path = os.path.join(tests_path, 'assets', 'project')
-data_path = os.path.join(tests_path, 'assets', 'data')
-
 
 class ConfigTestCase(unittest.TestCase):
 
-    def setup_test(self, name='simple', mount='test', data='test', config=None):
-        Config.MOUNT = os.path.join(env_path, mount)
-        Config.DATA = os.path.join(data_path, data)
-        self.path = os.path.join(project_path, name)
+    def setup_test(self, name='simple', data='test', config=None):
+        helper.setenv(data=data)
+        self.path = os.path.join(helper.TESTS_PATH, 'assets', 'project', name)
         if config is None:
             config = {'path': self.path}
         return Config(config)
