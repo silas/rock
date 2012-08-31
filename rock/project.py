@@ -67,6 +67,40 @@ class Project(object):
     def clean(self, *args):
         self.execute_type('clean', *args)
 
+    def create(self, name=None, path=None, *args):
+        if not self.config._setup:
+            self.config._setup = True
+        path = self.config.data['path'] = path or self.config['path']
+        # templat paths
+        paths = self.config.paths('template')
+        # run template
+        if name:
+            # validate path
+            if not os.path.exists(path):
+                os.makedirs(path)
+            if not os.path.isdir(path):
+                raise ConfigError('path must be a directory')
+            if os.listdir(path):
+                raise ConfigError('directory is not empty')
+            # search for template and run if it exists
+            for path in paths:
+                path = os.path.join(path, name)
+                if os.path.isfile(path):
+                    self.execute('. ' + path)
+        # display templates
+        else:
+            templates = set()
+            # get paths
+            for path in paths:
+                if not os.path.isdir(path):
+                    continue
+                for template in os.listdir(path):
+                    if os.path.isfile(os.path.join(path, template)):
+                        templates.add(template)
+            templates = list(templates)
+            templates.sort()
+            return templates
+
     def run(self, args):
         if len(args) == 0 and 'run' in self.config:
             self.execute_section('run')

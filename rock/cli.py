@@ -26,6 +26,12 @@ def clean(args, extra):
     project(args).clean(*extra)
 
 
+def create(args, extra):
+    names = project(args).create(args.name, *extra)
+    if names:
+        print '\n'.join(names)
+
+
 def env(args, extra):
     for name, value in project(args).config['env'].items():
         print 'export %s="%s"' % (name, value)
@@ -73,6 +79,11 @@ def main():
     # project: clean
     parser_clean = project.add_parser('clean', help='clean project')
     parser_clean.set_defaults(func=clean)
+
+    # project: create
+    parser_create = project.add_parser('create', help='create project')
+    parser_create.set_defaults(func=create)
+    parser_create.add_argument('name', nargs="?", help='template name')
 
     # project: env
     parser_env = project.add_parser('env', help='show environment variables')

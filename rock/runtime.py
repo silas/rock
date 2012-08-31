@@ -19,6 +19,9 @@ class Runtime(object):
 
 
 def list():
-    rs = map(Runtime, os.listdir(Runtime.root_path()))
+    path = Runtime.root_path()
+    if not os.path.isdir(path):
+        return []
+    rs = map(Runtime, os.listdir(path))
     rs = [r for r in rs if r.exists('rock.yml')]
     return sorted(rs, key=lambda r: r.name)

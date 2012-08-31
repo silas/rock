@@ -14,16 +14,32 @@ TEMPLATE_RE = re.compile(r'^(?:build|clean|run|test)(?:_.+)?$')
 class Config(collections.Mapping):
 
     def __init__(self, data):
-        self._data = data
+        self.data = data
         self._setup = False
+
+    @staticmethod
+    def paths(*args):
+        return (
+            Config.user_path(*args),
+            Config.etc_path(*args),
+            Config.data_path(*args),
+        )
 
     @staticmethod
     def data_path(*args):
         return os.path.join(*(os.path.dirname(__file__), 'data') + args)
 
     @staticmethod
+    def etc_path(*args):
+        return Config.mount_path(*('etc', 'rock') + args)
+
+    @staticmethod
     def mount_path(*args):
         return os.path.join(*('/',) + args)
+
+    @staticmethod
+    def user_path(*args):
+        return os.path.join(*(os.path.expanduser('~/.rock'),) + args)
 
     @staticmethod
     def runtime(*args, **kwargs):
@@ -109,15 +125,15 @@ class Config(collections.Mapping):
         # setup configuration
         data = {}
         # runtime
-        yml_path = ('path' in self._data and
-                    os.path.join(self._data['path'], '.rock.yml'))
+        yml_path = ('path' in self.data and
+                    os.path.join(self.data['path'], '.rock.yml'))
         if yml_path and os.path.isfile(yml_path):
             data = self.parse(yml_path)
             if not isinstance(data, dict):
                 raise ConfigError('.rock.yml syntax error')
-            data.update(self._data)
+            data.update(self.data)
         else:
-            data = copy.deepcopy(self._data)
+            data = copy.deepcopy(self.data)
         if 'runtime' in data and 'runtime_type' not in data:
             data['runtime_type'] = data['runtime'].rstrip('0123456789')
         # project
@@ -127,7 +143,7 @@ class Config(collections.Mapping):
         # runtime
         runtime = self.runtime(data['runtime'])
         # paths
-        etc_path = self.mount_path('etc', 'rock', 'runtime')
+        etc_path = self.etc_path('runtime')
         runtime_type_yml = data['runtime_type'] + '.yml'
         runtime_yml = data['runtime'] + '.yml'
         # ensure runtime exists
@@ -144,35 +160,35 @@ class Config(collections.Mapping):
         etc_config = self.parse(os.path.join(etc_path, runtime_yml),
                                 require_exists=False)
         # merge
-        self._data = {
+        self.data = {
             'env': {
                 'PROJECT_PATH': data['path'],
             },
         }
         # merge runtime
-        self.merge(runtime_config, self._data)
+        self.merge(runtime_config, self.data)
         # merge runtime config
         if rock_config or etc_config:
-            self.merge(rock_config, self._data)
-            self.merge(etc_config, self._data)
+            self.merge(rock_config, self.data)
+            self.merge(etc_config, self.data)
         else:
-            self.merge(rock_type_config, self._data)
-            self.merge(etc_type_config, self._data)
+            self.merge(rock_type_config, self.data)
+            self.merge(etc_type_config, self.data)
         # merge project
-        self.merge(data, self._data)
+        self.merge(data, self.data)
 
     def __contains__(self, *args, **kwargs):
         self.setup()
-        return self._data.__contains__(*args, **kwargs)
+        return self.data.__contains__(*args, **kwargs)
 
     def __getitem__(self, *args, **kwargs):
         self.setup()
-        return self._data.__getitem__(*args, **kwargs)
+        return self.data.__getitem__(*args, **kwargs)
 
     def __iter__(self, *args, **kwargs):
         self.setup()
-        return self._data.__iter__(*args, **kwargs)
+        return self.data.__iter__(*args, **kwargs)
 
     def __len__(self, *args, **kwargs):
         self.setup()
-        return self._data.__len__(*args, **kwargs)
+        return self.data.__len__(*args, **kwargs)
