@@ -9,17 +9,12 @@ body {
   font-family: Lato, Arial, Helvetica, sans-serif;
   line-height: 1.4;
   margin: 0;
+  color: #606060;
 }
 
-a:link,
-a:hover,
-a:visited {
+a {
   color: #4183C4;
   text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
 }
 
 h1, h2, h3, h4, h5 {
@@ -27,21 +22,16 @@ h1, h2, h3, h4, h5 {
 }
 
 h1 {
-  font-size: 1.4em;
+  font-size: 1.6em;
 }
 
 h2 {
   font-size: 1.3em;
 }
 
-.container {
-  width: 940px;
-  margin: auto;
-  padding: 0 1em 0 1em;
-}
-
-header.container {
-  padding-top: 2em;
+header {
+  background: #f0f0f0;
+  padding: 1em 0 0 0;
 }
 
 header ul {
@@ -49,6 +39,7 @@ header ul {
   padding: 0;
   display: inline;
   margin-left: 1em;
+  vertical-align: middle;
 }
 
 header ul li {
@@ -64,18 +55,72 @@ header hr {
   margin: 1em 0;
 }
 
+header a:link,
+header a:visited {
+  color: #b0b0b0;
+}
+
+header a:hover {
+  color: #808080;
+}
+
 #logo {
-  font-size: 2em;
+  vertical-align: middle;
+  font-size: 1.4em;
   font-weight: bold;
   color: #333;
   text-decoration: none;
+  margin: 0 0 0 1em;
+  display: inline-block;
+}
+
+#logo em {
+  font-style: normal;
+  color: #d71e00;
+}
+
+h1 em {
+  font-style: normal;
+  color: #d71e00;
 }
 
 p.tagline {
   float: right;
+  margin: 0.4em 2em 0 0;
+  color: #c4c4c4;
+}
+.container {
+  width: 990px;
+  margin: 2em auto;
 }
 
 code {
-  background-color: ghostWhite;
+  background-color: #f4f4f4;
+  border: 1px solid #e2e2e2;
+  border-radius: 2px;
   padding: 0.2em 0.5em;
 }
+
+#home #hero {
+  width: 55%;
+  padding: 0 2.5em 0 0;
+  float: left;
+}
+#home #example {
+  width: 40%;
+  float: left;
+}
+#home code,
+#home pre {
+  margin: 10px;
+  padding: 0;
+}
+hr {
+  clear: both;
+  border: 1px solid #e8e8e8;
+}
+ol, ul {
+  list-style-position: inside;
+  padding: 0;
+}
+
