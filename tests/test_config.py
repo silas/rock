@@ -40,6 +40,13 @@ class ConfigTestCase(helper.unittest.TestCase):
         self.assertTrue('build' in c)
         self.assertTrue('build' in iter(c))
 
+    def test_paths(self):
+        paths = Config.paths('ok')
+        self.assertEqual(len(paths), 3)
+        self.assertTrue(paths[0].endswith('/.rock/ok'))
+        self.assertTrue(paths[1].endswith('/test/etc/rock/ok'))
+        self.assertTrue(paths[2].endswith('/data/test/ok'))
+
     def test_parent(self):
         c = self.setup_test('parent')
         self.assertEqual(c['test_parent1'], '1')
