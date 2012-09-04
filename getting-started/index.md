@@ -9,7 +9,9 @@ The Rock Platform is a collection of language runtimes and a command line tool
 that allows developers to use modern technologies and encourages
 "best practises".
 
-# Install
+## Setting Up Rock
+
+Install options include a prebuilt Vagrant box and an Enterprise Linux YUM repository.
 
  * [Vagrant](/install/vagrant/)
  * [Enterprise Linux](/install/el/) - Red Hat Enterprise Linux (RHEL), CentOS,
