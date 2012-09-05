@@ -1,0 +1,29 @@
+cat << EOF > .rock.yml
+runtime: ${ROCK_RUNTIME-php54}
+
+run: php -c "\$PHP_INI" -S 127.0.0.1:8000 -t public
+EOF
+
+cat << EOF > php.ini
+date.timezone = UTC
+EOF
+
+extdir="$( rock run php-config --extension-dir )"
+
+for path in $( find "$extdir" -name '*.so' ); do
+  name="$( basename $path )"
+
+  if ! echo "$name" | grep -P '^(curl|dom|json|phar).so' &>/dev/null; then
+    echo -n ';' >> php.ini
+  fi
+
+  echo "extension=$name" >> php.ini
+done
+
+rock run composer.phar create-project slim/slim-skeleton tmp
+
+shopt -s dotglob
+
+mv tmp/* .
+
+rmdir tmp
