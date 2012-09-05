@@ -1,4 +1,4 @@
-if [[ -z $ROCK_NAME ]]; then
+if [[ -z $ROCK_NAME || $ROCK_NAME == 1 ]]; then
   die 'name required (ex: --name=Sample::App)'
 fi
 
@@ -15,11 +15,13 @@ EOF
 
 rock build
 
-rock run dancer -a "$ROCK_NAME"
+name="$( echo $ROCK_NAME | sed 's|::|-|g' )"
+
+rock run dancer -x -a "$ROCK_NAME" | \
+  sed "s|${name}/||g" | \
+  grep -v "+ ${name}"
 
 shopt -s dotglob
-
-name="$( echo $ROCK_NAME | sed 's|::|-|g' )"
 
 mv ${name}/* .
 
