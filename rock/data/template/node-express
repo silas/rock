@@ -1,5 +1,5 @@
 cat << EOF > .rock.yml
-runtime: node08
+runtime: ${ROCK_RUNTIME-node08}
 
 run: node app
 EOF
