@@ -1,0 +1,26 @@
+if [[ -z $ROCK_NAME ]]; then
+  die 'name required (ex: --name=Sample::App)'
+fi
+
+cat << EOF > .rock.yml
+runtime: ${ROCK_RUNTIME-perl516}
+
+run: app.pl
+EOF
+
+cat << EOF > cpanfile
+requires 'Dancer';
+requires 'YAML';
+EOF
+
+rock build
+
+rock run dancer -a "$ROCK_NAME"
+
+shopt -s dotglob
+
+name="$( echo $ROCK_NAME | sed 's|::|-|g' )"
+
+mv ${name}/* .
+
+rmdir $name
