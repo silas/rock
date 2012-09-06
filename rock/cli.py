@@ -5,6 +5,8 @@ from rock.exceptions import Error
 from rock.project import Project
 from rock.runtime import list as runtime_list
 
+stdout = sys.stdout
+
 
 def project(args):
     config = {'path': args.path}
@@ -29,17 +31,17 @@ def clean(args, extra):
 def create(args, extra):
     names = project(args).create(args.name, *extra)
     if names:
-        print '\n'.join(names)
+        stdout.write('%s\n' % '\n'.join(names))
 
 
 def env(args, extra):
     for name, value in project(args).config['env'].items():
-        print 'export %s="%s"' % (name, value)
+        stdout.write('export %s="%s"\n' % (name, value))
 
 
 def runtime(args, extra):
     for r in runtime_list():
-        print r.name
+        stdout.write('%s\n' % r.name)
 
 
 def run(args, extra):
@@ -50,7 +52,7 @@ def test(args, extra):
     project(args).test(*extra)
 
 
-def main():
+def main(args=[]):
     description = """
     rock helps you build, test and run your app in the Rock Platform.
     """
@@ -104,7 +106,7 @@ def main():
     parser_test.set_defaults(func=test)
 
     try:
-        args, extra = parser.parse_known_args()
+        args, extra = parser.parse_known_args(args)
         args.func(args, extra)
     except Error, error:
         message = '%s' % error
