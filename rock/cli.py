@@ -52,7 +52,7 @@ def test(args, extra):
     project(args).test(*extra)
 
 
-def main(args=[]):
+def main(args=None):
     description = """
     rock helps you build, test and run your app in the Rock Platform.
     """
