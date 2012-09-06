@@ -9,7 +9,6 @@ from rock.exceptions import ConfigError
 from rock.process import ProcessManager
 from rock.utils import Shell
 
-
 NAME_RE = re.compile('^[a-zA-Z_]+$')
 
 
