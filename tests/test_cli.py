@@ -1,6 +1,7 @@
 import helper
 import os
-import ops
+import subprocess
+import tempfile
 from StringIO import StringIO
 from rock import cli, utils
 from rock.exceptions import ConfigError
@@ -40,9 +41,10 @@ class CliTestCase(helper.unittest.TestCase):
     def test_create(self):
         args = Args()
         args.name = 'test-something'
-        with ops.workspace() as w:
-            args.path = os.path.join(w.path, 'one')
+        path = tempfile.mkdtemp('rock.tests')
+        try:
             # ok
+            args.path = os.path.join(path, 'one')
             cli.create(args, ['--one', 'one', '--two=two', 'arg'])
             self.assertTrue('/test-something' in self.args[4])
             # bad args
@@ -52,10 +54,12 @@ class CliTestCase(helper.unittest.TestCase):
                 f.write('test')
             self.assertRaises(ConfigError, cli.create, args, [])
             # path not dir
-            args.path = os.path.join(w.path, 'two')
+            args.path = os.path.join(path, 'two')
             with open(args.path, 'w+') as f:
                 f.write('test')
             self.assertRaises(ConfigError, cli.create, args, [])
+        finally:
+            subprocess.check_call(['rm', '-fr', path])
 
     def test_create_list(self):
         cli.create(Args(), [])
