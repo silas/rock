@@ -36,7 +36,7 @@ class ConfigTestCase(helper.unittest.TestCase):
         self.assertEqual(c['clean'].strip(), 'clean')
         self.assertEqual(c['test'].strip(), 'test')
         # misc
-        self.assertEqual(len(c), 8)
+        self.assertEqual(len(c), 10)
         self.assertTrue('build' in c)
         self.assertTrue('build' in iter(c))
 

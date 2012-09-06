@@ -1,13 +1,16 @@
 import helper
+import os
+import ops
 from StringIO import StringIO
 from rock import cli, utils
+from rock.exceptions import ConfigError
 from rock.project import Project
 
 
 class Args(object):
 
     def __init__(self):
-        self.path = '/tmp/rock123'
+        self.path = os.path.join(helper.TESTS_PATH, 'assets', 'project', 'simple')
         self.verbose = True
         self.dry_run = True
         self.runtime = 'test123'
@@ -27,8 +30,8 @@ class CliTestCase(helper.unittest.TestCase):
         self.assertTrue(isinstance(cli.project(Args()), Project))
 
     def test_build(self):
-        cli.build(Args(), [])
-        self.assertTrue('\n\nbuild\n\n' in self.args[4])
+        cli.build(Args(), ['deployment'])
+        self.assertTrue('\n\nbuild deployment\n\n' in self.args[4])
 
     def test_clean(self):
         cli.clean(Args(), [])
@@ -37,8 +40,22 @@ class CliTestCase(helper.unittest.TestCase):
     def test_create(self):
         args = Args()
         args.name = 'test-something'
-        cli.create(args, [])
-        self.assertTrue('/test-something' in self.args[4])
+        with ops.workspace() as w:
+            args.path = os.path.join(w.path, 'one')
+            # ok
+            cli.create(args, ['--one', 'one', '--two=two', 'arg'])
+            self.assertTrue('/test-something' in self.args[4])
+            # bad args
+            self.assertRaises(ConfigError, cli.create, args, ['--f:ail=true'])
+            # path not empty
+            with open(os.path.join(args.path, 'test'), 'w+') as f:
+                f.write('test')
+            self.assertRaises(ConfigError, cli.create, args, [])
+            # path not dir
+            args.path = os.path.join(w.path, 'two')
+            with open(args.path, 'w+') as f:
+                f.write('test')
+            self.assertRaises(ConfigError, cli.create, args, [])
 
     def test_create_list(self):
         cli.create(Args(), [])
@@ -55,10 +72,17 @@ class CliTestCase(helper.unittest.TestCase):
     def test_run(self):
         cli.run(Args(), ['one', 'two', 'three'])
         self.assertTrue('\none two three\n' in self.args[4])
+        # str section
+        cli.run(Args(), [])
+        self.assertTrue('\necho zero\n' in self.args[4])
+        # dict section
+        cli.run(Args(), ['full'])
 
     def test_test(self):
         cli.test(Args(), [])
         self.assertTrue('\n\ntest\n\n' in self.args[4])
+        # not found
+        self.assertRaises(ConfigError, cli.test, Args(), ['not_found'])
 
     def test_main(self):
         cli.main(args=['runtime'])
