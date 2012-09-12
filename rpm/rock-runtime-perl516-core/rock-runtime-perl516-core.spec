@@ -6,7 +6,7 @@
 %global perl516_rootdir /opt/rock/runtime/%{runtime}
 
 Name:           rock-runtime-perl516-core
-Version:        5.16.0
+Version:        5.16.1
 Release:        1%{?dist}
 Summary:        A Perl 5.16.x runtime
 
@@ -42,7 +42,11 @@ This packages contains resources for building %{name} RPMs.
 ./Configure -des \
   -Doptimize="$RPM_OPT_FLAGS" \
   -Dprefix=%{perl516_rootdir}%{_prefix} \
-  -Dman3ext=3pm
+  -Dman3ext=3pm \
+  -Dusethreads \
+  -Duseithreads \
+  -Duselargefiles \
+  -Duseperlio
 
 %{__make}
 
@@ -76,5 +80,9 @@ rm -rf %{buildroot}
 %{_sysconfdir}/rpm/macros.rock-perl516
 
 %changelog
+* Tue Sep 11 2012 Silas Sewell <silas@sewell.org> - 5.16.1-1
+- Update to 5.16.1
+- Add threads, largefiles and perlio flags
+
 * Mon May 14 2012 Silas Sewell <silas@sewell.org> - 5.16.0-1
 - Initial build

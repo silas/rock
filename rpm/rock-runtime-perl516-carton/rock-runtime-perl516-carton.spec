@@ -4,21 +4,21 @@
 
 Name:           rock-runtime-perl516-carton
 Version:        1.5014
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A tool to manage Perl 5.16.x dependencies
 
 Group:          Development/Languages
 License:        (GPL+ or Artistic) and (GPLv2+ or Artistic) and Copyright Only and MIT and Public Domain and UCD
 URL:            http://search.cpan.org/dist/carton/
 Source0:        http://www.cpan.org/authors/id/T/TO/TOKUHIROM/Test-Requires-0.06.tar.gz
-Source1:        http://www.cpan.org/authors/id/D/DA/DAGOLDEN/Capture-Tiny-0.18.tar.gz
+Source1:        http://www.cpan.org/authors/id/D/DA/DAGOLDEN/Capture-Tiny-0.19.tar.gz
 Source2:        http://www.cpan.org/authors/id/D/DA/DAGOLDEN/CPAN-Meta-YAML-0.008.tar.gz
 Source3:        http://www.cpan.org/authors/id/D/DA/DAGOLDEN/Parse-CPAN-Meta-1.4404.tar.gz
 Source4:        http://www.cpan.org/authors/id/D/DA/DAGOLDEN/CPAN-Meta-Requirements-2.122.tar.gz
 Source5:        http://www.cpan.org/authors/id/D/DA/DAGOLDEN/CPAN-Meta-2.120921.tar.gz
 Source6:        http://www.cpan.org/authors/id/A/AP/APEIRON/local-lib-1.008004.tar.gz
 Source7:        http://www.cpan.org/authors/id/D/DO/DOY/Try-Tiny-0.11.tar.gz
-Source8:        http://www.cpan.org/authors/id/M/MI/MIYAGAWA/App-cpanminus-1.5014.tar.gz
+Source8:        http://www.cpan.org/authors/id/M/MI/MIYAGAWA/App-cpanminus-1.5017.tar.gz
 Source9:        http://www.cpan.org/authors/id/D/DR/DROLSKY/Devel-StackTrace-1.27.tar.gz
 Source10:       http://www.cpan.org/authors/id/T/TM/TMTM/Class-Data-Inheritable-0.08.tar.gz
 Source11:       http://www.cpan.org/authors/id/D/DR/DROLSKY/Exception-Class-1.32.tar.gz
@@ -87,5 +87,9 @@ rm -rf %{buildroot}
 %{perl516_rootdir}%{_prefix}/lib/carton
 
 %changelog
+* Tue Sep 11 2012 Silas Sewell <silas@sewell.org> - 1.5014-2
+- Rebuild for Perl 5.16.1
+- Update dependencies
+
 * Mon May 14 2012 Silas Sewell <silas@sewell.org> - 1.5014-1
 - Initial build

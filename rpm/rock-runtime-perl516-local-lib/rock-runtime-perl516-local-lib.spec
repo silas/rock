@@ -4,8 +4,8 @@
 
 Name:           rock-runtime-perl516-local-lib
 Version:        1.008004
-Release:        1%{?dist}
-Summary:        A tool to manage Perl 5.14 dependencies
+Release:        2%{?dist}
+Summary:        A tool to manage Perl 5.16.x dependencies
 
 Group:          Development/Languages
 License:        GPL+ or Artistic
@@ -43,8 +43,11 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root,-)
 %doc Changes
-%{perl516_rootdir}%{_prefix}/lib/site_perl/5.16.0
+%{perl516_rootdir}%{_prefix}/lib/site_perl/5.16.1
 
 %changelog
+* Tue Sep 11 2012 Silas Sewell <silas@sewell.org> - 1.008004-2
+- Rebuild for Perl 5.16.1
+
 * Mon May 14 2012 Silas Sewell <silas@sewell.org> - 1.008004-1
 - Initial build

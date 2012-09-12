@@ -1,5 +1,5 @@
 Name:           rock
-Version:        0.5.0
+Version:        0.6.0
 Release:        1%{?dist}
 Summary:        Build, test and run tool
 
@@ -40,6 +40,9 @@ nosetests
 %{python_sitelib}/%{name}-%{version}-py*.egg-info
 
 %changelog
+* Wed Sep 12 2012 Silas Sewell <silas@sewell.org> - 0.6.0-1
+- Update to 0.6.0
+
 * Sat Aug 19 2012 Silas Sewell <silas@sewell.org> - 0.5.0-1
 - Update to 0.5.0
 
