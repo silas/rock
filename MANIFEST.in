@@ -1,5 +1,5 @@
+graft rock/data
 include LICENSE
 include README.md
-recursive-include rock *.py
-recursive-include rock *.yml
 recursive-exclude tests *.py
+recursive-include rock *.py

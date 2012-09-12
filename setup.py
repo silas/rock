@@ -19,7 +19,7 @@ setup(
     url='https://github.com/rockplatform/rock',
     packages=['rock'],
     package_data={'rock': [
-        'data/*/*.yml',
+        'data/*/*',
     ]},
     scripts=['scripts/rock'],
     install_requires=[
