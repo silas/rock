@@ -2,8 +2,8 @@
 
 Rock Platform tool.
 
-This is a command line tool that simplifies building, testing, and running
-applications on the Rock Platform.
+This is a command line tool that simplifies creating, building, testing, and
+running applications on the Rock Platform.
 
 ## License
 
