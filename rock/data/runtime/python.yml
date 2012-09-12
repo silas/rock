@@ -32,6 +32,8 @@ build_deployment: |
 
   pip ${ROCK_PIP_INSTALL_DEPLOYMENT}
 
+  virtualenv --relocatable "${BUILD_PATH}"
+
 test: |
 
   python -m unittest discover "${TEST_PATH}"
