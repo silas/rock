@@ -4,4 +4,4 @@
 # This file is subject to the MIT License (see the LICENSE file).
 
 __copyright__ = '2012, Silas Sewell'
-__version__ = '0.6.1'
+__version__ = '0.7.0'
