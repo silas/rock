@@ -1,7 +1,8 @@
 env:
   HELLO: world
-  prod:
-    HELLO: "better ${HELLO}"
+
+env_prod:
+  HELLO: "better ${HELLO}"
 
 runtime: test123
 

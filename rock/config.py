@@ -13,8 +13,9 @@ TEMPLATE_RE = re.compile(r'^(?:build|clean|run|test)(?:_.+)?$')
 
 class Config(collections.Mapping):
 
-    def __init__(self, data):
+    def __init__(self, data, env=None):
         self.data = data
+        self.env = env
         self._setup = False
 
     @staticmethod
@@ -60,32 +61,29 @@ class Config(collections.Mapping):
             if require_parses:
                 raise ConfigError('parse error: ' + path)
 
-    @staticmethod
-    def merge(src, dst, env_name):
+    def merge_env(self, src, dst, env=None):
+        env = 'env_%s' % env if env else 'env'
+        if env in src:
+            if not isinstance(src[env], dict):
+                raise ConfigError('%s must be an associative array' % env)
+            # evaluate env variables
+            for name, value in src[env].items():
+                if not isinstance(value, basestring):
+                    if isinstance(value, (int, float)):
+                        value = str(value)
+                    else:
+                        raise ConfigError('%s.%s must be a string' %
+                                          (env, name))
+                dst['env'][name] = string.Template(
+                    src[env][name]).safe_substitute(**dst['env'])
+            del src[env]
+
+    def merge(self, src, dst):
         if src is None:
             return dst
-        if 'env' in src:
-            if not isinstance(src['env'], dict):
-                raise ConfigError('env must be a hash')
-            # remove env specific variables
-            env_list = {}
-            for name, value in src['env'].items():
-                if isinstance(value, dict):
-                    env_list[name] = value
-                    del src['env'][name]
-            # evaluate env variables
-            for env in (src['env'], env_list.get(env_name, {})):
-                for name, value in env.items():
-                    if not isinstance(value, basestring):
-                        if isinstance(value, (int, float)):
-                            value = str(value)
-                        else:
-                            raise ConfigError('env must be a string: %s=<%s>' %
-                                              (name, type(value).__name__))
-                    dst['env'][name] = string.Template(value).safe_substitute(
-                        **dst['env'])
-            del src['env']
-        # parent tag to build, clean, run and test
+        self.merge_env(src, dst)
+        self.merge_env(src, dst, self.env)
+        # parent section to build, clean, run and test
         for name in src.keys():
             if not TEMPLATE_RE.match(name):
                 continue
@@ -146,7 +144,7 @@ class Config(collections.Mapping):
         if 'runtime' in data and 'runtime_type' not in data:
             data['runtime_type'] = data['runtime'].rstrip('0123456789')
         # project
-        for name in ('path', 'env_name', 'runtime', 'runtime_type'):
+        for name in ('path', 'runtime', 'runtime_type'):
             if name not in data:
                 raise ConfigError('%s is required' % name)
         # runtime
@@ -172,20 +170,20 @@ class Config(collections.Mapping):
         self.data = {
             'env': {
                 'PROJECT_PATH': data['path'],
-                'ROCK_ENV': data['env_name'],
+                'ROCK_ENV': self.env,
             },
         }
         # merge runtime
-        self.merge(runtime_config, self.data, data['env_name'])
+        self.merge(runtime_config, self.data)
         # merge runtime config
         if rock_config or etc_config:
-            self.merge(rock_config, self.data, data['env_name'])
-            self.merge(etc_config, self.data, data['env_name'])
+            self.merge(rock_config, self.data)
+            self.merge(etc_config, self.data)
         else:
-            self.merge(rock_type_config, self.data, data['env_name'])
-            self.merge(etc_type_config, self.data, data['env_name'])
+            self.merge(rock_type_config, self.data)
+            self.merge(etc_type_config, self.data)
         # merge project
-        self.merge(data, self.data, data['env_name'])
+        self.merge(data, self.data)
 
     def __contains__(self, *args, **kwargs):
         self.setup()

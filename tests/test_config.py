@@ -11,8 +11,8 @@ class ConfigTestCase(helper.unittest.TestCase):
         self.path = os.path.join(helper.TESTS_PATH, 'assets', 'project', name)
         self.env = env
         if config is None:
-            config = {'env_name': self.env, 'path': self.path}
-        return Config(config)
+            config = {'path': self.path}
+        return Config(config, env=env)
 
     def full(self, c):
         self.assertEqual(c['path'], self.path)
@@ -37,7 +37,6 @@ class ConfigTestCase(helper.unittest.TestCase):
         self.assertEqual(c['clean'].strip(), 'clean')
         self.assertEqual(c['test'].strip(), 'test')
         # misc
-        self.assertEqual(len(c), 11)
         self.assertTrue('build' in c)
         self.assertTrue('build' in iter(c))
 
@@ -99,12 +98,12 @@ class ConfigTestCase(helper.unittest.TestCase):
 
     def test_badenv1(self):
         c = self.setup_test('badenv1')
-        with self.assertRaisesRegexp(ConfigError, r'env must be a hash') as a:
+        with self.assertRaisesRegexp(ConfigError, r'env must be an associative array') as a:
             c['path']
 
     def test_badenv2(self):
         c = self.setup_test('badenv2')
-        with self.assertRaisesRegexp(ConfigError, r'env must be a string: one=<list>') as a:
+        with self.assertRaisesRegexp(ConfigError, r'env.one must be a string') as a:
             c['path']
 
     def test_nopath(self):

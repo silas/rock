@@ -9,7 +9,7 @@ stdout = sys.stdout
 
 
 def project(args):
-    config = {'env_name': args.env, 'path': args.path}
+    config = {'path': args.path}
     if args.verbose:
         config['verbose'] = True
     if args.dry_run:
@@ -17,7 +17,7 @@ def project(args):
         config['verbose'] = True
     if args.runtime:
         config['runtime'] = args.runtime
-    return Project(config)
+    return Project(config, env=args.env)
 
 
 def build(args, extra):
