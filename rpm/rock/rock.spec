@@ -1,5 +1,5 @@
 Name:           rock
-Version:        0.6.1
+Version:        0.7.0
 Release:        1%{?dist}
 Summary:        Build, test and run tool
 
@@ -40,6 +40,10 @@ nosetests
 %{python_sitelib}/%{name}-%{version}-py*.egg-info
 
 %changelog
+* Sun Sep 23 2012 Silas Sewell <silas@sewell.org> - 0.7.0-1
+- Add env support
+- Fix non-string type coercion in env
+
 * Wed Sep 12 2012 Silas Sewell <silas@sewell.org> - 0.6.1-1
 - Update to 0.6.1
 - Fix missing template directory
