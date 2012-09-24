@@ -81,7 +81,7 @@ class Config(collections.Mapping):
                             value = str(value)
                         else:
                             raise ConfigError('env must be a string: %s=<%s>' %
-                                (name, type(value).__name__))
+                                              (name, type(value).__name__))
                     dst['env'][name] = string.Template(value).safe_substitute(
                         **dst['env'])
             del src['env']
