@@ -9,7 +9,7 @@ stdout = sys.stdout
 
 
 def project(args):
-    config = {'path': args.path}
+    config = {'env_name': args.env, 'path': args.path}
     if args.verbose:
         config['verbose'] = True
     if args.dry_run:
@@ -69,6 +69,8 @@ def main(args=None):
     project_options = parser.add_argument_group('project options')
     project_options.add_argument('--path', help='set path',
                                  default=os.getcwd())
+    project_options.add_argument('--env', help='set env',
+                                 default=os.environ.get('ROCK_ENV', 'local'))
     project_options.add_argument('--runtime', help='set runtime')
 
     # project commands

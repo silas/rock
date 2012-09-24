@@ -16,6 +16,7 @@ class Args(object):
         self.dry_run = True
         self.runtime = 'test123'
         self.name = ''
+        self.env = 'local'
 
 
 class CliTestCase(helper.unittest.TestCase):

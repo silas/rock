@@ -1,3 +1,8 @@
+env:
+  HELLO: world
+  prod:
+    HELLO: "better ${HELLO}"
+
 runtime: test123
 
 build: |

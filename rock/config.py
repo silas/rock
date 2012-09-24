@@ -61,20 +61,29 @@ class Config(collections.Mapping):
                 raise ConfigError('parse error: ' + path)
 
     @staticmethod
-    def merge(src, dst):
+    def merge(src, dst, env_name):
         if src is None:
             return dst
         if 'env' in src:
-            # ensure env is a dict of strings
-            if (not isinstance(src['env'], dict) or
-                not all(map(lambda v: isinstance(v, basestring),
-                        src['env'].values()))):
-                raise ConfigError('env must be an associative array of ' +
-                                  'strings')
-            # evaluate env variables
+            if not isinstance(src['env'], dict):
+                raise ConfigError('env must be a hash')
+            # remove env specific variables
+            env_list = {}
             for name, value in src['env'].items():
-                dst['env'][name] = string.Template(
-                    src['env'][name]).safe_substitute(**dst['env'])
+                if isinstance(value, dict):
+                    env_list[name] = value
+                    del src['env'][name]
+            # evaluate env variables
+            for env in (src['env'], env_list.get(env_name, {})):
+                for name, value in env.items():
+                    if not isinstance(value, basestring):
+                        if isinstance(value, (int, float)):
+                            value = str(value)
+                        else:
+                            raise ConfigError('env must be a string: %s=<%s>' %
+                                (name, type(value).__name__))
+                    dst['env'][name] = string.Template(value).safe_substitute(
+                        **dst['env'])
             del src['env']
         # parent tag to build, clean, run and test
         for name in src.keys():
@@ -137,7 +146,7 @@ class Config(collections.Mapping):
         if 'runtime' in data and 'runtime_type' not in data:
             data['runtime_type'] = data['runtime'].rstrip('0123456789')
         # project
-        for name in ('path', 'runtime', 'runtime_type'):
+        for name in ('path', 'env_name', 'runtime', 'runtime_type'):
             if name not in data:
                 raise ConfigError('%s is required' % name)
         # runtime
@@ -163,19 +172,20 @@ class Config(collections.Mapping):
         self.data = {
             'env': {
                 'PROJECT_PATH': data['path'],
+                'ROCK_ENV': data['env_name'],
             },
         }
         # merge runtime
-        self.merge(runtime_config, self.data)
+        self.merge(runtime_config, self.data, data['env_name'])
         # merge runtime config
         if rock_config or etc_config:
-            self.merge(rock_config, self.data)
-            self.merge(etc_config, self.data)
+            self.merge(rock_config, self.data, data['env_name'])
+            self.merge(etc_config, self.data, data['env_name'])
         else:
-            self.merge(rock_type_config, self.data)
-            self.merge(etc_type_config, self.data)
+            self.merge(rock_type_config, self.data, data['env_name'])
+            self.merge(etc_type_config, self.data, data['env_name'])
         # merge project
-        self.merge(data, self.data)
+        self.merge(data, self.data, data['env_name'])
 
     def __contains__(self, *args, **kwargs):
         self.setup()
