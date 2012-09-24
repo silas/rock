@@ -1,5 +1,7 @@
 env:
   HELLO: world
+  FLOAT: 1.13
+  INTEGER: 1
 
 env_prod:
   HELLO: "better ${HELLO}"

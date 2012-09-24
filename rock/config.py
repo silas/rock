@@ -70,7 +70,7 @@ class Config(collections.Mapping):
             for name, value in src[env].items():
                 if not isinstance(value, basestring):
                     if isinstance(value, (int, float)):
-                        value = str(value)
+                        src[env][name] = str(value)
                     else:
                         raise ConfigError('%s.%s must be a string' %
                                           (env, name))
