@@ -13,8 +13,9 @@ TEMPLATE_RE = re.compile(r'^(?:build|clean|run|test)(?:_.+)?$')
 
 class Config(collections.Mapping):
 
-    def __init__(self, data):
+    def __init__(self, data, env=None):
         self.data = data
+        self.env = env
         self._setup = False
 
     @staticmethod
@@ -60,23 +61,29 @@ class Config(collections.Mapping):
             if require_parses:
                 raise ConfigError('parse error: ' + path)
 
-    @staticmethod
-    def merge(src, dst):
+    def merge_env(self, src, dst, env=None):
+        env = 'env_%s' % env if env else 'env'
+        if env in src:
+            if not isinstance(src[env], dict):
+                raise ConfigError('%s must be an associative array' % env)
+            # evaluate env variables
+            for name, value in src[env].items():
+                if not isinstance(value, basestring):
+                    if isinstance(value, (int, float)):
+                        src[env][name] = str(value)
+                    else:
+                        raise ConfigError('%s.%s must be a string' %
+                                          (env, name))
+                dst['env'][name] = string.Template(
+                    src[env][name]).safe_substitute(**dst['env'])
+            del src[env]
+
+    def merge(self, src, dst):
         if src is None:
             return dst
-        if 'env' in src:
-            # ensure env is a dict of strings
-            if (not isinstance(src['env'], dict) or
-                not all(map(lambda v: isinstance(v, basestring),
-                        src['env'].values()))):
-                raise ConfigError('env must be an associative array of ' +
-                                  'strings')
-            # evaluate env variables
-            for name, value in src['env'].items():
-                dst['env'][name] = string.Template(
-                    src['env'][name]).safe_substitute(**dst['env'])
-            del src['env']
-        # parent tag to build, clean, run and test
+        self.merge_env(src, dst)
+        self.merge_env(src, dst, self.env)
+        # parent section to build, clean, run and test
         for name in src.keys():
             if not TEMPLATE_RE.match(name):
                 continue
@@ -163,6 +170,7 @@ class Config(collections.Mapping):
         self.data = {
             'env': {
                 'PROJECT_PATH': data['path'],
+                'ROCK_ENV': self.env,
             },
         }
         # merge runtime

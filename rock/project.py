@@ -14,8 +14,8 @@ NAME_RE = re.compile('^[a-zA-Z_]+$')
 
 class Project(object):
 
-    def __init__(self, config):
-        self.config = Config(config)
+    def __init__(self, *args, **kwargs):
+        self.config = Config(*args, **kwargs)
 
     def _setup(self, shell):
         # declare builtin functions

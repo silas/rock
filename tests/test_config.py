@@ -6,12 +6,13 @@ from rock.exceptions import ConfigError
 
 class ConfigTestCase(helper.unittest.TestCase):
 
-    def setup_test(self, name='simple', data='test', config=None):
+    def setup_test(self, name='simple', data='test', config=None, env='local'):
         helper.setenv(data=data)
         self.path = os.path.join(helper.TESTS_PATH, 'assets', 'project', name)
+        self.env = env
         if config is None:
             config = {'path': self.path}
-        return Config(config)
+        return Config(config, env=env)
 
     def full(self, c):
         self.assertEqual(c['path'], self.path)
@@ -36,7 +37,6 @@ class ConfigTestCase(helper.unittest.TestCase):
         self.assertEqual(c['clean'].strip(), 'clean')
         self.assertEqual(c['test'].strip(), 'test')
         # misc
-        self.assertEqual(len(c), 10)
         self.assertTrue('build' in c)
         self.assertTrue('build' in iter(c))
 
@@ -67,10 +67,14 @@ class ConfigTestCase(helper.unittest.TestCase):
             c['test_dict_to_dict']
 
     def test_simple1(self):
-        self.full(self.setup_test())
+        c = self.setup_test()
+        self.full(c)
+        self.assertEqual(c['env']['HELLO'], 'world')
 
     def test_simple2(self):
-        self.full(self.setup_test(data='test123'))
+        c = self.setup_test(data='test123', env='prod')
+        self.full(c)
+        self.assertEqual(c['env']['HELLO'], 'better world')
 
     def test_runtime_notfound(self):
         c = self.setup_test('runtime_notfound')
@@ -94,12 +98,12 @@ class ConfigTestCase(helper.unittest.TestCase):
 
     def test_badenv1(self):
         c = self.setup_test('badenv1')
-        with self.assertRaisesRegexp(ConfigError, r'env must be an associative array of strings') as a:
+        with self.assertRaisesRegexp(ConfigError, r'env must be an associative array') as a:
             c['path']
 
     def test_badenv2(self):
         c = self.setup_test('badenv2')
-        with self.assertRaisesRegexp(ConfigError, r'env must be an associative array of strings') as a:
+        with self.assertRaisesRegexp(ConfigError, r'env.one must be a string') as a:
             c['path']
 
     def test_nopath(self):
