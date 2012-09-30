@@ -13,6 +13,7 @@ build: |
   if [[ ! -e "${BUILD_PATH}/bin/python" ]]; then
     pyvenv ${ROCK_VIRTUALENV}
     distribute-setup
+    rm -f distribute-*.gz
     easy_install pip
   fi
 
@@ -31,6 +32,7 @@ build_deployment: |
   if [[ ! -e "${BUILD_PATH}/bin/python" ]]; then
     pyvenv ${ROCK_VIRTUALENV_DEPLOYMENT}
     distribute-setup
+    rm -f distribute-*.gz
     easy_install pip
   fi
 
