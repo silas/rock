@@ -14,7 +14,7 @@ Runtimes
   * Node: 0.4, 0.6, 0.8
   * Perl: 5.16
   * PHP: 5.4
-  * Python: 2.7
+  * Python: 2.7, 3.3
   * Ruby: 1.8, 1.9
 
 ## Note
