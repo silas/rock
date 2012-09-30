@@ -1,0 +1,29 @@
+ROCK_NAME=${ROCK_NAME-app}
+
+cat << EOF > .rock.yml
+runtime: ${ROCK_RUNTIME-python33}
+
+run: python ${ROCK_NAME}.py
+EOF
+
+cat << EOF > requirements.txt
+bottle
+EOF
+
+rock build
+
+rock run pip freeze > requirements.txt
+
+cat << EOF > "${ROCK_NAME}.py"
+from bottle import route, run, template
+
+@route('/')
+@route('/:name')
+def index(name='World'):
+    return template('<b>Hello {{name}}</b>!', name=name)
+
+if __name__ == '__main__':
+    run(host='localhost', port=8000)
+EOF
+
+mkdir -p tests
