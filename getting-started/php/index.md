@@ -37,7 +37,11 @@ This guide walks you through setting up a basic PHP web application with tests.
 
         $ mkdir public
 
- 1. Create `public/web.php`
+ 1. Create `lib` directory
+
+        $ mkdir lib
+
+ 1. Create `lib/web.php`
 
         <?php
 
@@ -47,23 +51,19 @@ This guide walks you through setting up a basic PHP web application with tests.
             return 'Hello World';
         }
 
-        function app() {
-            $app = new Slim();
-
-            $app->get('/', function () {
-                echo greeting();
-            });
-
-            return $app;
-        }
-
  1. Create `public/index.php`
 
         <?php
 
-        require __DIR__ . '/web.php';
+        require __DIR__ . '/../lib/web.php';
 
-        app()->run();
+        $app = new \Slim\Slim();
+
+        $app->get('/', function () {
+            echo greeting();
+        });
+
+        $app->run();
 
  1. Create `bin` directory
 
@@ -121,7 +121,7 @@ This guide walks you through setting up a basic PHP web application with tests.
 
         <?php
 
-        require __DIR__ . '/../public/web.php';
+        require __DIR__ . '/../lib/web.php';
 
         class Test extends PHPUnit_Framework_TestCase {
             public function testGreeting() {
