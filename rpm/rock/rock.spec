@@ -1,7 +1,7 @@
 Name:           rock
-Version:        0.7.0
+Version:        0.8.0
 Release:        1%{?dist}
-Summary:        Build, test and run tool
+Summary:        Create, build, test and run applications
 
 Group:          Development/Languages
 License:        MIT
@@ -18,7 +18,8 @@ Requires:       PyYAML
 Requires:       python-argparse
 
 %description
-This is a build, test and run tool for the Rock Platform.
+This is a cli tool that allows you to easily create, build, test and run
+applications.
 
 %prep
 %setup -q
@@ -40,6 +41,10 @@ nosetests
 %{python_sitelib}/%{name}-%{version}-py*.egg-info
 
 %changelog
+* Sat Sep 29 2012 Silas Sewell <silas@sewell.org> - 0.8.0-1
+- Add python33 support
+- Add --version flag
+
 * Sun Sep 23 2012 Silas Sewell <silas@sewell.org> - 0.7.0-1
 - Add env support
 - Fix non-string type coercion in env
