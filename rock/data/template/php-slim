@@ -20,9 +20,11 @@ for path in $( find "$extdir" -name '*.so' ); do
   echo "extension=$name" >> php.ini
 done
 
-rock run composer.phar create-project slim/slim-skeleton tmp
+rock run composer.phar create-project silas/slim-skeleton tmp
 
 shopt -s dotglob
+
+rm -fr tmp/.git*
 
 mv tmp/* .
 
