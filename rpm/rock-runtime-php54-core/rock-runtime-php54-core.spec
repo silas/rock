@@ -13,7 +13,7 @@
 %global php54_libdir %{php54_rootdir}%{_prefix}/lib
 
 Name:           rock-runtime-php54-core
-Version:        5.4.6
+Version:        5.4.7
 Release:        1%{?dist}
 Summary:        A PHP 5.4.x runtime
 
@@ -188,8 +188,10 @@ rm -rf %{buildroot}
 
 find %{buildroot}%{php54_rootdir} -name '*.a' -delete
 
+echo "date.timezone = UTC" >> %{buildroot}%{php54_libdir}/php.ini
+
 for name in json phar; do
-  echo "extension=${name}.so" >> %{buildroot}%{php54_libdir}/php.ini
+  echo "extension = ${name}.so" >> %{buildroot}%{php54_libdir}/php.ini
 done
 
 rm -fr %{php54_rootdir}/%{junk} %{php54_libdir}/php/%{junk}
@@ -213,6 +215,9 @@ rm -rf %{buildroot}
 %{_sysconfdir}/rpm/macros.rock-php54
 
 %changelog
+* Sat Sep 29 2012 Silas Sewell <silas@sewell.org> - 5.4.7-1
+- Update to 5.4.7
+
 * Thu Aug 23 2012 Silas Sewell <silas@sewell.org> - 5.4.6-1
 - Update to 5.4.6
 
