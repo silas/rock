@@ -5,15 +5,13 @@ env:
   PYTHONPATH: "${PROJECT_PATH}:${PYTHONPATH}"
   ROCK_PIP_INSTALL: "install -r ./requirements.txt"
   ROCK_PIP_INSTALL_DEPLOYMENT: "install -r ./requirements.txt"
-  ROCK_VIRTUALENV: "\"${BUILD_PATH}\""
-  ROCK_VIRTUALENV_DEPLOYMENT: "\"${BUILD_PATH}\""
+  ROCK_VIRTUALENV: "--distribute \"${BUILD_PATH}\""
+  ROCK_VIRTUALENV_DEPLOYMENT: "--distribute \"${BUILD_PATH}\""
 
 build: |
 
-  if [[ ! -e "${BUILD_PATH}/bin/python" ]]; then
-    pyvenv ${ROCK_VIRTUALENV}
-    distribute-setup
-    easy_install pip
+  if [[ ! -f "${BUILD_PATH}/bin/activate" ]]; then
+    virtualenv ${ROCK_VIRTUALENV}
   fi
 
   if [[ -f ./requirements.txt ]]; then
@@ -28,13 +26,13 @@ build_deployment: |
     die 'no "requirements.txt" file found'
   fi
 
-  if [[ ! -e "${BUILD_PATH}/bin/python" ]]; then
-    pyvenv ${ROCK_VIRTUALENV_DEPLOYMENT}
-    distribute-setup
-    easy_install pip
+  if [[ ! -f "${BUILD_PATH}/bin/activate" ]]; then
+    virtualenv ${ROCK_VIRTUALENV_DEPLOYMENT}
   fi
 
   pip ${ROCK_PIP_INSTALL_DEPLOYMENT}
+
+  virtualenv --relocatable "${BUILD_PATH}"
 
 test: |
 
