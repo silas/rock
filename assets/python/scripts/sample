@@ -3,4 +3,4 @@
 import sys
 import sample
 
-print sample.convert(sys.argv[1])
+print(sample.convert(sys.argv[1]))

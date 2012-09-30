@@ -61,6 +61,9 @@ class RuntimeTestCase(unittest.TestCase):
     def test_python27(self):
         self.runtime('python27')
 
+    def test_python33(self):
+        self.runtime('python33')
+
     def test_ruby18(self):
         self.runtime('ruby18')
 
