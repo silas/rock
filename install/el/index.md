@@ -24,6 +24,7 @@ title: Install (Enterprise Linux)
             rock-runtime-perl516 \
             rock-runtime-php54 \
             rock-runtime-python27 \
+            rock-runtime-python33 \
             rock-runtime-ruby18 \
             rock-runtime-ruby19
 
