@@ -1,6 +1,7 @@
 import argparse
 import os
 import sys
+from rock import __version__
 from rock.exceptions import Error
 from rock.project import Project
 from rock.runtime import list as runtime_list
@@ -64,6 +65,7 @@ def main(args=None):
                         help="show commands, but don't run")
     parser.add_argument('-v', '--verbose', action='store_true',
                         help='show run commands')
+    parser.add_argument('--version', action='version', version=__version__)
 
     # project options
     project_options = parser.add_argument_group('project options')
