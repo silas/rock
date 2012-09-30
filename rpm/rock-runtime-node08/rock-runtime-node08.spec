@@ -3,7 +3,7 @@
 
 Name:           rock-runtime-node08
 Version:        1
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        node08 runtime for rock
 
 Group:          Development/Languages
@@ -12,7 +12,7 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 
 BuildRequires:  rock-runtime-node08-core-rpmbuild
-Requires:       rock-runtime-node08-core >= 0.8.9-1
+Requires:       rock-runtime-node08-core >= 0.8.11-1
 
 %description
 node08 runtime for rock.
@@ -39,6 +39,9 @@ rm -rf %{buildroot}
 %{node08_rootdir}/rock.yml
 
 %changelog
+* Sat Sep 29 2012 Silas Sewell <silas@sewell.org> - 1-5
+- Update to node 0.8.11
+
 * Wed Sep 12 2012 Silas Sewell <silas@sewell.org> - 1-4
 - Update to node 0.8.9
 
