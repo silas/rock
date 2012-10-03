@@ -61,14 +61,14 @@ def main(args=None):
     parser = argparse.ArgumentParser(prog='rock', description=description)
 
     # general options
-    parser.add_argument('--dry-run', action='store_true',
-                        help="show commands, but don't run")
     parser.add_argument('-v', '--verbose', action='store_true',
                         help='show run commands')
+    parser.add_argument('--dry-run', action='store_true',
+                        help="show commands, but don't run")
     parser.add_argument('--version', action='version', version=__version__)
 
-    # project options
-    project_options = parser.add_argument_group('project options')
+    # options
+    project_options = parser.add_argument_group('project')
     project_options.add_argument('--path', help='set path',
                                  default=os.getcwd())
     project_options.add_argument('--env', help='set env',
@@ -76,37 +76,37 @@ def main(args=None):
     project_options.add_argument('--runtime', help='set runtime')
 
     # project commands
-    project = parser.add_subparsers(title='project')
+    sub = parser.add_subparsers(title='commands')
 
-    # project: build
-    parser_build = project.add_parser('build', help='build project')
+    # build
+    parser_build = sub.add_parser('build', help='build project')
     parser_build.set_defaults(func=build)
 
-    # project: clean
-    parser_clean = project.add_parser('clean', help='clean project')
+    # clean
+    parser_clean = sub.add_parser('clean', help='clean project')
     parser_clean.set_defaults(func=clean)
 
-    # project: create
-    parser_create = project.add_parser('create', help='create project')
+    # create
+    parser_create = sub.add_parser('create', help='create new project')
     parser_create.set_defaults(func=create)
     parser_create.add_argument('name', nargs="?", help='template name')
 
-    # project: env
-    parser_env = project.add_parser('env', help='show environment variables')
+    # env
+    parser_env = sub.add_parser('env', help='show environment variables')
     parser_env.set_defaults(func=env)
 
     # runtime
-    parser_runtime = project.add_parser('runtime', help='list runtimes',
-                                        add_help=False)
+    parser_runtime = sub.add_parser('runtime', help='list runtimes',
+                                    add_help=False)
     parser_runtime.set_defaults(func=runtime)
 
-    # project: run
-    parser_run = project.add_parser('run', help='run project file',
-                                    add_help=False)
+    # run
+    parser_run = sub.add_parser('run', help='run section or command in ' +
+                                'project environment', add_help=False)
     parser_run.set_defaults(func=run)
 
-    # project: test
-    parser_test = project.add_parser('test', help='test project')
+    # test
+    parser_test = sub.add_parser('test', help='run test sections')
     parser_test.set_defaults(func=test)
 
     try:
