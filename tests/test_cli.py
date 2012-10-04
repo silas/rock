@@ -7,16 +7,20 @@ from rock import cli, utils
 from rock.exceptions import ConfigError
 from rock.project import Project
 
+PROJECT_PATH = os.path.join(helper.TESTS_PATH, 'assets', 'project')
 
 class Args(object):
 
-    def __init__(self):
-        self.path = os.path.join(helper.TESTS_PATH, 'assets', 'project', 'simple')
+    def __init__(self, **kwargs):
+        self.path = os.path.join(PROJECT_PATH, 'simple')
         self.verbose = True
         self.dry_run = True
         self.runtime = 'test123'
+        self.platform = ''
         self.name = ''
         self.env = 'local'
+        for name, value in kwargs.items():
+            setattr(self, name, value)
 
 
 class CliTestCase(helper.unittest.TestCase):
@@ -69,6 +73,21 @@ class CliTestCase(helper.unittest.TestCase):
     def test_env(self):
         cli.env(Args(), [])
         self.assertTrue('\nexport TEST_PATH="test_path"\n' in self.stdout.getvalue())
+
+    def test_platform(self):
+        self.assertEqual(cli.platform(Args(platform='helper'), []), 'ok')
+        # platform not installed
+        self.assertRaises(ConfigError, cli.platform, Args(platform='not-exist'), [])
+        # platform doesn't have main
+        self.assertRaises(ConfigError, cli.platform, Args(platform='empty'), [])
+        # no platform
+        self.assertRaises(ConfigError, cli.platform, Args(), [])
+        # no platform type
+        path = os.path.join(PROJECT_PATH, 'platform_type_notfound')
+        self.assertRaises(ConfigError, cli.platform, Args(path=path), [])
+        # platform from yaml
+        path = os.path.join(PROJECT_PATH, 'platform')
+        self.assertEqual(cli.platform(Args(path=path), ['1', '2']), '1,2')
 
     def test_runtime(self):
         cli.runtime(Args(), [])

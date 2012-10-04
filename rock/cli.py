@@ -1,8 +1,9 @@
 import argparse
+import importlib
 import os
 import sys
 from rock import __version__
-from rock.exceptions import Error
+from rock.exceptions import ConfigError, Error
 from rock.project import Project
 from rock.runtime import list as runtime_list
 
@@ -45,6 +46,27 @@ def runtime(args, extra):
         stdout.write('%s\n' % r.name)
 
 
+def platform(args, extra):
+    p = project(args)
+
+    if not args.platform:
+        if not isinstance(p.config.get('platform'), dict):
+            raise ConfigError('platform type required')
+        if 'type' not in p.config['platform']:
+            raise ConfigError('platform.type required')
+        args.platform = p.config['platform']['type']
+
+    try:
+        module = importlib.import_module(args.platform)
+    except ImportError:
+        raise ConfigError('platform not installed: %s' % args.platform)
+
+    if not hasattr(module, 'main'):
+        raise ConfigError("platform module doesn't have a main function")
+
+    return module.main(p, args=extra)
+
+
 def run(args, extra):
     project(args).run(extra)
 
@@ -73,6 +95,8 @@ def main(args=None):
                                  default=os.getcwd())
     project_options.add_argument('--env', help='set env',
                                  default=os.environ.get('ROCK_ENV', 'local'))
+    project_options.add_argument('--platform', help='set platform',
+                                 default=os.environ.get('ROCK_PLATFORM', ''))
     project_options.add_argument('--runtime', help='set runtime')
 
     # project commands
@@ -100,13 +124,18 @@ def main(args=None):
                                     add_help=False)
     parser_runtime.set_defaults(func=runtime)
 
+    # platform
+    parser_platform = sub.add_parser('platform', help='platform commands',
+                                     add_help=False)
+    parser_platform.set_defaults(func=platform)
+
     # run
     parser_run = sub.add_parser('run', help='run section or command in ' +
                                 'project environment', add_help=False)
     parser_run.set_defaults(func=run)
 
     # test
-    parser_test = sub.add_parser('test', help='run test sections')
+    parser_test = sub.add_parser('test', help='test project')
     parser_test.set_defaults(func=test)
 
     try:
