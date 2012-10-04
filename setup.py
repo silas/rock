@@ -10,10 +10,9 @@ applications on the Rock Platform.
 See http://www.rockplatform.org for more information.
 """
 
-
 install_requires = ['PyYAML']
 
-if sys.version_info.major <= 2 and sys.version_info.minor < 7:
+if sys.version_info < (2, 7):
     install_requires += ['argparse', 'importlib']
 
 setup(
