@@ -23,6 +23,6 @@ def setenv(mount='test', data='test'):
     Config.data_path = data_path
 
 
-def main(project, args=None, **kwargs):
+def hook(name, project, args=None, **kwargs):
     args = args or []
     return ','.join(args) if args else 'ok'

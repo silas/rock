@@ -61,10 +61,10 @@ def platform(args, extra):
     except ImportError:
         raise ConfigError('platform not installed: %s' % args.platform)
 
-    if not hasattr(module, 'main'):
-        raise ConfigError("platform module doesn't have a main function")
+    if not hasattr(module, 'hook'):
+        raise ConfigError("platform module doesn't have a hook function")
 
-    return module.main(p, args=extra)
+    return module.hook('cli', project=project, args=extra)
 
 
 def run(args, extra):
