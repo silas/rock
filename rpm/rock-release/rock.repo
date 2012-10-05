@@ -1,0 +1,4 @@
+[rock]
+name=EL $releasever - $basearch - Rock
+baseurl=http://dl.rockplatform.org/rp0/rpm/el/$releasever/$basearch
+gpgcheck=0
