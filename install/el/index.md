@@ -7,12 +7,7 @@ title: Install (Enterprise Linux)
 
  1. Add YUM repo
 
-        $ sudo cat << EOF > /etc/yum.repos.d/rock.repo
-        [rock]
-        name=EL \$releasever - \$basearch - Rock
-        baseurl=http://dl.rockplatform.org/rp0/rpm/el/\$releasever/\$basearch
-        gpgcheck=0
-        EOF
+        $ sudo rpm -i http://dl.rockplatform.org/rp0/rpm/el/rock-release.rpm
 
  1. Install `rock` and runtimes (also see [Puppet module](https://github.com/rockplatform/puppet-rock))
 
