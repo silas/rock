@@ -38,11 +38,11 @@ class CliTestCase(helper.unittest.TestCase):
 
     def test_build(self):
         cli.build(Args(), ['deployment'])
-        self.assertTrue('\n\nbuild deployment\n\n' in self.args[4])
+        self.assertTrue('\n\nbuild deployment\n\n' in self.args[3])
 
     def test_clean(self):
         cli.clean(Args(), [])
-        self.assertTrue('\n\nclean\n\n' in self.args[4])
+        self.assertTrue('\n\nclean\n\n' in self.args[3])
 
     def test_create(self):
         args = Args()
@@ -52,7 +52,7 @@ class CliTestCase(helper.unittest.TestCase):
             # ok
             args.path = os.path.join(path, 'one')
             cli.create(args, ['--one', 'one', '--two=two', 'arg'])
-            self.assertTrue('/test-something' in self.args[4])
+            self.assertTrue('/test-something' in self.args[3])
             # bad args
             self.assertRaises(ConfigError, cli.create, args, ['--f:ail=true'])
             # path not empty
@@ -96,17 +96,17 @@ class CliTestCase(helper.unittest.TestCase):
 
     def test_run(self):
         cli.run(Args(), ['one', 'two', 'three'])
-        self.assertTrue('\none two three\n' in self.args[4])
+        self.assertTrue('\none two three\n' in self.args[3])
         # str section
         cli.run(Args(), [])
-        self.assertTrue('\necho zero\n' in self.args[4])
+        self.assertTrue('\necho zero\n' in self.args[3])
         # run section
         cli.run(Args(), ['two'])
-        self.assertTrue('\necho two\n' in self.args[4])
+        self.assertTrue('\necho two\n' in self.args[3])
 
     def test_test(self):
         cli.test(Args(), [])
-        self.assertTrue('\n\ntest\n\n' in self.args[4])
+        self.assertTrue('\n\ntest\n\n' in self.args[3])
         # not found
         self.assertRaises(ConfigError, cli.test, Args(), ['not_found'])
 

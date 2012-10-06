@@ -13,11 +13,10 @@ class UtilsTestCase(helper.unittest.TestCase):
         s.write('ok')
         self.assertEqual(s.stdin.getvalue(), 'ok\n')
         def execl(*args):
-            self.assertEqual(len(args), 5)
-            self.assertEqual(args[0], '/usr/bin/env')
-            self.assertEqual(args[1], 'bash')
-            self.assertEqual(args[2], 'bash')
-            self.assertEqual(args[3], '-c')
-            self.assertEqual(args[4], 'ok\n')
+            self.assertEqual(len(args), 4)
+            self.assertEqual(args[0], '/bin/bash')
+            self.assertEqual(args[1], '-l')
+            self.assertEqual(args[2], '-c')
+            self.assertEqual(args[3], 'ok\n')
         utils.os.execl = execl
         s.__exit__('type', 'value', 'tracebook')
