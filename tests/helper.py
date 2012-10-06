@@ -7,7 +7,10 @@ from rock.config import Config
 
 
 TESTS_PATH = os.path.join(os.path.dirname(__file__))
-ENV_PATH = os.path.join(TESTS_PATH, 'assets', 'env')
+ASSETS_PATH = os.path.join(TESTS_PATH, 'assets')
+ENV_PATH = os.path.join(ASSETS_PATH, 'env')
+DATA_PATH = os.path.join(ASSETS_PATH, 'data')
+PROJECT_PATH = os.path.join(ASSETS_PATH, 'project')
 
 
 def setenv(mount='test', data='test'):
@@ -17,7 +20,7 @@ def setenv(mount='test', data='test'):
 
     @staticmethod
     def data_path(*args):
-        return os.path.join(*(TESTS_PATH, 'assets', 'data', data) + args)
+        return os.path.join(*(DATA_PATH, data) + args)
 
     Config.mount_path = mount_path
     Config.data_path = data_path

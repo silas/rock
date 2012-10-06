@@ -6,9 +6,9 @@ from rock.exceptions import ConfigError
 
 class ConfigTestCase(helper.unittest.TestCase):
 
-    def setup_test(self, name='simple', data='test', config=None, env='local'):
+    def setup(self, name='simple', data='test', config=None, env='local'):
         helper.setenv(data=data)
-        self.path = os.path.join(helper.TESTS_PATH, 'assets', 'project', name)
+        self.path = os.path.join(helper.PROJECT_PATH, name)
         self.env = env
         if config is None:
             config = {'path': self.path}
@@ -48,7 +48,7 @@ class ConfigTestCase(helper.unittest.TestCase):
         self.assertTrue(paths[2].endswith('/data/test/ok'))
 
     def test_parent(self):
-        c = self.setup_test('parent')
+        c = self.setup('parent')
         self.assertEqual(c['test_parent1'], '1')
         self.assertEqual(c['test_parent2'], '2')
         # str to dict
@@ -62,51 +62,53 @@ class ConfigTestCase(helper.unittest.TestCase):
         self.assertEqual(c['test_dict_to_dict']['four'], 'pre4-simple4-post4')
 
     def test_parent2(self):
-        c = self.setup_test('parent2')
+        c = self.setup('parent2')
         with self.assertRaisesRegexp(ConfigError, r'^unable to merge') as a:
             c['test_dict_to_dict']
 
     def test_simple1(self):
-        c = self.setup_test()
+        c = self.setup()
         self.full(c)
         self.assertEqual(c['env']['HELLO'], 'world')
+        # misc other
+        self.assertEqual(len(c), 11)
 
     def test_simple2(self):
-        c = self.setup_test(data='test123', env='prod')
+        c = self.setup(data='test123', env='prod')
         self.full(c)
         self.assertEqual(c['env']['HELLO'], 'better world')
 
     def test_runtime_notfound(self):
-        c = self.setup_test('runtime_notfound')
+        c = self.setup('runtime_notfound')
         with self.assertRaisesRegexp(ConfigError, r"runtime path doesn't exist") as a:
             c['path']
 
     def test_runtime_config_notfound(self):
-        c = self.setup_test('runtime_config_notfound')
+        c = self.setup('runtime_config_notfound')
         with self.assertRaisesRegexp(ConfigError, r'not found: .*') as a:
             c['path']
 
     def test_project_parse(self):
-        c = self.setup_test('project_parse')
+        c = self.setup('project_parse')
         with self.assertRaisesRegexp(ConfigError, r'.rock.yml syntax error') as a:
             c['path']
 
     def test_parse(self):
-        c = self.setup_test('parse')
+        c = self.setup('parse')
         with self.assertRaisesRegexp(ConfigError, r'parse error: .*') as a:
             c['path']
 
     def test_badenv1(self):
-        c = self.setup_test('badenv1')
+        c = self.setup('badenv1')
         with self.assertRaisesRegexp(ConfigError, r'env must be an associative array') as a:
             c['path']
 
     def test_badenv2(self):
-        c = self.setup_test('badenv2')
+        c = self.setup('badenv2')
         with self.assertRaisesRegexp(ConfigError, r'env.one must be a string') as a:
             c['path']
 
     def test_nopath(self):
-        c = self.setup_test('simple', config={})
+        c = self.setup('simple', config={})
         with self.assertRaisesRegexp(ConfigError, r'path is required') as a:
             c['path']

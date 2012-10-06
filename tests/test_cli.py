@@ -1,6 +1,7 @@
 import helper
 import os
 import subprocess
+import sys
 import tempfile
 from StringIO import StringIO
 from rock import cli, utils
@@ -111,4 +112,9 @@ class CliTestCase(helper.unittest.TestCase):
 
     def test_main(self):
         cli.main(args=['runtime'])
-        self.assertRaises(SystemExit, cli.main, ['--path=%s/not-found' % helper.TESTS_PATH, 'run', 'ok'])
+        stderr = sys.stderr
+        try:
+            sys.stderr = StringIO()
+            self.assertRaises(SystemExit, cli.main, ['--path=%s/not-found' % helper.TESTS_PATH, 'run', 'ok'])
+        finally:
+            sys.stderr = stderr
