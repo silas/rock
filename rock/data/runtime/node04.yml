@@ -2,8 +2,8 @@ env:
   PATH: "${PROJECT_PATH}/bin:${PROJECT_PATH}/node_modules/.bin:${PATH}"
   BUILD_PATH: "${PROJECT_PATH}/node_modules"
   ROCK_NPM_INSTALL: "install"
-  ROCK_NPM_INSTALL_DEPLOYMENT: "install"
-  ROCK_NPM_REBUILD_DEPLOYMENT: "rebuild"
+  ROCK_NPM_INSTALL_DEPLOYMENT: "--verbose --no-color install"
+  ROCK_NPM_REBUILD_DEPLOYMENT: "--verbose --no-color rebuild"
 
 build: |
 

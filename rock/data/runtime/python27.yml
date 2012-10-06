@@ -4,9 +4,9 @@ env:
   TEST_PATH: "${PROJECT_PATH}/tests"
   PYTHONPATH: "${PROJECT_PATH}:${PYTHONPATH}"
   ROCK_PIP_INSTALL: "install -r ./requirements.txt"
-  ROCK_PIP_INSTALL_DEPLOYMENT: "install -r ./requirements.txt"
+  ROCK_PIP_INSTALL_DEPLOYMENT: "--verbose install -r ./requirements.txt"
   ROCK_VIRTUALENV: "--distribute \"${BUILD_PATH}\""
-  ROCK_VIRTUALENV_DEPLOYMENT: "--distribute \"${BUILD_PATH}\""
+  ROCK_VIRTUALENV_DEPLOYMENT: "--verbose --distribute \"${BUILD_PATH}\""
 
 build: |
 

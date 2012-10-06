@@ -4,14 +4,14 @@ env:
   TEST_PATH: "${PROJECT_PATH}/tests"
   PYTHONPATH: "${PROJECT_PATH}:${PYTHONPATH}"
   ROCK_PIP_INSTALL: "install -r ./requirements.txt"
-  ROCK_PIP_INSTALL_DEPLOYMENT: "install -r ./requirements.txt"
-  ROCK_VIRTUALENV: "\"${BUILD_PATH}\""
-  ROCK_VIRTUALENV_DEPLOYMENT: "\"${BUILD_PATH}\""
+  ROCK_PIP_INSTALL_DEPLOYMENT: "--verbose install -r ./requirements.txt"
+  ROCK_PYVENV: "\"${BUILD_PATH}\""
+  ROCK_PYVENV_DEPLOYMENT: "\"${BUILD_PATH}\""
 
 build: |
 
   if [[ ! -e "${BUILD_PATH}/bin/python" ]]; then
-    pyvenv ${ROCK_VIRTUALENV}
+    pyvenv ${ROCK_PYVENV}
     distribute-setup
     rm -f distribute-*.gz
     easy_install pip
@@ -30,10 +30,10 @@ build_deployment: |
   fi
 
   if [[ ! -e "${BUILD_PATH}/bin/python" ]]; then
-    pyvenv ${ROCK_VIRTUALENV_DEPLOYMENT}
+    pyvenv ${ROCK_PYVENV_DEPLOYMENT}
     distribute-setup
     rm -f distribute-*.gz
-    easy_install pip
+    easy_install --verbose pip
   fi
 
   pip ${ROCK_PIP_INSTALL_DEPLOYMENT}
