@@ -4,7 +4,7 @@ env:
   TEST_PATH: "${PROJECT_PATH}/tests"
   PHP_INI: "${PROJECT_PATH}"
   ROCK_COMPOSER_INSTALL: "install"
-  ROCK_COMPOSER_INSTALL_DEPLOYMENT: "install --no-interaction"
+  ROCK_COMPOSER_INSTALL_DEPLOYMENT: "--no-ansi --no-interaction install"
 
 build: |
 
