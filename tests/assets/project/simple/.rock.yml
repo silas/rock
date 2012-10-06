@@ -15,6 +15,4 @@ build: |
 
 run: echo zero
 
-run_full:
-  one: echo one
-  two: echo two
+run_two: echo two

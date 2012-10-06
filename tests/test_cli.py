@@ -99,8 +99,9 @@ class CliTestCase(helper.unittest.TestCase):
         # str section
         cli.run(Args(), [])
         self.assertTrue('\necho zero\n' in self.args[4])
-        # dict section
-        cli.run(Args(), ['full'])
+        # run section
+        cli.run(Args(), ['two'])
+        self.assertTrue('\ntwo\n' in self.args[4])
 
     def test_test(self):
         cli.test(Args(), [])

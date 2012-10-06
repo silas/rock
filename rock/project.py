@@ -6,7 +6,6 @@ import sys
 import yaml
 from rock.config import Config
 from rock.exceptions import ConfigError
-from rock.process import ProcessManager
 from rock.utils import Shell
 
 NAME_RE = re.compile('^[a-zA-Z_]+$')
@@ -54,18 +53,6 @@ class Project(object):
         if section not in self.config:
             raise ConfigError('section not found: %s' % section)
         self.execute(self.config[section])
-
-    def execute_section(self, name):
-        section = self.config.get(name)
-
-        if isinstance(section, dict):
-            pm = ProcessManager()
-            for name, value in section.items():
-                pm.add_process(name, '%s run %s' %
-                               (sys.argv[0], pipes.quote(value)))
-            pm.loop()
-        else:
-            self.execute(section)
 
     def build(self, *args):
         self.execute_type('build', *args)
@@ -140,9 +127,9 @@ class Project(object):
 
     def run(self, args):
         if len(args) == 0 and 'run' in self.config:
-            self.execute_section('run')
+            self.execute(self.config['run'])
         elif len(args) == 1 and 'run_%s' % args[0] in self.config:
-            self.execute_section('run_%s' % args[0])
+            self.execute(self.config['run_%s' % args[0]])
         else:
             self.execute(args)
 
