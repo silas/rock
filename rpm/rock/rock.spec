@@ -1,5 +1,5 @@
 Name:           rock
-Version:        0.8.0
+Version:        0.8.1
 Release:        1%{?dist}
 Summary:        Create, build, test and run applications
 
@@ -41,6 +41,11 @@ nosetests
 %{python_sitelib}/%{name}-%{version}-py*.egg-info
 
 %changelog
+* Sun Sep 30 2012 Silas Sewell <silas@sewell.org> - 0.8.1-1
+- Add python-bottle which defaults to python33
+- Remove distribute tar on create venv
+- Revert php-slim to upstream
+
 * Sat Sep 29 2012 Silas Sewell <silas@sewell.org> - 0.8.0-1
 - Add python33 support
 - Add --version flag
