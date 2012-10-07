@@ -1,0 +1,7 @@
+/var/log/rock-platform-supervisor/*.log {
+       missingok
+       weekly
+       notifempty
+       nocompress
+}
+
