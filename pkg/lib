@@ -40,9 +40,8 @@ build_setup() {
     local file="$( basename "$url" )"
     local file_path="${CACHE_PATH}/${file}"
 
-    [[ -f "$file_path" ]] || curl "$url" -o "$file_path"
-
-    ln "$file_path" "${path}/${file}"
+    [[ -f "$file_path" ]] || curl -L "$url" -o "$file_path"
+    [[ -f "${path}/${file}" ]] || ln "$file_path" "${path}/${file}"
   done
 }
 
