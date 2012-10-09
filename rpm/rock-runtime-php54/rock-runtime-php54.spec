@@ -27,7 +27,7 @@ rm -rf %{buildroot}
 
 mkdir -p %{buildroot}%{php54_rootdir}
 
-cat > %{buildroot}%{php54_rootdir}/rock.yml << EOF
+cat << EOF > %{buildroot}%{php54_rootdir}/rock.yml
 env:
   PATH: "%{php54_rootdir}/usr/bin:\${PATH}"
 EOF

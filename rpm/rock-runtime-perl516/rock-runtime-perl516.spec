@@ -29,7 +29,7 @@ rm -rf %{buildroot}
 
 mkdir -p %{buildroot}%{perl516_rootdir}
 
-cat > %{buildroot}%{perl516_rootdir}/rock.yml << EOF
+cat << EOF > %{buildroot}%{perl516_rootdir}/rock.yml
 env:
   PATH: "%{perl516_rootdir}/usr/bin:\${PATH}"
 EOF

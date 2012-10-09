@@ -27,7 +27,7 @@ rm -rf %{buildroot}
 
 mkdir -p %{buildroot}%{python27_rootdir}
 
-cat > %{buildroot}%{python27_rootdir}/rock.yml << EOF
+cat << EOF > %{buildroot}%{python27_rootdir}/rock.yml
 env:
   PATH: "%{python27_rootdir}/usr/bin:\${PATH}"
 EOF

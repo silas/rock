@@ -27,7 +27,7 @@ rm -rf %{buildroot}
 
 mkdir -p %{buildroot}%{node04_rootdir}
 
-cat > %{buildroot}%{node04_rootdir}/rock.yml << EOF
+cat << EOF > %{buildroot}%{node04_rootdir}/rock.yml
 env:
   PATH: "%{node04_rootdir}/usr/bin:\${PATH}"
 EOF

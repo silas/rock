@@ -30,7 +30,7 @@ rm -rf %{buildroot}
 
 mkdir -p %{buildroot}%{ruby18_rootdir}
 
-cat > %{buildroot}%{ruby18_rootdir}/rock.yml << EOF
+cat << EOF > %{buildroot}%{ruby18_rootdir}/rock.yml
 env:
   PATH: "%{ruby18_rootdir}/usr/bin:\${PATH}"
   RUBY_ABI: "%{ruby18_abi}"

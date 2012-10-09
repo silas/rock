@@ -26,7 +26,7 @@ rm -rf %{buildroot}
 
 mkdir -p %{buildroot}%{node06_rootdir}
 
-cat > %{buildroot}%{node06_rootdir}/rock.yml << EOF
+cat << EOF > %{buildroot}%{node06_rootdir}/rock.yml
 env:
   PATH: "%{node06_rootdir}/usr/bin:\${PATH}"
 EOF

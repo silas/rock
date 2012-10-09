@@ -29,7 +29,7 @@ rm -rf %{buildroot}
 
 mkdir -p %{buildroot}%{ruby19_rootdir}
 
-cat > %{buildroot}%{ruby19_rootdir}/rock.yml << EOF
+cat << EOF > %{buildroot}%{ruby19_rootdir}/rock.yml
 env:
   PATH: "%{ruby19_rootdir}/usr/bin:\${PATH}"
   RUBY_ABI: "%{ruby19_abi}"
