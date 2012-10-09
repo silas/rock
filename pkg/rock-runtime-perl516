@@ -1,0 +1,87 @@
+#!/usr/bin/env bash
+
+ROOT="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )" ; . "$ROOT/lib" ; set -ve
+
+name='perl516'
+version='5.16.1'
+url="http://www.cpan.org/src/5.0/perl-${version}.tar.bz2"
+local_lib_version='1.008004'
+local_lib_url="http://search.cpan.org/CPAN/authors/id/A/AP/APEIRON/local-lib-${local_lib_version}.tar.gz"
+cpanm_version='1.5017'
+cpanm_url="https://raw.github.com/miyagawa/cpanminus/${cpanm_version}/cpanm"
+carton_version='0.9_7'
+carton_urls="
+http://www.cpan.org/authors/id/T/TO/TOKUHIROM/Test-Requires-0.06.tar.gz
+http://www.cpan.org/authors/id/D/DA/DAGOLDEN/Capture-Tiny-0.19.tar.gz
+http://www.cpan.org/authors/id/D/DA/DAGOLDEN/CPAN-Meta-YAML-0.008.tar.gz
+http://www.cpan.org/authors/id/D/DA/DAGOLDEN/Parse-CPAN-Meta-1.4404.tar.gz
+http://www.cpan.org/authors/id/D/DA/DAGOLDEN/CPAN-Meta-Requirements-2.122.tar.gz
+http://www.cpan.org/authors/id/D/DA/DAGOLDEN/CPAN-Meta-2.120921.tar.gz
+http://www.cpan.org/authors/id/A/AP/APEIRON/local-lib-1.008004.tar.gz
+http://www.cpan.org/authors/id/D/DO/DOY/Try-Tiny-0.11.tar.gz
+http://www.cpan.org/authors/id/M/MI/MIYAGAWA/App-cpanminus-1.5017.tar.gz
+http://www.cpan.org/authors/id/D/DR/DROLSKY/Devel-StackTrace-1.27.tar.gz
+http://www.cpan.org/authors/id/T/TM/TMTM/Class-Data-Inheritable-0.08.tar.gz
+http://www.cpan.org/authors/id/D/DR/DROLSKY/Exception-Class-1.32.tar.gz
+http://www.cpan.org/authors/id/M/MI/MIYAGAWA/Module-CPANfile-0.9007.tar.gz
+http://www.cpan.org/authors/id/M/ML/MLEHMANN/common-sense-3.6.tar.gz
+http://www.cpan.org/authors/id/M/ML/MLEHMANN/JSON-XS-2.32.tar.gz
+http://www.cpan.org/authors/id/M/MA/MAKAMAKA/JSON-2.53.tar.gz
+http://search.cpan.org/CPAN/authors/id/M/MI/MIYAGAWA/carton-v${carton_version}.tar.gz
+"
+
+src_path="$( build_path $name )"
+dst_path="$( runtime_path $name )"
+
+setup "$name" "$url" "$local_lib_url" "$cpanm_url" "$carton_urls"
+
+pushd "$src_path"
+  tar -xjf "$( basename "$url" )"
+  tar -xzf "$( basename "$local_lib_url" )"
+
+  pushd "perl-${version}"
+    ./Configure -des \
+      -Dprefix="${dst_path}/usr" \
+      -Dman3ext=3pm \
+      -Dusethreads \
+      -Duseithreads \
+      -Duselargefiles \
+      -Duseperlio
+    make
+    make install
+    find "${dst_path}/usr" -name '*.0' -type f -delete
+  popd
+
+  export PATH="${dst_path}/usr/bin:$PATH"
+
+  pushd "local-lib-${local_lib_version}"
+    perl Makefile.PL
+    make install
+  popd
+
+  install -p -m 0755 cpanm "${dst_path}/usr/bin/cpanm"
+
+  carton_files=""
+  for carton_url in $carton_urls; do
+    carton_files="$carton_files $( basename $carton_url )"
+  done
+
+  cpanm -l local $carton_files
+
+  mv local "${dst_path}/usr/lib/carton"
+
+  cat << EOF > "${dst_path}/usr/bin/carton"
+#!/usr/bin/env bash
+
+perl \
+  -Mlocal::lib=${dst_path}/usr/lib/carton \
+  ${dst_path}/usr/lib/carton/bin/carton "\$@"
+EOF
+
+  chmod 755 "${dst_path}/usr/bin/carton"
+popd
+
+cat << EOF > "${dst_path}/rock.yml"
+env:
+  PATH: "${dst_path}/usr/bin:\${PATH}"
+EOF
