@@ -11,8 +11,6 @@ class RockRuntimeNode04 < Formula
   def install_npm
     npm_version = '1.0.106'
 
-    ENV['PATH'] = "#{bin}:#{ENV['PATH']}"
-
     system 'curl', '-O', "http://registry.npmjs.org/npm/-/npm-#{npm_version}.tgz"
     system 'tar', '-xzf', "npm-#{npm_version}.tgz"
 
@@ -28,6 +26,9 @@ class RockRuntimeNode04 < Formula
   def install
     system './configure', "--prefix=#{prefix}"
     system 'make', 'install'
+
+    ENV['PATH'] = "#{bin}:#{ENV['PATH']}"
+
     install_npm
   end
 end
