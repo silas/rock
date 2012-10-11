@@ -1,12 +1,16 @@
 require 'formula'
 
 class RockRuntimeRuby18 < Formula
-  homepage 'http://www.python.org/'
+  homepage 'http://www.ruby-lang.org/en/'
   url 'http://ftp.ruby-lang.org/pub/ruby/1.8/ruby-1.8.7-p370.tar.gz'
   sha1 'ffc5736019c9aa692a05ed95af7fe976afb3da13'
 
   env :std
   keg_only 'rock'
+
+  depends_on 'readline'
+  depends_on 'gdbm'
+  depends_on 'libyaml'
 
   def install_rubygems
     rubygems_version = '1.8.24'
@@ -20,10 +24,6 @@ class RockRuntimeRuby18 < Formula
       "--prefix=#{prefix}",
       '--rdoc'
 
-    # /usr/local/Cellar/rock-runtime-ruby18/1.8.7-p370/lib/rubygems
-    # /usr/local/Cellar/rock-runtime-ruby18/1.8.7-p370/lib/rubygems.rb
-
-    #(prefix + 'lib/ruby/1.8').mkpath
     system "mv #{prefix}/lib/*.rb #{prefix}/lib/ruby/1.8"
     system "mv #{prefix}/lib/{rbconfig,rubygems} #{prefix}/lib/ruby/1.8"
 
