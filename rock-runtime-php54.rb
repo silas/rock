@@ -29,13 +29,20 @@ class RockRuntimePhp54 < Formula
 
   def install_composer
     phar_version = '1.0.0'
-    phar_pre = 'alpha'
+    phar_pre = 'alpha5'
 
     system 'curl', '-Lo', "#{bin}/composer.phar", "http://getcomposer.org/download/#{phar_version}-#{phar_pre}/composer.phar"
     system 'chmod', '755', "#{bin}/composer.phar"
   end
 
   def install
+    rock = Pathname.new('/opt/rock')
+
+    unless rock.directory? && rock.writable?
+      onoe "#{rock} must be a directory and writable"
+      exit 1
+    end
+
     args = [
       "--prefix=#{prefix}",
       "--sbindir=#{prefix}/bin",
@@ -131,5 +138,14 @@ class RockRuntimePhp54 < Formula
     ENV['PATH'] = "#{bin}:#{ENV['PATH']}"
 
     install_composer
+
+    runtime = rock + 'runtime/php54'
+    runtime.mkpath
+    runtime += 'rock.yml'
+    runtime.unlink if runtime.exist?
+    runtime.write <<-EOS.undent
+      env:
+        PATH: "#{bin}:${PATH}"
+    EOS
   end
 end

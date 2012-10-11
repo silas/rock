@@ -12,9 +12,11 @@ class RockRuntimeRuby19 < Formula
   depends_on 'gdbm'
   depends_on 'libyaml'
 
-  def install_bundler
-    bundler_version = '1.1.5'
+  def bundler_version
+    '1.1.5'
+  end
 
+  def install_bundler
     system 'curl', '-LO', "http://rubygems.org/downloads/bundler-#{bundler_version}.gem"
 
     ENV['GEM_HOME'] = "#{prefix}/lib/ruby/gems/1.9.1"
@@ -41,6 +43,13 @@ class RockRuntimeRuby19 < Formula
   end
 
   def install
+    rock = Pathname.new('/opt/rock')
+
+    unless rock.directory? && rock.writable?
+      onoe "#{rock} must be a directory and writable"
+      exit 1
+    end
+
     lib.mkpath
 
     system './configure',
@@ -52,5 +61,16 @@ class RockRuntimeRuby19 < Formula
     ENV['PATH'] = "#{bin}:#{ENV['PATH']}"
 
     install_bundler
+
+    runtime = rock + 'runtime/ruby19'
+    runtime.mkpath
+    runtime += 'rock.yml'
+    runtime.unlink if runtime.exist?
+    runtime.write <<-EOS.undent
+      env:
+        PATH: "#{bin}:${PATH}"
+        RUBY_ABI: "1.9.1"
+        RUBYOPT: "-I#{lib}/ruby/gems/1.9.1/gems/bundler-#{bundler_version}/lib -rbundler/setup"
+    EOS
   end
 end

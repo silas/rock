@@ -8,7 +8,23 @@ class RockRuntimeNode06 < Formula
   keg_only 'rock'
 
   def install
+    rock = Pathname.new('/opt/rock')
+
+    unless rock.directory? && rock.writable?
+      onoe "#{rock} must be a directory and writable"
+      exit 1
+    end
+
     system './configure', "--prefix=#{prefix}"
     system 'make', 'install'
+
+    runtime = rock + 'runtime/node06'
+    runtime.mkpath
+    runtime += 'rock.yml'
+    runtime.unlink if runtime.exist?
+    runtime.write <<-EOS.undent
+      env:
+        PATH: "#{bin}:${PATH}"
+    EOS
   end
 end

@@ -24,11 +24,27 @@ class RockRuntimeNode04 < Formula
   end
 
   def install
+    rock = Pathname.new('/opt/rock')
+
+    unless rock.directory? && rock.writable?
+      onoe "#{rock} must be a directory and writable"
+      exit 1
+    end
+
     system './configure', "--prefix=#{prefix}"
     system 'make', 'install'
 
     ENV['PATH'] = "#{bin}:#{ENV['PATH']}"
 
     install_npm
+
+    runtime = rock + 'runtime/node04'
+    runtime.mkpath
+    runtime += 'rock.yml'
+    runtime.unlink if runtime.exist?
+    runtime.write <<-EOS.undent
+      env:
+        PATH: "#{bin}:${PATH}"
+    EOS
   end
 end

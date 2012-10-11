@@ -12,9 +12,15 @@ class RockRuntimeRuby18 < Formula
   depends_on 'gdbm'
   depends_on 'libyaml'
 
-  def install_rubygems
-    rubygems_version = '1.8.24'
+  def rubygems_version
+    '1.8.24'
+  end
 
+  def bundler_version
+    '1.1.5'
+  end
+
+  def install_rubygems
     system 'curl', '-LO', "http://production.cf.rubygems.org/rubygems/rubygems-#{rubygems_version}.tgz"
     system 'tar', '-xzf', "rubygems-#{rubygems_version}.tgz"
 
@@ -31,8 +37,6 @@ class RockRuntimeRuby18 < Formula
   end
 
   def install_bundler
-    bundler_version = '1.1.5'
-
     system 'curl', '-LO', "http://rubygems.org/downloads/bundler-#{bundler_version}.gem"
 
     ENV['GEM_HOME'] = "#{prefix}/lib/ruby/gems/1.8"
@@ -59,6 +63,13 @@ class RockRuntimeRuby18 < Formula
   end
 
   def install
+    rock = Pathname.new('/opt/rock')
+
+    unless rock.directory? && rock.writable?
+      onoe "#{rock} must be a directory and writable"
+      exit 1
+    end
+
     lib.mkpath
 
     system './configure',
@@ -71,5 +82,16 @@ class RockRuntimeRuby18 < Formula
 
     install_rubygems
     install_bundler
+
+    runtime = rock + 'runtime/ruby18'
+    runtime.mkpath
+    runtime += 'rock.yml'
+    runtime.unlink if runtime.exist?
+    runtime.write <<-EOS.undent
+      env:
+        PATH: "#{bin}:${PATH}"
+        RUBY_ABI: "1.8"
+        RUBYOPT: "-I#{lib}/ruby/gems/1.8/gems/bundler-#{bundler_version}/lib -rbundler/setup"
+    EOS
   end
 end

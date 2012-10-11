@@ -17,6 +17,13 @@ class RockRuntimePython33 < Formula
   end
 
   def install
+    rock = Pathname.new('/opt/rock')
+
+    unless rock.directory? && rock.writable?
+      onoe "#{rock} must be a directory and writable"
+      exit 1
+    end
+
     ENV.append 'EXTRA_CFLAGS', '-fwrapv'
 
     system './configure', "--prefix=#{prefix}"
@@ -33,5 +40,14 @@ class RockRuntimePython33 < Formula
     ENV['PATH'] = "#{bin}:#{ENV['PATH']}"
 
     install_distribute
+
+    runtime = rock + 'runtime/python33'
+    runtime.mkpath
+    runtime += 'rock.yml'
+    runtime.unlink if runtime.exist?
+    runtime.write <<-EOS.undent
+      env:
+        PATH: "#{bin}:${PATH}"
+    EOS
   end
 end

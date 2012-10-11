@@ -64,6 +64,13 @@ class RockRuntimePerl516 < Formula
   end
 
   def install
+    rock = Pathname.new('/opt/rock')
+
+    unless rock.directory? && rock.writable?
+      onoe "#{rock} must be a directory and writable"
+      exit 1
+    end
+
     system './Configure',
       '-des',
       "-Dprefix=#{prefix}",
@@ -80,5 +87,14 @@ class RockRuntimePerl516 < Formula
     install_local_lib
     install_cpanm
     install_carton
+
+    runtime = rock + 'runtime/perl516'
+    runtime.mkpath
+    runtime += 'rock.yml'
+    runtime.unlink if runtime.exist?
+    runtime.write <<-EOS.undent
+      env:
+        PATH: "#{bin}:${PATH}"
+    EOS
   end
 end
