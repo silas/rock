@@ -11,7 +11,13 @@ class Runtime(object):
     def root_path(*args):
         return Config.mount_path(*('opt', 'rock', 'runtime') + args)
 
+    @staticmethod
+    def user_path(*args):
+        return Config.user_path(*('runtime',) + args)
+
     def path(self, *args):
+        if os.path.exists(self.user_path(self.name, 'rock.yml')):
+            return self.user_path(*(self.name,) + args)
         return self.root_path(*(self.name,) + args)
 
     def exists(self, *args):
