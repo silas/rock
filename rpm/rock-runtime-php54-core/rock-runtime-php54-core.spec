@@ -138,14 +138,17 @@ This packages contains resources for building %{name} RPMs.
   --with-system-tzdata \
   --with-mhash \
   --enable-pcntl \
-  --with-imap=shared --with-imap-ssl \
+  --with-imap=shared \
+  --with-imap-ssl \
   --enable-mbstring=shared \
   --enable-mbregex \
   --with-gd=shared \
   --enable-bcmath=shared \
-  --enable-dba=shared --with-db4=%{_prefix} \
+  --enable-dba=shared \
+  --with-db4=%{_prefix} \
   --with-xmlrpc=shared \
-  --with-ldap=shared --with-ldap-sasl \
+  --with-ldap=shared \
+  --with-ldap-sasl \
   --with-mysql=shared,mysqlnd \
   --with-mysqli=shared,mysqlnd \
   --with-mysql-sock=%{mysql_sock} \
@@ -157,7 +160,8 @@ This packages contains resources for building %{name} RPMs.
   --with-snmp=shared,%{_prefix} \
   --enable-soap=shared \
   --with-xsl=shared,%{_prefix} \
-  --enable-xmlreader=shared --enable-xmlwriter=shared \
+  --enable-xmlreader=shared \
+  --enable-xmlwriter=shared \
   --with-curl=shared,%{_prefix} \
   --with-sqlite3=shared,%{_prefix} \
   --enable-json=shared \
@@ -168,7 +172,9 @@ This packages contains resources for building %{name} RPMs.
   --with-mcrypt=shared,%{_prefix} \
   --with-kerberos \
   --with-tidy=shared,%{_prefix} \
-  --enable-sysvmsg=shared --enable-sysvshm=shared --enable-sysvsem=shared \
+  --enable-sysvmsg=shared \
+  --enable-sysvshm=shared \
+  --enable-sysvsem=shared \
   --enable-posix=shared \
   --enable-fileinfo=shared \
   --enable-intl=shared \
