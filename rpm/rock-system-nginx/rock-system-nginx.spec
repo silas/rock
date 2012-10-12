@@ -1,6 +1,6 @@
-%global  root                /opt/rock/platform
+%global root /opt/rock/system
 
-Name:              rock-platform-nginx
+Name:              rock-system-nginx
 Version:           1.2.4
 Release:           1%{?dist}
 
