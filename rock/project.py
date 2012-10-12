@@ -39,10 +39,13 @@ class Project(object):
         # blank line before command
         shell.write('')
 
-    def execute(self, command):
+    def execute(self, command, args=None):
+        args = args or []
         with Shell() as shell:
             self._setup(shell)
             # run command and wait for results
+            shell.write("export ROCK_ARGS='%s'" %
+                        ' '.join(map(pipes.quote, args)))
             if isinstance(command, (list, tuple)):
                 shell.write(' '.join(command))
             else:
@@ -52,7 +55,7 @@ class Project(object):
         section = '%s_%s' % (name, args[0]) if len(args) > 0 else name
         if section not in self.config:
             raise ConfigError('section not found: %s' % section)
-        self.execute(self.config[section])
+        self.execute(self.config[section], args[1:])
 
     def build(self, *args):
         self.execute_type('build', *args)
@@ -128,8 +131,8 @@ class Project(object):
     def run(self, args):
         if len(args) == 0 and 'run' in self.config:
             self.execute(self.config['run'])
-        elif len(args) == 1 and 'run_%s' % args[0] in self.config:
-            self.execute(self.config['run_%s' % args[0]])
+        elif len(args) >= 1 and 'run_%s' % args[0] in self.config:
+            self.execute(self.config['run_%s' % args[0]], args[1:])
         else:
             self.execute(args)
 

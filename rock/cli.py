@@ -103,11 +103,13 @@ def main(args=None):
     sub = parser.add_subparsers(title='commands')
 
     # build
-    parser_build = sub.add_parser('build', help='build project')
+    parser_build = sub.add_parser('build', help='build project',
+                                  add_help=False)
     parser_build.set_defaults(func=build)
 
     # clean
-    parser_clean = sub.add_parser('clean', help='clean project')
+    parser_clean = sub.add_parser('clean', help='clean project',
+                                  add_help=False)
     parser_clean.set_defaults(func=clean)
 
     # create
@@ -116,6 +118,7 @@ def main(args=None):
     parser_create.add_argument('name', nargs="?", help='template name')
 
     # env
+    # TODO: remove
     parser_env = sub.add_parser('env', help='show environment variables')
     parser_env.set_defaults(func=env)
 
@@ -135,7 +138,7 @@ def main(args=None):
     parser_run.set_defaults(func=run)
 
     # test
-    parser_test = sub.add_parser('test', help='test project')
+    parser_test = sub.add_parser('test', help='test project', add_help=False)
     parser_test.set_defaults(func=test)
 
     try:

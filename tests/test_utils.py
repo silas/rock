@@ -5,12 +5,11 @@ from rock import utils
 class UtilsTestCase(helper.unittest.TestCase):
 
     def test_shell(self):
-        def execute(self, *args):
-            self.args = args
-        utils.Shell.execute = execute
+        utils.Shell.run = lambda self: self
         s = utils.Shell()
         self.assertTrue(isinstance(s.__enter__(), utils.Shell))
         s.write('ok')
+        s.__exit__(None, None, None)
         self.assertEqual(s.stdin.getvalue(), 'ok\n')
         def execl(*args):
             self.assertEqual(len(args), 4)

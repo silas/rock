@@ -43,7 +43,7 @@ class ConfigTestCase(helper.unittest.TestCase):
     def test_paths(self):
         paths = Config.paths('ok')
         self.assertEqual(len(paths), 3)
-        self.assertTrue(paths[0].endswith('/.rock/ok'))
+        self.assertTrue(paths[0].endswith('/user/test/ok'))
         self.assertTrue(paths[1].endswith('/test/etc/rock/ok'))
         self.assertTrue(paths[2].endswith('/data/test/ok'))
 
