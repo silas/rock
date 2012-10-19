@@ -1,6 +1,6 @@
 ---
 layout: post
-title: rock 0.6 released and node08/perl516 core packages updated
+title: rock 0.6 released and node08/perl516 updated
 ---
 
 [rock 0.6][pypi] ([diff][diff]) released.
