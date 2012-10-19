@@ -9,7 +9,7 @@ title: Install (Enterprise Linux)
 
         $ sudo rpm -i http://dl.rockplatform.org/rp0/rpm/el/rock-release.rpm
 
- 1. Install `rock` and runtimes (also see [Puppet module](https://github.com/rockplatform/puppet-rock))
+ 1. Install `rock` and runtimes
 
         $ sudo yum install -y \
             rock \
