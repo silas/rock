@@ -209,4 +209,9 @@ ol, ul {
 ol li p {
   margin-top: 2em;
 }
-
+.post {
+  margin-bottom: 1.3em;
+}
+.byline {
+  font-size: 0.9em;
+}
