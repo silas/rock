@@ -42,6 +42,7 @@ class RockRuntimeRuby18 < Formula
     ENV['GEM_HOME'] = "#{prefix}/lib/ruby/gems/1.8"
 
     system 'gem', 'install',
+      '--config-file', 'nofile',
       '--force',
       '--ignore-dependencies',
       '--no-rdoc',

@@ -22,6 +22,7 @@ class RockRuntimeRuby19 < Formula
     ENV['GEM_HOME'] = "#{prefix}/lib/ruby/gems/1.9.1"
 
     system 'gem', 'install',
+      '--config-file', 'nofile',
       '--force',
       '--ignore-dependencies',
       '--no-rdoc',
