@@ -1,5 +1,5 @@
 Name:           rock
-Version:        0.8.1
+Version:        0.9.0
 Release:        1%{?dist}
 Summary:        Create, build, test and run applications
 
@@ -12,10 +12,12 @@ BuildArch:      noarch
 BuildRequires:  PyYAML
 BUildRequires:  python-argparse
 BuildRequires:  python-devel
+BuildRequires:  python-importlib
 BuildRequires:  python-nose
 BuildRequires:  python-unittest2
 Requires:       PyYAML
 Requires:       python-argparse
+Requires:       python-importlib
 
 %description
 This is a cli tool that allows you to easily create, build, test and run
@@ -41,6 +43,13 @@ nosetests
 %{python_sitelib}/%{name}-%{version}-py*.egg-info
 
 %changelog
+* Thu Oct 18 2012 Silas Sewell <silas@sewell.org> - 0.9.0-1
+- Platform subcommand
+- Run arguments
+- Verbose flags in build deployment commands
+- Remove build process run
+- Fix user path search
+
 * Sun Sep 30 2012 Silas Sewell <silas@sewell.org> - 0.8.1-1
 - Add python-bottle which defaults to python33
 - Remove distribute tar on create venv
