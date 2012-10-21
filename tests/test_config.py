@@ -1,5 +1,7 @@
 import helper
 import os
+import shutil
+import tempfile
 from rock.config import Config
 from rock.exceptions import ConfigError
 
@@ -77,6 +79,29 @@ class ConfigTestCase(helper.unittest.TestCase):
         c = self.setup(data='test123', env='prod')
         self.full(c)
         self.assertEqual(c['env']['HELLO'], 'better world')
+
+    def test_path(self):
+        rock_path = os.path.join(helper.PROJECT_PATH, 'path')
+        cwd = os.getcwd()
+        try:
+            os.chdir(os.path.join(rock_path, 'tests'))
+            c = self.setup('path', config={})
+            env = c['env']
+            self.assertEqual(env['ROCK_PATH'], rock_path)
+        finally:
+            os.chdir(cwd)
+
+    def test_no_valid_config(self):
+        rock_path = tempfile.mkdtemp()
+        cwd = os.getcwd()
+        try:
+            os.chdir(rock_path)
+            c = self.setup('path', config={})
+            with self.assertRaisesRegexp(ConfigError, r"runtime is required") as a:
+                c['path']
+        finally:
+            os.chdir(cwd)
+            shutil.rmtree(rock_path)
 
     def test_runtime_notfound(self):
         c = self.setup('runtime_notfound')
