@@ -19,7 +19,6 @@ class ConfigTestCase(helper.unittest.TestCase):
     def full(self, c):
         self.assertEqual(c['path'], self.path)
         self.assertEqual(c['runtime'], 'test123')
-        self.assertEqual(c['runtime_type'], 'test')
         # env
         env = c['env']
         self.assertEqual(env['PATH'],
@@ -73,7 +72,7 @@ class ConfigTestCase(helper.unittest.TestCase):
         self.full(c)
         self.assertEqual(c['env']['HELLO'], 'world')
         # misc other
-        self.assertEqual(len(c), 11)
+        self.assertEqual(len(c), 10)
 
     def test_simple2(self):
         c = self.setup(data='test123', env='prod')

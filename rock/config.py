@@ -154,29 +154,24 @@ class Config(collections.Mapping):
             data.update(self.data)
         else:
             data = copy.deepcopy(self.data)
-        if 'runtime' in data and 'runtime_type' not in data:
-            data['runtime_type'] = data['runtime'].rstrip('0123456789')
         # project
-        for name in ('runtime', 'runtime_type'):
+        for name in ('path', 'runtime'):
             if name not in data:
                 raise ConfigError('%s is required' % name)
-        # runtime
-        runtime = self.runtime(data['runtime'])
         # paths
+        runtime = self.runtime(data['runtime'])
         etc_path = self.etc_path('runtime')
-        runtime_type_yml = data['runtime_type'] + '.yml'
         runtime_yml = data['runtime'] + '.yml'
+        data_path = self.data_path('runtime', runtime_yml)
+        if not os.path.exists(data_path):
+            file_name = data['runtime'].rstrip('0123456789') + '.yml'
+            data_path = self.data_path('runtime', file_name)
         # ensure runtime exists
         if not os.path.isdir(runtime.path()):
             raise ConfigError("runtime path doesn't exist")
         # parse configs
         runtime_config = self.parse(runtime.path('rock.yml'))
-        rock_type_config = self.parse(self.data_path('runtime',
-                                      runtime_type_yml), require_exists=False)
-        rock_config = self.parse(self.data_path('runtime', runtime_yml),
-                                 require_exists=False)
-        etc_type_config = self.parse(os.path.join(etc_path,
-                                     runtime_type_yml), require_exists=False)
+        rock_config = self.parse(data_path, require_exists=False)
         etc_config = self.parse(os.path.join(etc_path, runtime_yml),
                                 require_exists=False)
         # merge
@@ -189,12 +184,8 @@ class Config(collections.Mapping):
         # merge runtime
         self.merge(runtime_config, self.data)
         # merge runtime config
-        if rock_config or etc_config:
-            self.merge(rock_config, self.data)
-            self.merge(etc_config, self.data)
-        else:
-            self.merge(rock_type_config, self.data)
-            self.merge(etc_type_config, self.data)
+        self.merge(rock_config, self.data)
+        self.merge(etc_config, self.data)
         # merge project
         self.merge(data, self.data)
 
