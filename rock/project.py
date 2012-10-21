@@ -16,7 +16,7 @@ class Project(object):
     def __init__(self, *args, **kwargs):
         self.config = Config(*args, **kwargs)
 
-    def _setup(self, shell):
+    def _setup(self, shell, cd=True):
         # declare builtin functions
         shell.write('warn() { echo "$@" >&2; }')
         shell.write('die() { warn "$@"; exit 1; }')
@@ -29,7 +29,8 @@ class Project(object):
         # exit with error if any one command fails
         shell.write('set -o errexit')
         # switch to project directory
-        shell.write('cd ' + pipes.quote(self.config['path']))
+        if cd:
+            shell.write('cd ' + pipes.quote(self.config['path']))
         # setup environment variables
         if self.config.get('env'):
             # blank line before exports
@@ -39,13 +40,14 @@ class Project(object):
         # blank line before command
         shell.write('')
 
-    def execute(self, command, args=None):
+    def execute(self, command, args=None, cd=True):
         args = args or []
         with Shell() as shell:
-            self._setup(shell)
+            self._setup(shell, cd=cd)
             # run command and wait for results
             shell.write("export ROCK_ARGS='%s'" %
                         ' '.join(map(pipes.quote, args)))
+            shell.write("export ROCK_PWD='%s'" % os.getcwd())
             if isinstance(command, (list, tuple)):
                 shell.write(' '.join(command))
             else:
@@ -134,7 +136,7 @@ class Project(object):
         elif len(args) >= 1 and 'run_%s' % args[0] in self.config:
             self.execute(self.config['run_%s' % args[0]], args[1:])
         else:
-            self.execute(args)
+            self.execute(args, cd=False)
 
     def test(self, *args):
         self.execute_type('test', *args)
