@@ -1,8 +1,5 @@
 env:
-  PATH: "${PROJECT_PATH}/bin:${PROJECT_PATH}/vendor/bin:${PATH}"
-  BUILD_PATH: "${PROJECT_PATH}/vendor"
-  TEST_PATH: "${PROJECT_PATH}/tests"
-  PHP_INI: "${PROJECT_PATH}"
+  PATH: "${ROCK_PATH}/bin:${ROCK_PATH}/vendor/bin:${PATH}"
   ROCK_COMPOSER_INSTALL: "install"
   ROCK_COMPOSER_INSTALL_DEPLOYMENT: "--verbose --no-ansi --no-interaction install"
 
@@ -24,10 +21,10 @@ build_deployment: |
 
 test: |
 
-  php -c "${PHP_INI}" "${BUILD_PATH}/bin/phpunit"
+  php -c "${ROCK_PATH}" ./vendor/bin/phpunit
 
 clean: |
 
-  if [[ -d "${BUILD_PATH}" ]]; then
-    rm -fr "${BUILD_PATH}"
+  if [[ -d ./vendor ]]; then
+    rm -fr ./vendor
   fi

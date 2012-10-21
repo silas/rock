@@ -92,7 +92,7 @@ def main(args=None):
     # options
     project_options = parser.add_argument_group('project')
     project_options.add_argument('--path', help='set path',
-                                 default=os.getcwd())
+                                 default=os.environ.get('ROCK_PATH', ''))
     project_options.add_argument('--env', help='set env',
                                  default=os.environ.get('ROCK_ENV', 'local'))
     project_options.add_argument('--platform', help='set platform',

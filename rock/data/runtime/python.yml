@@ -1,16 +1,14 @@
 env:
-  PATH: "${PROJECT_PATH}/scripts:${PROJECT_PATH}/bin:${PROJECT_PATH}/venv/bin:${PATH}"
-  BUILD_PATH: "${PROJECT_PATH}/venv"
-  TEST_PATH: "${PROJECT_PATH}/tests"
-  PYTHONPATH: "${PROJECT_PATH}:${PYTHONPATH}"
+  PATH: "${ROCK_PATH}/scripts:${ROCK_PATH}/bin:${ROCK_PATH}/venv/bin:${PATH}"
+  PYTHONPATH: "${ROCK_PATH}:${PYTHONPATH}"
   ROCK_PIP_INSTALL: "install -r ./requirements.txt"
   ROCK_PIP_INSTALL_DEPLOYMENT: "--verbose install -r ./requirements.txt"
-  ROCK_PYVENV: "\"${BUILD_PATH}\""
-  ROCK_PYVENV_DEPLOYMENT: "\"${BUILD_PATH}\""
+  ROCK_PYVENV: "./venv"
+  ROCK_PYVENV_DEPLOYMENT: "./venv"
 
 build: |
 
-  if [[ ! -e "${BUILD_PATH}/bin/python" ]]; then
+  if [[ ! -e "./venv/bin/python" ]]; then
     pyvenv ${ROCK_PYVENV}
     distribute-setup
     rm -f distribute-*.gz
@@ -29,7 +27,7 @@ build_deployment: |
     die 'no "requirements.txt" file found'
   fi
 
-  if [[ ! -e "${BUILD_PATH}/bin/python" ]]; then
+  if [[ ! -e ./venv/bin/python ]]; then
     pyvenv ${ROCK_PYVENV_DEPLOYMENT}
     distribute-setup
     rm -f distribute-*.gz
@@ -40,10 +38,10 @@ build_deployment: |
 
 test: |
 
-  python -m unittest discover "${TEST_PATH}"
+  python -m unittest discover ./tests
 
 clean: |
 
-  if [[ -d "${BUILD_PATH}" ]]; then
-    rm -fr "${BUILD_PATH}"
+  if [[ -d ./venv ]]; then
+    rm -fr ./venv
   fi

@@ -1,16 +1,14 @@
 env:
-  PATH: "${PROJECT_PATH}/scripts:${PROJECT_PATH}/bin:${PROJECT_PATH}/venv/bin:${PATH}"
-  BUILD_PATH: "${PROJECT_PATH}/venv"
-  TEST_PATH: "${PROJECT_PATH}/tests"
-  PYTHONPATH: "${PROJECT_PATH}:${PYTHONPATH}"
+  PATH: "${ROCK_PATH}/scripts:${ROCK_PATH}/bin:${ROCK_PATH}/venv/bin:${PATH}"
+  PYTHONPATH: "${ROCK_PATH}:${PYTHONPATH}"
   ROCK_PIP_INSTALL: "install -r ./requirements.txt"
   ROCK_PIP_INSTALL_DEPLOYMENT: "--verbose install -r ./requirements.txt"
-  ROCK_VIRTUALENV: "--distribute \"${BUILD_PATH}\""
-  ROCK_VIRTUALENV_DEPLOYMENT: "--verbose --distribute \"${BUILD_PATH}\""
+  ROCK_VIRTUALENV: "--distribute ./venv"
+  ROCK_VIRTUALENV_DEPLOYMENT: "--verbose --distribute ./venv"
 
 build: |
 
-  if [[ ! -f "${BUILD_PATH}/bin/activate" ]]; then
+  if [[ ! -f ./venv/bin/activate ]]; then
     virtualenv ${ROCK_VIRTUALENV}
   fi
 
@@ -26,20 +24,20 @@ build_deployment: |
     die 'no "requirements.txt" file found'
   fi
 
-  if [[ ! -f "${BUILD_PATH}/bin/activate" ]]; then
+  if [[ ! -f ./venv/bin/activate ]]; then
     virtualenv ${ROCK_VIRTUALENV_DEPLOYMENT}
   fi
 
   pip ${ROCK_PIP_INSTALL_DEPLOYMENT}
 
-  virtualenv --relocatable "${BUILD_PATH}"
+  virtualenv --relocatable ./venv
 
 test: |
 
-  python -m unittest discover "${TEST_PATH}"
+  python -m unittest discover ./tests
 
 clean: |
 
-  if [[ -d "${BUILD_PATH}" ]]; then
-    rm -fr "${BUILD_PATH}"
+  if [[ -d ./venv ]]; then
+    rm -fr ./venv
   fi

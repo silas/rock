@@ -1,6 +1,5 @@
 env:
-  PATH: "${PROJECT_PATH}/bin:${PROJECT_PATH}/node_modules/.bin:${PATH}"
-  BUILD_PATH: "${PROJECT_PATH}/node_modules"
+  PATH: "${ROCK_PATH}/bin:${ROCK_PATH}/node_modules/.bin:${PATH}"
   ROCK_NPM_INSTALL: "install"
   ROCK_NPM_INSTALL_DEPLOYMENT: "--verbose --no-color install"
   ROCK_NPM_REBUILD_DEPLOYMENT: "--verbose --no-color rebuild"
@@ -29,6 +28,6 @@ test: |
 
 clean: |
 
-  if [[ -d "${BUILD_PATH}" ]]; then
-    rm -fr "${BUILD_PATH}"
+  if [[ -d ./node_modules ]]; then
+    rm -fr ./node_modules
   fi

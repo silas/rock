@@ -96,8 +96,8 @@ class Project(object):
     def create(self, name=None, *args):
         if not self.config._setup:
             self.config._setup = True
-        # project path
-        path = self.config['path']
+        # path
+        path = self.config.get('path') or os.getcwd()
         # if name is given try to run it, otherwise list available templates
         if name:
             # create project path if it doesn't exist

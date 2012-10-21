@@ -1,8 +1,7 @@
 env:
-  PATH: "${PROJECT_PATH}/bin:${PROJECT_PATH}/vendor/bundle/ruby/${RUBY_ABI}/bin:${PATH}"
-  BUILD_PATH: "${PROJECT_PATH}/vendor/bundle"
-  RUBYLIB: "${PROJECT_PATH}/lib:${RUBYLIB}"
-  ROCK_BUNDLE_INSTALL: "install --path=\"${BUILD_PATH}\""
+  PATH: "${ROCK_PATH}/bin:${ROCK_PATH}/vendor/bundle/ruby/${RUBY_ABI}/bin:${PATH}"
+  RUBYLIB: "${ROCK_PATH}/lib:${RUBYLIB}"
+  ROCK_BUNDLE_INSTALL: "install --path=./vendor/bundle"
   ROCK_BUNDLE_INSTALL_DEPLOYMENT: "--verbose --no-color install --deployment"
 
 build: |
@@ -27,10 +26,10 @@ test: |
 
 clean: |
 
-  if [[ -d "${BUILD_PATH}" ]]; then
-    rm -fr "${BUILD_PATH}"
+  if [[ -d ./vendor/bundle ]]; then
+    rm -fr ./vendor/bundle
   fi
 
-  if [[ -d "${PROJECT_PATH}/.bundle" ]]; then
-    rm -fr "${PROJECT_PATH}/.bundle"
+  if [[ -d ./.bundle ]]; then
+    rm -fr ./.bundle
   fi

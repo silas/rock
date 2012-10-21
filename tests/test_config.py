@@ -25,7 +25,7 @@ class ConfigTestCase(helper.unittest.TestCase):
             self.path)
         self.assertEqual(env['BUILD_PATH'], 'build_path')
         self.assertEqual(env['TEST_PATH'], 'test_path')
-        self.assertEqual(env['PROJECT_PATH'], self.path)
+        self.assertEqual(env['ROCK_PATH'], self.path)
         # build with parent
         build = [b for b in c['build'].split('\n') if b]
         self.assertEqual(len(build), 3)
@@ -106,9 +106,4 @@ class ConfigTestCase(helper.unittest.TestCase):
     def test_badenv2(self):
         c = self.setup('badenv2')
         with self.assertRaisesRegexp(ConfigError, r'env.one must be a string') as a:
-            c['path']
-
-    def test_nopath(self):
-        c = self.setup('simple', config={})
-        with self.assertRaisesRegexp(ConfigError, r'path is required') as a:
             c['path']

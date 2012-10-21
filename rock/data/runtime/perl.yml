@@ -1,10 +1,9 @@
 env:
-  PATH: "${PROJECT_PATH}/bin:${PROJECT_PATH}/local/bin:${PATH}"
-  BUILD_PATH: "${PROJECT_PATH}/local"
-  PERL_LOCAL_LIB_ROOT: "${PROJECT_PATH}/local"
-  PERL_MB_OPT: "--install_base ${PROJECT_PATH}/local"
-  PERL_MM_OPT: "INSTALL_BASE=${PROJECT_PATH}/local"
-  PERL5LIB: "${PROJECT_PATH}/lib:${PROJECT_PATH}/lib/perl5/x86_64-linux:${PROJECT_PATH}/local/lib/perl5"
+  PATH: "${ROCK_PATH}/bin:${ROCK_PATH}/local/bin:${PATH}"
+  PERL_LOCAL_LIB_ROOT: "${ROCK_PATH}/local"
+  PERL_MB_OPT: "--install_base ${ROCK_PATH}/local"
+  PERL_MM_OPT: "INSTALL_BASE=${ROCK_PATH}/local"
+  PERL5LIB: "${ROCK_PATH}/lib:${ROCK_PATH}/lib/perl5/x86_64-linux:${ROCK_PATH}/local/lib/perl5"
   ROCK_CARTON_INSTALL: "install"
   ROCK_CARTON_INSTALL_DEPLOYMENT: "--verbose --no-color install --deployment"
 
@@ -30,6 +29,6 @@ test: |
 
 clean: |
 
-  if [[ -d "${BUILD_PATH}" ]]; then
-    rm -fr "${BUILD_PATH}"
+  if [[ -d ./local ]]; then
+    rm -fr ./local
   fi

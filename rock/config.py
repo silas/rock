@@ -125,15 +125,28 @@ class Config(collections.Mapping):
             del src[name]
         dst.update(src)
 
+    def setup_path(self):
+        if not self.data.get('path'):
+            path = '.'
+            while os.path.split(os.path.abspath(path))[1]:
+                config_path = os.path.join(path, '.rock.yml')
+                if os.path.isfile(config_path):
+                    self.data['path'] = os.path.abspath(path)
+                    break
+                path = os.path.join('..', path)
+        if not self.data.get('path'):
+            self.data['path'] = os.getcwd()
+
     def setup(self):
         if self._setup:
             return
         self._setup = True
-        # setup configuration
+        # path
+        self.setup_path()
+        # new configuration
         data = {}
         # runtime
-        yml_path = ('path' in self.data and
-                    os.path.join(self.data['path'], '.rock.yml'))
+        yml_path = os.path.join(self.data['path'], '.rock.yml')
         if yml_path and os.path.isfile(yml_path):
             data = self.parse(yml_path)
             if not isinstance(data, dict):
@@ -144,7 +157,7 @@ class Config(collections.Mapping):
         if 'runtime' in data and 'runtime_type' not in data:
             data['runtime_type'] = data['runtime'].rstrip('0123456789')
         # project
-        for name in ('path', 'runtime', 'runtime_type'):
+        for name in ('runtime', 'runtime_type'):
             if name not in data:
                 raise ConfigError('%s is required' % name)
         # runtime
@@ -169,8 +182,8 @@ class Config(collections.Mapping):
         # merge
         self.data = {
             'env': {
-                'PROJECT_PATH': data['path'],
                 'ROCK_ENV': self.env,
+                'ROCK_PATH': data['path'],
             },
         }
         # merge runtime
