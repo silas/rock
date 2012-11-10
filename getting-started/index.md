@@ -5,7 +5,7 @@ title: Getting Started
 
 # Getting Started
 
-The Rock Platform is a collection of language runtimes and a command line tool
+The RockStack is a collection of language runtimes and a command line tool
 that allows developers to use modern technologies and encourages
 "best practises".
 

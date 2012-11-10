@@ -13,4 +13,4 @@ Runtime Changes
  - added python33 runtime
 
 [pypi]: http://pypi.python.org/pypi/rock/0.8.1
-[diff]: https://github.com/rockplatform/rock/compare/0.7.0...0.8.1
+[diff]: https://github.com/rockstack/rock/compare/0.7.0...0.8.1

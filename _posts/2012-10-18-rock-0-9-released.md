@@ -12,4 +12,4 @@ title: rock 0.9 released
  - fix user config search
 
 [pypi]: http://pypi.python.org/pypi/rock/0.9.0
-[diff]: https://github.com/rockplatform/rock/compare/0.8.1...0.9.0
+[diff]: https://github.com/rockstack/rock/compare/0.8.1...0.9.0

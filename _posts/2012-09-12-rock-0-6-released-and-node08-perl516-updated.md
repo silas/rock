@@ -14,6 +14,6 @@ Runtime Changes
  - updated perl516 core to [Perl 5.16.1][perl516]
 
 [pypi]: http://pypi.python.org/pypi/rock/0.6.0
-[diff]: https://github.com/rockplatform/rock/compare/0.5.0...0.6.0
+[diff]: https://github.com/rockstack/rock/compare/0.5.0...0.6.0
 [node08]: https://raw.github.com/joyent/node/v0.8.9/ChangeLog
 [perl516]: http://search.cpan.org/dist/perl-5.16.1/pod/perldelta.pod

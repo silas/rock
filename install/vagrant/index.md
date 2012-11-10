@@ -11,7 +11,7 @@ title: Install (Vagrant)
 
         Vagrant::Config.run do |config|
           config.vm.box = 'rp0-centos6'
-          config.vm.box_url = 'http://dl.rockplatform.org/rp0/vagrant/centos6.box'
+          config.vm.box_url = 'http://dl.rockstack.org/rp0/vagrant/centos6.box'
           config.vm.provision :shell, :inline => "yum update -y rock 'rock-*'"
           config.vm.forward_port 8000, 8000
           config.vm.forward_port 9000, 9000
