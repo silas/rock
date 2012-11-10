@@ -25,4 +25,4 @@ title: Install (Vagrant)
 
         $ vagrant ssh
 
- 1. Continue to [getting started](/getting-started/) page
+ 1. Continue to [getting started](/docs/) page

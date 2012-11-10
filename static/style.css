@@ -69,6 +69,9 @@ header hr {
   height: 1px;
   margin: 1em 0;
 }
+header a {
+  text-transform: uppercase;
+}
 header a:link,
 header a:visited {
   color: #b0b0b0;

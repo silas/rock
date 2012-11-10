@@ -23,4 +23,4 @@ title: Install (Enterprise Linux)
             rock-runtime-ruby18 \
             rock-runtime-ruby19
 
- 1. Continue to [getting started](/getting-started/) page
+ 1. Continue to [getting started](/docs/) page
