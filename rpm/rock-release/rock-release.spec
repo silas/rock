@@ -10,7 +10,7 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 
 %description
-yum config files for the Rock Platform.
+yum config files for rock.
 
 %prep
 

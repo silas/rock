@@ -5,7 +5,7 @@ Summary:        Create, build, test and run applications
 
 Group:          Development/Languages
 License:        MIT
-URL:            https://github.com/rockplatform/rock
+URL:            https://github.com/rockstack/rock
 Source0:        http://pypi.python.org/packages/source/r/rock/rock-%{version}.tar.gz
 BuildArch:      noarch
 
