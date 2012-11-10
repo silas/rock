@@ -13,7 +13,7 @@ Ensure you have the following requirements installed:
 
 Clone repository:
 
-    git clone git://github.com/rockplatform/dev.git rock
+    git clone git://github.com/rockstack/dev.git rock
 
 Switch to rock directory:
 
