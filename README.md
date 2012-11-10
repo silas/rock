@@ -5,27 +5,35 @@ This is the rock development environment.
 
 ## Getting Started
 
-Ensure you have the following requirements installed:
+Ensure you have the following requirements installed
 
  * [Git](http://git-scm.com/)
  * [VirtualBox](https://www.virtualbox.org/)
  * [Vagrant](http://vagrantup.com/)
 
-Clone repository:
+Then do the following
 
-    git clone git://github.com/rockstack/dev.git rock
+ 1. Clone repository
 
-Switch to rock directory:
+        git clone git://github.com/rockstack/dev.git rock
 
-    cd rock
+ 1. Switch to rock directory
 
-Run setup script:
+        cd rock
 
-    ./misc/setup
+ 1. Run setup script
 
-Up vagrant:
+        ./misc/setup
 
-    vagrant up
+ 1. Up vagrant
+
+        vagrant up
+
+## Tips
+
+Run a command in all project directories
+
+    ./misc/project git status
 
 ## License
 

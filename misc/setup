@@ -15,3 +15,4 @@ clone ${ROCK_PACKAGES-rockstack/packages}
 clone ${ROCK_PUPPET-rockstack/puppet-rock} misc/modules/rock
 clone ${ROCK_TESTS-rockstack/tests}
 clone ${ROCK_SITE-rockstack/rockstack.github.com} site
+clone ${ROCK_VAGRANT-rockstack/vagrant} vagrant
