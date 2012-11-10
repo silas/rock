@@ -5,7 +5,7 @@ title: Getting Started
 
 # Getting Started
 
-The RockStack is a collection of language runtimes and a command line tool
+RockStack is a collection of language runtimes and a command line tool
 that allows developers to use modern technologies and encourages
 "best practises".
 
