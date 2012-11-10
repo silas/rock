@@ -1,9 +1,7 @@
-# Rock [![Build Status](https://secure.travis-ci.org/rockplatform/rock.png)](http://travis-ci.org/rockplatform/rock)
-
-Rock Platform tool.
+# Rock [![Build Status](https://secure.travis-ci.org/rockstack/rock.png)](http://travis-ci.org/rockstack/rock)
 
 This is a command line tool that simplifies creating, building, testing, and
-running applications on the Rock Platform.
+running applications.
 
 ## License
 
