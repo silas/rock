@@ -10,7 +10,7 @@ title: Install (Vagrant)
  1. Create `Vagrantfile`
 
         Vagrant::Config.run do |config|
-          config.vm.box = 'rp0-centos6'
+          config.vm.box = 'rock-centos6'
           config.vm.box_url = 'http://dl.rockstack.org/vagrant/centos6.box'
           config.vm.provision :shell, :inline => "yum update -y rock 'rock-*'"
           config.vm.forward_port 8000, 8000
