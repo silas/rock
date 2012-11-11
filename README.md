@@ -23,7 +23,7 @@ Then do the following
 
  1. Run setup script
 
-        ./misc/setup
+        make
 
  1. Up vagrant
 
