@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Getting Started
+title: Documentation
 ---
 
 # Documentation
@@ -17,13 +17,15 @@ Install options include a prebuilt Vagrant box and an Enterprise Linux YUM repos
  * [Enterprise Linux](/docs/install/el/) - Red Hat Enterprise Linux (RHEL), CentOS,
    Oracle Linux, Scientific Linux (SL), etc...
 
-## Create an Application
+## Using Runtimes
 
-The following are step-by-step guides that show you how to create a basic web
-application with tests.
+Supported runtimes include multiple languages and versions and are isolated
+from system installations and other rock runtimes.
 
- * [Node](/docs/node/getting-started/)
- * [Perl](/docs/perl/getting-started/)
- * [PHP](/docs/php/getting-started/)
- * [Python](/docs/python/getting-started/)
- * [Ruby](/docs/ruby/getting-started/)
+Its easy and often recommended to run all the runtimes on a single box.
+
+ * [Node](/docs/node/)
+ * [Perl](/docs/perl/)
+ * [PHP](/docs/php/)
+ * [Python](/docs/python/)
+ * [Ruby](/docs/ruby/)
