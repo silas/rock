@@ -4,10 +4,10 @@ from distutils.core import setup
 from rock import __version__ as version
 
 long_description = """
-This is a command line tool that simplifies building, testing, and running
-applications on the Rock Platform.
+This is a command line tool that simplifies creating, building, testing, and
+running applications in multiple languages and versions on the same system.
 
-See http://www.rockplatform.org for more information.
+See http://www.rockstack.org for more information.
 """
 
 install_requires = ['PyYAML']
@@ -18,12 +18,12 @@ if sys.version_info < (2, 7):
 setup(
     name='rock',
     version=version,
-    description='Rock Platform tool',
+    description='Rock Better Runtimes',
     long_description=long_description.strip(),
     author='Silas Sewell',
     author_email='silas@sewell.org',
     license='MIT',
-    url='https://github.com/rockplatform/rock',
+    url='http://www.rockstack.org',
     packages=['rock'],
     package_data={'rock': ['data/*/*']},
     scripts=['scripts/rock'],
