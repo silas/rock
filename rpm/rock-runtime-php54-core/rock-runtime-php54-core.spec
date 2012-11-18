@@ -14,7 +14,7 @@
 
 Name:           rock-runtime-php54-core
 Version:        5.4.7
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A PHP 5.4.x runtime
 
 Group:          Development/Languages
@@ -183,7 +183,7 @@ This packages contains resources for building %{name} RPMs.
   --enable-pdo=shared \
   --disable-cgi \
   --enable-fpm \
-  --without-pear
+  --with-pear
 
 %{__make} %{?_smp_mflags}
 
@@ -196,16 +196,33 @@ find %{buildroot}%{php54_rootdir} -name '*.a' -delete
 
 echo "date.timezone = UTC" >> %{buildroot}%{php54_libdir}/php.ini
 
-for name in json phar; do
-  echo "extension = ${name}.so" >> %{buildroot}%{php54_libdir}/php.ini
+for path in $( find '%{buildroot}%{php54_libdir}/php/extensions' -name '*.so' -type f ); do
+  file=$( basename $path )
+  echo "extension = ${file}" >> %{buildroot}%{php54_libdir}/php.ini
 done
 
-rm -fr %{php54_rootdir}/%{junk} %{php54_libdir}/php/%{junk}
+rm -fr %{buildroot}%{php54_rootdir}/%{junk} \
+       %{buildroot}%{php54_libdir}/php/%{junk} \
+       %{buildroot}/%{junk}
 
 mkdir -p %{buildroot}%{_sysconfdir}/rpm
 
-cat > %{buildroot}%{_sysconfdir}/rpm/macros.rock-php54 << EOF
+cat << EOF > %{buildroot}%{_sysconfdir}/rpm/macros.rock-php54
 %%php54_rootdir %{php54_rootdir}
+%%php54_libdir %{php54_libdir}
+%%php54_extdir %{php54_libdir}/php/extensions/no-debug-non-zts-20100525
+%%__pear %%{php54_rootdir}%%{_bindir}/pear
+%%__pecl %%{php54_rootdir}%%{_bindir}/pecl
+%%pear_phpdir  %%(%%{__pear} config-get php_dir  2> /dev/null || echo undefined)
+%%pear_docdir  %%(%%{__pear} config-get doc_dir  2> /dev/null || echo undefined)
+%%pear_testdir %%(%%{__pear} config-get test_dir 2> /dev/null || echo undefined)
+%%pear_datadir %%(%%{__pear} config-get data_dir 2> /dev/null || echo undefined)
+%%pecl_phpdir  %%(%%{__pecl} config-get php_dir  2> /dev/null || echo undefined)
+%%pecl_docdir  %%(%%{__pecl} config-get doc_dir  2> /dev/null || echo undefined)
+%%pecl_testdir %%(%%{__pecl} config-get test_dir 2> /dev/null || echo undefined)
+%%pecl_datadir %%(%%{__pecl} config-get data_dir 2> /dev/null || echo undefined)
+%%pear_xmldir %%{pear_phpdir}/.pkgxml
+%%pecl_xmldir %%{pecl_phpdir}/.pkgxml
 EOF
 
 %clean
@@ -221,6 +238,10 @@ rm -rf %{buildroot}
 %{_sysconfdir}/rpm/macros.rock-php54
 
 %changelog
+* Sat Nov 17 2012 Silas Sewell <silas@sewell.org> - 5.4.7-2
+- Enable all extensions by default
+- Enable pear
+
 * Sat Sep 29 2012 Silas Sewell <silas@sewell.org> - 5.4.7-1
 - Update to 5.4.7
 
