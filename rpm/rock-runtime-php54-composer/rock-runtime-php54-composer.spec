@@ -2,11 +2,11 @@
 %filter_from_requires /^php.*/d; /^libphp.*/d
 %filter_setup
 
-%global pre alpha5
+%global pre alpha6
 
 Name:           rock-runtime-php54-composer
 Version:        1.0.0
-Release:        0.2.%{pre}%{?dist}
+Release:        0.3.%{pre}%{?dist}
 Summary:        A tool to manage PHP 5.4.x dependencies
 
 Group:          Development/Languages
@@ -37,6 +37,10 @@ install -p -D -m 755 %{SOURCE0} %{buildroot}%{php54_rootdir}%{_bindir}/composer.
 install -p -D -m 644 %{SOURCE2} %{buildroot}%{_docdir}/%{name}-%{version}/CHANGELOG.md
 install -p -D -m 644 %{SOURCE1} %{buildroot}%{_docdir}/%{name}-%{version}/LICENSE
 
+pushd %{buildroot}%{php54_rootdir}%{_bindir}
+  ln -s composer.phar composer
+popd
+
 %clean
 rm -rf %{buildroot}
 
@@ -45,8 +49,14 @@ rm -rf %{buildroot}
 %doc %{_docdir}/%{name}-%{version}/CHANGELOG.md
 %doc %{_docdir}/%{name}-%{version}/LICENSE
 %{php54_rootdir}%{_bindir}/composer.phar
+%{php54_rootdir}%{_bindir}/composer
 
 %changelog
+* Sat Nov 17 2012 Silas Sewell <silas@sewell.org> - 1.0.0-0.3.alpha6
+- Update to alpha6
+- Reduces memory usage
+- Link composer to composer.phar
+
 * Thu Aug 23 2012 Silas Sewell <silas@sewell.org> - 1.0.0-0.2.alpha5
 - Update to alpha5
 - Unzip requirement
