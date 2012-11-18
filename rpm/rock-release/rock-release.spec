@@ -31,5 +31,8 @@ rm -rf %{buildroot}
 %{_sysconfdir}/yum.repos.d/rock.repo
 
 %changelog
+* Sat Nov 17 2012 Silas Sewell <silas@sewell.org> - 1-2
+- Update repository url
+
 * Thu Oct 04 2012 Silas Sewell <silas@sewell.org> - 1-1
 - Initial release
