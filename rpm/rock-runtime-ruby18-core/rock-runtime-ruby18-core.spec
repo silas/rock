@@ -8,18 +8,18 @@
 %global ruby18_gemdir %{ruby18_rootdir}%{_prefix}/lib/ruby/gems/%{ruby18_abi}
 
 %global shortversion 1.8.7
-%global patch 370
+%global patch 371
 
 Name:           rock-runtime-ruby18-core
 Version:        %{shortversion}.%{patch}
-Release:        2%{?dist}
+Release:        1%{?dist}
 Summary:        A Ruby 1.8.x runtime
 
 Group:          Development/Languages
 License:        Ruby or BSD
 URL:            http://ruby-lang.org
 Source0:        http://ftp.ruby-lang.org/pub/ruby/1.8/ruby-%{shortversion}-p%{patch}.tar.gz
-Patch0:         ruby-%{shortversion}-p%{patch}-ext-dl.patch
+Patch0:         ruby-1.8.7-p370-ext-dl.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  patchelf
@@ -92,6 +92,9 @@ rm -rf %{buildroot}
 %{_sysconfdir}/rpm/macros.rock-ruby18
 
 %changelog
+* Sun Nov 18 2012 Silas Sewell <silas@sewell.org> - 1.8.7.371-1
+- Update to patch 371
+
 * Fri Jul 20 2012 Silas Sewell <silas@sewell.org> - 1.8.7.370-2
 - Add ruby18_abi to rpmbuild
 

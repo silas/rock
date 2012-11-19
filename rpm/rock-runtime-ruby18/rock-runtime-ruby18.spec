@@ -5,7 +5,7 @@
 
 Name:           rock-runtime-ruby18
 Version:        1
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        ruby18 runtime for rock
 
 Group:          Development/Languages
@@ -13,9 +13,9 @@ License:        MIT
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 
-BuildRequires:  rock-runtime-ruby18-core-rpmbuild >= 1.8.7.370-2
+BuildRequires:  rock-runtime-ruby18-core-rpmbuild
 Requires:       rock-runtime-ruby18-bundler >= %{bundler_version}-1
-Requires:       rock-runtime-ruby18-core >= 1.8.7.370-2
+Requires:       rock-runtime-ruby18-core >= 1.8.7.371-1
 Requires:       rock-runtime-ruby18-rubygems >= 1.8.24-1
 
 %description
@@ -45,6 +45,9 @@ rm -rf %{buildroot}
 %{ruby18_rootdir}/rock.yml
 
 %changelog
+* Sun Nov 18 2012 Silas Sewell <silas@sewell.org> - 1-4
+- Update to ruby 1.8.7 p371
+
 * Fri Jul 20 2012 Silas Sewell <silas@sewell.org> - 1-3
 - Convert env to rock.yml
 - Update to bundler 1.1.5

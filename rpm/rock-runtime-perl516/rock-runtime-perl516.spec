@@ -3,7 +3,7 @@
 
 Name:           rock-runtime-perl516
 Version:        1
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        perl516 runtime for rock
 
 Group:          Development/Languages
@@ -12,7 +12,7 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 
 BuildRequires:  rock-runtime-perl516-core-rpmbuild
-Requires:       rock-runtime-perl516-core >= 5.16.1-1
+Requires:       rock-runtime-perl516-core >= 5.16.2-1
 Requires:       rock-runtime-perl516-cpanm >= 1.5017-1
 Requires:       rock-runtime-perl516-local-lib >= 1.008004-2
 Requires:       rock-runtime-perl516-carton >= 1.5014-2
@@ -42,6 +42,9 @@ rm -rf %{buildroot}
 %{perl516_rootdir}/rock.yml
 
 %changelog
+* Sun Nov 18 2012 Silas Sewell <silas@sewell.org> - 1-5
+- Update to Perl 5.16.2
+
 * Wed Sep 12 2012 Silas Sewell <silas@sewell.org> - 1-4
 - Update to Perl 5.16.1
 - Rebuild and update dependency management tools

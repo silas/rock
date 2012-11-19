@@ -3,7 +3,7 @@
 
 Name:           rock-runtime-php54
 Version:        1
-Release:        6%{?dist}
+Release:        7%{?dist}
 Summary:        php54 runtime for rock
 
 Group:          Development/Languages
@@ -12,8 +12,10 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 
 BuildRequires:  rock-runtime-php54-core-rpmbuild
-Requires:       rock-runtime-php54-composer >= 1.0.0-0.2
-Requires:       rock-runtime-php54-core >= 5.4.7-1
+Requires:       rock-runtime-php54-composer >= 1.0.0-0.3
+Requires:       rock-runtime-php54-core >= 5.4.8-1
+Requires:       rock-runtime-php54-libmemcached >= 1.0.13-2
+Requires:       rock-runtime-php54-memcached >= 2.1.0-4
 
 %description
 php54 runtime for rock.
@@ -40,6 +42,10 @@ rm -rf %{buildroot}
 %{php54_rootdir}/rock.yml
 
 %changelog
+* Sun Nov 18 2012 Silas Sewell <silas@sewell.org> - 1-7
+- PHP 5.4.8
+- Add PHP memcached
+
 * Sat Sep 29 2012 Silas Sewell <silas@sewell.org> - 1-6
 - PHP 5.4.7
 

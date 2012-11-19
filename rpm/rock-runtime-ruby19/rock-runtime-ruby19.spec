@@ -5,7 +5,7 @@
 
 Name:           rock-runtime-ruby19
 Version:        1
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        ruby19 runtime for rock
 
 Group:          Development/Languages
@@ -13,9 +13,9 @@ License:        MIT
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 
-BuildRequires:  rock-runtime-ruby19-core-rpmbuild >= 1.9.3.194-2
+BuildRequires:  rock-runtime-ruby19-core-rpmbuild
 Requires:       rock-runtime-ruby19-bundler >= %{bundler_version}-1
-Requires:       rock-runtime-ruby19-core >= 1.9.3.194-2
+Requires:       rock-runtime-ruby19-core >= 1.9.3.327-1
 
 %description
 ruby19 runtime for rock.
@@ -44,6 +44,9 @@ rm -rf %{buildroot}
 %{ruby19_rootdir}/rock.yml
 
 %changelog
+* Sun Nov 18 2012 Silas Sewell <silas@sewell.org> - 1-4
+- Update ruby 1.9.3 p327
+
 * Fri Jul 20 2012 Silas Sewell <silas@sewell.org> - 1-3
 - Convert env to rock.yml
 - Update to bundler 1.1.5

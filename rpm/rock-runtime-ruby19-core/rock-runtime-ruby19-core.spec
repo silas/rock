@@ -8,11 +8,11 @@
 %global ruby19_gemdir %{ruby19_rootdir}%{_prefix}/lib/ruby/gems/%{ruby19_abi}
 
 %global shortversion 1.9.3
-%global patch 194
+%global patch 327
 
 Name:           rock-runtime-ruby19-core
 Version:        %{shortversion}.%{patch}
-Release:        2%{?dist}
+Release:        1%{?dist}
 Summary:        A Ruby 1.9.x runtime
 
 Group:          Development/Languages
@@ -94,6 +94,9 @@ rm -rf %{buildroot}
 %{ruby19_rootdir}%{_prefix}/lib/pkgconfig/ruby*
 
 %changelog
+* Sun Nov 18 2012 Silas Sewell <silas@sewell.org> - 1.9.3.327-1
+- Update to 1.9.3 p327
+
 * Fri Jul 20 2012 Silas Sewell <silas@sewell.org> - 1.9.3.194-2
 - Add ruby19_abi to rpmbuild
 
