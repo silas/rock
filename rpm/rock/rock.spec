@@ -1,5 +1,5 @@
 Name:           rock
-Version:        0.9.0
+Version:        0.10.0
 Release:        1%{?dist}
 Summary:        Create, build, test and run applications
 
@@ -43,6 +43,14 @@ nosetests
 %{python_sitelib}/%{name}-%{version}-py*.egg-info
 
 %changelog
+* Sun Nov 18 2012 Silas Sewell <silas@sewell.org> - 0.10.0-1
+- Rename PROJECT_PATH to ROCK_PATH
+- Search directory path for .rock.yml file
+- Make "rock run" from working directory when not a section command
+- Remove BUILD_PATH from yaml files
+- Remove runtime_type and make configuration files explicit
+- Expose working directory to sections via ROCK_PWD
+
 * Thu Oct 18 2012 Silas Sewell <silas@sewell.org> - 0.9.0-1
 - Platform subcommand
 - Run arguments
