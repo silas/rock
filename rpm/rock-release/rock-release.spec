@@ -28,11 +28,12 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
-%{_sysconfdir}/yum.repos.d/rock.repo
+%config(noreplace) %{_sysconfdir}/yum.repos.d/rock.repo
 
 %changelog
 * Sat Nov 17 2012 Silas Sewell <silas@sewell.org> - 1-2
 - Update repository url
+- Add testing repository
 
 * Thu Oct 04 2012 Silas Sewell <silas@sewell.org> - 1-1
 - Initial release
