@@ -1,6 +1,6 @@
 Name:           rock-release
 Version:        1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        rock release files
 
 Group:          System Environment/Base
