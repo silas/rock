@@ -3,8 +3,9 @@
 %filter_setup
 
 Name:           rock-runtime-perl516-carton
-Version:        1.5014
-Release:        2%{?dist}
+Epoch:          1
+Version:        0.9.7
+Release:        0.1%{?dist}
 Summary:        A tool to manage Perl 5.16.x dependencies
 
 Group:          Development/Languages
@@ -29,12 +30,16 @@ Source15:       http://www.cpan.org/authors/id/M/MA/MAKAMAKA/JSON-2.53.tar.gz
 Source16:       http://search.cpan.org/CPAN/authors/id/M/MI/MIYAGAWA/carton-v0.9_7.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-BuildRequires:  rock-runtime-perl516-core-rpmbuild
+BuildRequires:  rock-runtime-perl516-core-rpmbuild >= 5.12.2-2
 BuildRequires:  rock-runtime-perl516-cpanm
-Requires:       rock-runtime-perl516-core
+Requires:       rock-runtime-perl516-core >= 5.12.2-2
 
 %description
-cpanm - get, unpack build and install modules from CPAN
+carton is a command line tool to track the Perl module dependencies for your
+Perl application. The managed dependencies are tracked in a carton.lock file,
+which is meant to be version controlled, and the lock file allows other
+developers of your application will have the exact same versions of the
+modules.
 
 %prep
 
@@ -87,6 +92,10 @@ rm -rf %{buildroot}
 %{perl516_rootdir}%{_prefix}/lib/carton
 
 %changelog
+* Tue Nov 20 2012 Silas Sewell <silas@sewell.org> - 1:0.9.7-0.1
+- Fix version and epoch
+- Fix paths
+
 * Tue Sep 11 2012 Silas Sewell <silas@sewell.org> - 1.5014-2
 - Rebuild for Perl 5.16.1
 - Update dependencies

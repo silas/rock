@@ -5,9 +5,18 @@
 %global runtime perl516
 %global perl516_rootdir /opt/rock/runtime/%{runtime}
 
+%global privlib %{perl516_rootdir}%{_prefix}/share/perl5
+%global archlib %{perl516_rootdir}%{_prefix}/lib/perl5
+
+%global perl516_vendorlib  %{privlib}/vendor_perl
+%global perl516_vendorarch %{archlib}/vendor_perl
+
+%global perl516_arch_stem -thread-multi
+%global perl516_archname %{_arch}-%{_os}%{perl516_arch_stem}
+
 Name:           rock-runtime-perl516-core
 Version:        5.16.2
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A Perl 5.16.x runtime
 
 Group:          Development/Languages
@@ -42,6 +51,15 @@ This packages contains resources for building %{name} RPMs.
 ./Configure -des \
   -Doptimize="$RPM_OPT_FLAGS" \
   -Dprefix=%{perl516_rootdir}%{_prefix} \
+  -Dvendorprefix=%{perl516_rootdir}%{_prefix} \
+  -Dsiteprefix=%{perl516_rootdir}%{_prefix}/local \
+  -Dsitelib="%{perl516_rootdir}%{_prefix}/local/share/perl5" \
+  -Dsitearch="%{perl516_rootdir}%{_prefix}/local/lib/perl5" \
+  -Dprivlib="%{privlib}" \
+  -Dvendorlib="%{perl516_vendorlib}" \
+  -Darchlib="%{archlib}" \
+  -Dvendorarch="%{perl516_vendorarch}" \
+  -Darchname=%{perl516_archname} \
   -Dman3ext=3pm \
   -Dusethreads \
   -Duseithreads \
@@ -65,6 +83,10 @@ find %{buildroot} -name '*.0' -type f -delete
 
 cat > %{buildroot}%{_sysconfdir}/rpm/macros.rock-perl516 << EOF
 %%perl516_rootdir %{perl516_rootdir}
+%%perl516_vendorlib  %{privlib}/vendor_perl
+%%perl516_vendorarch %{archlib}/vendor_perl
+%%perl516_arch_stem -thread-multi
+%%perl516_archname %{_arch}-%{_os}%{perl516_arch_stem}
 EOF
 
 %clean
@@ -80,6 +102,9 @@ rm -rf %{buildroot}
 %{_sysconfdir}/rpm/macros.rock-perl516
 
 %changelog
+* Tue Nov 20 2012 Silas Sewell <silas@sewell.org> - 5.16.2-2
+- Fix various path issues
+
 * Sat Nov 17 2012 Silas Sewell <silas@sewell.org> - 5.16.2-1
 - Update to 5.16.2
 
