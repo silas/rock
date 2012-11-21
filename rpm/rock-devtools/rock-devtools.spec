@@ -1,6 +1,6 @@
 Name:           rock-devtools
 Version:        1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Build and development tools
 
 Group:          Development/Languages
@@ -31,5 +31,8 @@ rm -rf %{buildroot}
 %defattr(-,root,root,-)
 
 %changelog
+* Tue Nov 20 2012 Silas Sewell <silas@sewell.org> - 1-2
+- Add git
+
 * Wed Jul 18 2012 Silas Sewell <silas@sewell.org> - 1-1
 - Initial build

@@ -1,5 +1,5 @@
 Name:           rock
-Version:        0.10.0
+Version:        0.11.0
 Release:        1%{?dist}
 Summary:        Create, build, test and run applications
 
@@ -43,6 +43,13 @@ nosetests
 %{python_sitelib}/%{name}-%{version}-py*.egg-info
 
 %changelog
+* Tue Nov 20 2012 Silas Sewell <silas@sewell.org> - 0.11.0-1
+- Rename ROCK_PWD to ROCK_CWD
+- Use PERL_ARCHNAME to generate PERL5LIB
+- Use composer instead of composer.phar
+- PHP test now calls bare phpunit
+- Remove php.ini usage and generation
+
 * Sun Nov 18 2012 Silas Sewell <silas@sewell.org> - 0.10.0-1
 - Rename PROJECT_PATH to ROCK_PATH
 - Search directory path for .rock.yml file
