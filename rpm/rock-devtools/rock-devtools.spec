@@ -10,6 +10,7 @@ BuildArch:      noarch
 
 Requires:       gcc
 Requires:       gcc-c++
+Requires:       git
 Requires:       make
 
 %description

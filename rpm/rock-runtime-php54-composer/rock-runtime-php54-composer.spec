@@ -19,7 +19,6 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 
 BuildRequires:  rock-runtime-php54-core-rpmbuild
-Requires:       git
 Requires:       rock-runtime-php54-core
 Requires:       unzip
 
