@@ -6,7 +6,7 @@ env:
 build: |
 
   if [[ -f ./composer.json ]]; then
-    composer.phar ${ROCK_COMPOSER_INSTALL}
+    composer ${ROCK_COMPOSER_INSTALL}
   else
     warn 'no "composer.json" file found'
   fi
@@ -17,11 +17,11 @@ build_deployment: |
     die 'no "composer.lock" file found'
   fi
 
-  composer.phar ${ROCK_COMPOSER_INSTALL_DEPLOYMENT}
+  composer ${ROCK_COMPOSER_INSTALL_DEPLOYMENT}
 
 test: |
 
-  php -c "${ROCK_PATH}" ./vendor/bin/phpunit
+  php ./vendor/bin/phpunit
 
 clean: |
 
