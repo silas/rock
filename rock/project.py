@@ -47,7 +47,7 @@ class Project(object):
             # run command and wait for results
             shell.write("export ROCK_ARGS='%s'" %
                         ' '.join(map(pipes.quote, args)))
-            shell.write("export ROCK_PWD='%s'" % os.getcwd())
+            shell.write("export ROCK_CWD='%s'" % os.getcwd())
             shell.write('')
             if isinstance(command, (list, tuple)):
                 shell.write(' '.join(command))
