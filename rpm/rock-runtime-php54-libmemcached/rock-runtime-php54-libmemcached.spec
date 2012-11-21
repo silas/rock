@@ -1,10 +1,14 @@
+%filter_from_provides /.*/d
+%filter_from_requires /^libhashkit.*/d; /^libmemcached.*/d
+%filter_setup
+
 %global with_tests       %{?_with_tests:1}%{!?_with_tests:0}
 %global with_sasl        0
 
 Name:      rock-runtime-php54-libmemcached
 Summary:   Client library and command line tools for memcached server
 Version:   1.0.13
-Release:   2%{?dist}
+Release:   3%{?dist}
 License:   BSD
 Group:     System Environment/Libraries
 URL:       http://libmemcached.org/
@@ -167,6 +171,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Wed Nov 21 2012 Silas Sewell <silas@sewell.org> - 10.0.13-3
+- Filter provides
+
 * Sat Nov 17 2012 Silas Sewell <silas@sewell.org> - 10.0.13-2
 - Namespace for rock runtime php54
 

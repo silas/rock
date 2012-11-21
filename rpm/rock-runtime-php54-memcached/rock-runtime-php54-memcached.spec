@@ -1,3 +1,7 @@
+%filter_from_provides /.*/d
+%filter_from_requires /^libmemcached.*/d
+%filter_setup
+
 %{!?__pecl:  %{expand: %%global __pecl  %{_bindir}/pecl}}
 
 %global pecl_name memcached
@@ -5,7 +9,7 @@
 Name:             rock-runtime-php54-memcached
 Summary:          Extension to work with the Memcached caching daemon
 Version:          2.1.0
-Release:          4%{?dist}
+Release:          5%{?dist}
 License:          PHP and MIT
 Group:            Development/Languages
 URL:              http://pecl.php.net/package/%{pecl_name}
@@ -18,18 +22,12 @@ Patch1:           %{pecl_name}-info.patch
 BuildRoot:        %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:    autoconf
 BuildRequires:    rock-runtime-php54-core-rpmbuild
-BuildRequires:    rock-runtime-php54-libmemcached-devel
+BuildRequires:    rock-runtime-php54-libmemcached-devel >= 1.0.13-3
 BuildRequires:    zlib-devel
 Requires:         rock-runtime-php54-core
+Requires:         rock-runtime-php54-libmemcached >= 1.0.13-3
 Requires(post):   %{__pecl}
 Requires(postun): %{__pecl}
-
-# RPM 4.8
-%{?filter_provides_in: %filter_provides_in %{_libdir}/.*\.so$}
-%{?filter_setup}
-
-# RPM 4.9
-%global __provides_exclude_from %{?__provides_exclude_from:%__provides_exclude_from|}%{_libdir}/.*\\.so$
 
 %description
 This extension uses libmemcached library to provide API for communicating
@@ -127,6 +125,9 @@ fi
 %endif
 
 %changelog
+* Wed Nov 21 2012 Silas Sewell <silas@sewell.org> - 2.1.0-5
+- Filter provides
+
 * Sat Nov 17 2012 Silas Sewell <silas@sewell.org> - 2.1.0-4
 - Namespace for rock runtime php54
 
