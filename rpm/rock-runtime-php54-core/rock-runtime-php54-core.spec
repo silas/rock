@@ -14,7 +14,7 @@
 
 Name:           rock-runtime-php54-core
 Version:        5.4.8
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A PHP 5.4.x runtime
 
 Group:          Development/Languages
@@ -211,18 +211,26 @@ cat << EOF > %{buildroot}%{_sysconfdir}/rpm/macros.rock-php54
 %%php54_rootdir %{php54_rootdir}
 %%php54_libdir %{php54_libdir}
 %%php54_extdir %{php54_libdir}/php/extensions/no-debug-non-zts-20100525
-%%__pear %%{php54_rootdir}%%{_bindir}/pear
-%%__pecl %%{php54_rootdir}%%{_bindir}/pecl
-%%pear_phpdir  %%(%%{__pear} config-get php_dir  2> /dev/null || echo undefined)
-%%pear_docdir  %%(%%{__pear} config-get doc_dir  2> /dev/null || echo undefined)
-%%pear_testdir %%(%%{__pear} config-get test_dir 2> /dev/null || echo undefined)
-%%pear_datadir %%(%%{__pear} config-get data_dir 2> /dev/null || echo undefined)
-%%pecl_phpdir  %%(%%{__pecl} config-get php_dir  2> /dev/null || echo undefined)
-%%pecl_docdir  %%(%%{__pecl} config-get doc_dir  2> /dev/null || echo undefined)
-%%pecl_testdir %%(%%{__pecl} config-get test_dir 2> /dev/null || echo undefined)
-%%pecl_datadir %%(%%{__pecl} config-get data_dir 2> /dev/null || echo undefined)
-%%pear_xmldir %%{pear_phpdir}/.pkgxml
-%%pecl_xmldir %%{pecl_phpdir}/.pkgxml
+EOF
+
+cat << EOF > %{buildroot}%{_sysconfdir}/rpm/macros.rock-php54-pear
+%%__php54_pear %{php54_rootdir}%%{_bindir}/pear
+%%__php54_pecl %{php54_rootdir}%%{_bindir}/pecl
+
+%%php54_pear_phpdir  %%(%%{__php54_pear} config-get php_dir  2> /dev/null || echo undefined)
+%%php54_pear_docdir  %%(%%{__php54_pear} config-get doc_dir  2> /dev/null || echo undefined)
+%%php54_pear_testdir %%(%%{__php54_pear} config-get test_dir 2> /dev/null || echo undefined)
+%%php54_pear_datadir %%(%%{__php54_pear} config-get data_dir 2> /dev/null || echo undefined)
+%%php54_pecl_phpdir  %%(%%{__php54_pecl} config-get php_dir  2> /dev/null || echo undefined)
+%%php54_pecl_docdir  %%(%%{__php54_pecl} config-get doc_dir  2> /dev/null || echo undefined)
+%%php54_pecl_testdir %%(%%{__php54_pecl} config-get test_dir 2> /dev/null || echo undefined)
+%%php54_pecl_datadir %%(%%{__php54_pecl} config-get data_dir 2> /dev/null || echo undefined)
+
+%%php54_pear_xmldir %%{php54_pear_phpdir}/.pkgxml
+%%php54_pecl_xmldir %%{php54_pecl_phpdir}/.pkgxml
+
+%%php54_pecl_install %%{__php54_pecl} install --nodeps --soft --force --register-only --nobuild
+%%php54_pecl_uninstall %%{__php54_pecl} uninstall --nodeps --ignore-errors --register-only
 EOF
 
 %clean
@@ -231,6 +239,7 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root,-)
 %doc LICENSE
+%{_sysconfdir}/rpm/macros.rock-php54-pear
 %{php54_rootdir}
 
 %files rpmbuild
@@ -238,6 +247,9 @@ rm -rf %{buildroot}
 %{_sysconfdir}/rpm/macros.rock-php54
 
 %changelog
+* Wed Nov 21 2012 Silas Sewell <silas@sewell.org> - 5.4.8-2
+- Move pear/pecl macros into separate file and add install/uninstall
+
 * Sat Nov 17 2012 Silas Sewell <silas@sewell.org> - 5.4.8-1
 - Update to 5.4.8
 - Enable all extensions by default

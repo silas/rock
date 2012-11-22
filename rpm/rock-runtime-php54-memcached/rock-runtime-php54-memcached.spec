@@ -2,14 +2,12 @@
 %filter_from_requires /^libmemcached.*/d
 %filter_setup
 
-%{!?__pecl:  %{expand: %%global __pecl  %{_bindir}/pecl}}
-
 %global pecl_name memcached
 
 Name:             rock-runtime-php54-memcached
 Summary:          Extension to work with the Memcached caching daemon
 Version:          2.1.0
-Release:          5%{?dist}
+Release:          6%{?dist}
 License:          PHP and MIT
 Group:            Development/Languages
 URL:              http://pecl.php.net/package/%{pecl_name}
@@ -21,13 +19,11 @@ Patch0:           %{pecl_name}-build.patch
 Patch1:           %{pecl_name}-info.patch
 BuildRoot:        %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:    autoconf
-BuildRequires:    rock-runtime-php54-core-rpmbuild
+BuildRequires:    rock-runtime-php54-core-rpmbuild >= 5.4.8-2
 BuildRequires:    rock-runtime-php54-libmemcached-devel >= 1.0.13-3
 BuildRequires:    zlib-devel
-Requires:         rock-runtime-php54-core
+Requires:         rock-runtime-php54-core >= 5.4.8-2
 Requires:         rock-runtime-php54-libmemcached >= 1.0.13-3
-Requires(post):   %{__pecl}
-Requires(postun): %{__pecl}
 
 %description
 This extension uses libmemcached library to provide API for communicating
@@ -90,7 +86,7 @@ make install -C %{pecl_name}-%{version} INSTALL_ROOT=%{buildroot}
 install -D -m 644 %{pecl_name}.ini %{buildroot}%{php54_rootdir}%{_sysconfdir}/php.d/%{pecl_name}.ini
 
 # Install XML package description
-install -D -m 644 package.xml %{buildroot}%{pecl_xmldir}/%{name}.xml
+install -D -m 644 package.xml %{buildroot}%{php54_pecl_xmldir}/%{name}.xml
 
 # Install the ZTS extension
 %if 0%{?__ztsphp:1}
@@ -99,16 +95,12 @@ install -D -m 644 %{pecl_name}.ini %{buildroot}%{php54_rootdir}%{php_ztsinidir}/
 %endif
 
 %post
-export PATH="%{php54_rootdir}%{_bindir}:$PATH"
-
-%{pecl_install} %{pecl_xmldir}/%{name}.xml >/dev/null || :
+%{php54_pecl_install} %{php54_pecl_xmldir}/%{name}.xml >/dev/null || :
 
 
 %postun
-export PATH="%{php54_rootdir}%{_bindir}:$PATH"
-
 if [ $1 -eq 0 ] ; then
-    %{pecl_uninstall} %{pecl_name} >/dev/null || :
+    %{php54_pecl_uninstall} %{pecl_name} >/dev/null || :
 fi
 
 %files
@@ -117,7 +109,7 @@ fi
 %doc LICENSE-FastLZ
 %config(noreplace) %{php54_rootdir}%{_sysconfdir}/php.d/%{pecl_name}.ini
 %{php54_extdir}/%{pecl_name}.so
-%{pecl_xmldir}/%{name}.xml
+%{php54_pecl_xmldir}/%{name}.xml
 
 %if 0%{?__ztsphp:1}
 %config(noreplace) %{php_ztsinidir}/%{pecl_name}.ini
@@ -125,6 +117,9 @@ fi
 %endif
 
 %changelog
+* Wed Nov 21 2012 Silas Sewell <silas@sewell.org> - 2.1.0-6
+- Use new pecl macros
+
 * Wed Nov 21 2012 Silas Sewell <silas@sewell.org> - 2.1.0-5
 - Filter provides
 
