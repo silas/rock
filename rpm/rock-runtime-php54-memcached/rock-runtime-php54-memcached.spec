@@ -7,7 +7,7 @@
 Name:             rock-runtime-php54-memcached
 Summary:          Extension to work with the Memcached caching daemon
 Version:          2.1.0
-Release:          6%{?dist}
+Release:          7%{?dist}
 License:          PHP and MIT
 Group:            Development/Languages
 URL:              http://pecl.php.net/package/%{pecl_name}
@@ -19,10 +19,10 @@ Patch0:           %{pecl_name}-build.patch
 Patch1:           %{pecl_name}-info.patch
 BuildRoot:        %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:    autoconf
-BuildRequires:    rock-runtime-php54-core-rpmbuild >= 5.4.8-2
+BuildRequires:    rock-runtime-php54-core-rpmbuild >= 5.4.8-3
 BuildRequires:    rock-runtime-php54-libmemcached-devel >= 1.0.13-3
 BuildRequires:    zlib-devel
-Requires:         rock-runtime-php54-core >= 5.4.8-2
+Requires:         rock-runtime-php54-core >= 5.4.8-3
 Requires:         rock-runtime-php54-libmemcached >= 1.0.13-3
 
 %description
@@ -83,7 +83,8 @@ make %{?_smp_mflags}
 make install -C %{pecl_name}-%{version} INSTALL_ROOT=%{buildroot}
 
 # Drop in the bit of configuration
-install -D -m 644 %{pecl_name}.ini %{buildroot}%{php54_rootdir}%{_sysconfdir}/php.d/%{pecl_name}.ini
+mkdir -p %{buildroot}%{php54_libdir}/php.d
+echo 'extension = memcached.so' > %{buildroot}%{php54_libdir}/php.d/memcached.ini
 
 # Install XML package description
 install -D -m 644 package.xml %{buildroot}%{php54_pecl_xmldir}/%{name}.xml
@@ -117,6 +118,9 @@ fi
 %endif
 
 %changelog
+* Thu Nov 22 2012 Silas Sewell <silas@sewell.org> - 2.1.0-7
+- Use new php.d directory
+
 * Wed Nov 21 2012 Silas Sewell <silas@sewell.org> - 2.1.0-6
 - Use new pecl macros
 

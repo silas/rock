@@ -14,7 +14,7 @@
 
 Name:           rock-runtime-php54-core
 Version:        5.4.8
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        A PHP 5.4.x runtime
 
 Group:          Development/Languages
@@ -111,6 +111,7 @@ This packages contains resources for building %{name} RPMs.
   --prefix=%{php54_rootdir}%{_prefix} \
   --sbindir=%{php54_rootdir}%{_bindir} \
   --with-libdir=%{libname} \
+  --with-config-file-scan-dir=%{php54_libdir}/php.d \
   --disable-debug \
   --disable-static \
   --with-pic \
@@ -194,11 +195,13 @@ rm -rf %{buildroot}
 
 find %{buildroot}%{php54_rootdir} -name '*.a' -delete
 
-echo "date.timezone = UTC" >> %{buildroot}%{php54_libdir}/php.ini
+echo 'date.timezone = UTC' > %{buildroot}%{php54_libdir}/php.ini
+
+mkdir -p %{buildroot}%{php54_libdir}/php.d
 
 for path in $( find '%{buildroot}%{php54_libdir}/php/extensions' -name '*.so' -type f ); do
   file=$( basename $path )
-  echo "extension = ${file}" >> %{buildroot}%{php54_libdir}/php.ini
+  echo "extension = ${file}" > "%{buildroot}%{php54_libdir}/php.d/${file%.*}.ini"
 done
 
 rm -fr %{buildroot}%{php54_rootdir}/%{junk} \
@@ -247,6 +250,9 @@ rm -rf %{buildroot}
 %{_sysconfdir}/rpm/macros.rock-php54
 
 %changelog
+* Thu Nov 22 2012 Silas Sewell <silas@sewell.org> - 5.4.8-3
+- Move extensions config to php.d
+
 * Wed Nov 21 2012 Silas Sewell <silas@sewell.org> - 5.4.8-2
 - Move pear/pecl macros into separate file and add install/uninstall
 
