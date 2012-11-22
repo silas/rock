@@ -2,8 +2,8 @@ require 'formula'
 
 class RockRuntimeRuby18 < Formula
   homepage 'http://www.ruby-lang.org/en/'
-  url 'http://ftp.ruby-lang.org/pub/ruby/1.8/ruby-1.8.7-p370.tar.gz'
-  sha1 'ffc5736019c9aa692a05ed95af7fe976afb3da13'
+  url 'http://ftp.ruby-lang.org/pub/ruby/1.8/ruby-1.8.7-p371.tar.gz'
+  sha1 '59a19b93e1e146ad65efd8be930b9ddc5a95dd4e'
 
   env :std
   keg_only 'rock'
