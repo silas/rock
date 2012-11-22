@@ -2,8 +2,8 @@ require 'formula'
 
 class RockRuntimePhp54 < Formula
   homepage 'http://www.php.net/'
-  url 'http://us.php.net/distributions/php-5.4.7.tar.bz2'
-  sha1 'e634fbbb63818438636bf83a5f6ea887d4569943'
+  url 'http://us.php.net/distributions/php-5.4.8.tar.bz2'
+  sha1 'ed9c4e31da827af8a4d4b1adf3dfde17d11c0b34'
 
   env :std
   keg_only 'rock'
@@ -19,6 +19,7 @@ class RockRuntimePhp54 < Formula
   depends_on 'homebrew/dupes/zlib'
   depends_on 'icu4c'
   depends_on 'imap-uw'
+  depends_on 'libmemcached'
   depends_on 'jpeg'
   depends_on 'libpng'
   depends_on 'libxml2' unless MacOS.version >= :mountain_lion
@@ -27,12 +28,37 @@ class RockRuntimePhp54 < Formula
   depends_on 'pcre'
   depends_on 'unixodbc'
 
+  # extensions
+  depends_on 'autoconf' => :build
+
   def install_composer
     phar_version = '1.0.0'
-    phar_pre = 'alpha5'
+    phar_pre = 'alpha6'
 
     system 'curl', '-Lo', "#{bin}/composer.phar", "http://getcomposer.org/download/#{phar_version}-#{phar_pre}/composer.phar"
     system 'chmod', '755', "#{bin}/composer.phar"
+    system 'ln', '-s', "#{bin}/composer.phar", "#{bin}/composer"
+  end
+
+  def install_memcached
+    memcached_version = '2.1.0'
+
+    system 'curl', '-LO', "http://pecl.php.net/get/memcached-#{memcached_version}.tgz"
+    system 'tar', 'xzf', "memcached-#{memcached_version}.tgz"
+
+    Dir.chdir "memcached-#{memcached_version}"
+
+    system "#{bin}/phpize"
+    system './configure', '--enable-memcached-json',
+      "--prefix=#{prefix}",
+      "--with-php-config=#{bin}/php-config",
+      "--with-libmemcached-dir=#{Formula.factory('libmemcached').prefix}"
+    system 'make'
+    system 'make', 'install'
+
+    system "echo 'extension = memcached.so' > #{lib}/php.d/memcached.ini"
+
+    Dir.chdir '..'
   end
 
   def install
@@ -49,6 +75,7 @@ class RockRuntimePhp54 < Formula
       '--with-libdir=lib',
       '--disable-debug',
       '--disable-static',
+      "--with-config-file-scan-dir=#{lib}/php.d",
       '--with-pic',
       '--with-bz2',
       "--with-freetype-dir=#{Formula.factory('freetype').prefix}",
@@ -118,7 +145,7 @@ class RockRuntimePhp54 < Formula
       '--enable-pdo',
       '--disable-cgi',
       '--enable-fpm',
-      '--without-pe',
+      '--with-pear',
     ]
 
     unless MacOS.version >= :mountain_lion
@@ -130,14 +157,19 @@ class RockRuntimePhp54 < Formula
     ENV.deparallelize
     system 'make', 'install'
 
-    (lib + 'php.ini').write <<-EOS.undent
-      extension = json.so
-      extension = phar.so
-    EOS
+    system "
+      echo 'date.timezone = UTC' > '#{lib}/php.ini'
+      mkdir -p #{lib}/php.d
+      for path in $( find '#{lib}/php/extensions' -name '*.so' -type f ); do
+        file=$( basename $path )
+        echo \"extension = ${file}\" > \"#{lib}/php.d/${file%.*}.ini\"
+      done
+    "
 
     ENV['PATH'] = "#{bin}:#{ENV['PATH']}"
 
     install_composer
+    install_memcached
 
     runtime = rock + 'runtime/php54'
     runtime.mkpath
