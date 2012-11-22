@@ -2,8 +2,8 @@ require 'formula'
 
 class RockRuntimePerl516 < Formula
   homepage 'http://www.perl.org/'
-  url 'http://www.cpan.org/src/5.0/perl-5.16.1.tar.bz2'
-  sha1 '14955f9869eef5029fea7fcc48d0b2afabb16d1e'
+  url 'http://www.cpan.org/src/5.0/perl-5.16.2.tar.bz2'
+  sha1 '674380237fa5a44447c6531e15bd3590d987e4b4'
 
   keg_only 'rock'
 
@@ -71,14 +71,25 @@ class RockRuntimePerl516 < Formula
       exit 1
     end
 
-    system './Configure',
-      '-des',
+    archname='darwin-thread-multi-2level'
+
+    system './Configure', '-des',
       "-Dprefix=#{prefix}",
+      "-Dvendorprefix=#{prefix}",
+      "-Dsiteprefix=#{prefix}/local",
+      "-Dsitelib=#{prefix}/local/share/perl5",
+      "-Dsitearch=#{prefix}/local/lib/perl5",
+      "-Dprivlib=#{prefix}/share/perl5",
+      "-Dvendorlib=#{prefix}/share/perl5",
+      "-Darchlib=#{prefix}/lib/perl5",
+      "-Dvendorarch=#{prefix}/lib/perl5/vendor_perl",
+      "-Darchname=#{archname}",
       '-Dman3ext=3pm',
       '-Dusethreads',
       '-Duseithreads',
       '-Duselargefiles',
-      '-Duseperlio'
+      '-Duseperl'
+
     system 'make'
     system 'make', 'install'
 
@@ -95,6 +106,7 @@ class RockRuntimePerl516 < Formula
     runtime.write <<-EOS.undent
       env:
         PATH: "#{bin}:${PATH}"
+        PERL_ARCHNAME: "#{archname}"
     EOS
   end
 end
