@@ -16,15 +16,11 @@ This guide walks you through setting up a basic PHP web application with tests.
 
         runtime: php54
 
- 1. Create `php.ini`
-
-        extension=dom.so
-
  1. Create `composer.json`
 
         {
             "require": {
-                "EHER/PHPUnit": "*",
+                "phpunit/phpunit": "*",
                 "slim/slim": "*"
             }
         }
@@ -73,7 +69,7 @@ This guide walks you through setting up a basic PHP web application with tests.
 
         #!/usr/bin/env bash
 
-        exec php -S "${HTTP_HOST-127.0.0.1}:${HTTP_PORT-8000}" -c "${PROJECT_PATH}/php.ini" -t "${PROJECT_PATH}/public"
+        exec php -S "${HTTP_HOST-127.0.0.1}:${HTTP_PORT-8000}" -t "${PROJECT_PATH}/public"
 
  1. Make it executable
 
