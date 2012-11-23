@@ -1,13 +1,15 @@
-import os
-import unittest
+import logging
 import ops
+import os
 
 root_path = os.path.dirname(os.path.dirname(__file__))
+
+logging.getLogger('ops').addHandler(logging.NullHandler())
 
 def node_hook(self, w):
     self.assertRun('rock run npm shrinkwrap', cwd=w.path)
 
-class RuntimeTestCase(unittest.TestCase):
+class RuntimeTests(object):
 
     def assertRun(self, *args, **kwargs):
         kwargs['combine'] = True
@@ -42,30 +44,3 @@ class RuntimeTestCase(unittest.TestCase):
             self.assertNotRun('rock test', cwd=w.path)
             self.assertRun('rock build deployment', cwd=w.path)
             self.assertRun('rock test', cwd=w.path)
-
-    def test_node04(self):
-        self.runtime('node04')
-
-    def test_node06(self):
-        self.runtime('node06', post_test=node_hook)
-
-    def test_node08(self):
-        self.runtime('node08', post_test=node_hook)
-
-    def test_perl516(self):
-        self.runtime('perl516')
-
-    def test_php54(self):
-        self.runtime('php54')
-
-    def test_python27(self):
-        self.runtime('python27')
-
-    def test_python33(self):
-        self.runtime('python33')
-
-    def test_ruby18(self):
-        self.runtime('ruby18')
-
-    def test_ruby19(self):
-        self.runtime('ruby19')
