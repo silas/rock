@@ -1,6 +1,6 @@
 {
     "require": {
-        "EHER/PHPUnit": "*",
+        "phpunit/phpunit": "*",
         "dflydev/markdown": "*"
     }
 }
