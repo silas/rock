@@ -57,8 +57,6 @@ cd %{pecl_name}-%{version}
 %patch1 -p1 -b .info
 cd ..
 
-cp -r %{pecl_name}-%{version} %{pecl_name}-%{version}-zts
-
 %build
 cd %{pecl_name}-%{version}
 %{php54_rootdir}%{_bindir}/phpize
@@ -67,16 +65,6 @@ cd %{pecl_name}-%{version}
            --with-libmemcached-dir=%{php54_rootdir}%{_prefix} \
            --with-php-config=%{php54_rootdir}%{_bindir}/php-config
 make %{?_smp_mflags}
-
-%if 0%{?__ztsphp:1}
-cd ../%{pecl_name}-%{version}-zts
-%{php54_rootdir}%{_bindir}/zts-phpize
-./configure --enable-memcached-json \
-           --prefix=%{php54_rootdir}%{_prefix} \
-           --with-libmemcached-dir=%{php54_rootdir}%{_prefix} \
-           --with-php-config=%{php54_rootdir}%{_bindir}/zts-php-config
-make %{?_smp_mflags}
-%endif
 
 %install
 # Install the NTS extension
@@ -88,12 +76,6 @@ echo 'extension = memcached.so' > %{buildroot}%{php54_libdir}/php.d/memcached.in
 
 # Install XML package description
 install -D -m 644 package.xml %{buildroot}%{php54_pecl_xmldir}/%{name}.xml
-
-# Install the ZTS extension
-%if 0%{?__ztsphp:1}
-make install -C %{pecl_name}-%{version}-zts INSTALL_ROOT=%{buildroot}
-install -D -m 644 %{pecl_name}.ini %{buildroot}%{php54_rootdir}%{php_ztsinidir}/%{pecl_name}.ini
-%endif
 
 %post
 %{php54_pecl_install} %{php54_pecl_xmldir}/%{name}.xml >/dev/null || :
@@ -108,18 +90,14 @@ fi
 %defattr(-,root,root,-)
 %doc %{pecl_name}-%{version}/{CREDITS,LICENSE,README.markdown,ChangeLog}
 %doc LICENSE-FastLZ
-%config(noreplace) %{php54_rootdir}%{_sysconfdir}/php.d/%{pecl_name}.ini
+%config(noreplace) %{php54_libdir}/php.d/%{pecl_name}.ini
 %{php54_extdir}/%{pecl_name}.so
 %{php54_pecl_xmldir}/%{name}.xml
-
-%if 0%{?__ztsphp:1}
-%config(noreplace) %{php_ztsinidir}/%{pecl_name}.ini
-%{php54_ztsextdir}/%{pecl_name}.so
-%endif
 
 %changelog
 * Thu Nov 22 2012 Silas Sewell <silas@sewell.org> - 2.1.0-7
 - Use new php.d directory
+- Remove zts references
 
 * Wed Nov 21 2012 Silas Sewell <silas@sewell.org> - 2.1.0-6
 - Use new pecl macros
