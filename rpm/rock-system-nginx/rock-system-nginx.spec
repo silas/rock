@@ -1,7 +1,7 @@
 %global root /opt/rock/system
 
 Name:              rock-system-nginx
-Version:           1.2.4
+Version:           1.3.8
 Release:           1%{?dist}
 
 Summary:           A high performance web server and reverse proxy server
@@ -78,6 +78,9 @@ install -p -D -m 0644 %{SOURCE1} \
 %{root}%{_sbindir}/nginx
 
 %changelog
+* Sat Nov 24 2012 Silas Sewell <silas@sewell.org> - 1.3.8-1
+- Update to 1.3.8
+
 * Sat Oct 06 2012 Silas Sewell <silas@sewell.org> - 1.2.4-1
 - Update to 1.2.4
 - Namespace for rock
