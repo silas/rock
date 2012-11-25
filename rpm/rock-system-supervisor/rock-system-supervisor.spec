@@ -16,7 +16,7 @@ Source0:          http://pypi.python.org/packages/source/s/supervisor/supervisor
 Source1:          %{name}d.init
 Source2:          supervisord.conf
 Source3:          %{name}.logrotate
-BuildRoot:        %{_tmppath}/%{real_name}-%{version}-%{release}-root
+BuildRoot:        %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildArch:        noarch
 
 BuildRequires:    python-devel
@@ -88,7 +88,7 @@ python setup.py test -q
 %preun
 if [ $1 = 0 ]; then
   /sbin/service %{name}d stop > /dev/null 2>&1 || :
-  /sbin/chkconfig --del %{real_name}d || :
+  /sbin/chkconfig --del %{name}d || :
 fi
 
 %files
