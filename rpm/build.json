@@ -28,5 +28,8 @@
   {"spec": "rock-runtime-ruby19-core/rock-runtime-ruby19-core.spec"},
   {"spec": "rock-runtime-ruby19-bundler/rock-runtime-ruby19-bundler.spec"},
   {"spec": "rock-runtime-ruby19/rock-runtime-ruby19.spec"},
-  {"spec": "rock/rock.spec"}
+  {"spec": "rock/rock.spec"},
+  {"spec": "rock-system-haproxy/rock-system-haproxy.spec"},
+  {"spec": "rock-system-nginx/rock-system-nginx.spec"},
+  {"spec": "rock-system-supervisor/rock-system-supervisor.spec"}
 ]
