@@ -33,5 +33,9 @@ def setenv(mount='test', data='test', user='test'):
 
 
 def hook(name, project, args=None, **kwargs):
-    args = args or []
-    return ','.join(args) if args else 'ok'
+    return {
+        'name': name,
+        'project': project,
+        'args': args or [],
+        'kwargs': kwargs,
+    }

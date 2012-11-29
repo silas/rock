@@ -64,7 +64,7 @@ def platform(args, extra):
     if not hasattr(module, 'hook'):
         raise ConfigError("platform module doesn't have a hook function")
 
-    return module.hook('cli', project=project, args=extra)
+    return module.hook('cli', project=p, args=extra)
 
 
 def run(args, extra):

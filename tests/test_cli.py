@@ -76,7 +76,11 @@ class CliTestCase(helper.unittest.TestCase):
         self.assertTrue('\nexport TEST_PATH="test_path"\n' in self.stdout.getvalue())
 
     def test_platform(self):
-        self.assertEqual(cli.platform(Args(platform='helper'), []), 'ok')
+        result = cli.platform(Args(platform='helper'), ['1', '2'])
+        self.assertEqual(result['name'], 'cli')
+        self.assertTrue(isinstance(result['project'], Project))
+        self.assertEqual(result['args'], ['1', '2'])
+        self.assertEqual(result['kwargs'], {})
         # platform not installed
         self.assertRaises(ConfigError, cli.platform, Args(platform='not-exist'), [])
         # platform doesn't have main
@@ -88,7 +92,7 @@ class CliTestCase(helper.unittest.TestCase):
         self.assertRaises(ConfigError, cli.platform, Args(path=path), [])
         # platform from yaml
         path = os.path.join(PROJECT_PATH, 'platform')
-        self.assertEqual(cli.platform(Args(path=path), ['1', '2']), '1,2')
+        self.assertEqual(cli.platform(Args(path=path), 'ok')['args'], 'ok')
 
     def test_runtime(self):
         cli.runtime(Args(), [])
