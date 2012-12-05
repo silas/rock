@@ -34,6 +34,12 @@ echo
 echo 'Updating brew'
 brew update
 
+if [[ "$( brew tap )" != *homebrew/dupes* ]]; then
+  echo
+  echo 'Tapping homebrew/dupes'
+  brew tap homebrew/dupes
+fi
+
 if [[ "$( brew tap )" == *rockplatform/rock* ]]; then
   echo
   echo 'Untapping rockplatform/rock'
