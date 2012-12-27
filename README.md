@@ -1,7 +1,7 @@
 Rock Packages
 =============
 
-Rock RPM packages.
+Rock system packages.
 
 ## Supported
 
