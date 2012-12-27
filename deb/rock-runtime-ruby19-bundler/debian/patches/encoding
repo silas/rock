@@ -1,0 +1,24 @@
+Index: rock-runtime-ruby19-bundler-1.1.5/bundler.gemspec
+===================================================================
+--- rock-runtime-ruby19-bundler-1.1.5.orig/bundler.gemspec  2012-12-26 20:36:00.515117985 +0000
++++ rock-runtime-ruby19-bundler-1.1.5/bundler.gemspec 2012-12-26 20:36:17.983117669 +0000
+@@ -2,6 +2,9 @@
+ lib = File.expand_path('../lib/', __FILE__)
+ $:.unshift lib unless $:.include?(lib)
+ 
++Encoding.default_external = Encoding::UTF_8
++Encoding.default_internal = Encoding::UTF_8
++
+ require 'bundler/version'
+ 
+ Gem::Specification.new do |s|
+@@ -23,9 +26,6 @@
+ 
+   # Man files are required because they are ignored by git
+   man_files            = Dir.glob("lib/bundler/man/**/*")
+-  git_files            = `git ls-files`.split("\n") rescue ''
+-  s.files              = git_files + man_files
+-  s.test_files         = `git ls-files -- {test,spec,features}/*`.split("\n")
+   s.executables        = %w(bundle)
+   s.require_paths      = ["lib"]
+ end

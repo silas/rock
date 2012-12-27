@@ -1,0 +1,12 @@
+Source: rock-runtime-ruby19
+Section: ruby
+Priority: extra
+Maintainer: Philcolabs <support@philcolabs.com>
+Build-Depends: debhelper (>= 8.0.0)
+Standards-Version: 3.9.3
+Homepage: http://www.rockstack.org
+
+Package: rock-runtime-ruby19
+Architecture: all
+Depends: ${shlibs:Depends}, ${misc:Depends}, rock-runtime-ruby19-core, rock-runtime-ruby19-bundler
+Description: ruby19 runtime for rock.

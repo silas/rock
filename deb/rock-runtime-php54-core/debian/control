@@ -1,0 +1,16 @@
+Source: rock-runtime-php54-core
+Section: php
+Priority: extra
+Maintainer: Philcolabs <support@philcolabs.com>
+Build-Depends: debhelper (>= 8.0.0), bison, bzip2, libbz2-dev, libcurl4-openssl-dev, libdb-dev, libgmp-dev, libedit-dev, libstdc++6-4.4-dev, libtool (>= 1.4.3), libltdl-dev, libssl-dev, libpcre3-dev, perl, ssmtp, libsqlite3-dev, zlib1g-dev, libsasl2-dev, libldap-dev, libmysqlclient-dev, postgresql-server-dev-all, libxml2-dev (>= 2.4.14), libsnmp-dev, libxslt-dev, libfreetype6-dev, libxpm-dev, libpng-dev, libjpeg-dev, libt1-dev, libmcrypt-dev, libtidy-dev, libaspell-dev, libpspell-dev, libicu-dev, libenchant-dev
+Standards-Version: 3.9.3
+Homepage: http://www.php.net
+
+Package: rock-runtime-php54-core
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: PHP is an HTML-embedded scripting language.
+ PHP attempts to make it easy for developers to write dynamically
+ generated web pages. PHP also offers built-in database integration for several
+ commercial and non-commercial database management systems, so writing a
+ database-enabled webpage with PHP is fairly simple.

@@ -1,0 +1,12 @@
+Source: rock
+Section: devel
+Priority: extra
+Maintainer: Philcolabs <support@philcolabs.com>
+Build-Depends: debhelper (>= 8.0.0), python-argparse, python-dev, python-importlib, python-nose, python-unittest2, python-yaml
+Standards-Version: 3.9.3
+Homepage: http://www.rockstack.org
+
+Package: rock
+Architecture: all
+Depends: ${shlibs:Depends}, ${misc:Depends}, python-yaml, python-argparse, python-importlib
+Description: This is a cli tool that allows you to easily create, build, test and run applications.

@@ -1,0 +1,14 @@
+Index: rock-runtime-ruby19-bundler-1.1.5/bundler.gemspec
+===================================================================
+--- rock-runtime-ruby19-bundler-1.1.5.orig/bundler.gemspec	2012-12-26 22:26:06.995118034 +0000
++++ rock-runtime-ruby19-bundler-1.1.5/bundler.gemspec	2012-12-26 22:27:37.051116192 +0000
+@@ -24,8 +24,7 @@
+   s.add_development_dependency "ronn"
+   s.add_development_dependency "rspec", "~> 2.0"
+ 
+-  # Man files are required because they are ignored by git
+-  man_files            = Dir.glob("lib/bundler/man/**/*")
++  s.files              = `find .`.split("\n") rescue ''
+   s.executables        = %w(bundle)
+   s.require_paths      = ["lib"]
+ end

@@ -1,0 +1,13 @@
+Source: rock-runtime-python33-core
+Section: python
+Priority: extra
+Maintainer: Philcolabs <support@philcolabs.com>
+Build-Depends: debhelper (>= 8.0.0), autotools-dev, libreadline-dev, libsqlite3-dev, libssl-dev, libbz2-dev, bzip2, zlib1g-dev, libgmp-dev, ncurses-dev, gdb, chrpath
+Standards-Version: 3.9.3
+Homepage: http://www.python.org
+
+Package: rock-runtime-python33-core
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Python is an interpreted, interactive, object-oriented programming
+ language.

@@ -1,0 +1,12 @@
+Source: rock-devtools
+Section: devel
+Priority: extra
+Maintainer: Philcolabs <support@philcolabs.com>
+Build-Depends: debhelper (>= 8.0.0)
+Standards-Version: 3.9.3
+Homepage: http://www.rockstack.org
+
+Package: rock-devtools
+Architecture: all
+Depends: ${shlibs:Depends}, ${misc:Depends}, gcc, g++, git, make
+Description: Rock devtools is a collection of tools for building and developing applications.

@@ -1,0 +1,47 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+# Sample debian/rules that uses debhelper.
+# This file was originally written by Joey Hess and Craig Small.
+# As a special exception, when this file is copied by dh-make into a
+# dh-make output file, you may use that output file without restriction.
+# This special exception was added by Craig Small in version 0.37 of dh-make.
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+prefix := /usr
+runtime := php54
+php54_rootdir := /opt/rock/runtime/$(runtime)
+install_rootdir := $(CURDIR)/debian/rock-runtime-php54-memcached
+version := $(shell dpkg-parsechangelog | grep Version | sed 's/.*Version: \([^-]*\).*/\1/')
+orig_filename := rock-runtime-php54-memcached_$(version).orig.tar.gz
+
+get-orig-source:
+	uscan --noconf --rename --repack --download-current-version --force-download --verbose $(CURDIR)
+	tar -xvf ../$(orig_filename)
+	mv package.xml memcached-*/
+	rm -f package.xml
+	rm -f ../$(orig_filename)
+	tar -c memcached-$(version) | gzip > ../rock-runtime-php54-memcached_$(version).orig.tar.gz
+	rm -rf memcached-$(version)
+
+override_dh_auto_configure:
+	$(php54_rootdir)$(prefix)/bin/phpize
+	./configure --enable-memcached-json \
+           --prefix=$(php54_rootdir)$(prefix) \
+           --with-libmemcached-dir=$(php54_rootdir)$(prefix) \
+           --with-php-config=$(php54_rootdir)$(prefix)/bin/php-config
+
+override_dh_auto_build:
+	dh_auto_build
+	echo "extension = memcached.so" > memcached.ini
+	cp package.xml memcached.xml
+  
+
+override_dh_auto_install:
+	make install INSTALL_ROOT=$(install_rootdir)
+	dh_install memcached.ini $(php54_rootdir)$(prefix)/lib/php.d/
+	dh_install memcached.xml $(php54_rootdir)$(prefix)/lib/php/.pkgxml/
+
+%:
+	dh $@ 

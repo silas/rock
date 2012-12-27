@@ -1,0 +1,5 @@
+rock-runtime-php54-memcached (2.1.0-1) precise; urgency=low
+
+  * Initial release.
+
+ -- Philcolabs <support@philcolabs.com>  Thu, 20 Dec 2012 12:29:28 +0000

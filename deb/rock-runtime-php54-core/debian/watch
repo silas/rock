@@ -1,0 +1,5 @@
+version=3
+opts=downloadurlmangle=s#.*(5\.4\.[0-9]*).*#http://us.php.net/distributions/php-$1.tar.gz#\
+,filenamemangle=s#.*(5\.4\.[0-9]*).*#php-$1.tar.gz# \
+https://github.com/php/php-src/tags .*/php-(5\.4\.[0-9]*)\.tar\.gz \
+  debian uupdate

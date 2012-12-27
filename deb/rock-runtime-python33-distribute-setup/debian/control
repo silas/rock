@@ -1,0 +1,12 @@
+Source: rock-runtime-python33-distribute-setup
+Section: python
+Priority: extra
+Maintainer: Philcolabs <support@philcolabs.com>
+Build-Depends: debhelper (>= 8.0.0)
+Standards-Version: 3.9.3
+Homepage: http://packages.python.org/distribute
+
+Package: rock-runtime-python33-distribute-setup
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, rock-runtime-python33-core
+Description: Easily download, build, install, upgrade, and uninstall Python packages.

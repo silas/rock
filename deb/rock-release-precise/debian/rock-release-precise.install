@@ -1,0 +1,2 @@
+etc/apt/trusted.gpg.d/rockstack.gpg etc/apt/trusted.gpg.d/
+etc/apt/sources.list.d/rockstack.list etc/apt/sources.list.d/

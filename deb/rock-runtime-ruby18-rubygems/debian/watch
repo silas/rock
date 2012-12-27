@@ -1,0 +1,3 @@
+version=3
+https://github.com/rubygems/rubygems/tags .*/v([0-9]*\.[0-9]*\.[0-9]*)\.tar\.gz \
+  debian uupdate
