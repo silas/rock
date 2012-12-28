@@ -1,4 +1,4 @@
-rock-runtime-node08-core (0.8.14-1) precise; urgency=low
+rock-runtime-node08-core (0.8.14-1) precise quantal oldstable stable testing; urgency=low
 
   * Initial release.
 

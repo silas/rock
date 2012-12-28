@@ -1,4 +1,4 @@
-rock-runtime-ruby18-rubygems (1.8.24-1) precise; urgency=low
+rock-runtime-ruby18-rubygems (1.8.24-1) precise quantal oldstable stable testing; urgency=low
 
   * Initial release.
 

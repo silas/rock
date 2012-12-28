@@ -1,4 +1,4 @@
-rock-runtime-ruby19-core (1.9.3p327-1) precise; urgency=low
+rock-runtime-ruby19-core (1.9.3p327-1) precise quantal oldstable stable testing; urgency=low
 
   * Initial release.
 

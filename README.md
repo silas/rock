@@ -8,7 +8,8 @@ Rock system packages.
 Distributions
 
  * CentOS / RHEL: 6
- * Ubuntu: 12.04
+ * Ubuntu: 12.04, 12.10
+ * Debian: 5.0(oldstable), 6.0(stable), 7.0(testing)
 
 Runtimes
 
@@ -21,7 +22,7 @@ Runtimes
 ## Note
 
 * RPMs should should be built using mock and the latest version of Fedora.
-* debs should should be built using pbuilder or the included build.bash script and the latest version of Ubuntu
+* debs should should be built using pbuilder or the included build.bash script and the latest version of Ubuntu or Debian
 
 ## License
 

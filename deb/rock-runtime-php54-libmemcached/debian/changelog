@@ -1,4 +1,4 @@
-rock-runtime-php54-libmemcached (1.0.13-1) precise; urgency=low
+rock-runtime-php54-libmemcached (1.0.13-1) precise quantal oldstable stable testing; urgency=low
 
   * Initial release.
 

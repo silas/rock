@@ -1,4 +1,4 @@
-rock-runtime-perl516-local-lib (1.008004.0-1) precise; urgency=low
+rock-runtime-perl516-local-lib (1.008004.0-1) precise quantal oldstable stable testing; urgency=low
 
   * Initial release.
 
