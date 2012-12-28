@@ -1,4 +1,4 @@
-rock-runtime-ruby19-bundler (1.1.5) precise quantal oldstable stable testing; urgency=low
+rock-runtime-ruby19-bundler (1.1.5) precise quantal stable testing; urgency=low
 
   * Initial Release.
 

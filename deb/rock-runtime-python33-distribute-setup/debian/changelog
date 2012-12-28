@@ -1,4 +1,4 @@
-rock-runtime-python33-distribute-setup (0.6.28) precise quantal oldstable stable testing; urgency=low
+rock-runtime-python33-distribute-setup (0.6.28) precise quantal stable testing; urgency=low
 
   * Initial Release.
 
