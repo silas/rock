@@ -2,7 +2,7 @@ Source: rock-runtime-perl516-core
 Section: perl
 Priority: extra
 Maintainer: Philcolabs <support@philcolabs.com>
-Build-Depends: debhelper (>= 8.0.0), libbz2-dev, tcsh, zlib1g-dev
+Build-Depends: debhelper (>= 8.0.0), libbz2-dev, tcsh, zlib1g-dev, netbase
 Standards-Version: 3.9.3
 Homepage: http://www.perl.org
 

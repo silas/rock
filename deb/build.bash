@@ -2,7 +2,7 @@
 set -e
 
 ARCHS=( amd64 i386 )
-DISTS=( precise )
+DISTS=( precise quantal )
 
 SOURCE_DIR=/root/source
 PBUILDER_DIR=/root/pbuilder
