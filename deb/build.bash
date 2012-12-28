@@ -2,7 +2,7 @@
 set -e
 
 ARCHS=( amd64 i386 )
-DISTS=( precise quantal oldstable stable testing)
+DISTS=( precise quantal lenny squeeze wheezy)
 
 SOURCE_DIR=/root/source
 PBUILDER_DIR=/root/pbuilder

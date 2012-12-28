@@ -9,7 +9,7 @@ Distributions
 
  * CentOS / RHEL: 6
  * Ubuntu: 12.04, 12.10
- * Debian: 5.0(oldstable), 6.0(stable), 7.0(testing)
+ * Debian: 5.0(lenny [oldstable]), 6.0(squeeze [stable]), 7.0(wheezy [testing])
 
 Runtimes
 
