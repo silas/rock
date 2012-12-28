@@ -22,7 +22,7 @@ Runtimes
 ## Note
 
 * RPMs should should be built using mock and the latest version of Fedora.
-* debs should should be built using pbuilder or the included build.bash script and the latest version of Ubuntu or Debian
+* debs should should be built using pbuilder or the included build.bash script and the latest version of Ubuntu.
 
 ## License
 
