@@ -17,6 +17,10 @@ else
 libname := lib/i386-linux-gnu
 endif
 
+ifneq ($(shell egrep "squeeze|^6\.0\.[0-9]*" /etc/debian_version),)
+libname := lib
+endif
+
 runtime := php54
 php54_rootdir := /opt/rock/runtime/$(runtime)
 php54_libdir := $(php54_rootdir)$(prefix)/lib
