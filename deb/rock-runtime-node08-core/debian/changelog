@@ -1,4 +1,4 @@
-rock-runtime-node08-core (0.8.14-1) stable; urgency=low
+rock-runtime-node08-core (0.8.14-1) unstable; urgency=low
 
   * Initial release.
 

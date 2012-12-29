@@ -1,35 +1,51 @@
 #!/usr/bin/env bash
 set -e
 
+# Constants 
 ARCHS=( amd64 i386 )
-DISTS=( precise quantal squeeze wheezy)
+DISTS=( unstable precise quantal squeeze wheezy )
+ROOT_DIR=/root/rock-build
+PBUILDER_DIR=${ROOT_DIR}/pbuilder
+PBUILDER_MOUNT=${ROOT_DIR}/apt
+VAR_DIR=${ROOT_DIR}/build
 
-SOURCE_DIR=/root/source
-PBUILDER_DIR=/root/pbuilder
-PBUILDER_MOUNT="/root/apt"
+export DEBEMAIL=support@philcolabs.com
+export DEBFULLNAME=Philcolabs
+export PBUILDFOLDER=$PBUILDER_DIR
 
+# Paths
 cd `dirname $0`
-cwd=`pwd`
-trap "echo $cwd; cd $cwd; mv {*.tar.gz,*.dsc,*.build,*.changes} $SOURCE_DIR/ 2&> /dev/null" SIGINT SIGTERM
+package_root=`pwd`
+packages=`cat $package_root/build.list`
 
-cd $cwd
-packages=`cat ./build.list`
+# Args
+package=$1
+dist=$2
+arch=$3
 
-function build() {
-  package=$1
-  dist=$2
-  arch=$3
+function usage() {
+  echo "Usage: `basename $0` [-p package -d distribution -a architecture]"
+  exit 0
+}
+
+function echo_normal() {
+  echo "-----> $1"
+}
+
+function setup_env() {
+  dist=$1
+  arch=$2
+
   pbuilder_name=$dist
-  
   if [ "$arch" == 'i386' ]
   then
-    pbuilder_name=$pbuilder_name-$arch
+    pbuilder_name=${pbuilder_name}-${arch}
   fi
-  
-  pbuilder_result_mount="$PBUILDER_DIR/${pbuilder_name}_result"
-  pbuilder_package_mount="$PBUILDER_MOUNT/$pbuilder_name"
-  pbuilder_name=$pbuilder_name-base.tgz
- 
+
+  pbuilder_result_mount="${PBUILDER_DIR}/${pbuilder_name}_result"
+  pbuilder_package_mount="${PBUILDER_MOUNT}/${pbuilder_name}"
+  pbuilder_name=${pbuilder_name}-base.tgz
+
 cat << HERE > ~/.pbuilderrc
 BINDMOUNTS="$PBUILDER_MOUNT"
 HOOKDIR="$pbuilder_package_mount"
@@ -45,35 +61,73 @@ apt-get update
 HERE
 
   chmod +x $pbuilder_package_mount/D05deps
- 
   pbuilder_create_args=''
   pbuilder_create_args="$pbuilder_args --debootstrapopts --variant=buildd"
 
-  if [ ! -e "$PBUILDER_DIR/$pbuilder_name" ] || [ "`du $PBUILDER_DIR/$pbuilder_name | awk '{print $1}'`" == 0 ]
+  pbuilder_size=`du $PBUILDER_DIR/$pbuilder_name | awk '{print $1}'`
+  if [ ! -e "$PBUILDER_DIR/$pbuilder_name" ] || [ "$pbuilder_size" == 0 ]
   then
-    echo "Environment $dist-$arch does not exist, creating..."
-    echo "Running: pbuilder-dist $dist $arch create $pbuilder_args"
+    echo_normal "Environment $dist-$arch does not exist, creating..."
+    echo_normal "Running: pbuilder-dist $dist $arch create $pbuilder_args"
     pbuilder-dist $dist $arch create $pbuilder_create_args
   fi
 
-  cd $cwd
-  package_path=`find ./$package -type d -name *debian`
-  cd `dirname $package_path`
+  apt_packages=$pbuilder_package_mount/Packages
+  apt-ftparchive packages $pbuilder_package_mount > $apt_packages
+}
 
-  deb=`grep -m 1 "(.*)" debian/changelog | sed 's/\([^ ]*\) (\(.*\)*).*/\1_\2/'`
-  match_deb=`find $pbuilder_package_mount -type f -name $deb*deb`
+function build() {
+  # args
+  package=$1
+  dist=$2
+  arch=$3
+
+  # values
+  cd $package_root/$package
+  package_dist=`dpkg-parsechangelog | grep Distribution | awk '{print $2}'`
+  package_version=`dpkg-parsechangelog | grep Version | awk '{print $2}'`
+  case $dist in
+  squeeze)
+    package_suffix='~bp6.0'
+    package_debiandist=stable
+  ;;
+  wheezy)
+    package_suffix='~bp7.0'
+    package_debiandist=testing
+  ;;
+  unstable)
+    package_suffix=
+    package_debiandist=unstable
+  ;;
+  *)
+    package_suffix="~${dist}"
+    package_debiandist=$dist
+  ;;
+  esac
+
+  deb_search=${package}_${package_version}$package_suffix*deb
+  match_deb=`find $pbuilder_package_mount -type f -name $deb_search`
   if [ "$match_deb" != '' ]
   then
-    echo "$match_deb found, skipping"
+    echo_normal "$match_deb found, skipping"
     return
   fi
 
-  echo "-----> Building package: $package_path"
-  cd $pbuilder_package_mount
-  apt-ftparchive packages . > Packages
+  # Ensure chroot exists
+  setup_env $dist $arch
 
-  cd $cwd
-  cd `dirname $package_path`
+  # Create working directory
+  rm -rf $VAR_DIR/$package
+  cp -rf `pwd` $VAR_DIR/$package
+  
+  cd $VAR_DIR/$package
+  echo_normal "Building package: $package"
+  if [ "$package_dist" != "$dist" ]
+  then
+    dch -l $package_suffix -D $package_debiandist "Backport to $dist"
+  fi
+
+  cat debian/changelog
 
   if [ -e 'debian/watch' ]
   then
@@ -81,43 +135,92 @@ HERE
   fi
 
   debuild -S -us -uc
-  mv ../{*.tar.gz,*.dsc,*.build,*.changes} $SOURCE_DIR/
-  pbuilder-dist $dist $arch build $SOURCE_DIR/$(basename $(pwd))_*.dsc
+  mv ../{*.tar.gz,*.dsc,*.build,*.changes} $VAR_DIR/$package
+  pbuilder-dist $dist $arch build $VAR_DIR/$package/$(basename $(pwd))_*.dsc
 
-  cd $PBUILDER_DIR
   mkdir -p $pbuilder_package_mount
   mv $pbuilder_result_mount/*.deb $pbuilder_package_mount/
 }
 
+dist=all
+arch=all
+package=all
+
+while getopts "hd:a:p:" opt
+do
+  case $opt in
+    h)
+      usage
+      exit 0
+      ;;
+    d)
+      if [ ! -z "$OPTARG" ]
+      then
+        dist=$OPTARG
+      fi
+      ;;
+    a)
+      if [ ! -z "$OPTARG" ]
+      then
+        arch=$OPTARG
+      fi
+      ;;
+    p)
+      if [ ! -z "$OPTARG" ]
+      then
+        package=$OPTARG
+      fi
+      ;;
+    \?)
+      usage
+      exit 1
+      ;;
+    :)
+      echo "$OPTARG requires an argument"
+      exit 1
+      ;;
+  esac 
+done
+
 # Ensure build deps are installed
-echo "Ensuring build tools are installed..."
+echo_normal "Ensuring build tools are installed..."
 apt-get install ubuntu-dev-tools debhelper dh-make reprepro -y
 
 # Ensure local apt is available
 mkdir -p $PBUILDER_MOUNT
 
-# Ensure local source dir is available
-mkdir -p $SOURCE_DIR
+# Ensure local var dir is available
+mkdir -p $VAR_DIR
 
-# Individual package
-package=$1
-dist=$2
-arch=$3
-if [ ! -z "$package" ] && [ ! -z "$dist" ] && [ ! -z "$arch" ]
+
+# Process
+if [ "$package" == 'all' ]
 then
-  build $package $dist $arch
-  exit 0
+  selected_packages=${packages[@]}
+else
+  selected_packages=$package
+fi
+if [ "$dist" == 'all' ]
+then
+  selected_dists=${DISTS[@]}
+else
+  selected_dists=$dist
+fi
+if [ "$arch" == 'all' ]
+then
+  selected_archs=${ARCHS[@]}
+else
+  selected_archs=$arch
 fi
 
-# All packages
-for dist in ${DISTS[@]}
+for d in ${selected_dists[@]}
 do
-  for arch in ${ARCHS[@]}
+  for a in ${selected_archs[@]}
   do
-    for package in ${packages[@]}
+    for p in ${selected_packages[@]}
     do
-      echo "Processing: $package-$dist-$arch"
-      build $package $dist $arch
+      echo_normal "Processing: $p-$d-$a"
+      build $p $d $a
     done
   done
 done

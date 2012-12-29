@@ -1,4 +1,4 @@
-rock-runtime-php54-core (5.4.8-1) stable; urgency=low
+rock-runtime-php54-core (5.4.8-1) unstable; urgency=low
 
   * Initial release.
 

@@ -1,4 +1,4 @@
-rock-runtime-python27 (1.0.0) stable; urgency=low
+rock-runtime-python27 (1.0.0) unstable; urgency=low
 
   * Initial Release.
 

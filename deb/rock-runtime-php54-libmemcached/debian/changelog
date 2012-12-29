@@ -1,4 +1,4 @@
-rock-runtime-php54-libmemcached (1.0.13-1) stable; urgency=low
+rock-runtime-php54-libmemcached (1.0.13-1) unstable; urgency=low
 
   * Initial release.
 

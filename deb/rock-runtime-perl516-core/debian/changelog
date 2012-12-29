@@ -1,4 +1,4 @@
-rock-runtime-perl516-core (5.16.2-1) stable; urgency=low
+rock-runtime-perl516-core (5.16.2-1) unstable; urgency=low
 
   * Initial release.
 
