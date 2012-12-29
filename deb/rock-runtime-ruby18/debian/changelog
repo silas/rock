@@ -1,4 +1,4 @@
-rock-runtime-ruby18 (1.0.0) precise quantal stable testing; urgency=low
+rock-runtime-ruby18 (1.0.0) stable; urgency=low
 
   * Initial Release.
 

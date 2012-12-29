@@ -1,4 +1,4 @@
-rock-release-precise (1.0.0) precise quantal stable testing; urgency=low
+rock-release-precise (1.0.0) stable; urgency=low
 
   * Initial release.
 

@@ -1,4 +1,4 @@
-rock-runtime-python33-core (3.3.0-1) precise quantal stable testing; urgency=low
+rock-runtime-python33-core (3.3.0-1) stable; urgency=low
 
   * Initial release.
 

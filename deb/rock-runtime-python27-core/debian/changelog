@@ -1,4 +1,4 @@
-rock-runtime-python27-core (2.7.3-1) precise quantal stable testing; urgency=low
+rock-runtime-python27-core (2.7.3-1) stable; urgency=low
 
   * Initial release.
 
