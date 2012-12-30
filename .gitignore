@@ -1,7 +1,8 @@
 *.bz2
 *.gz
 *.rpm
+*.swp
 *.tgz
 *.zip
-*swp
+.vagrant
 build
