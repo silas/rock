@@ -47,13 +47,7 @@ function setup_env() {
   pbuilder_package_mount="${PBUILDER_MOUNT}/${pbuilder_name}"
   pbuilder_name=${pbuilder_name}-base.tgz
 
-cat << HERE > ~/.pbuilderrc
-BINDMOUNTS="$PBUILDER_MOUNT"
-HOOKDIR="$pbuilder_package_mount"
-ALLOWUNTRUSTED=yes
-HERE
-
-mkdir -p $pbuilder_package_mount
+  mkdir -p $pbuilder_package_mount
 cat << HERE > $pbuilder_package_mount/D05deps
 #!/usr/bin/env bash
 
@@ -140,7 +134,10 @@ function build() {
 
   debuild -S -us -uc
   mv ../{*.tar.gz,*.dsc,*.build,*.changes} $build_dir
-  pbuilder-dist $dist $arch build $build_dir/$package_$version*.dsc
+
+  pbuilder_args="--hookdir $pbuilder_package_mount --allow-untrusted --bindmounts $PBUILDER_MOUNT"
+
+  pbuilder-dist $dist $arch build $pbuilder_args $build_dir/$package_$version*.dsc
 
   mkdir -p $pbuilder_package_mount
   mv $pbuilder_result_mount/*.deb $pbuilder_package_mount/
@@ -188,7 +185,7 @@ done
 
 # Ensure build deps are installed
 echo_normal "Ensuring build tools are installed..."
-apt-get install ubuntu-dev-tools debhelper dh-make reprepro debootstrap pbuilder -y
+apt-get install ubuntu-dev-tools debhelper dh-make reprepro debootstrap pbuilder libcrypt-ssleay-perl -y
 
 # Ensure local apt is available
 mkdir -p $PBUILDER_MOUNT
