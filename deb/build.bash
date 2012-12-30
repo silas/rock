@@ -118,9 +118,10 @@ function build() {
   # Create working directory
   build_dir=$VAR_DIR/$package-$dist-$arch
   rm -rf $build_dir
-  cp -rf $package_root/$package $build_dir
+  mkdir -p $build_dir
+  cp -rf $package_root/$package/ $build_dir/package/
   
-  cd $build_dir
+  cd $build_dir/package
   echo_normal "Building package: $package"
   if [ "$package_dist" != "$dist" ]
   then
@@ -133,10 +134,9 @@ function build() {
   fi
 
   debuild -S -us -uc
-  mv ../{*.tar.gz,*.dsc,*.build,*.changes} $build_dir
-
+  pieces_search=${package}_${package_version}*
+  
   pbuilder_args="--hookdir $pbuilder_package_mount --allow-untrusted --bindmounts $PBUILDER_MOUNT"
-
   pbuilder-dist $dist $arch build $pbuilder_args $build_dir/$package_$version*.dsc
 
   mkdir -p $pbuilder_package_mount
