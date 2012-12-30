@@ -3,7 +3,8 @@ set -e
 
 # Constants 
 ARCHS=( amd64 i386 )
-DISTS=( unstable precise quantal squeeze wheezy )
+ALL_ARCH=amd64
+DISTS=( precise quantal squeeze wheezy )
 ROOT_DIR=/root/rock-build
 PBUILDER_DIR=${ROOT_DIR}/pbuilder
 PBUILDER_MOUNT=${ROOT_DIR}/apt
@@ -73,7 +74,8 @@ HERE
   fi
 
   apt_packages=$pbuilder_package_mount/Packages
-  apt-ftparchive packages $pbuilder_package_mount > $apt_packages
+  cd $pbuilder_package_mount
+  apt-ftparchive packages .  > $apt_packages
 }
 
 function build() {
@@ -86,24 +88,30 @@ function build() {
   cd $package_root/$package
   package_dist=`dpkg-parsechangelog | grep Distribution | awk '{print $2}'`
   package_version=`dpkg-parsechangelog | grep Version | awk '{print $2}'`
+  package_arch=`cat debian/control | grep Architecture | awk '{print $2}'`
+
   case $dist in
   squeeze)
-    package_suffix='~bp6.0'
+    package_suffix='~bp6.0+'
     package_debiandist=stable
   ;;
   wheezy)
-    package_suffix='~bp7.0'
+    package_suffix='~bp7.0+'
     package_debiandist=testing
-  ;;
-  unstable)
-    package_suffix=
-    package_debiandist=unstable
   ;;
   *)
     package_suffix="~${dist}"
     package_debiandist=$dist
   ;;
   esac
+
+  # Setup env
+  if [ "$package_arch" == 'all' ]
+  then
+    setup_env $dist $ALL_ARCH
+  else
+    setup_env $dist $arch
+  fi
 
   deb_search=${package}_${package_version}$package_suffix*deb
   match_deb=`find $pbuilder_package_mount -type f -name $deb_search`
@@ -113,21 +121,17 @@ function build() {
     return
   fi
 
-  # Ensure chroot exists
-  setup_env $dist $arch
-
   # Create working directory
-  rm -rf $VAR_DIR/$package
-  cp -rf `pwd` $VAR_DIR/$package
+  build_dir=$VARD_DIR/$package-$dist-$arch
+  rm -rf $build_dir
+  cp -rf $package_root/$package $build_dir
   
-  cd $VAR_DIR/$package
+  cd $build_dir
   echo_normal "Building package: $package"
   if [ "$package_dist" != "$dist" ]
   then
     dch -l $package_suffix -D $package_debiandist "Backport to $dist"
   fi
-
-  cat debian/changelog
 
   if [ -e 'debian/watch' ]
   then
@@ -135,8 +139,8 @@ function build() {
   fi
 
   debuild -S -us -uc
-  mv ../{*.tar.gz,*.dsc,*.build,*.changes} $VAR_DIR/$package
-  pbuilder-dist $dist $arch build $VAR_DIR/$package/$(basename $(pwd))_*.dsc
+  mv ../{*.tar.gz,*.dsc,*.build,*.changes} $build_dir
+  pbuilder-dist $dist $arch build $build_dir/$package_$version*.dsc
 
   mkdir -p $pbuilder_package_mount
   mv $pbuilder_result_mount/*.deb $pbuilder_package_mount/
@@ -184,7 +188,7 @@ done
 
 # Ensure build deps are installed
 echo_normal "Ensuring build tools are installed..."
-apt-get install ubuntu-dev-tools debhelper dh-make reprepro -y
+apt-get install ubuntu-dev-tools debhelper dh-make reprepro debootstrap pbuilder -y
 
 # Ensure local apt is available
 mkdir -p $PBUILDER_MOUNT

@@ -9,5 +9,15 @@
 # Uncomment this to turn on verbose mode.
 #export DH_VERBOSE=1
 
+url := http://apt.philcolabs.com/rockstack
+install_rootdir := $(CURDIR)/debian/rock-release
+source_file := /etc/apt/sources.list.d/rockstack.list
+dist := $(shell lsb_release -cs)
+
+override_dh_auto_install:
+	lsb_release -a
+	mkdir -p $(install_rootdir)/`dirname $(source_file)`
+	echo "deb $(url) $(dist) main" >> $(install_rootdir)$(source_file)
+
 %:
 	dh $@ 

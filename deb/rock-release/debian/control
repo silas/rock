@@ -1,12 +1,12 @@
-Source: rock-release-precise
+Source: rock-release
 Section: misc
 Priority: extra
 Maintainer: Philcolabs <support@philcolabs.com>
-Build-Depends: debhelper (>= 8.0.0)
+Build-Depends: debhelper (>= 8.0.0), lsb-release
 Standards-Version: 3.9.3
 Homepage: http://www.rockstack.org
 
-Package: rock-release-precise
+Package: rock-release
 Architecture: all
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Apt repo and key for rockstack repo 

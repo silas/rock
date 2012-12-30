@@ -1,5 +1,5 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
-Upstream-Name: rock-release-precise
+Upstream-Name: rock-release
 
 Files: *
 Copyright: 2012 Philcolabs <support@philcolabs.com>
