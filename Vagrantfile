@@ -52,7 +52,7 @@ Vagrant::Config.run do |config|
     deb_config.vm.box_url = 'https://github.com/downloads/roderik/VagrantQuantal64Box/quantal64.box'
     deb_config.vm.customize customize
     deb_config.vm.provision :puppet do |puppet|
-      puppet.manifests_path = 'puppet/manfiests' 
+      puppet.manifests_path = 'puppet/manifests' 
       puppet.manifest_file = 'deb.pp'
     end
   end
@@ -62,7 +62,7 @@ Vagrant::Config.run do |config|
     rpm_config.vm.box_url = 'http://dl.sewell.org/vagrant/fedora-17-x86_64.box'
     rpm_config.vm.customize customize
     rpm_config.vm.provision :puppet do |puppet|
-      puppet.manifests_path = 'puppet/manfiests' 
+      puppet.manifests_path = 'puppet/manifests' 
       puppet.manifest_file = 'rpm.pp'
     end
   end
