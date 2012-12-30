@@ -2,7 +2,7 @@
 set -e
 
 # Constants 
-ARCHS=( amd64 i386 )
+ARCHS=( i386 amd64 )
 ALL_ARCH=i386
 DISTS=( precise quantal squeeze wheezy )
 ROOT_DIR=/root/rock-build
