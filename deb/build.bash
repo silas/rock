@@ -3,7 +3,7 @@ set -e
 
 # Constants 
 ARCHS=( amd64 i386 )
-ALL_ARCH=amd64
+ALL_ARCH=i386
 DISTS=( precise quantal squeeze wheezy )
 ROOT_DIR=/root/rock-build
 PBUILDER_DIR=${ROOT_DIR}/pbuilder
