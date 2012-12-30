@@ -68,8 +68,6 @@ HERE
   fi
 
   apt_packages=$pbuilder_package_mount/Packages
-  cd $pbuilder_package_mount
-  apt-ftparchive packages .  > $apt_packages
 }
 
 function build() {
@@ -133,12 +131,18 @@ function build() {
     debian/rules get-orig-source
   fi
 
+  # Build dsc
   debuild -S -us -uc
-  pieces_search=${package}_${package_version}*
-  
+
+  # Update local packages
+  cd $pbuilder_package_mount
+  apt-ftparchive packages .  > $apt_packages
+
+  # Build  
   pbuilder_args="--hookdir $pbuilder_package_mount --allow-untrusted --bindmounts $PBUILDER_MOUNT"
   pbuilder-dist $dist $arch build $pbuilder_args $build_dir/$package_$version*.dsc
 
+  # Move result to target
   mkdir -p $pbuilder_package_mount
   mv $pbuilder_result_mount/*.deb $pbuilder_package_mount/
 }
