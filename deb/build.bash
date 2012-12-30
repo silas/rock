@@ -116,7 +116,7 @@ function build() {
   fi
 
   # Create working directory
-  build_dir=$VARD_DIR/$package-$dist-$arch
+  build_dir=$VAR_DIR/$package-$dist-$arch
   rm -rf $build_dir
   cp -rf $package_root/$package $build_dir
   
@@ -192,7 +192,6 @@ mkdir -p $PBUILDER_MOUNT
 
 # Ensure local var dir is available
 mkdir -p $VAR_DIR
-
 
 # Process
 if [ "$package" == 'all' ]
