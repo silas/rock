@@ -44,7 +44,7 @@ function setup_env() {
   fi
 
   pbuilder_result_mount="${PBUILDER_DIR}/${pbuilder_name}_result"
-  pbuilder_package_mount="${PBUILDER_MOUNT}/${pbuilder_name}"
+  pbuilder_package_mount="${PBUILDER_MOUNT}/${dist}"
   pbuilder_name=${pbuilder_name}-base.tgz
 
   mkdir -p $pbuilder_package_mount
@@ -101,11 +101,13 @@ function build() {
   if [ "$package_arch" == 'all' ]
   then
     setup_env $dist $ALL_ARCH
+    package_arch=all
   else
     setup_env $dist $arch
+    package_arch=$arch
   fi
 
-  deb_search=${package}_${package_version}$package_suffix*deb
+  deb_search=${package}_${package_version}${package_suffix}*_${package_arch}.deb
   match_deb=`find $pbuilder_package_mount -type f -name $deb_search`
   if [ "$match_deb" != '' ]
   then
