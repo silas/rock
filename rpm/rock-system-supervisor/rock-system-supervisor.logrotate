@@ -1,7 +1,0 @@
-/var/log/rock-system-supervisor/*.log {
-       missingok
-       weekly
-       notifempty
-       nocompress
-}
-
