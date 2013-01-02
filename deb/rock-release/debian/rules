@@ -10,14 +10,13 @@
 #export DH_VERBOSE=1
 
 url := http://dl.rockstack.org/deb
-install_rootdir := $(CURDIR)/debian/rock-release
-source_file := /etc/apt/sources.list.d/rockstack.list
+source_file := rockstack.list
+testing_source_file := rockstack-testing.list
 dist := $(shell lsb_release -cs)
 
-override_dh_auto_install:
-	lsb_release -a
-	mkdir -p $(install_rootdir)/`dirname $(source_file)`
-	echo "deb $(url) $(dist) main" >> $(install_rootdir)$(source_file)
+override_dh_auto_build:
+	echo "deb $(url) $(dist) main" > $(source_file)
+	echo "deb $(url) $(dist)-testing main" > $(testing_source_file)
 
 %:
 	dh $@ 

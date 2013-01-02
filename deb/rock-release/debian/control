@@ -9,4 +9,10 @@ Homepage: http://www.rockstack.org
 Package: rock-release
 Architecture: all
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: Apt repo and key for rockstack repo 
+Description: Apt repo and key for rockstack
+
+
+Package: rock-release-testing
+Architecture: all
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Testing apt repo and key for rockstack
