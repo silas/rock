@@ -9,7 +9,7 @@
 # Uncomment this to turn on verbose mode.
 #export DH_VERBOSE=1
 
-url := http://dl.rockstack.org
+url := http://dl.rockstack.org/deb
 install_rootdir := $(CURDIR)/debian/rock-release
 source_file := /etc/apt/sources.list.d/rockstack.list
 dist := $(shell lsb_release -cs)
