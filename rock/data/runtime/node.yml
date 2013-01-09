@@ -12,6 +12,8 @@ build: |
     warn 'no "package.json" file found'
   fi
 
+  npm shrinkwrap
+
 build_deployment: |
 
   if [[ ! -f ./npm-shrinkwrap.json ]]; then
