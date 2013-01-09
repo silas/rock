@@ -18,6 +18,8 @@ build: |
     warn 'no "requirements.txt" file found'
   fi
 
+  pip freeze > requirements.txt
+
 build_deployment: |
 
   if [[ ! -f ./requirements.txt ]]; then
