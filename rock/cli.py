@@ -46,27 +46,6 @@ def runtime(args, extra):
         stdout.write('%s\n' % r.name)
 
 
-def platform(args, extra):
-    p = project(args)
-
-    if not args.platform:
-        if not isinstance(p.config.get('platform'), dict):
-            raise ConfigError('platform type required')
-        if 'type' not in p.config['platform']:
-            raise ConfigError('platform.type required')
-        args.platform = p.config['platform']['type']
-
-    try:
-        module = importlib.import_module(args.platform)
-    except ImportError:
-        raise ConfigError('platform not installed: %s' % args.platform)
-
-    if not hasattr(module, 'hook'):
-        raise ConfigError("platform module doesn't have a hook function")
-
-    return module.hook('cli', project=p, args=extra)
-
-
 def run(args, extra):
     project(args).run(extra)
 
@@ -95,8 +74,6 @@ def main(args=None):
                                  default=os.environ.get('ROCK_PATH', ''))
     project_options.add_argument('--env', help='set env',
                                  default=os.environ.get('ROCK_ENV', 'local'))
-    project_options.add_argument('--platform', help='set platform',
-                                 default=os.environ.get('ROCK_PLATFORM', ''))
     project_options.add_argument('--runtime', help='set runtime')
 
     # project commands
@@ -126,11 +103,6 @@ def main(args=None):
     parser_runtime = sub.add_parser('runtime', help='list runtimes',
                                     add_help=False)
     parser_runtime.set_defaults(func=runtime)
-
-    # platform
-    parser_platform = sub.add_parser('platform', help='platform commands',
-                                     add_help=False)
-    parser_platform.set_defaults(func=platform)
 
     # run
     parser_run = sub.add_parser('run', help='run section or command in ' +

@@ -17,7 +17,6 @@ class Args(object):
         self.verbose = True
         self.dry_run = True
         self.runtime = 'test123'
-        self.platform = ''
         self.name = ''
         self.env = 'local'
         for name, value in kwargs.items():
@@ -74,25 +73,6 @@ class CliTestCase(helper.unittest.TestCase):
     def test_env(self):
         cli.env(Args(), [])
         self.assertTrue('\nexport TEST_PATH="test_path"\n' in self.stdout.getvalue())
-
-    def test_platform(self):
-        result = cli.platform(Args(platform='helper'), ['1', '2'])
-        self.assertEqual(result['name'], 'cli')
-        self.assertTrue(isinstance(result['project'], Project))
-        self.assertEqual(result['args'], ['1', '2'])
-        self.assertEqual(result['kwargs'], {})
-        # platform not installed
-        self.assertRaises(ConfigError, cli.platform, Args(platform='not-exist'), [])
-        # platform doesn't have main
-        self.assertRaises(ConfigError, cli.platform, Args(platform='empty'), [])
-        # no platform
-        self.assertRaises(ConfigError, cli.platform, Args(), [])
-        # no platform type
-        path = os.path.join(PROJECT_PATH, 'platform_type_notfound')
-        self.assertRaises(ConfigError, cli.platform, Args(path=path), [])
-        # platform from yaml
-        path = os.path.join(PROJECT_PATH, 'platform')
-        self.assertEqual(cli.platform(Args(path=path), 'ok')['args'], 'ok')
 
     def test_runtime(self):
         cli.runtime(Args(), [])
