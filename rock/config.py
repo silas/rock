@@ -56,7 +56,7 @@ class Config(collections.Mapping):
                 return None
         try:
             with open(path) as f:
-                return yaml.load(f)
+                return yaml.safe_load(f)
         except Exception, error:
             if require_parses:
                 raise ConfigError('parse error: ' + path)
