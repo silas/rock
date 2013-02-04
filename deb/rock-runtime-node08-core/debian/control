@@ -2,7 +2,13 @@ Source: rock-runtime-node08-core
 Section: web
 Priority: extra
 Maintainer: Philcolabs <support@philcolabs.com>
-Build-Depends: debhelper (>= 8.0.0), autotools-dev, libevent-dev, libssl-dev, python, openssl, curl
+Build-Depends: debhelper (>= 8.0.0),
+ autotools-dev,
+ libevent-dev,
+ libssl-dev,
+ python,
+ openssl,
+ curl
 Standards-Version: 3.9.3
 Homepage: http://nodejs.org
 

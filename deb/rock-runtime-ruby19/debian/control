@@ -8,5 +8,8 @@ Homepage: http://www.rockstack.org
 
 Package: rock-runtime-ruby19
 Architecture: all
-Depends: ${shlibs:Depends}, ${misc:Depends}, rock-runtime-ruby19-core, rock-runtime-ruby19-bundler
+Depends: ${shlibs:Depends},
+ ${misc:Depends},
+ rock-runtime-ruby19-core (>= 1.9.3p374-1),
+ rock-runtime-ruby19-bundler (>= 1.2.3-1)
 Description: ruby19 runtime for rock.

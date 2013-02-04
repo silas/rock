@@ -1,5 +1,12 @@
-rock-runtime-ruby19 (1.0.0) unstable; urgency=low
+rock-runtime-ruby19 (1.0.0-2) unstable; urgency=low
 
-  * Initial Release.
+  * Ruby 1.9.3 p374
+  * Bundler 1.2.3
+
+ -- Philcolabs <support@philcolabs.com>  Sun, 23 Dec 2012 05:19:00 +0000
+
+rock-runtime-ruby19 (1.0.0-1) unstable; urgency=low
+
+  * Initial release
 
  -- Philcolabs <support@philcolabs.com>  Sun, 23 Dec 2012 05:19:00 +0000

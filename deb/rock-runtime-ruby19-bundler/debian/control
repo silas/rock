@@ -2,12 +2,15 @@ Source: rock-runtime-ruby19-bundler
 Section: ruby
 Priority: extra
 Maintainer: Philcolabs <support@philcolabs.com>
-Build-Depends: debhelper (>= 8.0.0), rock-runtime-ruby19-core
+Build-Depends: debhelper (>= 8.0.0),
+ rock-runtime-ruby19-core
 Standards-Version: 3.9.3
 Homepage: http://gembundler.com
 
 Package: rock-runtime-ruby19-bundler
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, rock-runtime-ruby19-core
-Description: Bundler manages an application's dependencies through its entire 
+Depends: ${shlibs:Depends},
+ ${misc:Depends},
+ rock-runtime-ruby19-core
+Description: Bundler manages an application's dependencies through its entire
  life across many machines systematically and repeatably.

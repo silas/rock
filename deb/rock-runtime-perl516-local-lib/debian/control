@@ -8,5 +8,7 @@ Homepage: http://search.cpan.org/~apeiron/local-lib
 
 Package: rock-runtime-perl516-local-lib
 Architecture: all
-Depends: ${shlibs:Depends}, ${misc:Depends}, rock-runtime-perl516-core
+Depends: ${shlibs:Depends},
+ ${misc:Depends},
+ rock-runtime-perl516-core
 Description: Create and use a local-lib for Perl modules with PERL5LIB.

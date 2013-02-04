@@ -2,7 +2,13 @@ Source: rock-runtime-php54-libmemcached
 Section: php
 Priority: extra
 Maintainer: Philcolabs <support@philcolabs.com>
-Build-Depends: debhelper (>= 8.0.0), flex, bison, python-sphinx, systemtap-sdt-dev, libevent-dev, libcloog-ppl0 
+Build-Depends: debhelper (>= 8.0.0),
+ flex,
+ bison,
+ python-sphinx,
+ systemtap-sdt-dev,
+ libevent-dev,
+ libcloog-ppl0
 Standards-Version: 3.9.3
 Homepage: http://libmemcached.org
 
@@ -29,7 +35,9 @@ Description: libmemcached is a C/C++ client library and tools for the memcached
 
 Package: rock-runtime-php54-libmemcached-dev
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, rock-runtime-php54-libmemcached
+Depends: ${shlibs:Depends},
+ ${misc:Depends},
+ rock-runtime-php54-libmemcached
 Description: This package contains the header files and development libraries
  for rock-runtime-php54-libmemcached. If you like to develop programs using 
  rock-runtime-php54-libmemcached, you will need to 

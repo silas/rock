@@ -8,5 +8,8 @@ Homepage: http://packages.python.org/distribute
 
 Package: rock-runtime-python33-distribute-setup
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, rock-runtime-python33-core
-Description: Easily download, build, install, upgrade, and uninstall Python packages.
+Depends: ${shlibs:Depends},
+ ${misc:Depends},
+ rock-runtime-python33-core
+Description: Easily download, build, install, upgrade, and uninstall Python
+ packages.

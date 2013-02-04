@@ -2,7 +2,9 @@ Source: rock-runtime-php54-composer
 Section: php
 Priority: extra
 Maintainer: Philcolabs <support@philcolabs.com>
-Build-Depends: debhelper (>= 8.0.0), rock-runtime-php54-core, curl
+Build-Depends: debhelper (>= 8.0.0),
+ rock-runtime-php54-core,
+ curl
 Standards-Version: 3.9.3
 Homepage: http://getcomposer.org
 

@@ -1,5 +1,11 @@
+rock-runtime-php54-memcached (2.1.0-2) unstable; urgency=low
+
+  * Bump for libmemcached 1.0.16
+
+ -- Silas Sewell <silas@sewell.org>  Sun, 03 Feb 2013 00:00:00 +0000
+
 rock-runtime-php54-memcached (2.1.0-1) unstable; urgency=low
 
-  * Initial release.
+  * Initial release
 
  -- Philcolabs <support@philcolabs.com>  Thu, 20 Dec 2012 12:29:28 +0000

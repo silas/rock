@@ -2,13 +2,15 @@ Source: rock-runtime-node04-npm
 Section: web
 Priority: extra
 Maintainer: Philcolabs <support@philcolabs.com>
-Build-Depends: debhelper (>= 8.0.0), rock-runtime-node04-core, python
+Build-Depends: debhelper (>= 8.0.0),
+ rock-runtime-node04-core,
+ python
 Standards-Version: 3.9.3
 Homepage: http://npmjs.org
 
 Package: rock-runtime-node04-npm
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, rock-runtime-node04-core
-Description: npm is a package manager for node. You can use it to install 
-  and publish your node programs. It manages dependencies and does 
+Description: npm is a package manager for node. You can use it to install
+  and publish your node programs. It manages dependencies and does
   other cool stuff.

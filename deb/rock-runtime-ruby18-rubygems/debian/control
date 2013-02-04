@@ -2,12 +2,15 @@ Source: rock-runtime-ruby18-rubygems
 Section: ruby
 Priority: extra
 Maintainer: Philcolabs <support@philcolabs.com>
-Build-Depends: debhelper (>= 8.0.0), rock-runtime-ruby18-core
+Build-Depends: debhelper (>= 8.0.0),
+ rock-runtime-ruby18-core
 Standards-Version: 3.9.3
 Homepage: http://rubygems.org
 
 Package: rock-runtime-ruby18-rubygems
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, rock-runtime-ruby18-core
+Depends: ${shlibs:Depends},
+ ${misc:Depends},
+ rock-runtime-ruby18-core
 Description: RubyGems is the Ruby standard for publishing and managing third 
  party libraries.

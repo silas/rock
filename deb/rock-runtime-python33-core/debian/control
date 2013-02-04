@@ -2,7 +2,19 @@ Source: rock-runtime-python33-core
 Section: python
 Priority: extra
 Maintainer: Philcolabs <support@philcolabs.com>
-Build-Depends: debhelper (>= 8.0.0), autotools-dev, libreadline-dev, libsqlite3-dev, libssl-dev, libbz2-dev, bzip2, zlib1g-dev, libgmp3-dev, ncurses-dev, gdb, chrpath, lsb-release
+Build-Depends: debhelper (>= 8.0.0),
+ autotools-dev,
+ libreadline-dev,
+ libsqlite3-dev,
+ libssl-dev,
+ libbz2-dev,
+ bzip2,
+ zlib1g-dev,
+ libgmp3-dev,
+ ncurses-dev,
+ gdb,
+ chrpath,
+ lsb-release
 Standards-Version: 3.9.3
 Homepage: http://www.python.org
 

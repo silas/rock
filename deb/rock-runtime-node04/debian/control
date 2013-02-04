@@ -8,5 +8,8 @@ Homepage: http://www.rockstack.org
 
 Package: rock-runtime-node04
 Architecture: all
-Depends: ${shlibs:Depends}, ${misc:Depends}, rock-runtime-node04-core, rock-runtime-node04-npm
+Depends: ${shlibs:Depends},
+ ${misc:Depends},
+ rock-runtime-node04-core (>= 0.4.12-1),
+ rock-runtime-node04-npm (>= 1.0.106-1)
 Description: node04 runtime for rock.

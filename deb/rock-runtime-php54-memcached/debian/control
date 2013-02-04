@@ -2,13 +2,20 @@ Source: rock-runtime-php54-memcached
 Section: php
 Priority: extra
 Maintainer: Philcolabs <support@philcolabs.com>
-Build-Depends: debhelper (>= 8.0.0), autoconf, zlib1g-dev, rock-runtime-php54-core, rock-runtime-php54-libmemcached-dev
+Build-Depends: debhelper (>= 8.0.0),
+ autoconf,
+ zlib1g-dev,
+ rock-runtime-php54-core,
+ rock-runtime-php54-libmemcached-dev
 Standards-Version: 3.9.3
 Homepage: http://pecl.php.net/package/memcached
 
 Package: rock-runtime-php54-memcached
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, rock-runtime-php54-core, rock-runtime-php54-libmemcached
+Depends: ${shlibs:Depends},
+ ${misc:Depends},
+ rock-runtime-php54-core,
+ rock-runtime-php54-libmemcached
 Description: This extension uses libmemcached library to provide API for 
  communicating with memcached servers.
  memcached is a high-performance, distributed memory object caching system,

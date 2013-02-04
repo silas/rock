@@ -2,7 +2,16 @@ Source: rock-runtime-ruby18-core
 Section: ruby
 Priority: extra
 Maintainer: Philcolabs <support@philcolabs.com>
-Build-Depends: debhelper (>= 8.0.0), autotools-dev, chrpath, libgdbm-dev, libncurses-dev, libdb-dev, libffi-dev, libssl-dev, libyaml-dev, libreadline-dev
+Build-Depends: debhelper (>= 8.0.0),
+ autotools-dev,
+ chrpath,
+ libgdbm-dev,
+ libncurses-dev,
+ libdb-dev,
+ libffi-dev,
+ libssl-dev,
+ libyaml-dev,
+ libreadline-dev
 Standards-Version: 3.9.3
 Homepage: http://ruby-lang.org
 
