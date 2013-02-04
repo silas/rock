@@ -54,18 +54,6 @@ class Project(object):
             else:
                 shell.write(command)
 
-    def execute_type(self, name, *args):
-        section = '%s_%s' % (name, args[0]) if len(args) > 0 else name
-        if section not in self.config:
-            raise ConfigError('section not found: %s' % section)
-        self.execute(self.config[section], args[1:])
-
-    def build(self, *args):
-        self.execute_type('build', *args)
-
-    def clean(self, *args):
-        self.execute_type('clean', *args)
-
     def _template(self, path, args):
         with Shell() as shell:
             self._setup(shell)
@@ -131,13 +119,16 @@ class Project(object):
             templates.sort()
             return templates
 
-    def run(self, args):
-        if len(args) == 0 and 'run' in self.config:
-            self.execute(self.config['run'])
-        elif len(args) >= 1 and 'run_%s' % args[0] in self.config:
-            self.execute(self.config['run_%s' % args[0]], args[1:])
+    def run(self, section, args):
+        if section == 'run':
+            if len(args) == 0:
+                if 'run' in self.config:
+                    self.execute(self.config['run'])
+                else:
+                    raise ConfigError('section not found: %s' % section)
+            else:
+                self.execute(args, cd=False)
+        elif section in self.config:
+            self.execute(section, args)
         else:
-            self.execute(args, cd=False)
-
-    def test(self, *args):
-        self.execute_type('test', *args)
+            raise ConfigError('section not found: %s' % section)

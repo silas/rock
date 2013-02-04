@@ -22,20 +22,6 @@ def project(args):
     return Project(config, env=args.env)
 
 
-def build(args, extra):
-    project(args).build(*extra)
-
-
-def clean(args, extra):
-    project(args).clean(*extra)
-
-
-def create(args, extra):
-    names = project(args).create(args.name, *extra)
-    if names:
-        stdout.write('%s\n' % '\n'.join(names))
-
-
 def env(args, extra):
     for name, value in project(args).config['env'].items():
         stdout.write('export %s="%s"\n' % (name, value))
@@ -46,20 +32,26 @@ def runtime(args, extra):
         stdout.write('%s\n' % r.name)
 
 
-def run(args, extra):
-    project(args).run(extra)
-
-
-def test(args, extra):
-    project(args).test(*extra)
+def setup(args, extra):
+    names = project(args).setup(args.name, *extra)
+    if names:
+        stdout.write('%s\n' % '\n'.join(names))
 
 
 def main(args=None):
     description = """
-    rock helps you build, test and run your app in the Rock Platform.
+    rock helps you build, test and run your app.
     """
 
-    parser = argparse.ArgumentParser(prog='rock', description=description)
+    add_help = True
+
+    for arg in sys.argv[1:]:
+        if not arg.startswith('-'):
+            add_help = False
+            break
+
+    parser = argparse.ArgumentParser(prog='rock', description=description,
+                                     add_help=add_help)
 
     # general options
     parser.add_argument('-v', '--verbose', action='store_true',
@@ -69,53 +61,23 @@ def main(args=None):
     parser.add_argument('--version', action='version', version=__version__)
 
     # options
-    project_options = parser.add_argument_group('project')
-    project_options.add_argument('--path', help='set path',
-                                 default=os.environ.get('ROCK_PATH', ''))
-    project_options.add_argument('--env', help='set env',
-                                 default=os.environ.get('ROCK_ENV', 'local'))
-    project_options.add_argument('--runtime', help='set runtime')
+    options = parser.add_argument_group('project')
+    options.add_argument('--path', help='set path',
+                         default=os.environ.get('ROCK_PATH', ''))
+    options.add_argument('--env', help='set env',
+                         default=os.environ.get('ROCK_ENV', 'local'))
+    options.add_argument('--runtime', help='set runtime')
 
-    # project commands
-    sub = parser.add_subparsers(title='commands')
-
-    # build
-    parser_build = sub.add_parser('build', help='build project',
-                                  add_help=False)
-    parser_build.set_defaults(func=build)
-
-    # clean
-    parser_clean = sub.add_parser('clean', help='clean project',
-                                  add_help=False)
-    parser_clean.set_defaults(func=clean)
-
-    # create
-    parser_create = sub.add_parser('create', help='create new project')
-    parser_create.set_defaults(func=create)
-    parser_create.add_argument('name', nargs="?", help='template name')
-
-    # env
-    # TODO: remove
-    parser_env = sub.add_parser('env', help='show environment variables')
-    parser_env.set_defaults(func=env)
-
-    # runtime
-    parser_runtime = sub.add_parser('runtime', help='list runtimes',
-                                    add_help=False)
-    parser_runtime.set_defaults(func=runtime)
-
-    # run
-    parser_run = sub.add_parser('run', help='run section or command in ' +
-                                'project environment', add_help=False)
-    parser_run.set_defaults(func=run)
-
-    # test
-    parser_test = sub.add_parser('test', help='test project', add_help=False)
-    parser_test.set_defaults(func=test)
+    parser.add_argument('command', nargs='?', help='action to take')
 
     try:
         args, extra = parser.parse_known_args(args)
-        args.func(args, extra)
+        if args.command in ('env', 'runtime', 'setup'):
+            globals()[args.command](args, extra)
+        elif args.command:
+            project(args).run(args.command, extra)
+        else:
+            parser.print_help()
     except Error, error:
         message = '%s' % error
         if not message.endswith('\n'):
