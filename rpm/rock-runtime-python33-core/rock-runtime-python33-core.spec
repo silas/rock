@@ -9,7 +9,7 @@
 
 Name:           rock-runtime-python33-core
 Version:        3.3.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A Python 3.3.x runtime
 
 Group:          Development/Languages
@@ -77,6 +77,8 @@ popd
 sed -i 's|^#! /usr/local/bin/python|#!/usr/bin/env python|g' \
   %{buildroot}%{python33_rootdir}%{_prefix}/lib/python3.3/cgi.py
 
+sed -i "s|%{buildroot}||g" %{buildroot}%{python33_rootdir}%{_prefix}/lib/python3.3/config-3.3m/Makefile
+
 patchelf --set-rpath %{python33_rootdir}/usr/lib %{buildroot}%{python33_rootdir}%{_bindir}/python3.3
 
 # skip buildroot/rpath check
@@ -108,5 +110,8 @@ rm -rf %{buildroot}
 %{python33_rootdir}%{_prefix}/lib/pkgconfig/python*.pc
 
 %changelog
+* Sun Feb 03 2013 Silas Sewell <silas@sewell.org> - 3.3.0-2
+- Fix Makefile paths
+
 * Sat Sep 29 2012 Silas Sewell <silas@sewell.org> - 3.3.0-1
 - Initial build

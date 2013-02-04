@@ -18,19 +18,24 @@ get-orig-source:
 	uscan --noconf --rename --repack --download-current-version --force-download --verbose $(CURDIR)
 
 override_dh_auto_configure:
-	mkdir -p $(CURDIR)/debian/rock-runtime-python27-core$(python27_rootdir)$(prefix)/lib
+	mkdir -p $(install_rootdir)$(python27_rootdir)$(prefix)/lib
 	./configure \
     --prefix=$(python27_rootdir)$(prefix) \
     --enable-ipv6 \
     --enable-unicode=ucs4 \
     --enable-shared \
-    LDFLAGS="-Wl,-rpath $(CURDIR)/debian/rock-runtime-python27-core$(python27_rootdir)$(prefix)/lib"
+    LDFLAGS="-Wl,-rpath $(install_rootdir)$(python27_rootdir)$(prefix)/lib"
 
 override_dh_auto_install:
 	make install DESTDIR=$(install_rootdir)
-	chrpath -r $(python27_rootdir)$(prefix)/lib $(install_rootdir)$(python27_rootdir)$(prefix)/bin/python2.7
+
 	sed -i 's|^#! /usr/local/bin/python|#!/usr/bin/env python|g' \
-    $(install_rootdir)$(python27_rootdir)$(prefix)/lib/python2.7/cgi.py
+	  $(install_rootdir)$(python27_rootdir)$(prefix)/lib/python2.7/cgi.py
+
+	sed -i "s|$(install_rootdir)||g" \
+	  $(install_rootdir)$(python27_rootdir)$(prefix)/lib/python2.7/config/Makefile
+
+	chrpath -r $(python27_rootdir)$(prefix)/lib $(install_rootdir)$(python27_rootdir)$(prefix)/bin/python2.7
 
 override_dh_auto_test:
 

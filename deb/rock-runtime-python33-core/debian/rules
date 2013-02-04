@@ -29,9 +29,14 @@ override_dh_auto_configure:
 
 override_dh_auto_install:
 	make install DESTDIR=$(install_rootdir)
-	chrpath -r $(python33_rootdir)$(prefix)/lib $(install_rootdir)$(python33_rootdir)$(prefix)/bin/python3.3
+
 	sed -i 's|^#! /usr/local/bin/python|#!/usr/bin/env python|g' \
-    $(install_rootdir)$(python33_rootdir)$(prefix)/lib/python3.3/cgi.py
+	  $(install_rootdir)$(python33_rootdir)$(prefix)/lib/python3.3/cgi.py
+
+	sed -i "s|$(install_rootdir)||g" \
+	  $(install_rootdir)$(python33_rootdir)$(prefix)/lib/python3.3m/config/Makefile
+
+	chrpath -r $(python33_rootdir)$(prefix)/lib $(install_rootdir)$(python33_rootdir)$(prefix)/bin/python3.3
 
 override_dh_auto_test:
 
