@@ -3,7 +3,7 @@
 %filter_setup
 
 Name:           rock-runtime-ruby18-rubygems
-Version:        1.8.24
+Version:        1.8.25
 Release:        1%{?dist}
 Summary:        A tool to manage Ruby 1.8.x dependencies
 
@@ -48,5 +48,8 @@ rm -rf %{buildroot}
 %{ruby18_rootdir}%{_prefix}/lib/ruby/1.8
 
 %changelog
+* Sun Feb 03 2013 Silas Sewell <silas@sewell.org> - 1.8.25-1
+- Update to 1.8.25
+
 * Fri Jun 22 2012 Silas Sewell <silas@sewell.org> - 1.8.24-1
 - Initial build

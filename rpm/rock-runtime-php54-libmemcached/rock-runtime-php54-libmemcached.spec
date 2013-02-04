@@ -7,8 +7,8 @@
 
 Name:      rock-runtime-php54-libmemcached
 Summary:   Client library and command line tools for memcached server
-Version:   1.0.13
-Release:   3%{?dist}
+Version:   1.0.16
+Release:   1%{?dist}
 License:   BSD
 Group:     System Environment/Libraries
 URL:       http://libmemcached.org/
@@ -171,6 +171,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sun Feb 03 2013 Silas Sewell <silas@sewell.org> - 10.0.16-1
+- Update to 10.0.16
+
 * Wed Nov 21 2012 Silas Sewell <silas@sewell.org> - 10.0.13-3
 - Filter provides
 

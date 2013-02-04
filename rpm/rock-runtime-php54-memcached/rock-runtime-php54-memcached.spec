@@ -7,7 +7,7 @@
 Name:             rock-runtime-php54-memcached
 Summary:          Extension to work with the Memcached caching daemon
 Version:          2.1.0
-Release:          7%{?dist}
+Release:          8%{?dist}
 License:          PHP and MIT
 Group:            Development/Languages
 URL:              http://pecl.php.net/package/%{pecl_name}
@@ -19,11 +19,11 @@ Patch0:           %{pecl_name}-build.patch
 Patch1:           %{pecl_name}-info.patch
 BuildRoot:        %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:    autoconf
-BuildRequires:    rock-runtime-php54-core-rpmbuild >= 5.4.8-3
-BuildRequires:    rock-runtime-php54-libmemcached-devel >= 1.0.13-3
+BuildRequires:    rock-runtime-php54-core-rpmbuild >= 5.4.11-1
+BuildRequires:    rock-runtime-php54-libmemcached-devel >= 1.0.16-1
 BuildRequires:    zlib-devel
-Requires:         rock-runtime-php54-core >= 5.4.8-3
-Requires:         rock-runtime-php54-libmemcached >= 1.0.13-3
+Requires:         rock-runtime-php54-core >= 5.4.11-1
+Requires:         rock-runtime-php54-libmemcached >= 1.0.16-1
 
 %description
 This extension uses libmemcached library to provide API for communicating
@@ -95,6 +95,9 @@ fi
 %{php54_pecl_xmldir}/%{name}.xml
 
 %changelog
+* Sun Feb 03 2013 Silas Sewell <silas@sewell.org> - 2.1.0-8
+- Bump for libmemcached 1.0.16
+
 * Thu Nov 22 2012 Silas Sewell <silas@sewell.org> - 2.1.0-7
 - Use new php.d directory
 - Remove zts references

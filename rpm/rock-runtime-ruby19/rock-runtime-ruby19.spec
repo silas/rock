@@ -1,11 +1,11 @@
 %filter_from_provides /.*/d
 %filter_setup
 
-%global bundler_version 1.1.5
+%global bundler_version 1.2.3
 
 Name:           rock-runtime-ruby19
 Version:        1
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        ruby19 runtime for rock
 
 Group:          Development/Languages
@@ -44,6 +44,10 @@ rm -rf %{buildroot}
 %{ruby19_rootdir}/rock.yml
 
 %changelog
+* Sun Feb 03 2013 Silas Sewell <silas@sewell.org> - 1-5
+- Ruby 1.9.3 374
+- Bundler 1.2.3
+
 * Sun Nov 18 2012 Silas Sewell <silas@sewell.org> - 1-4
 - Update ruby 1.9.3 p327
 

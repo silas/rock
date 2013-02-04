@@ -3,7 +3,7 @@
 %filter_setup
 
 Name:           rock-runtime-ruby18-bundler
-Version:        1.1.5
+Version:        1.2.3
 Release:        1%{?dist}
 Summary:        A tool to manage Ruby 1.8.x dependencies
 
@@ -60,6 +60,9 @@ rm -rf %{buildroot}
 %{ruby18_rootdir}%{_bindir}/rock-bundle
 
 %changelog
+* Sun Feb 03 2013 Silas Sewell <silas@sewell.org> - 1.2.3-1
+- Update to 1.2.3
+
 * Fri Jul 20 2012 Silas Sewell <silas@sewell.org> - 1.1.5-1
 - Update to version 1.1.5
 - Unset RUBYOPT hack
