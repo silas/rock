@@ -12,14 +12,7 @@ Release:   1%{?dist}
 License:   BSD
 Group:     System Environment/Libraries
 URL:       http://libmemcached.org/
-# Original sources:
-#   http://launchpad.net/libmemcached/1.0/%{version}/+download/libmemcached-%{version}.tar.gz
-# The source tarball must be repackaged to remove the Hsieh hash
-# code, since the license is non-free.  When upgrading, download the new
-# source tarball, and run "./strip-hsieh.sh <version>" to produce the
-# "-exhsieh" tarball.
-Source0:   libmemcached-%{version}-exhsieh.tar.gz
-Patch0:    libmemcached-bigendian.patch
+Source0:   http://launchpad.net/libmemcached/1.0/%{version}/+download/libmemcached-%{version}.tar.gz
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 %if %{with_sasl}
@@ -77,7 +70,6 @@ you will need to install %{name}-devel.
 
 %prep
 %setup -q -n libmemcached-%{version}
-%patch0 -p1
 
 mkdir examples
 cp -p tests/*.{cc,h} examples/
@@ -149,7 +141,6 @@ rm -rf %{buildroot}
 %exclude %{php54_libdir}/lib*.la
 %{php54_libdir}/libhashkit.so.2*
 %{php54_libdir}/libmemcached.so.11*
-%{php54_libdir}/libmemcachedprotocol.so.0*
 %{php54_libdir}/libmemcachedutil.so.2*
 
 
@@ -160,11 +151,9 @@ rm -rf %{buildroot}
 %{php54_rootdir}%{_includedir}/libmemcached-1.0
 %{php54_rootdir}%{_includedir}/libhashkit
 %{php54_rootdir}%{_includedir}/libhashkit-1.0
-%{php54_rootdir}%{_includedir}/libmemcachedprotocol-0.0
 %{php54_rootdir}%{_includedir}/libmemcachedutil-1.0
 %{php54_libdir}/libhashkit.so
 %{php54_libdir}/libmemcached.so
-%{php54_libdir}/libmemcachedprotocol.so
 %{php54_libdir}/libmemcachedutil.so
 %{php54_libdir}/pkgconfig/libmemcached.pc
 %{php54_rootdir}%{_datadir}/aclocal/ax_libmemcached.m4
