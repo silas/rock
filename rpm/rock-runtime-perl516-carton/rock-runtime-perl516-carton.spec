@@ -92,13 +92,13 @@ rm -rf %{buildroot}
 %{perl516_rootdir}%{_prefix}/lib/carton
 
 %changelog
-* Tue Nov 20 2012 Silas Sewell <silas@sewell.org> - 1:0.9.7-0.1
+* Tue Nov 20 2012 RockStack <packages@rockstack.org> - 1:0.9.7-0.1
 - Fix version and epoch
 - Fix paths
 
-* Tue Sep 11 2012 Silas Sewell <silas@sewell.org> - 1.5014-2
+* Tue Sep 11 2012 RockStack <packages@rockstack.org> - 1.5014-2
 - Rebuild for Perl 5.16.1
 - Update dependencies
 
-* Mon May 14 2012 Silas Sewell <silas@sewell.org> - 1.5014-1
+* Mon May 14 2012 RockStack <packages@rockstack.org> - 1.5014-1
 - Initial build

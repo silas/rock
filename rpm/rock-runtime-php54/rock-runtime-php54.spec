@@ -42,38 +42,38 @@ rm -rf %{buildroot}
 %{php54_rootdir}/rock.yml
 
 %changelog
-* Sun Feb 03 2013 Silas Sewell <silas@sewell.org> - 1-11
+* Sun Feb 03 2013 RockStack <packages@rockstack.org> - 1-11
 - PHP 5.4.11
 
-* Thu Nov 22 2012 Silas Sewell <silas@sewell.org> - 1-10
+* Thu Nov 22 2012 RockStack <packages@rockstack.org> - 1-10
 - Use php.d
 
-* Wed Nov 21 2012 Silas Sewell <silas@sewell.org> - 1-9
+* Wed Nov 21 2012 RockStack <packages@rockstack.org> - 1-9
 - Fix pear/pecl macros
 
-* Wed Nov 21 2012 Silas Sewell <silas@sewell.org> - 1-8
+* Wed Nov 21 2012 RockStack <packages@rockstack.org> - 1-8
 - Fix provides and requires for memcache
 
-* Sun Nov 18 2012 Silas Sewell <silas@sewell.org> - 1-7
+* Sun Nov 18 2012 RockStack <packages@rockstack.org> - 1-7
 - PHP 5.4.8
 - Add PHP memcached
 
-* Sat Sep 29 2012 Silas Sewell <silas@sewell.org> - 1-6
+* Sat Sep 29 2012 RockStack <packages@rockstack.org> - 1-6
 - PHP 5.4.7
 
-* Thu Aug 23 2012 Silas Sewell <silas@sewell.org> - 1-5
+* Thu Aug 23 2012 RockStack <packages@rockstack.org> - 1-5
 - Composer 1.0.0 alpha5
 - PHP 5.4.6
 
-* Fri Jul 20 2012 Silas Sewell <silas@sewell.org> - 1-4
+* Fri Jul 20 2012 RockStack <packages@rockstack.org> - 1-4
 - Convert env to rock.yml
 
-* Tue Jul 17 2012 Silas Sewell <silas@sewell.org> - 1-3
+* Tue Jul 17 2012 RockStack <packages@rockstack.org> - 1-3
 - Fix various issues with core package
 
-* Tue Jul 10 2012 Silas Sewell <silas@sewell.org> - 1-2
+* Tue Jul 10 2012 RockStack <packages@rockstack.org> - 1-2
 - Add env file
 - Add explicit requires
 
-* Sun Jul 08 2012 Silas Sewell <silas@sewell.org> - 1-1
+* Sun Jul 08 2012 RockStack <packages@rockstack.org> - 1-1
 - Initial build

@@ -1,7 +1,7 @@
 Source: rock-runtime-php54-composer
 Section: php
 Priority: extra
-Maintainer: Philcolabs <support@philcolabs.com>
+Maintainer: RockStack <packages@rockstack.org>
 Build-Depends: debhelper (>= 8.0.0),
  rock-runtime-php54-core,
  curl

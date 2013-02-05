@@ -2,10 +2,10 @@ rock-runtime-ruby19-core (1.9.3p374-1) unstable; urgency=low
 
   * Update to 1.9.3 p374
 
- -- Silas Sewell <silas@sewell.org>  Sun, 03 Feb 2013 00:00:00 +0000
+ -- RockStack <packages@rockstack.org>  Sun, 03 Feb 2013 00:00:00 +0000
 
 rock-runtime-ruby19-core (1.9.3p327-1) unstable; urgency=low
 
   * Initial release
 
- -- Philcolabs <support@philcolabs.com>  Sat, 22 Dec 2012 23:42:08 +0000
+ -- RockStack <packages@rockstack.org>  Sat, 22 Dec 2012 23:42:08 +0000

@@ -34,7 +34,7 @@ override_dh_auto_install:
 	  $(install_rootdir)$(python33_rootdir)$(prefix)/lib/python3.3/cgi.py
 
 	sed -i "s|$(install_rootdir)||g" \
-	  $(install_rootdir)$(python33_rootdir)$(prefix)/lib/python3.3m/config/Makefile
+	  $(install_rootdir)$(python33_rootdir)$(prefix)/lib/python3.3/config-3.3m/Makefile
 
 	chrpath -r $(python33_rootdir)$(prefix)/lib $(install_rootdir)$(python33_rootdir)$(prefix)/bin/python3.3
 

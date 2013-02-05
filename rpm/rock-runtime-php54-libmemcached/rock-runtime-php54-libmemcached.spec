@@ -160,13 +160,13 @@ rm -rf %{buildroot}
 
 
 %changelog
-* Sun Feb 03 2013 Silas Sewell <silas@sewell.org> - 10.0.16-1
+* Sun Feb 03 2013 RockStack <packages@rockstack.org> - 10.0.16-1
 - Update to 10.0.16
 
-* Wed Nov 21 2012 Silas Sewell <silas@sewell.org> - 10.0.13-3
+* Wed Nov 21 2012 RockStack <packages@rockstack.org> - 10.0.13-3
 - Filter provides
 
-* Sat Nov 17 2012 Silas Sewell <silas@sewell.org> - 10.0.13-2
+* Sat Nov 17 2012 RockStack <packages@rockstack.org> - 10.0.13-2
 - Namespace for rock runtime php54
 
 * Sat Oct 20 2012 Remi Collet <remi@fedoraproject.org> - 1.0.13-1

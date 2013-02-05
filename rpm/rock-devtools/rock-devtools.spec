@@ -31,8 +31,8 @@ rm -rf %{buildroot}
 %defattr(-,root,root,-)
 
 %changelog
-* Tue Nov 20 2012 Silas Sewell <silas@sewell.org> - 1-2
+* Tue Nov 20 2012 RockStack <packages@rockstack.org> - 1-2
 - Add git
 
-* Wed Jul 18 2012 Silas Sewell <silas@sewell.org> - 1-1
+* Wed Jul 18 2012 RockStack <packages@rockstack.org> - 1-1
 - Initial build

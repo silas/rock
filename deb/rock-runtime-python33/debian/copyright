@@ -2,7 +2,7 @@ Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: rock-runtime-python33
 
 Files: *
-Copyright: 2012 Philcolabs <support@philcolabs.com>
+Copyright: 2012 RockStack Contributors
 License: MIT
  Permission is hereby granted, free of charge, to any person obtaining a
  copy of this software and associated documentation files (the "Software"),

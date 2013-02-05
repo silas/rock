@@ -2,10 +2,10 @@ rock-runtime-php54-core (5.4.11-1) unstable; urgency=low
 
   * Update to 5.4.11
 
- -- Silas Sewell <silas@sewell.org>  Sun, 03 Feb 2013 00:00:00 +0000
+ -- RockStack <packages@rockstack.org>  Sun, 03 Feb 2013 00:00:00 +0000
 
 rock-runtime-php54-core (5.4.8-1) unstable; urgency=low
 
   * Initial release
 
- -- Philcolabs <support@philcolabs.com>  Wed, 19 Dec 2012 14:27:52 +0000
+ -- RockStack <packages@rockstack.org>  Wed, 19 Dec 2012 14:27:52 +0000

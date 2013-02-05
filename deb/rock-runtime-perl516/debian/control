@@ -1,7 +1,7 @@
 Source: rock-runtime-perl516
 Section: perl
 Priority: extra
-Maintainer: Philcolabs <support@philcolabs.com>
+Maintainer: RockStack <packages@rockstack.org>
 Build-Depends: debhelper (>= 8.0.0)
 Standards-Version: 3.9.3
 Homepage: http://www.rockstack.org

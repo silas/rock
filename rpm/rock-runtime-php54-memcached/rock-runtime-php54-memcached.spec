@@ -95,20 +95,20 @@ fi
 %{php54_pecl_xmldir}/%{name}.xml
 
 %changelog
-* Sun Feb 03 2013 Silas Sewell <silas@sewell.org> - 2.1.0-8
+* Sun Feb 03 2013 RockStack <packages@rockstack.org> - 2.1.0-8
 - Bump for libmemcached 1.0.16
 
-* Thu Nov 22 2012 Silas Sewell <silas@sewell.org> - 2.1.0-7
+* Thu Nov 22 2012 RockStack <packages@rockstack.org> - 2.1.0-7
 - Use new php.d directory
 - Remove zts references
 
-* Wed Nov 21 2012 Silas Sewell <silas@sewell.org> - 2.1.0-6
+* Wed Nov 21 2012 RockStack <packages@rockstack.org> - 2.1.0-6
 - Use new pecl macros
 
-* Wed Nov 21 2012 Silas Sewell <silas@sewell.org> - 2.1.0-5
+* Wed Nov 21 2012 RockStack <packages@rockstack.org> - 2.1.0-5
 - Filter provides
 
-* Sat Nov 17 2012 Silas Sewell <silas@sewell.org> - 2.1.0-4
+* Sat Nov 17 2012 RockStack <packages@rockstack.org> - 2.1.0-4
 - Namespace for rock runtime php54
 
 * Fri Oct 19 2012 Remi Collet <remi@fedoraproject.org> - 2.1.0-3

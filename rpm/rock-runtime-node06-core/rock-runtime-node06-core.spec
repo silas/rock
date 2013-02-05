@@ -70,15 +70,15 @@ rm -rf %{buildroot}
 %{_sysconfdir}/rpm/macros.rock-node06
 
 %changelog
-* Fri Aug 10 2012 Silas Sewell <silas@sewell.org> - 0.6.21-1
+* Fri Aug 10 2012 RockStack <packages@rockstack.org> - 0.6.21-1
 - Update 0.6.21
 
-* Tue Jul 10 2012 Silas Sewell <silas@sewell.org> - 0.6.18-2
+* Tue Jul 10 2012 RockStack <packages@rockstack.org> - 0.6.18-2
 - Add man requirement
 - Add rpm macro
 
-* Fri Jun 22 2012 Silas Sewell <silas@sewell.org> - 0.6.19-1
+* Fri Jun 22 2012 RockStack <packages@rockstack.org> - 0.6.19-1
 - Update to 0.6.19
 
-* Mon May 14 2012 Silas Sewell <silas@sewell.org> - 0.6.17-1
+* Mon May 14 2012 RockStack <packages@rockstack.org> - 0.6.17-1
 - Initial build

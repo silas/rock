@@ -1,7 +1,7 @@
 Source: rock-release
 Section: misc
 Priority: extra
-Maintainer: Philcolabs <support@philcolabs.com>
+Maintainer: RockStack <packages@rockstack.org>
 Build-Depends: debhelper (>= 8.0.0), lsb-release
 Standards-Version: 3.9.3
 Homepage: http://www.rockstack.org

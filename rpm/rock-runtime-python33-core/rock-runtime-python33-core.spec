@@ -110,8 +110,8 @@ rm -rf %{buildroot}
 %{python33_rootdir}%{_prefix}/lib/pkgconfig/python*.pc
 
 %changelog
-* Sun Feb 03 2013 Silas Sewell <silas@sewell.org> - 3.3.0-2
+* Sun Feb 03 2013 RockStack <packages@rockstack.org> - 3.3.0-2
 - Fix Makefile paths
 
-* Sat Sep 29 2012 Silas Sewell <silas@sewell.org> - 3.3.0-1
+* Sat Sep 29 2012 RockStack <packages@rockstack.org> - 3.3.0-1
 - Initial build

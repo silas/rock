@@ -39,24 +39,24 @@ rm -rf %{buildroot}
 %{node08_rootdir}/rock.yml
 
 %changelog
-* Sun Feb 03 2013 Silas Sewell <silas@sewell.org> - 1-7
+* Sun Feb 03 2013 RockStack <packages@rockstack.org> - 1-7
 - Node 0.8.18
 
-* Sat Nov 17 2012 Silas Sewell <silas@sewell.org> - 1-6
+* Sat Nov 17 2012 RockStack <packages@rockstack.org> - 1-6
 - Update to node 0.8.14
 
-* Sat Sep 29 2012 Silas Sewell <silas@sewell.org> - 1-5
+* Sat Sep 29 2012 RockStack <packages@rockstack.org> - 1-5
 - Update to node 0.8.11
 
-* Wed Sep 12 2012 Silas Sewell <silas@sewell.org> - 1-4
+* Wed Sep 12 2012 RockStack <packages@rockstack.org> - 1-4
 - Update to node 0.8.9
 
-* Fri Jul 20 2012 Silas Sewell <silas@sewell.org> - 1-3
+* Fri Jul 20 2012 RockStack <packages@rockstack.org> - 1-3
 - Convert env to rock.yml
 
-* Tue Jul 10 2012 Silas Sewell <silas@sewell.org> - 1-2
+* Tue Jul 10 2012 RockStack <packages@rockstack.org> - 1-2
 - Add env file
 - Add explicit requires
 
-* Sat Jun 30 2012 Silas Sewell <silas@sewell.org> - 1-1
+* Sat Jun 30 2012 RockStack <packages@rockstack.org> - 1-1
 - Initial build

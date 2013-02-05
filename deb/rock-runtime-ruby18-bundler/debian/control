@@ -1,7 +1,7 @@
 Source: rock-runtime-ruby18-bundler
 Section: ruby
 Priority: extra
-Maintainer: Philcolabs <support@philcolabs.com>
+Maintainer: RockStack <packages@rockstack.org>
 Build-Depends: debhelper (>= 8.0.0),
  rock-runtime-ruby18-rubygems
 Standards-Version: 3.9.3

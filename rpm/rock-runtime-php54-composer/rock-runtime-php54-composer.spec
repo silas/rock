@@ -52,14 +52,14 @@ rm -rf %{buildroot}
 %{php54_rootdir}%{_bindir}/composer
 
 %changelog
-* Sat Nov 17 2012 Silas Sewell <silas@sewell.org> - 1.0.0-0.3.alpha6
+* Sat Nov 17 2012 RockStack <packages@rockstack.org> - 1.0.0-0.3.alpha6
 - Update to alpha6
 - Reduces memory usage
 - Link composer to composer.phar
 
-* Thu Aug 23 2012 Silas Sewell <silas@sewell.org> - 1.0.0-0.2.alpha5
+* Thu Aug 23 2012 RockStack <packages@rockstack.org> - 1.0.0-0.2.alpha5
 - Update to alpha5
 - Unzip requirement
 
-* Sun Jul 08 2012 Silas Sewell <silas@sewell.org> - 1.0.0-0.1.alpha4
+* Sun Jul 08 2012 RockStack <packages@rockstack.org> - 1.0.0-0.1.alpha4
 - Initial build

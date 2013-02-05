@@ -48,5 +48,5 @@ rm -rf %{buildroot}
 %{node04_rootdir}%{_mandir}/man*/npm*
 
 %changelog
-* Fri Jun 22 2012 Silas Sewell <silas@sewell.org> - 1.0.106-1
+* Fri Jun 22 2012 RockStack <packages@rockstack.org> - 1.0.106-1
 - Initial build

@@ -1,7 +1,7 @@
 Source: rock-runtime-ruby18-rubygems
 Section: ruby
 Priority: extra
-Maintainer: Philcolabs <support@philcolabs.com>
+Maintainer: RockStack <packages@rockstack.org>
 Build-Depends: debhelper (>= 8.0.0),
  rock-runtime-ruby18-core
 Standards-Version: 3.9.3

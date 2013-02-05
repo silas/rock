@@ -14,6 +14,8 @@
   {"spec": "rock-runtime-perl516/rock-runtime-perl516.spec"},
   {"spec": "rock-runtime-php54-core/rock-runtime-php54-core.spec"},
   {"spec": "rock-runtime-php54-composer/rock-runtime-php54-composer.spec"},
+  {"spec": "rock-runtime-php54-libmemcached/rock-runtime-php54-libmemcached.spec"},
+  {"spec": "rock-runtime-php54-memcached/rock-runtime-php54-memcached.spec"},
   {"spec": "rock-runtime-php54/rock-runtime-php54.spec"},
   {"spec": "rock-runtime-python27-core/rock-runtime-python27-core.spec"},
   {"spec": "rock-runtime-python27-virtualenv/rock-runtime-python27-virtualenv.spec"},

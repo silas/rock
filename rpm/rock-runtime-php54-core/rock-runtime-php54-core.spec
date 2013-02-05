@@ -250,32 +250,32 @@ rm -rf %{buildroot}
 %{_sysconfdir}/rpm/macros.rock-php54
 
 %changelog
-* Sun Feb 03 2013 Silas Sewell <silas@sewell.org> - 5.4.11-1
+* Sun Feb 03 2013 RockStack <packages@rockstack.org> - 5.4.11-1
 - Update to 5.4.11
 
-* Thu Nov 22 2012 Silas Sewell <silas@sewell.org> - 5.4.8-3
+* Thu Nov 22 2012 RockStack <packages@rockstack.org> - 5.4.8-3
 - Move extensions config to php.d
 
-* Wed Nov 21 2012 Silas Sewell <silas@sewell.org> - 5.4.8-2
+* Wed Nov 21 2012 RockStack <packages@rockstack.org> - 5.4.8-2
 - Move pear/pecl macros into separate file and add install/uninstall
 
-* Sat Nov 17 2012 Silas Sewell <silas@sewell.org> - 5.4.8-1
+* Sat Nov 17 2012 RockStack <packages@rockstack.org> - 5.4.8-1
 - Update to 5.4.8
 - Enable all extensions by default
 - Enable pear
 
-* Sat Sep 29 2012 Silas Sewell <silas@sewell.org> - 5.4.7-1
+* Sat Sep 29 2012 RockStack <packages@rockstack.org> - 5.4.7-1
 - Update to 5.4.7
 
-* Thu Aug 23 2012 Silas Sewell <silas@sewell.org> - 5.4.6-1
+* Thu Aug 23 2012 RockStack <packages@rockstack.org> - 5.4.6-1
 - Update to 5.4.6
 
-* Fri Aug 10 2012 Silas Sewell <silas@sewell.org> - 5.4.5-1
+* Fri Aug 10 2012 RockStack <packages@rockstack.org> - 5.4.5-1
 - Update to 5.4.5
 
-* Mon Jul 16 2012 Silas Sewell <silas@sewell.org> - 5.4.3-2
+* Mon Jul 16 2012 RockStack <packages@rockstack.org> - 5.4.3-2
 - Load json and phar modules via php.ini
 - Remove '*.a' files
 
-* Sun Jul 08 2012 Silas Sewell <silas@sewell.org> - 5.4.3-1
+* Sun Jul 08 2012 RockStack <packages@rockstack.org> - 5.4.3-1
 - Initial build

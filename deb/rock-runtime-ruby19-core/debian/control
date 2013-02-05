@@ -1,7 +1,7 @@
 Source: rock-runtime-ruby19-core
 Section: ruby
 Priority: extra
-Maintainer: Philcolabs <support@philcolabs.com>
+Maintainer: RockStack <packages@rockstack.org>
 Build-Depends: debhelper (>= 8.0.0),
  autotools-dev,
  chrpath,

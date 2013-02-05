@@ -3,10 +3,10 @@ rock-runtime-php54 (1.0.0-2) unstable; urgency=low
   * PHP 5.4.11
   - libmemcached 10.0.16
 
- -- Silas Sewell <silas@sewell.org>  Sun, 03 Feb 2013 00:00:00 +0000
+ -- RockStack <packages@rockstack.org>  Sun, 03 Feb 2013 00:00:00 +0000
 
 rock-runtime-php54 (1.0.0-1) unstable; urgency=low
 
   * Initial release
 
- -- Philcolabs <support@philcolabs.com>  Thu, 20 Dec 2012 10:34:53 +0000
+ -- RockStack <packages@rockstack.org>  Thu, 20 Dec 2012 10:34:53 +0000

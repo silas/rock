@@ -40,21 +40,21 @@ rm -rf %{buildroot}
 %{python27_rootdir}/rock.yml
 
 %changelog
-* Sun Feb 03 2013 Silas Sewell <silas@sewell.org> - 1-6
+* Sun Feb 03 2013 RockStack <packages@rockstack.org> - 1-6
 - Update to virtualenv 1.8.4
 
-* Wed Sep 12 2012 Silas Sewell <silas@sewell.org> - 1-5
+* Wed Sep 12 2012 RockStack <packages@rockstack.org> - 1-5
 - Update to virtualenv 1.8.2
 
-* Fri Jul 20 2012 Silas Sewell <silas@sewell.org> - 1-4
+* Fri Jul 20 2012 RockStack <packages@rockstack.org> - 1-4
 - Convert env to rock.yml
 
-* Wed Jul 18 2012 Silas Sewell <silas@sewell.org> - 1-3
+* Wed Jul 18 2012 RockStack <packages@rockstack.org> - 1-3
 - Update to virtualenv 1.7.2
 
-* Tue Jul 10 2012 Silas Sewell <silas@sewell.org> - 1-2
+* Tue Jul 10 2012 RockStack <packages@rockstack.org> - 1-2
 - Add env file
 - Add explicit requires
 
-* Mon May 14 2012 Silas Sewell <silas@sewell.org> - 1-1
+* Mon May 14 2012 RockStack <packages@rockstack.org> - 1-1
 - Initial build

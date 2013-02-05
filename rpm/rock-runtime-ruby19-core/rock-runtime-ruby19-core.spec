@@ -94,14 +94,14 @@ rm -rf %{buildroot}
 %{ruby19_rootdir}%{_prefix}/lib/pkgconfig/ruby*
 
 %changelog
-* Sun Feb 03 2013 Silas Sewell <silas@sewell.org> - 1.9.3.374-1
+* Sun Feb 03 2013 RockStack <packages@rockstack.org> - 1.9.3.374-1
 - Update to 1.9.3 p374
 
-* Sun Nov 18 2012 Silas Sewell <silas@sewell.org> - 1.9.3.327-1
+* Sun Nov 18 2012 RockStack <packages@rockstack.org> - 1.9.3.327-1
 - Update to 1.9.3 p327
 
-* Fri Jul 20 2012 Silas Sewell <silas@sewell.org> - 1.9.3.194-2
+* Fri Jul 20 2012 RockStack <packages@rockstack.org> - 1.9.3.194-2
 - Add ruby19_abi to rpmbuild
 
-* Mon May 14 2012 Silas Sewell <silas@sewell.org> - 1.9.3.194-1
+* Mon May 14 2012 RockStack <packages@rockstack.org> - 1.9.3.194-1
 - Initial build

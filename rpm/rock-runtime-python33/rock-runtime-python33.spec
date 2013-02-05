@@ -40,8 +40,8 @@ rm -rf %{buildroot}
 %{python33_rootdir}/rock.yml
 
 %changelog
-* Sun Feb 03 2013 Silas Sewell <silas@sewell.org> - 1-2
+* Sun Feb 03 2013 RockStack <packages@rockstack.org> - 1-2
 - distribute-setup 0.6.34-1
 
-* Sat Sep 29 2012 Silas Sewell <silas@sewell.org> - 1-1
+* Sat Sep 29 2012 RockStack <packages@rockstack.org> - 1-1
 - Initial build

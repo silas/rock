@@ -1,7 +1,7 @@
 Source: rock-runtime-perl516-carton
 Section:  perl
 Priority: extra
-Maintainer: Philcolabs <support@philcolabs.com>
+Maintainer: RockStack <packages@rockstack.org>
 Build-Depends: debhelper (>= 8.0.0),
  rock-runtime-perl516-cpanm,
  rock-runtime-perl516-local-lib,

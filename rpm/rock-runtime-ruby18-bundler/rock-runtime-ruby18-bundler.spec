@@ -60,12 +60,12 @@ rm -rf %{buildroot}
 %{ruby18_rootdir}%{_bindir}/rock-bundle
 
 %changelog
-* Sun Feb 03 2013 Silas Sewell <silas@sewell.org> - 1.2.3-1
+* Sun Feb 03 2013 RockStack <packages@rockstack.org> - 1.2.3-1
 - Update to 1.2.3
 
-* Fri Jul 20 2012 Silas Sewell <silas@sewell.org> - 1.1.5-1
+* Fri Jul 20 2012 RockStack <packages@rockstack.org> - 1.1.5-1
 - Update to version 1.1.5
 - Unset RUBYOPT hack
 
-* Fri Jun 22 2012 Silas Sewell <silas@sewell.org> - 1.1.4-1
+* Fri Jun 22 2012 RockStack <packages@rockstack.org> - 1.1.4-1
 - Initial build

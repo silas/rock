@@ -1,7 +1,7 @@
 Source: rock-runtime-node04-core
 Section: web
 Priority: extra
-Maintainer: Philcolabs <support@philcolabs.com>
+Maintainer: RockStack <packages@rockstack.org>
 Build-Depends: debhelper (>= 8.0.0),
  autotools-dev,
  libevent-dev,

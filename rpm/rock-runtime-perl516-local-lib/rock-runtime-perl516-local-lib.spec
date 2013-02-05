@@ -47,11 +47,11 @@ rm -rf %{buildroot}
 %{perl516_vendorarch}
 
 %changelog
-* Tue Nov 20 2012 Silas Sewell <silas@sewell.org> - 1.008004-3
+* Tue Nov 20 2012 RockStack <packages@rockstack.org> - 1.008004-3
 - Fix paths for Perl 5.16.2
 
-* Tue Sep 11 2012 Silas Sewell <silas@sewell.org> - 1.008004-2
+* Tue Sep 11 2012 RockStack <packages@rockstack.org> - 1.008004-2
 - Rebuild for Perl 5.16.1
 
-* Mon May 14 2012 Silas Sewell <silas@sewell.org> - 1.008004-1
+* Mon May 14 2012 RockStack <packages@rockstack.org> - 1.008004-1
 - Initial build

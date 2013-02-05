@@ -10,8 +10,8 @@ PBUILDER_DIR=${ROOT_DIR}/pbuilder
 PBUILDER_MOUNT=${ROOT_DIR}/apt
 VAR_DIR=${ROOT_DIR}/build
 
-export DEBEMAIL=support@philcolabs.com
-export DEBFULLNAME=Philcolabs
+export DEBEMAIL=packages@rockstack.org
+export DEBFULLNAME=RockStack
 export PBUILDFOLDER=$PBUILDER_DIR
 
 # Paths

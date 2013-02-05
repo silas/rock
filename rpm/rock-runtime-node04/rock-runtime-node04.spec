@@ -40,12 +40,12 @@ rm -rf %{buildroot}
 %{node04_rootdir}/rock.yml
 
 %changelog
-* Fri Jul 20 2012 Silas Sewell <silas@sewell.org> - 1-3
+* Fri Jul 20 2012 RockStack <packages@rockstack.org> - 1-3
 - Convert env to rock.yml
 
-* Tue Jul 10 2012 Silas Sewell <silas@sewell.org> - 1-2
+* Tue Jul 10 2012 RockStack <packages@rockstack.org> - 1-2
 - Add env file
 - Add explicit requires
 
-* Fri Jun 22 2012 Silas Sewell <silas@sewell.org> - 1-1
+* Fri Jun 22 2012 RockStack <packages@rockstack.org> - 1-1
 - Initial build

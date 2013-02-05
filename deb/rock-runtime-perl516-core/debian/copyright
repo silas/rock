@@ -1751,7 +1751,7 @@ License: DONT-CHANGE-THE-GPL
  of this license document, but changing it is not allowed.
 
 Files: debian/*
-Copyright: 2012 Philcolabs <support@philcolabs.com>
+Copyright: 2012 RockStack Contributors
 License: MIT
 
 License: MIT

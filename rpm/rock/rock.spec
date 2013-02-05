@@ -43,17 +43,17 @@ nosetests
 %{python_sitelib}/%{name}-%{version}-py*.egg-info
 
 %changelog
-* Wed Dec 12 2012 Silas Sewell <silas@sewell.org> - 0.11.1-1
+* Wed Dec 12 2012 RockStack <packages@rockstack.org> - 0.11.1-1
 - Fix platform hook issue
 
-* Tue Nov 20 2012 Silas Sewell <silas@sewell.org> - 0.11.0-1
+* Tue Nov 20 2012 RockStack <packages@rockstack.org> - 0.11.0-1
 - Rename ROCK_PWD to ROCK_CWD
 - Use PERL_ARCHNAME to generate PERL5LIB
 - Use composer instead of composer.phar
 - PHP test now calls bare phpunit
 - Remove php.ini usage and generation
 
-* Sun Nov 18 2012 Silas Sewell <silas@sewell.org> - 0.10.0-1
+* Sun Nov 18 2012 RockStack <packages@rockstack.org> - 0.10.0-1
 - Rename PROJECT_PATH to ROCK_PATH
 - Search directory path for .rock.yml file
 - Make "rock run" from working directory when not a section command
@@ -61,57 +61,57 @@ nosetests
 - Remove runtime_type and make configuration files explicit
 - Expose working directory to sections via ROCK_PWD
 
-* Thu Oct 18 2012 Silas Sewell <silas@sewell.org> - 0.9.0-1
+* Thu Oct 18 2012 RockStack <packages@rockstack.org> - 0.9.0-1
 - Platform subcommand
 - Run arguments
 - Verbose flags in build deployment commands
 - Remove build process run
 - Fix user path search
 
-* Sun Sep 30 2012 Silas Sewell <silas@sewell.org> - 0.8.1-1
+* Sun Sep 30 2012 RockStack <packages@rockstack.org> - 0.8.1-1
 - Add python-bottle which defaults to python33
 - Remove distribute tar on create venv
 - Revert php-slim to upstream
 
-* Sat Sep 29 2012 Silas Sewell <silas@sewell.org> - 0.8.0-1
+* Sat Sep 29 2012 RockStack <packages@rockstack.org> - 0.8.0-1
 - Add python33 support
 - Add --version flag
 
-* Sun Sep 23 2012 Silas Sewell <silas@sewell.org> - 0.7.0-1
+* Sun Sep 23 2012 RockStack <packages@rockstack.org> - 0.7.0-1
 - Add env support
 - Fix non-string type coercion in env
 
-* Wed Sep 12 2012 Silas Sewell <silas@sewell.org> - 0.6.1-1
+* Wed Sep 12 2012 RockStack <packages@rockstack.org> - 0.6.1-1
 - Update to 0.6.1
 - Fix missing template directory
 
-* Wed Sep 12 2012 Silas Sewell <silas@sewell.org> - 0.6.0-1
+* Wed Sep 12 2012 RockStack <packages@rockstack.org> - 0.6.0-1
 - Update to 0.6.0
 
-* Sat Aug 19 2012 Silas Sewell <silas@sewell.org> - 0.5.0-1
+* Sat Aug 19 2012 RockStack <packages@rockstack.org> - 0.5.0-1
 - Update to 0.5.0
 
-* Fri Aug 18 2012 Silas Sewell <silas@sewell.org> - 0.4.0-1
+* Fri Aug 18 2012 RockStack <packages@rockstack.org> - 0.4.0-1
 - Update to 0.4.0
 
-* Mon Aug 06 2012 Silas Sewell <silas@sewell.org> - 0.3.1-1
+* Mon Aug 06 2012 RockStack <packages@rockstack.org> - 0.3.1-1
 - Update to 0.3.1
 
-* Thu Aug 02 2012 Silas Sewell <silas@sewell.org> - 0.3.0-1
+* Thu Aug 02 2012 RockStack <packages@rockstack.org> - 0.3.0-1
 - Update to 0.3.0
 
-* Mon Jul 30 2012 Silas Sewell <silas@sewell.org> - 0.2.0-1
+* Mon Jul 30 2012 RockStack <packages@rockstack.org> - 0.2.0-1
 - Update to 0.2.0
 
-* Mon Jul 23 2012 Silas Sewell <silas@sewell.org> - 0.1.1-1
+* Mon Jul 23 2012 RockStack <packages@rockstack.org> - 0.1.1-1
 - Update to 0.1.1
 - Use env instead of straight bash
 
-* Mon Jul 23 2012 Silas Sewell <silas@sewell.org> - 0.1.0-1
+* Mon Jul 23 2012 RockStack <packages@rockstack.org> - 0.1.0-1
 - Update to 0.1.0
 
-* Wed Jul 18 2012 Silas Sewell <silas@sewell.org> - 0.0.3-1
+* Wed Jul 18 2012 RockStack <packages@rockstack.org> - 0.0.3-1
 - Update to 0.0.3
 
-* Wed Jul 11 2012 Silas Sewell <silas@sewell.org> - 0.0.2-1
+* Wed Jul 11 2012 RockStack <packages@rockstack.org> - 0.0.2-1
 - Initial build

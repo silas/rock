@@ -92,14 +92,14 @@ rm -rf %{buildroot}
 %{_sysconfdir}/rpm/macros.rock-ruby18
 
 %changelog
-* Sun Nov 18 2012 Silas Sewell <silas@sewell.org> - 1.8.7.371-1
+* Sun Nov 18 2012 RockStack <packages@rockstack.org> - 1.8.7.371-1
 - Update to patch 371
 
-* Fri Jul 20 2012 Silas Sewell <silas@sewell.org> - 1.8.7.370-2
+* Fri Jul 20 2012 RockStack <packages@rockstack.org> - 1.8.7.370-2
 - Add ruby18_abi to rpmbuild
 
-* Sat Jul 07 2012 Silas Sewell <silas@sewell.org> - 1.8.7.370-1
+* Sat Jul 07 2012 RockStack <packages@rockstack.org> - 1.8.7.370-1
 - Update to patch 370
 
-* Fri Jun 22 2012 Silas Sewell <silas@sewell.org> - 1.8.7.358-1
+* Fri Jun 22 2012 RockStack <packages@rockstack.org> - 1.8.7.358-1
 - Initial build

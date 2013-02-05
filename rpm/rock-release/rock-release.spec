@@ -31,9 +31,9 @@ rm -rf %{buildroot}
 %config(noreplace) %{_sysconfdir}/yum.repos.d/rock.repo
 
 %changelog
-* Sat Nov 17 2012 Silas Sewell <silas@sewell.org> - 1-2
+* Sat Nov 17 2012 RockStack <packages@rockstack.org> - 1-2
 - Update repository url
 - Add testing repository
 
-* Thu Oct 04 2012 Silas Sewell <silas@sewell.org> - 1-1
+* Thu Oct 04 2012 RockStack <packages@rockstack.org> - 1-1
 - Initial release

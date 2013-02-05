@@ -103,5 +103,5 @@ rm -rf %{buildroot}
 %{python27_rootdir}%{_prefix}/lib/pkgconfig/python*.pc
 
 %changelog
-* Mon May 14 2012 Silas Sewell <silas@sewell.org> - 2.7.3-1
+* Mon May 14 2012 RockStack <packages@rockstack.org> - 2.7.3-1
 - Initial build

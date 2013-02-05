@@ -69,8 +69,8 @@ rm -rf %{buildroot}
 %{node04_rootdir}%{_prefix}/lib/pkgconfig/nodejs.pc
 
 %changelog
-* Tue Jul 10 2012 Silas Sewell <silas@sewell.org> - 0.4.12-2
+* Tue Jul 10 2012 RockStack <packages@rockstack.org> - 0.4.12-2
 - Add man requirement
 
-* Fri Jun 22 2012 Silas Sewell <silas@sewell.org> - 0.4.12-1
+* Fri Jun 22 2012 RockStack <packages@rockstack.org> - 0.4.12-1
 - Initial build

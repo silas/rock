@@ -1,7 +1,7 @@
 Source: rock-runtime-php54-core
 Section: php
 Priority: extra
-Maintainer: Philcolabs <support@philcolabs.com>
+Maintainer: RockStack <packages@rockstack.org>
 Build-Depends: debhelper (>= 8.0.0),
  bison,
  bzip2,

@@ -38,8 +38,8 @@ rm -rf %{buildroot}
 %{python33_rootdir}%{_bindir}/distribute-setup
 
 %changelog
-* Sun Feb 03 2013 Silas Sewell <silas@sewell.org> - 0.6.34-1
+* Sun Feb 03 2013 RockStack <packages@rockstack.org> - 0.6.34-1
 - Update to 0.6.34
 
-* Sat Sep 30 2012 Silas Sewell <silas@sewell.org> - 0.6.28-1
+* Sat Sep 30 2012 RockStack <packages@rockstack.org> - 0.6.28-1
 - Initial build
