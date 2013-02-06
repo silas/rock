@@ -2,8 +2,8 @@ require 'formula'
 
 class RockRuntimePhp54 < Formula
   homepage 'http://www.php.net/'
-  url 'http://us.php.net/distributions/php-5.4.8.tar.bz2'
-  sha1 'ed9c4e31da827af8a4d4b1adf3dfde17d11c0b34'
+  url 'http://us.php.net/distributions/php-5.4.11.tar.bz2'
+  sha1 '85666f32bf1f2850c769fe58fed788ae8fdfa1cb'
 
   env :std
   keg_only 'rock'
