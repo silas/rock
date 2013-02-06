@@ -17,7 +17,7 @@ class RockRuntimeRuby18 < Formula
   end
 
   def bundler_version
-    '1.1.5'
+    '1.2.3'
   end
 
   def install_rubygems
