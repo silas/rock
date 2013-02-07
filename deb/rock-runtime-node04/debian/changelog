@@ -1,9 +1,3 @@
-rock-runtime-node04 (1.0.0-2) unstable; urgency=low
-
-  * Set version requirements
-
- -- RockStack <packages@rockstack.org>  Sun, 03 Feb 2013 00:00:00 +0000
-
 rock-runtime-node04 (1.0.0-1) unstable; urgency=low
 
   * Initial release

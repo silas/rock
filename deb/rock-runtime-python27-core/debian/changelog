@@ -1,9 +1,3 @@
-rock-runtime-python27-core (2.7.3-2) unstable; urgency=low
-
-  * Fix Makefile paths
-
- -- RockStack <packages@rockstack.org>  Sun, 03 Feb 2013 00:00:00 +0000
-
 rock-runtime-python27-core (2.7.3-1) unstable; urgency=low
 
   * Initial release

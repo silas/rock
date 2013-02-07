@@ -1,11 +1,5 @@
 rock-runtime-ruby18-rubygems (1.8.25-1) unstable; urgency=low
 
-  * Update to 1.8.25
-
- -- RockStack <packages@rockstack.org>  Sun, 03 Feb 2013 00:00:00 +0000
-
-rock-runtime-ruby18-rubygems (1.8.24-1) unstable; urgency=low
-
   * Initial release
 
- -- RockStack <packages@rockstack.org>  Sun, 23 Dec 2012 01:38:38 +0000
+ -- RockStack <packages@rockstack.org>  Sun, 03 Feb 2013 00:00:00 +0000

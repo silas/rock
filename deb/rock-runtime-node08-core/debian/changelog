@@ -1,11 +1,5 @@
 rock-runtime-node08-core (0.8.18-1) unstable; urgency=low
 
-  * Update to 0.8.18
-
- -- RockStack <packages@rockstack.org>  Sun, 03 Feb 2013 00:00:00 +0000
-
-rock-runtime-node08-core (0.8.14-1) unstable; urgency=low
-
   * Initial release
 
- -- RockStack <packages@rockstack.org>  Tue, 18 Dec 2012 04:39:58 +0000
+ -- RockStack <packages@rockstack.org>  Sun, 03 Feb 2013 00:00:00 +0000
