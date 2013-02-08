@@ -32,15 +32,9 @@ def runtime(args, extra):
         stdout.write('%s\n' % r.name)
 
 
-def setup(args, extra):
-    names = project(args).setup(args.name, *extra)
-    if names:
-        stdout.write('%s\n' % '\n'.join(names))
-
-
 def main(args=None):
     description = """
-    rock helps you build, test and run your app.
+    rock better runtimes.
     """
 
     add_help = True
@@ -72,7 +66,7 @@ def main(args=None):
 
     try:
         args, extra = parser.parse_known_args(args)
-        if args.command in ('env', 'runtime', 'setup'):
+        if args.command in ('env', 'runtime'):
             globals()[args.command](args, extra)
         elif args.command:
             project(args).run(args.command, extra)
