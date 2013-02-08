@@ -10,8 +10,8 @@ Package: rock-runtime-perl516
 Architecture: all
 Depends: ${shlibs:Depends},
  ${misc:Depends},
- rock-runtime-perl516-core (>= 5.16.2-1),
- rock-runtime-perl516-cpanm (>= 1.5017.0-1),
- rock-runtime-perl516-local-lib (>= 1.008004.0-1),
- rock-runtime-perl516-carton (>= 0.9.7-1)
+ rock-runtime-perl516-core (>= 5.16.2-1~),
+ rock-runtime-perl516-cpanm (>= 1.5017.0-1~),
+ rock-runtime-perl516-local-lib (>= 1.008004.0-1~),
+ rock-runtime-perl516-carton (>= 0.9.7-1~)
 Description: perl516 runtime for rock.

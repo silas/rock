@@ -10,7 +10,7 @@ Package: rock-runtime-ruby18
 Architecture: all
 Depends: ${shlibs:Depends},
  ${misc:Depends},
- rock-runtime-ruby18-core (>= 1.8.7p371-1),
- rock-runtime-ruby18-rubygems (>= 1.8.25-1),
- rock-runtime-ruby18-bundler (>= 1.2.3-1)
+ rock-runtime-ruby18-core (>= 1.8.7p371-1~),
+ rock-runtime-ruby18-rubygems (>= 1.8.25-1~),
+ rock-runtime-ruby18-bundler (>= 1.2.3-1~)
 Description: ruby18 runtime for rock.

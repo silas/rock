@@ -10,5 +10,5 @@ Package: rock-runtime-node06
 Architecture: all
 Depends: ${shlibs:Depends},
  ${misc:Depends},
- rock-runtime-node06-core (>= 0.6.21-1)
+ rock-runtime-node06-core (>= 0.6.21-1~)
 Description: node06 runtime for rock.

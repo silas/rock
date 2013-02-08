@@ -10,6 +10,6 @@ Package: rock-runtime-python27
 Architecture: all
 Depends: ${shlibs:Depends},
  ${misc:Depends},
- rock-runtime-python27-core (>= 2.7.3-1),
- rock-runtime-python27-virtualenv (>= 1.8.4-1)
+ rock-runtime-python27-core (>= 2.7.3-1~),
+ rock-runtime-python27-virtualenv (>= 1.8.4-1~)
 Description: python27 runtime for rock.

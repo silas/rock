@@ -10,5 +10,5 @@ Package: rock-runtime-node08
 Architecture: all
 Depends: ${shlibs:Depends},
  ${misc:Depends},
- rock-runtime-node08-core (>= 0.8.18-1)
+ rock-runtime-node08-core (>= 0.8.18-1~)
 Description: node08 runtime for rock.
