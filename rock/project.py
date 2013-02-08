@@ -8,7 +8,7 @@ from rock.config import Config
 from rock.exceptions import ConfigError
 from rock.utils import Shell
 
-NAME_RE = re.compile('^[a-zA-Z_]+$')
+NAME_RE = re.compile('^[a-zA-Z0-9_]+$')
 
 
 class Project(object):
@@ -16,119 +16,86 @@ class Project(object):
     def __init__(self, *args, **kwargs):
         self.config = Config(*args, **kwargs)
 
-    def _setup(self, shell, cd=True):
-        # declare builtin functions
-        shell.write('warn() { echo "$@" >&2; }')
-        shell.write('die() { warn "$@"; exit 1; }')
-        # print commands as they're run
-        if self.config.get('verbose'):
-            shell.write('set -o verbose')
-        # don't execute commands, just print them
-        if self.config.get('dry_run'):
-            shell.write('set -o noexec')
-        # exit with error if any one command fails
-        shell.write('set -o errexit')
-        # switch to project directory
-        if cd:
-            shell.write('cd ' + pipes.quote(self.config['path']))
-        # setup environment variables
-        if self.config.get('env'):
-            # blank line before exports
-            shell.write('')
-            for name, value in self.config['env'].items():
-                shell.write('export %s="%s"' % (name, value))
-        # blank line before command
-        shell.write('')
+    def run(self, section, argv):
+        argv, args, opts = argv or [], [], {}
+        script = self.config.get(section, '')
 
-    def execute(self, command, args=None, cd=True):
-        args = args or []
-        with Shell() as shell:
-            self._setup(shell, cd=cd)
-            # run command and wait for results
-            shell.write("export ROCK_ARGS='%s'" %
-                        ' '.join(map(pipes.quote, args)))
-            shell.write("export ROCK_CWD='%s'" % os.getcwd())
-            shell.write('')
-            if isinstance(command, (list, tuple)):
-                shell.write(' '.join(command))
-            else:
-                shell.write(command)
+        def check():
+            if section not in self.config:
+                raise ConfigError('section not found: %s' % section)
 
-    def _template(self, path, args):
-        with Shell() as shell:
-            self._setup(shell)
-            # handle options
-            length = len(args)
-            skip_next = False
-            template_args = []
-            for i in xrange(length):
-                if skip_next:
-                    skip_next = False
-                    continue
-                arg = args[i]
-                if arg.startswith('--'):
-                    name, value = arg[2:], '1'
-                    if '=' in name:
-                        name, value = name.split('=', 1)
-                    elif (i + 1 < length and not args[i + 1].startswith('--')):
-                        value = args[i + 1]
-                        skip_next = True
-                    name = name.upper().replace('-', '_')
-                    if NAME_RE.match(name):
-                        # write options to shell
-                        shell.write('export ROCK_%s="%s"' %
-                                    (name, pipes.quote(value)))
-                    else:
-                        raise ConfigError('invalid argument: ' + arg)
-                else:
-                    template_args.append(arg)
-            shell.write('. ' + path)
-
-    def create(self, name=None, *args):
-        if not self.config._setup:
-            self.config._setup = True
-        # path
-        path = self.config.get('path') or os.getcwd()
-        # if name is given try to run it, otherwise list available templates
-        if name:
-            # create project path if it doesn't exist
-            if not os.path.exists(path):
-                os.makedirs(path)
-            # ensure its a directory
-            if not os.path.isdir(path):
-                raise ConfigError('path must be a directory')
-            # ensure its empty
-            if os.listdir(path):
-                raise ConfigError('directory is not empty')
-            # search for template and run if it exists
-            for template_path in self.config.paths('template'):
-                template_path = os.path.join(template_path, name)
-                if os.path.isfile(template_path):
-                    # run template
-                    self._template(template_path, args)
-        else:
-            templates = set()
-            # get paths
-            for path in self.config.paths('template'):
-                if not os.path.isdir(path):
-                    continue
-                for template in os.listdir(path):
-                    if os.path.isfile(os.path.join(path, template)):
-                        templates.add(template)
-            templates = list(templates)
-            templates.sort()
-            return templates
-
-    def run(self, section, args):
         if section == 'run':
-            if len(args) == 0:
-                if 'run' in self.config:
-                    self.execute(self.config['run'])
-                else:
-                    raise ConfigError('section not found: %s' % section)
+            if not argv:
+                check()
             else:
-                self.execute(args, cd=False)
-        elif section in self.config:
-            self.execute(section, args)
+                script = ' '.join(argv)
         else:
-            raise ConfigError('section not found: %s' % section)
+            check()
+
+        with Shell() as shell:
+            # declare builtin functions
+            shell.write('warn() { echo "$@" >&2; }')
+            shell.write('die() { warn "$@"; exit 1; }')
+            # print commands as they're run
+            if self.config.get('verbose'):
+                shell.write('set -o verbose')
+            # don't execute commands, just print them
+            if self.config.get('dry_run'):
+                shell.write('set -o noexec')
+            # exit with error if any one command fails
+            shell.write('set -o errexit')
+            # switch to project directory
+            if section != 'run' or len(argv) == 0:
+                shell.write('cd ' + pipes.quote(self.config['path']))
+            # setup environment variables
+            if self.config.get('env'):
+                # blank line before exports
+                shell.write('')
+                for name, value in self.config['env'].items():
+                    shell.write('export %s="%s"' % (name, value))
+            # blank line before command
+            shell.write('')
+            # handle arguments
+            if section != 'run':
+                # raw arguments
+                shell.write("export ROCK_ARGV='%s'" %
+                            ' '.join(map(pipes.quote, argv)))
+                # parse arguments
+                skip_next = False
+                for i, arg in enumerate(argv):
+                    if skip_next:
+                        skip_next = False
+                        continue
+                    if arg.startswith('--'):
+                        name, value = arg[2:], '1'
+                        if '=' in name:
+                            name, value = name.split('=', 1)
+                        elif (i + 1 < len(argv) and not argv[i+1].startswith('--')):
+                            value = argv[i+1]
+                            skip_next = True
+                        name = name.upper().replace('-', '_')
+                        if NAME_RE.match(name):
+                            opts[name] = value
+                    else:
+                        args.append(arg)
+                # parsed arguments
+                shell.write("export ROCK_ARGS='%s'" %
+                            ' '.join(map(pipes.quote, args)))
+                # set zero argument to command
+                args.insert(0, section)
+                # positional arguments
+                for i, arg in enumerate(args):
+                    shell.write("export ROCK_ARG%s='%s'" %
+                                (i, pipes.quote(arg)))
+                # parsed argument options
+                for name, value in opts.items():
+                    shell.write('export ROCK_ARGS_%s="%s"' %
+                                (name, pipes.quote(value)))
+                # parsed options
+                shell.write("export ROCK_OPTS='%s'" %
+                            ' '.join(map(pipes.quote, opts.keys())))
+                shell.write('')
+                shell.write("export ROCK_CWD='%s'" % os.getcwd())
+                shell.write('')
+            # execute script
+            shell.write(script)
