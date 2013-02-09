@@ -2,7 +2,7 @@ env:
   PATH: "${ROCK_PATH}/bin:${ROCK_PATH}/vendor/bundle/ruby/${RUBY_ABI}/bin:${PATH}"
   RUBYLIB: "${ROCK_PATH}/lib:${RUBYLIB}"
   ROCK_BUNDLE_INSTALL: "install --path=./vendor/bundle"
-  ROCK_BUNDLE_INSTALL_DEPLOYMENT: "--verbose --no-color install --deployment"
+  ROCK_BUNDLE_INSTALL_DEPLOYMENT: "install --verbose --no-color --deployment"
 
 build: |
 
