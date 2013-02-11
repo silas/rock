@@ -61,18 +61,11 @@ class Project(object):
                 shell.write("export ROCK_ARGV='%s'" %
                             ' '.join(map(pipes.quote, argv)))
                 # parse arguments
-                skip_next = False
                 for i, arg in enumerate(argv):
-                    if skip_next:
-                        skip_next = False
-                        continue
                     if arg.startswith('--'):
-                        name, value = arg[2:], '1'
+                        name, value = arg[2:], 'true'
                         if '=' in name:
                             name, value = name.split('=', 1)
-                        elif (i + 1 < len(argv) and not argv[i+1].startswith('--')):
-                            value = argv[i+1]
-                            skip_next = True
                         name = name.upper().replace('-', '_')
                         if NAME_RE.match(name):
                             opts[name] = value
