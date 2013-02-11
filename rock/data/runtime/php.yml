@@ -5,7 +5,7 @@ env:
 
 build: |
 
-  if [[ -z "${ROCK_ARGS_DEPLOYMENT}" ]]; then
+  if [[ "${ROCK_ARGS_DEPLOYMENT}" != "true" ]]; then
     if [[ -f ./composer.json ]]; then
       composer ${ROCK_COMPOSER_INSTALL}
     else

@@ -6,7 +6,7 @@ env:
 
 build: |
 
-  if [[ -z "${ROCK_ARGS_DEPLOYMENT}" ]]; then
+  if [[ "${ROCK_ARGS_DEPLOYMENT}" != "true" ]]; then
     if [[ -f ./Gemfile || -f ./Gemfile.lock ]]; then
       bundle ${ROCK_BUNDLE_INSTALL}
     else

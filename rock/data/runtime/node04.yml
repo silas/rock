@@ -6,7 +6,7 @@ env:
 
 build: |
 
-  if [[ -z "${ROCK_ARGS_DEPLOYMENT}" ]]; then
+  if [[ "${ROCK_ARGS_DEPLOYMENT}" != "true" ]]; then
     if [[ -f ./package.json ]]; then
       npm ${ROCK_NPM_INSTALL}
     else
