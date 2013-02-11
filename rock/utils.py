@@ -6,6 +6,10 @@ from rock.exceptions import ConfigError
 ROCK_SHELL = os.environ.get('ROCK_SHELL', '/bin/bash -l -c').split()
 
 
+def isexecutable(path):
+    return os.path.isfile(path) and os.access(path, os.X_OK)
+
+
 class Shell(object):
 
     def __init__(self):
@@ -18,7 +22,7 @@ class Shell(object):
         self.run()
 
     def run(self):
-        if not os.path.isfile(ROCK_SHELL[0]) or not os.access(ROCK_SHELL[0], os.X_OK):
+        if not isexecutable(ROCK_SHELL[0]):
             raise ConfigError('invalid ROCK_SHELL: %s' % ROCK_SHELL)
         os.execl(*(ROCK_SHELL + [self.stdin.getvalue()]))
 
