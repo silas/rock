@@ -16,14 +16,16 @@ class Project(object):
     def __init__(self, *args, **kwargs):
         self.config = Config(*args, **kwargs)
 
-    def run(self, section, argv):
+    def run(self, section, argv=None):
         argv, args, opts = argv or [], [], {}
         script = self.config.get(section, '')
 
+        # ensure section exists
         def check():
             if section not in self.config:
                 raise ConfigError('section not found: %s' % section)
 
+        # handle run special case
         if section == 'run':
             if not argv:
                 check()
@@ -31,7 +33,7 @@ class Project(object):
                 script = ' '.join(argv)
         else:
             check()
-
+        # build bash script
         with Shell() as shell:
             # declare builtin functions
             shell.write('warn() { echo "$@" >&2; }')
@@ -50,11 +52,8 @@ class Project(object):
             # setup environment variables
             if self.config.get('env'):
                 # blank line before exports
-                shell.write('')
                 for name, value in self.config['env'].items():
                     shell.write('export %s="%s"' % (name, value))
-            # blank line before command
-            shell.write('')
             # handle arguments
             if section != 'run':
                 # raw arguments
@@ -87,8 +86,7 @@ class Project(object):
                 # parsed options
                 shell.write("export ROCK_OPTS='%s'" %
                             ' '.join(map(pipes.quote, opts.keys())))
-                shell.write('')
                 shell.write("export ROCK_CWD='%s'" % os.getcwd())
-                shell.write('')
             # execute script
+            shell.write('# script')
             shell.write(script)
