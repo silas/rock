@@ -9,19 +9,18 @@ env:
 
 build: |
 
-  if [[ -f ./cpanfile ]]; then
-    carton ${ROCK_CARTON_INSTALL}
+  if [[ -z "${ROCK_ARGS_DEPLOYMENT}" ]]; then
+    if [[ -f ./cpanfile ]]; then
+      carton ${ROCK_CARTON_INSTALL}
+    else
+      warn 'no "cpanfile" file found'
+    fi
   else
-    warn 'no "cpanfile" file found'
+    if [[ ! -f ./carton.lock ]]; then
+      die 'no "carton.lock" file found'
+    fi
+    carton ${ROCK_CARTON_INSTALL_DEPLOYMENT}
   fi
-
-build_deployment: |
-
-  if [[ ! -f ./carton.lock ]]; then
-    die 'no "carton.lock" file found'
-  fi
-
-  carton ${ROCK_CARTON_INSTALL_DEPLOYMENT}
 
 test: |
 

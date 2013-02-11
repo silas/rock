@@ -6,19 +6,18 @@ env:
 
 build: |
 
-  if [[ -f ./Gemfile || -f ./Gemfile.lock ]]; then
-    bundle ${ROCK_BUNDLE_INSTALL}
+  if [[ -z "${ROCK_ARGS_DEPLOYMENT}" ]]; then
+    if [[ -f ./Gemfile || -f ./Gemfile.lock ]]; then
+      bundle ${ROCK_BUNDLE_INSTALL}
+    else
+      warn 'no "Gemfile" or "Gemfile.lock" file found'
+    fi
   else
-    warn 'no "Gemfile" or "Gemfile.lock" file found'
+    if [[ ! -f ./Gemfile.lock ]]; then
+      die 'no "Gemfile.lock" file found'
+    fi
+    bundle ${ROCK_BUNDLE_INSTALL_DEPLOYMENT}
   fi
-
-build_deployment: |
-
-  if [[ ! -f ./Gemfile.lock ]]; then
-    die 'no "Gemfile.lock" file found'
-  fi
-
-  bundle ${ROCK_BUNDLE_INSTALL_DEPLOYMENT}
 
 test: |
 
