@@ -35,12 +35,12 @@ class Project(object):
             check()
         # build bash script
         with Shell() as shell:
-            # declare builtin functions
-            shell.write('warn() { echo "$@" >&2; }')
-            shell.write('die() { warn "$@"; exit 1; }')
             # print commands as they're run
             if self.config.get('verbose'):
                 shell.write('set -o verbose')
+            # declare builtin functions
+            shell.write('warn() { echo "$@" >&2; }')
+            shell.write('die() { warn "$@"; exit 1; }')
             # don't execute commands, just print them
             if self.config.get('dry_run'):
                 shell.write('set -o noexec')
