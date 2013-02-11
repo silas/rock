@@ -1,0 +1,25 @@
+{
+  "run": "echo zero", 
+  "env": {
+    "BUILD_PATH": "build_path", 
+    "ROCK_PATH": "/Users/ssewell/src/rock/rock/tests/assets/project/simple", 
+    "TEST_PATH": "test_path", 
+    "FLOAT": "1.13", 
+    "INTEGER": "1", 
+    "PATH": "/Users/ssewell/src/rock/rock/tests/assets/project/simple/bindir:/opt/rock/runtime/test123/usr/bin:${PATH}", 
+    "HELLO": "world", 
+    "ROCK_ENV": "local"
+  }, 
+  "dry_run": true, 
+  "build_deployment": "\nbuild deployment\n", 
+  "run_two": "echo two", 
+  "build": "pre\n\nbuild\n\npost\n", 
+  "clean": "\nclean\n", 
+  "env_prod": {
+    "HELLO": "better ${HELLO}"
+  }, 
+  "test": "\ntest\n", 
+  "path": "/Users/ssewell/src/rock/rock/tests/assets/project/simple", 
+  "runtime": "test123", 
+  "verbose": true
+}

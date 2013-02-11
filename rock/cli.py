@@ -89,7 +89,8 @@ def main(args=None):
         elif args.command:
             project(args).run(args.command, extra)
         else:
-            parser.print_help()
+            parser.print_help(file=sys.stderr)
+            parser.exit(1)
     except Error, error:
         message = '%s' % error
         if not message.endswith('\n'):
