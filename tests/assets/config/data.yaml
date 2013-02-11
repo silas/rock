@@ -18,11 +18,11 @@ clean: '
 
   '
 dry_run: true
-env: {BUILD_PATH: build_path, FLOAT: '1.13', HELLO: world, INTEGER: '1', PATH: '/Users/ssewell/src/rock/rock/tests/assets/project/simple/bindir:/opt/rock/runtime/test123/usr/bin:${PATH}',
-  ROCK_ENV: local, ROCK_PATH: /Users/ssewell/src/rock/rock/tests/assets/project/simple,
+env: {BUILD_PATH: build_path, FLOAT: '1.13', HELLO: world, INTEGER: '1', PATH: '<ROOT>/tests/assets/project/simple/bindir:/opt/rock/runtime/test123/usr/bin:${PATH}',
+  ROCK_ENV: local, ROCK_PATH: <ROOT>/tests/assets/project/simple,
   TEST_PATH: test_path}
 env_prod: {HELLO: 'better ${HELLO}'}
-path: /Users/ssewell/src/rock/rock/tests/assets/project/simple
+path: <ROOT>/tests/assets/project/simple
 run: echo zero
 run_two: echo two
 runtime: test123

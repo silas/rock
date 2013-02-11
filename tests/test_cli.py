@@ -29,11 +29,13 @@ class CliTestCase(helper.unittest.TestCase):
 
     def test_config_json(self):
         cli.config(Args(), ['--format=json'])
-        self.assertEqual(self.stdout.getvalue().strip(), config_file('data.json'))
+        data = self.stdout.getvalue().strip().replace(helper.ROOT_PATH, '<ROOT>')
+        self.assertEqual(data, config_file('data.json'))
 
     def test_config_yaml(self):
         cli.config(Args(), ['--format=yaml'])
-        self.assertEqual(self.stdout.getvalue().strip(), config_file('data.yaml'))
+        data = self.stdout.getvalue().strip().replace(helper.ROOT_PATH, '<ROOT>')
+        self.assertEqual(data, config_file('data.yaml'))
 
     def test_env(self):
         cli.env(Args(), [])
@@ -48,7 +50,7 @@ class CliTestCase(helper.unittest.TestCase):
         try:
             sys.stderr = StringIO()
             self.assertRaises(SystemExit, cli.main, [])
-            self.assertTrue('rock better runtimes.' in sys.stderr.getvalue())
+            self.assertTrue('usage: rock' in sys.stderr.getvalue())
         finally:
             sys.stderr = stderr
 

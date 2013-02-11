@@ -6,7 +6,8 @@ except:
 from rock.config import Config
 
 
-TESTS_PATH = os.path.join(os.path.dirname(__file__))
+ROOT_PATH = os.path.dirname(os.path.dirname(__file__))
+TESTS_PATH = os.path.join(ROOT_PATH, 'tests')
 ASSETS_PATH = os.path.join(TESTS_PATH, 'assets')
 CONFIG_PATH = os.path.join(ASSETS_PATH, 'config')
 ENV_PATH = os.path.join(ASSETS_PATH, 'env')
