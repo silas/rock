@@ -22,6 +22,24 @@ def project(args):
     return Project(config, env=args.env)
 
 
+def config(args, extra):
+    parser = argparse.ArgumentParser(prog='rock config')
+    parser.add_argument('--format', help='set output format',
+                        choices=['json', 'yaml'], default='yaml')
+
+    sub_args = parser.parse_args(extra)
+
+    config = project(args).config
+    config.setup()
+
+    if sub_args.format == 'json':
+        import json
+        stdout.write(json.dumps(config.data, indent=2))
+    else:
+        import yaml
+        stdout.write(yaml.dump(config.data))
+
+
 def env(args, extra):
     for name, value in project(args).config['env'].items():
         stdout.write('export %s="%s"\n' % (name, value))
@@ -66,7 +84,7 @@ def main(args=None):
 
     try:
         args, extra = parser.parse_known_args(args)
-        if args.command in ('env', 'runtime'):
+        if args.command in ('config', 'env', 'runtime'):
             globals()[args.command](args, extra)
         elif args.command:
             project(args).run(args.command, extra)
