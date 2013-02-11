@@ -8,7 +8,6 @@ from rock.exceptions import ConfigError
 
 
 PARENT_RE = re.compile(r'\{\{\s*parent\s*\}\}', re.MULTILINE)
-TEMPLATE_RE = re.compile(r'^(?:build|clean|run|test)(?:_.+)?$')
 
 
 class Config(collections.Mapping):
@@ -83,10 +82,7 @@ class Config(collections.Mapping):
             return dst
         self.merge_env(src, dst)
         self.merge_env(src, dst, self.env)
-        # parent section to build, clean, run and test
         for name in src.keys():
-            if not TEMPLATE_RE.match(name):
-                continue
             if name not in dst:
                 if isinstance(src[name], basestring):
                     src[name] = PARENT_RE.sub('', src[name])
