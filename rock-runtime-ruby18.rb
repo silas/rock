@@ -75,6 +75,7 @@ class RockRuntimeRuby18 < Formula
 
     system './configure',
       "--prefix=#{prefix}",
+      '--without-tk',
       '--enable-shared'
     system 'make'
     system 'make', 'install'
