@@ -13,8 +13,28 @@ class ProjectTestCase(helper.unittest.TestCase):
         self.p = helper.project()
 
     @property
+    def split(self):
+        return self.args[3].split('\n# script\n', 1)
+
+    @property
     def script(self):
-        return self.args[3].split('\n# script\n', 1)[1].strip()
+        return self.split[1].strip()
+
+    def test_arg(self):
+        self.p.run('clean', ['--six', '--zero', 'one', '--two=2', 'three', 'four', '--five=five', '--six'])
+        data = {}
+        for value in self.split[0].split('\n'):
+            if not value.startswith('export '):
+                continue
+            name = value.split(' ', 1)[1]
+            if '=' not in name:
+                continue
+            data[name.split('=', 1)[0]] = value
+        self.assertEqual(data.get('ROCK_ENV'), 'export ROCK_ENV="local"')
+        self.assertEqual(data.get('ROCK_ARGV'), "export ROCK_ARGV='--six --zero one --two=2 three four --five=five --six'")
+        self.assertEqual(data.get('ROCK_ARGS'), "export ROCK_ARGS='one three four'")
+        self.assertEqual(data.get('ROCK_ARG0'), "export ROCK_ARG0='clean'")
+        self.assertEqual(data.get('ROCK_OPTS'), "export ROCK_OPTS='ZERO TWO FIVE SIX'")
 
     def test_run(self):
         self.p.run('run')

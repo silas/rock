@@ -50,14 +50,14 @@ def runtime(args, extra):
         stdout.write('%s\n' % r.name)
 
 
-def main(args=None):
+def main(args=sys.argv):
     description = """
     rock better runtimes.
     """
 
     add_help = True
 
-    for arg in sys.argv[1:]:
+    for arg in args[1:]:
         if not arg.startswith('-'):
             add_help = False
             break

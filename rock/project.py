@@ -17,7 +17,7 @@ class Project(object):
         self.config = Config(*args, **kwargs)
 
     def run(self, section, argv=None):
-        argv, args, opts = argv or [], [], {}
+        argv, args, opts, opts_list = argv or [], [], {}, []
         script = self.config.get(section, '')
 
         # ensure section exists
@@ -68,6 +68,9 @@ class Project(object):
                         name = name.upper().replace('-', '_')
                         if NAME_RE.match(name):
                             opts[name] = value
+                            if name in opts_list:
+                                opts_list.remove(name)
+                            opts_list.append(name)
                     else:
                         args.append(arg)
                 # parsed arguments
@@ -85,7 +88,7 @@ class Project(object):
                                 (name, pipes.quote(value)))
                 # parsed options
                 shell.write("export ROCK_OPTS='%s'" %
-                            ' '.join(map(pipes.quote, opts.keys())))
+                            ' '.join(map(pipes.quote, opts_list)))
                 shell.write("export ROCK_CWD='%s'" % os.getcwd())
             # execute script
             shell.write('# script')
