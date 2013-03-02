@@ -50,14 +50,14 @@ set :environment, :test
 describe 'The HelloWorld App' do
   include Rack::Test::Methods
 
-  def app 
+  def app
     Sinatra::Application
-  end 
+  end
 
   it "says hello" do
-    get '/' 
+    get '/'
     last_response.should be_ok
     last_response.body.should == 'Hello World'
-  end 
+  end
 end
 EOF
