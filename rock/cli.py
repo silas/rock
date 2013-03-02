@@ -50,10 +50,13 @@ def runtime(args, extra):
         stdout.write('%s\n' % r.name)
 
 
-def main(args=sys.argv):
+def main(args=None):
     description = """
     rock better runtimes.
     """
+
+    if args is None:
+        args = sys.argv[1:]
 
     add_help = True
 
