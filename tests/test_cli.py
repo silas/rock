@@ -47,11 +47,14 @@ class CliTestCase(helper.unittest.TestCase):
 
     def test_main_empty(self):
         stderr = sys.stderr
+        argv = sys.argv
         try:
+            sys.argv = []
             sys.stderr = StringIO()
-            self.assertRaises(SystemExit, cli.main, [])
+            self.assertRaises(SystemExit, cli.main)
             self.assertTrue('usage: rock' in sys.stderr.getvalue())
         finally:
+            sys.argv = argv
             sys.stderr = stderr
 
     def test_main_valid(self):
