@@ -7,20 +7,12 @@ from StringIO import StringIO
 from rock import cli, utils
 from rock.exceptions import ConfigError
 from rock.project import Project
+from helper import Args
 
-PROJECT_PATH = os.path.join(helper.TESTS_PATH, 'assets', 'project')
 
-class Args(object):
-
-    def __init__(self, **kwargs):
-        self.path = os.path.join(PROJECT_PATH, 'simple')
-        self.verbose = True
-        self.dry_run = True
-        self.runtime = 'test123'
-        self.name = ''
-        self.env = 'local'
-        for name, value in kwargs.items():
-            setattr(self, name, value)
+def config_file(name):
+    with open(os.path.join(helper.CONFIG_PATH, name)) as f:
+        return f.read().strip()
 
 
 class CliTestCase(helper.unittest.TestCase):
@@ -35,40 +27,15 @@ class CliTestCase(helper.unittest.TestCase):
     def test_project(self):
         self.assertTrue(isinstance(cli.project(Args()), Project))
 
-    def test_build(self):
-        cli.build(Args(), ['deployment'])
-        self.assertTrue('\n\nbuild deployment\n\n' in self.args[3])
+    def test_config_json(self):
+        cli.config(Args(), ['--format=json'])
+        data = self.stdout.getvalue().strip().replace(helper.ROOT_PATH, '<ROOT>')
+        self.assertEqual(data, config_file('data.json'))
 
-    def test_clean(self):
-        cli.clean(Args(), [])
-        self.assertTrue('\n\nclean\n\n' in self.args[3])
-
-    def test_create(self):
-        args = Args()
-        args.name = 'test-something'
-        path = tempfile.mkdtemp('rock.tests')
-        try:
-            # ok
-            args.path = os.path.join(path, 'one')
-            cli.create(args, ['--one', 'one', '--two=two', 'arg'])
-            self.assertTrue('/test-something' in self.args[3])
-            # bad args
-            self.assertRaises(ConfigError, cli.create, args, ['--f:ail=true'])
-            # path not empty
-            with open(os.path.join(args.path, 'test'), 'w+') as f:
-                f.write('test')
-            self.assertRaises(ConfigError, cli.create, args, [])
-            # path not dir
-            args.path = os.path.join(path, 'two')
-            with open(args.path, 'w+') as f:
-                f.write('test')
-            self.assertRaises(ConfigError, cli.create, args, [])
-        finally:
-            subprocess.check_call(['rm', '-fr', path])
-
-    def test_create_list(self):
-        cli.create(Args(), [])
-        self.assertEqual(self.stdout.getvalue(), 'test-something\n')
+    def test_config_yaml(self):
+        cli.config(Args(), ['--format=yaml'])
+        data = self.stdout.getvalue().strip().replace(helper.ROOT_PATH, '<ROOT>')
+        self.assertEqual(data, config_file('data.yaml'))
 
     def test_env(self):
         cli.env(Args(), [])
@@ -78,24 +45,22 @@ class CliTestCase(helper.unittest.TestCase):
         cli.runtime(Args(), [])
         self.assertTrue('\ntest123\n' in self.stdout.getvalue())
 
-    def test_run(self):
-        cli.run(Args(), ['one', 'two', 'three'])
-        self.assertTrue('\none two three\n' in self.args[3])
-        # str section
-        cli.run(Args(), [])
-        self.assertTrue('\necho zero\n' in self.args[3])
-        # run section
-        cli.run(Args(), ['two'])
-        self.assertTrue('\necho two\n' in self.args[3])
+    def test_main_empty(self):
+        stderr = sys.stderr
+        argv = sys.argv
+        try:
+            sys.argv = []
+            sys.stderr = StringIO()
+            self.assertRaises(SystemExit, cli.main)
+            self.assertTrue('usage: rock' in sys.stderr.getvalue())
+        finally:
+            sys.argv = argv
+            sys.stderr = stderr
 
-    def test_test(self):
-        cli.test(Args(), [])
-        self.assertTrue('\n\ntest\n\n' in self.args[3])
-        # not found
-        self.assertRaises(ConfigError, cli.test, Args(), ['not_found'])
-
-    def test_main(self):
+    def test_main_valid(self):
         cli.main(args=['runtime'])
+
+    def test_main_invalid(self):
         stderr = sys.stderr
         try:
             sys.stderr = StringIO()

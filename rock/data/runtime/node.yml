@@ -6,23 +6,20 @@ env:
 
 build: |
 
-  if [[ -f ./package.json ]]; then
-    npm ${ROCK_NPM_INSTALL}
+  if [[ "${ROCK_ARGS_DEPLOYMENT}" != "true" ]]; then
+    if [[ -f ./package.json ]]; then
+      npm ${ROCK_NPM_INSTALL}
+    else
+      warn 'no "package.json" file found'
+    fi
+    npm shrinkwrap
   else
-    warn 'no "package.json" file found'
+    if [[ ! -f ./npm-shrinkwrap.json ]]; then
+      die 'no "npm-shrinkwrap.json" file found'
+    fi
+    npm ${ROCK_NPM_INSTALL_DEPLOYMENT}
+    npm ${ROCK_NPM_REBUILD_DEPLOYMENT}
   fi
-
-  npm shrinkwrap
-
-build_deployment: |
-
-  if [[ ! -f ./npm-shrinkwrap.json ]]; then
-    die 'no "npm-shrinkwrap.json" file found'
-  fi
-
-  npm ${ROCK_NPM_INSTALL_DEPLOYMENT}
-
-  npm ${ROCK_NPM_REBUILD_DEPLOYMENT}
 
 test: |
 

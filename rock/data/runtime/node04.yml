@@ -6,21 +6,19 @@ env:
 
 build: |
 
-  if [[ -f ./package.json ]]; then
-    npm ${ROCK_NPM_INSTALL}
+  if [[ "${ROCK_ARGS_DEPLOYMENT}" != "true" ]]; then
+    if [[ -f ./package.json ]]; then
+      npm ${ROCK_NPM_INSTALL}
+    else
+      warn 'no "package.json" file found'
+    fi
   else
-    warn 'no "package.json" file found'
+    if [[ ! -f ./package.json ]]; then
+      die 'no "package.json" file found'
+    fi
+    npm ${ROCK_NPM_INSTALL_DEPLOYMENT}
+    npm ${ROCK_NPM_REBUILD_DEPLOYMENT}
   fi
-
-build_deployment: |
-
-  if [[ ! -f ./package.json ]]; then
-    die 'no "package.json" file found'
-  fi
-
-  npm ${ROCK_NPM_INSTALL_DEPLOYMENT}
-
-  npm ${ROCK_NPM_REBUILD_DEPLOYMENT}
 
 test: |
 

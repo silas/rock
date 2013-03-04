@@ -1,5 +1,6 @@
 import helper
 from rock import utils
+from rock.exceptions import ConfigError
 
 
 class UtilsTestCase(helper.unittest.TestCase):
@@ -19,3 +20,9 @@ class UtilsTestCase(helper.unittest.TestCase):
             self.assertEqual(args[3], 'ok\n')
         utils.os.execl = execl
         s.__exit__('type', 'value', 'tracebook')
+
+    def test_noshell(self):
+        utils.ROCK_SHELL = '/tmp/hopefully-no-exists'
+        s = utils.Shell()
+        s.__enter__()
+        self.assertRaises(ConfigError, s.__exit__, 'type', 'value', 'tracebook')

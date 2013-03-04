@@ -5,19 +5,18 @@ env:
 
 build: |
 
-  if [[ -f ./composer.json ]]; then
-    composer ${ROCK_COMPOSER_INSTALL}
+  if [[ "${ROCK_ARGS_DEPLOYMENT}" != "true" ]]; then
+    if [[ -f ./composer.json ]]; then
+      composer ${ROCK_COMPOSER_INSTALL}
+    else
+      warn 'no "composer.json" file found'
+    fi
   else
-    warn 'no "composer.json" file found'
+    if [[ ! -f ./composer.lock ]]; then
+      die 'no "composer.lock" file found'
+    fi
+    composer ${ROCK_COMPOSER_INSTALL_DEPLOYMENT}
   fi
-
-build_deployment: |
-
-  if [[ ! -f ./composer.lock ]]; then
-    die 'no "composer.lock" file found'
-  fi
-
-  composer ${ROCK_COMPOSER_INSTALL_DEPLOYMENT}
 
 test: |
 

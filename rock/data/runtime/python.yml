@@ -8,35 +8,31 @@ env:
 
 build: |
 
-  if [[ ! -e "./venv/bin/python" ]]; then
-    pyvenv ${ROCK_PYVENV}
-    distribute-setup
-    rm -f distribute-*.gz
-    easy_install pip
-  fi
-
-  if [[ -f ./requirements.txt ]]; then
-    pip ${ROCK_PIP_INSTALL}
+  if [[ "${ROCK_ARGS_DEPLOYMENT}" != "true" ]]; then
+    if [[ ! -e "./venv/bin/python" ]]; then
+      pyvenv ${ROCK_PYVENV}
+      distribute-setup
+      rm -f distribute-*.gz
+      easy_install pip
+    fi
+    if [[ -f ./requirements.txt ]]; then
+      pip ${ROCK_PIP_INSTALL}
+    else
+      warn 'no "requirements.txt" file found'
+    fi
+    pip freeze > requirements.txt
   else
-    warn 'no "requirements.txt" file found'
+    if [[ ! -f ./requirements.txt ]]; then
+      die 'no "requirements.txt" file found'
+    fi
+    if [[ ! -e ./venv/bin/python ]]; then
+      pyvenv ${ROCK_PYVENV_DEPLOYMENT}
+      distribute-setup
+      rm -f distribute-*.gz
+      easy_install --verbose pip
+    fi
+    pip ${ROCK_PIP_INSTALL_DEPLOYMENT}
   fi
-
-  pip freeze > requirements.txt
-
-build_deployment: |
-
-  if [[ ! -f ./requirements.txt ]]; then
-    die 'no "requirements.txt" file found'
-  fi
-
-  if [[ ! -e ./venv/bin/python ]]; then
-    pyvenv ${ROCK_PYVENV_DEPLOYMENT}
-    distribute-setup
-    rm -f distribute-*.gz
-    easy_install --verbose pip
-  fi
-
-  pip ${ROCK_PIP_INSTALL_DEPLOYMENT}
 
 test: |
 

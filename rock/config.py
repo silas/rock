@@ -8,10 +8,12 @@ from rock.exceptions import ConfigError
 
 
 PARENT_RE = re.compile(r'\{\{\s*parent\s*\}\}', re.MULTILINE)
-TEMPLATE_RE = re.compile(r'^(?:build|clean|run|test)(?:_.+)?$')
 
 
 class Config(collections.Mapping):
+    """
+    Parse and merge configuration files.
+    """
 
     def __init__(self, data, env=None):
         self.data = data
@@ -49,6 +51,9 @@ class Config(collections.Mapping):
 
     @staticmethod
     def parse(path, require_exists=True, require_parses=True):
+        """
+        Parse and return configuration file.
+        """
         if not os.path.isfile(path):
             if require_exists:
                 raise ConfigError('not found: ' + path)
@@ -62,6 +67,9 @@ class Config(collections.Mapping):
                 raise ConfigError('parse error: ' + path)
 
     def merge_env(self, src, dst, env=None):
+        """
+        Merge environment variables.
+        """
         env = 'env_%s' % env if env else 'env'
         if env in src:
             if not isinstance(src[env], dict):
@@ -81,12 +89,12 @@ class Config(collections.Mapping):
     def merge(self, src, dst):
         if src is None:
             return dst
+        # merge global environment variables
         self.merge_env(src, dst)
+        # merge env-specific environment variables
         self.merge_env(src, dst, self.env)
-        # parent section to build, clean, run and test
+        # merge sections
         for name in src.keys():
-            if not TEMPLATE_RE.match(name):
-                continue
             if name not in dst:
                 if isinstance(src[name], basestring):
                     src[name] = PARENT_RE.sub('', src[name])
