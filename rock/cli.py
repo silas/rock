@@ -11,6 +11,9 @@ stdout = sys.stdout
 
 
 def project(args):
+    """
+    Create and return project instance using cli arguments.
+    """
     config = {'path': args.path}
     if args.verbose:
         config['verbose'] = True
@@ -23,6 +26,9 @@ def project(args):
 
 
 def config(args, extra):
+    """
+    Output project configuration (json, yaml).
+    """
     parser = argparse.ArgumentParser(prog='rock config')
     parser.add_argument('--format', help='set output format',
                         choices=['json', 'yaml'], default='yaml')
@@ -41,16 +47,25 @@ def config(args, extra):
 
 
 def env(args, extra):
+    """
+    Output project environment.
+    """
     for name, value in project(args).config['env'].items():
         stdout.write('export %s="%s"\n' % (name, value))
 
 
 def runtime(args, extra):
+    """
+    List runtimes install on system.
+    """
     for r in runtime_list():
         stdout.write('%s\n' % r.name)
 
 
 def main(args=None):
+    """
+    Handle command line arguments.
+    """
     description = """
     rock better runtimes.
     """
