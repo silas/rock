@@ -13,6 +13,7 @@ title: Install (Enterprise Linux)
 
         $ sudo yum install -y \
             rock \
+            rock-devtools \
             rock-runtime-node04 \
             rock-runtime-node06 \
             rock-runtime-node08 \
