@@ -12,7 +12,7 @@ title: rock 0.12, new install options and more
 
 Install Changes
 
- - Install on [Debian/Ubuntu][deb] (big thanks to [Phi Reichenberger][preichenberger])
+ - Install on [Debian/Ubuntu][deb] (big thanks to [Phil Reichenberger][preichenberger])
  - Install on [OS X][homebrew]
  - Remove Vagrant option
 
