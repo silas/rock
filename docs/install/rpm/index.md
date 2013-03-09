@@ -1,9 +1,9 @@
 ---
 layout: default
-title: Install (Enterprise Linux)
+title: Install (rpm)
 ---
 
-# Install (Enterprise Linux)
+# Install (rpm)
 
  1. Add repo
 

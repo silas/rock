@@ -1,9 +1,9 @@
 ---
 layout: default
-title: Install (Homebrew)
+title: Install (homebrew)
 ---
 
-# Install (Homebrew)
+# Install (homebrew)
 
  1. Ensure you have [XCode][xcode] installed
 

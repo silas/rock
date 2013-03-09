@@ -1,9 +1,9 @@
 ---
 layout: default
-title: Install (Debian/Ubuntu)
+title: Install (dep)
 ---
 
-# Install (Debian/Ubuntu)
+# Install (dep)
 
  1. Add repo
 
