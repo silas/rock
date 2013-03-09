@@ -13,10 +13,10 @@ that allows developers to use modern technologies and encourages
 
 Install options include Debian/Ubuntu, Enterprise Linux and Homebrew.
 
- * [Debian/Ubuntu](/docs/install/deb/)
- * [Enterprise Linux](/docs/install/rpm/) - Red Hat Enterprise Linux (RHEL), CentOS,
+ * [homebrew](/docs/install/homebrew/) - OS X
+ * [dep](/docs/install/deb/) - Debian, Ubuntu
+ * [rpm](/docs/install/rpm/) - Red Hat Enterprise Linux (RHEL), CentOS,
    Oracle Linux, Scientific Linux (SL), etc...
- * [Homebrew](/docs/install/homebrew/)
 
 ## Using Runtimes
 
