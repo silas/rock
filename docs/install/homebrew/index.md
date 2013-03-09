@@ -5,11 +5,7 @@ title: Install (Homebrew)
 
 # Install (Homebrew)
 
- 1. Ensure you have the requirements
-
-    * An Intel CPU
-    * OS X 10.6 or higher
-    * [XCode](http://itunes.apple.com/us/app/xcode/id497799835)
+ 1. Ensure you have [XCode][xcode] installed
 
  1. Install base
 
@@ -29,3 +25,5 @@ title: Install (Homebrew)
             rock-runtime-ruby19
 
  1. Continue to [getting started](/docs/) page
+
+[xcode]: http://itunes.apple.com/us/app/xcode/id497799835
