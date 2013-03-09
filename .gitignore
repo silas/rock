@@ -1,5 +1,6 @@
 *.bz2
 *.gz
+*.pyc
 *.rpm
 *.swp
 *.tgz
