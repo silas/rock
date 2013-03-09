@@ -11,11 +11,12 @@ that allows developers to use modern technologies and encourages
 
 ## Setting up the Stack
 
-Install options include a prebuilt Vagrant box and an Enterprise Linux YUM repository.
+Install options include Debian/Ubuntu, Enterprise Linux and Homebrew.
 
- * [Vagrant](/docs/install/vagrant/)
- * [Enterprise Linux](/docs/install/el/) - Red Hat Enterprise Linux (RHEL), CentOS,
+ * [Debian/Ubuntu](/docs/install/deb/)
+ * [Enterprise Linux](/docs/install/rpm/) - Red Hat Enterprise Linux (RHEL), CentOS,
    Oracle Linux, Scientific Linux (SL), etc...
+ * [Homebrew](/docs/install/homebrew/)
 
 ## Using Runtimes
 

@@ -5,7 +5,7 @@ title: Install (Enterprise Linux)
 
 # Install (Enterprise Linux)
 
- 1. Add YUM repo
+ 1. Add repo
 
         $ sudo rpm -i http://dl.rockstack.org/rpm/stable/el/rock-release.rpm
 
