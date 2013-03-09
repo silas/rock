@@ -1,5 +1,5 @@
 Name:           rock
-Version:        0.11.1
+Version:        0.12.0
 Release:        1%{?dist}
 Summary:        Create, build, test and run applications
 
@@ -43,6 +43,12 @@ nosetests
 %{python_sitelib}/%{name}-%{version}-py*.egg-info
 
 %changelog
+* Fri Mar 08 2013 RockStack <packages@rockstack.org> - 0.12.0-1
+- Remove platform
+- Use yaml.safe_load
+- Create lockfiles in build (node, python)
+- Fix bundler flag positions
+
 * Wed Dec 12 2012 RockStack <packages@rockstack.org> - 0.11.1-1
 - Fix platform hook issue
 
