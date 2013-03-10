@@ -209,6 +209,11 @@ ol, ul {
   font-weight: bold;
   font-size: 1.3em;
 }
+#home #runtimes_list a,
+#home #runtimes_list a:hover,
+#home #runtimes_list a:visited {
+  color: #606060;
+}
 ol li p {
   margin-top: 2em;
 }
