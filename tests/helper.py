@@ -4,10 +4,10 @@ import os
 
 root_path = os.path.dirname(os.path.dirname(__file__))
 
-logging.getLogger('ops').addHandler(logging.NullHandler())
-
-def node_hook(self, w):
-    self.assertRun('rock run npm shrinkwrap', cwd=w.path)
+try:
+    logging.getLogger('ops').addHandler(logging.NullHandler())
+except:
+    pass
 
 class RuntimeTests(object):
 
@@ -23,7 +23,7 @@ class RuntimeTests(object):
         self.assertFalse(r, '\n\n' + r.stdout + '\n\n' + r.stderr)
         return r
 
-    def runtime(self, name, **hooks):
+    def runtime(self, name):
         root = name.rstrip('0123456789')
         ns = 'rock.test.runtime.{name}-'.format(name=name)
 
@@ -38,9 +38,7 @@ class RuntimeTests(object):
             result = self.assertRun('rock run sample test', cwd=w.path)
             self.assertEquals(result.stdout.rstrip(), '<p>test</p>')
             self.assertRun('rock test', cwd=w.path)
-            if hooks.get('post_test'):
-                hooks['post_test'](self, w=w)
             self.assertRun('rock clean', cwd=w.path)
             self.assertNotRun('rock test', cwd=w.path)
-            self.assertRun('rock build deployment', cwd=w.path)
+            self.assertRun('rock build --deployment', cwd=w.path)
             self.assertRun('rock test', cwd=w.path)

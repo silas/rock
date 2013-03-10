@@ -1,12 +1,12 @@
 import unittest
-from helper import RuntimeTests, node_hook
+from helper import RuntimeTests
 
 class RuntimeTestCase(RuntimeTests, unittest.TestCase):
 
     name = 'node06'
 
     def test_full(self):
-        self.runtime(self.name, post_test=node_hook)
+        self.runtime(self.name)
 
 if __name__ == '__main__':
     unittest.main()
