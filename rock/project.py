@@ -30,7 +30,7 @@ class Project(object):
             if not argv:
                 check()
             else:
-                script = ' '.join(argv)
+                script = ' '.join(map(pipes.quote, argv))
         else:
             check()
         # build bash script
