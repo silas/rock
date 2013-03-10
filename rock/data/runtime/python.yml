@@ -20,7 +20,9 @@ build: |
     else
       warn 'no "requirements.txt" file found'
     fi
-    pip freeze > requirements.txt
+    if [[ "${ROCK_PIP_FREEZE}" != "false" ]]; then
+      pip freeze > requirements.txt
+    fi
   else
     if [[ ! -f ./requirements.txt ]]; then
       die 'no "requirements.txt" file found'
