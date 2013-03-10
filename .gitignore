@@ -1,8 +1,5 @@
 *swp
-.vagrant
-modules
 packages
 rock
 site
 tests
-vagrant
