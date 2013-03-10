@@ -15,7 +15,7 @@ This is the rock development environment.
 
  1. Run the setup script
 
-        ./misc/setup
+        make
 
 ## Tips
 
