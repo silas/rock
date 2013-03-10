@@ -24,9 +24,9 @@ Runtime Changes
  - Update ruby18 bundler to 1.2.3, rubygems to 1.8.25
  - Update ruby19 from patch 194 to [374][ruby19], bundler to 1.2.3
 
-[deb]: http://www.rockstack.org/docs/install/deb/
+[deb]: /docs/install/deb/
 [diff]: https://github.com/rockstack/rock/compare/0.11.0...0.12.0
-[homebrew]: http://www.rockstack.org/docs/install/homebrew/
+[homebrew]: /docs/install/homebrew/
 [node08]: https://raw.github.com/joyent/node/v0.8.14/ChangeLog
 [php54]: http://www.php.net/ChangeLog-5.php#5.4.11
 [preichenberger]: https://github.com/preichenberger
