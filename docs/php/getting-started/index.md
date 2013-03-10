@@ -69,7 +69,7 @@ This guide walks you through setting up a basic PHP web application with tests.
 
         #!/usr/bin/env bash
 
-        exec php -S "${HTTP_HOST-127.0.0.1}:${HTTP_PORT-8000}" -t "${PROJECT_PATH}/public"
+        exec php -S "${HOST:-127.0.0.1}:${PORT:-8000}" -t "${PROJECT_PATH}/public"
 
  1. Make it executable
 
@@ -84,11 +84,14 @@ This guide walks you through setting up a basic PHP web application with tests.
         Press Ctrl-C to quit.
         ^C
 
- 1. Update `.rock.yml` to include a run alias that defaults to port 9000
+ 1. Update `.rock.yml` to include an `env` and `run` section
 
         runtime: php54
 
-        run: HTTP_PORT=${HTTP_PORT-9000} hello-world
+        env:
+	  PORT: "${PORT:-9000}"
+
+        run: exec hello-world
 
  1. Run and kill it using Ctrl+C
 
@@ -142,7 +145,10 @@ This guide walks you through setting up a basic PHP web application with tests.
 
         runtime: php54
 
-        run: HTTP_PORT=${HTTP_PORT-9000} hello-world
+        env:
+	  PORT: "${PORT:-9000}"
+
+        run: exec hello-world
 
         test_frontpage: |
 

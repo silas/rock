@@ -57,7 +57,7 @@ tests.
         require 'sinatra';
         require 'helloworld';
 
-        settings.port = ENV.include?('HTTP_PORT') ? ENV['HTTP_PORT'].to_i : 8000
+        settings.port = ENV.include?('PORT') ? ENV['PORT'].to_i : 8000
 
  1. Make it executable
 
@@ -75,11 +75,14 @@ tests.
         [2012-08-02 10:55:01] INFO  going to shutdown ...
         [2012-08-02 10:55:01] INFO  WEBrick::HTTPServer#start done
 
- 1. Update `.rock.yml` to include a run alias that defaults to port 9000
+ 1. Update `.rock.yml` to include an `env` and `run` section
 
         runtime: ruby19
 
-        run: HTTP_PORT=${HTTP_PORT-9000} hello-world
+        env:
+	  PORT: "${PORT:-9000}"
+
+        run: exec hello-world
 
  1. Run and kill it using Ctrl+C
 
@@ -137,7 +140,10 @@ tests.
 
         runtime: ruby19
 
-        run: HTTP_PORT=${HTTP_PORT-9000} hello-world
+        env:
+	  PORT: "${PORT:-9000}"
+
+        run: exec hello-world
 
         test_frontpage: |
 

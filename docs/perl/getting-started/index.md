@@ -63,7 +63,7 @@ tests.
 
         use HelloWorld ();
 
-        my $port = defined $ENV{HTTP_PORT} ? int($ENV{HTTP_PORT}) : 0;
+        my $port = defined $ENV{PORT} ? int($ENV{PORT}) : 0;
 
         setting('port', $port || 8000);
 
@@ -80,11 +80,14 @@ tests.
         == Entering the development dance floor ...
         ^C
 
- 1. Update `.rock.yml` to include a run alias that defaults to port 9000
+ 1. Update `.rock.yml` to include an `env` and `run` section
 
         runtime: perl516
 
-        run: HTTP_PORT=${HTTP_PORT-9000} hello-world
+        env:
+	  PORT: "${PORT:-9000}"
+
+        run: exec hello-world
 
  1. Run and kill it using Ctrl+C
 
@@ -120,7 +123,10 @@ tests.
 
         runtime: perl516
 
-        run: HTTP_PORT=${HTTP_PORT-9000} hello-world
+        env:
+	  PORT: "${PORT:-9000}"
+
+        run: exec hello-world
 
         test_frontpage: |
 

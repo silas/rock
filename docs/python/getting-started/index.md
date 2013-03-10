@@ -49,7 +49,7 @@ tests.
         import os
         import helloworld
 
-        port = int(os.environ.get('HTTP_PORT', 8000))
+        port = int(os.environ.get('PORT', 8000))
 
         if __name__ == '__main__':
             helloworld.app.run(port=port)
@@ -64,11 +64,14 @@ tests.
          * Running on http://127.0.0.1:8000/
         ^C
 
- 1. Update `.rock.yml` to include a run alias that defaults to port 9000
+ 1. Update `.rock.yml` to include an `env` and `run` section
 
         runtime: python27
 
-        run: HTTP_PORT=${HTTP_PORT-9000} hello-world
+        env:
+	  PORT: "${PORT:-9000}"
+
+        run: exec hello-world
 
  1. Run and kill it using Ctrl+C
 
@@ -102,7 +105,10 @@ tests.
 
         runtime: python27
 
-        run: HTTP_PORT=${HTTP_PORT-9000} hello-world
+        env:
+	  PORT: "${PORT:-9000}"
+
+        run: exec hello-world
 
         test_frontpage: |
 
@@ -129,10 +135,6 @@ tests.
 
         $ rock test frontpage
         OK
-
- 1. Create deployment build requirements
-
-        $ rock run pip freeze > requirements.txt
 
  1. Clean project root, run deployment build and run tests to ensure build worked
 
