@@ -133,11 +133,11 @@ tests.
 
  1. Run `frontpage` tests
 
-        $ rock test frontpage
+        $ rock test_frontpage
         OK
 
  1. Clean project root, run deployment build and run tests to ensure build worked
 
         $ rock clean
-        $ rock build deployment
+        $ rock build --deployment
         $ rock test

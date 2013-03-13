@@ -41,14 +41,6 @@ installation and can be extended from `/etc/rock/runtime/<runtime>.yml`,
 
     build: npm install
 
-    build_deployment: |
-      if [[ -f npm-shrinkwrap.json ]]; then
-        npm install
-      else
-        echo 'npm-shrinkwrap.json file required' >&2
-        exit 1
-      fi
-
     test: npm test
 
 The project configuration file sets the runtime and can extend any of the above.
@@ -58,7 +50,7 @@ The project configuration file sets the runtime and can extend any of the above.
     run: node app.js
     run_web: node app.js --cluster
 
-    build_deployment: |
+    build: |
       {{ '{{' }} parent }}
       make static
 
@@ -69,16 +61,9 @@ contain.
 Running the test command would evaluate to something like:
 
     $ rock --dry-run test
-    set -o noexec
-    set -o errexit
-
-    export ROCK_PATH="/example"
+    ...
     export PATH="/example/bin:/example/node_modules/.bin:/opt/rock/runtime/node08/usr/bin:${PATH}"
-    export ROCK_ENV="local"
-
-    export ROCK_ARGS=''
-    export ROCK_CWD='/example'
-
+    ...
     npm test
 
 ## Commands
