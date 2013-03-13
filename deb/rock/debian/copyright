@@ -3,11 +3,11 @@ Upstream-Name: rock
 Source: https://github.com/rockstack/rock
 
 Files: *
-Copyright: 2012 RockStack Contributors
+Copyright: 2013 RockStack Contributors
 License: MIT
 
 Files: debian/*
-Copyright: 2012 RockStack Contributors
+Copyright: 2013 RockStack Contributors
 License: MIT
 
 License: MIT

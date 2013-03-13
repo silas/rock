@@ -5,7 +5,6 @@ Maintainer: RockStack <packages@rockstack.org>
 Build-Depends: debhelper (>= 8.0.0),
  python-argparse,
  python-dev,
- python-importlib,
  python-nose,
  python-unittest2,
  python-yaml
@@ -16,8 +15,7 @@ Package: rock
 Architecture: all
 Depends: ${shlibs:Depends},
  ${misc:Depends},
- python-yaml,
  python-argparse,
- python-importlib
-Description: This is a cli tool that allows you to easily create, build, test
- and run applications.
+ python-yaml
+Description: This is a cli tool that allows you to easily build, test and run
+ applications.

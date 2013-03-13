@@ -1,7 +1,7 @@
 Name:           rock
-Version:        0.12.0
+Version:        0.13.0
 Release:        1%{?dist}
-Summary:        Create, build, test and run applications
+Summary:        Build, test and run applications
 
 Group:          Development/Languages
 License:        MIT
@@ -12,16 +12,13 @@ BuildArch:      noarch
 BuildRequires:  PyYAML
 BUildRequires:  python-argparse
 BuildRequires:  python-devel
-BuildRequires:  python-importlib
 BuildRequires:  python-nose
 BuildRequires:  python-unittest2
 Requires:       PyYAML
 Requires:       python-argparse
-Requires:       python-importlib
 
 %description
-This is a cli tool that allows you to easily create, build, test and run
-applications.
+This is a cli tool that allows you to easily build, test and run applications.
 
 %prep
 %setup -q
@@ -43,6 +40,13 @@ nosetests
 %{python_sitelib}/%{name}-%{version}-py*.egg-info
 
 %changelog
+* Wed Mar 13 2013 RockStack <packages@rockstack.org> - 0.13.0-1
+- Remove subcommands
+- Add argument parsing
+- Add config command
+- Remove create command
+- Make SHELL configurable
+
 * Fri Mar 08 2013 RockStack <packages@rockstack.org> - 0.12.0-1
 - Remove platform
 - Use yaml.safe_load

@@ -1,3 +1,13 @@
+rock (0.13.0-1) unstable; urgency=low
+
+  * Remove subcommands
+  * Add argument parsing
+  * Add config command
+  * Remove create command
+  * Make SHELL configurable
+
+ -- RockStack <packages@rockstack.org>  Wed, 13 Mar 2013 00:00:00 +0000
+
 rock (0.12.0-1) unstable; urgency=low
 
   * Initial release
