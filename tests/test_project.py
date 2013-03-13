@@ -48,6 +48,10 @@ class ProjectTestCase(helper.unittest.TestCase):
         self.p = helper.project(helper.Args(name='parent'))
         self.assertRaises(ConfigError, self.p.run, 'run')
 
+    def test_run_section_not_string(self):
+        self.p = helper.project(helper.Args(name='parent'))
+        self.assertRaises(ConfigError, self.p.run, 'test_str_to_dict')
+
     def test_build(self):
         self.p.run('build')
         self.assertEqual(self.script, 'pre\n\nbuild\n\npost')

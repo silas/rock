@@ -24,6 +24,8 @@ class Project(object):
         def check():
             if section not in self.config:
                 raise ConfigError('section not found: %s' % section)
+            if not isinstance(self.config[section], basestring):
+                raise ConfigError('section must be a string: %s' % section)
 
         # handle run special case
         if section == 'run':
