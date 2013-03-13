@@ -1,6 +1,6 @@
 ---
 layout: post
-title: rock 0.13
+title: rock 0.13 released
 ---
 
 [rock 0.13][pypi] ([diff][diff]) released.
