@@ -2,7 +2,7 @@ import argparse
 import os
 import sys
 from rock import __version__
-from rock.exceptions import ConfigError, Error
+from rock.exceptions import Error
 from rock.project import Project
 from rock.runtime import list as runtime_list
 

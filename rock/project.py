@@ -1,9 +1,6 @@
 import os
 import pipes
 import re
-import string
-import sys
-import yaml
 from rock.config import Config
 from rock.exceptions import ConfigError
 from rock.utils import Shell
