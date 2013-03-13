@@ -4,8 +4,8 @@ from distutils.core import setup
 from rock import __version__ as version
 
 long_description = """
-This is a command line tool that simplifies creating, building, testing, and
-running applications in multiple languages and versions on the same system.
+rock is a command line tool that simplifies building, testing, and running
+applications in multiple languages and versions on the same system.
 
 See http://www.rockstack.org for more information.
 """
@@ -13,7 +13,7 @@ See http://www.rockstack.org for more information.
 install_requires = ['PyYAML']
 
 if sys.version_info < (2, 7):
-    install_requires += ['argparse', 'importlib']
+    install_requires += ['argparse']
 
 setup(
     name='rock',

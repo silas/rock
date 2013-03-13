@@ -1,5 +1,4 @@
 import argparse
-import importlib
 import os
 import sys
 from rock import __version__
