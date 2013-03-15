@@ -12,5 +12,6 @@ mkdir -p misc/modules
 
 clone ${ROCK_PYTHON-rockstack/rock}
 clone ${ROCK_PACKAGES-rockstack/packages}
+clone ${ROCK_HOMEBREW-rockstack/homebrew-rock} homebrew
 clone ${ROCK_TESTS-rockstack/tests}
 clone ${ROCK_SITE-rockstack/rockstack.github.com} site
