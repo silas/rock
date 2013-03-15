@@ -19,6 +19,7 @@ title: Install (deb)
             rock-runtime-node04 \
             rock-runtime-node06 \
             rock-runtime-node08 \
+            rock-runtime-node010 \
             rock-runtime-perl516 \
             rock-runtime-php54 \
             rock-runtime-python27 \
