@@ -1,0 +1,33 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+# Sample debian/rules that uses debhelper.
+# This file was originally written by Joey Hess and Craig Small.
+# As a special exception, when this file is copied by dh-make into a
+# dh-make output file, you may use that output file without restriction.
+# This special exception was added by Craig Small in version 0.37 of dh-make.
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+prefix := /usr
+runtime := ruby20
+ruby20_rootdir := /opt/rock/runtime/$(runtime)
+abi := 2.0.0
+gem_dir := $(ruby20_rootdir)$(prefix)/lib/ruby/gems/$(abi)
+install_rootdir := $(CURDIR)/debian/rock-runtime-ruby20-bundler
+
+get-orig-source:
+	uscan --noconf --rename --repack --download-current-version --force-download --verbose $(CURDIR)
+
+override_dh_auto_install:
+	gem build bundler.gemspec
+	gem install --force --ignore-dependencies --no-rdoc --no-ri --local --force \
+    --install-dir $(install_rootdir)$(gem_dir) \
+    --bindir $(install_rootdir)$(ruby20_rootdir)$(prefix)/bin \
+    bundler-*.gem
+  
+	mv $(install_rootdir)$(ruby20_rootdir)$(prefix)/bin/bundle $(install_rootdir)$(ruby20_rootdir)$(prefix)/bin/rock-bundle	
+	dh_install debian/bundle $(ruby20_rootdir)$(prefix)/bin/
+
+%:
+	GEM_HOME=$(gem_dir) PATH=$(ruby20_rootdir)$(prefix)/bin:$$PATH dh $@ 

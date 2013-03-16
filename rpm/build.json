@@ -32,5 +32,8 @@
   {"spec": "rock-runtime-ruby19-core/rock-runtime-ruby19-core.spec"},
   {"spec": "rock-runtime-ruby19-bundler/rock-runtime-ruby19-bundler.spec"},
   {"spec": "rock-runtime-ruby19/rock-runtime-ruby19.spec"},
+  {"spec": "rock-runtime-ruby20-core/rock-runtime-ruby20-core.spec"},
+  {"spec": "rock-runtime-ruby20-bundler/rock-runtime-ruby20-bundler.spec"},
+  {"spec": "rock-runtime-ruby20/rock-runtime-ruby20.spec"},
   {"spec": "rock/rock.spec"}
 ]

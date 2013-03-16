@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+unset RUBYOPT
+
+exec rock-bundle "$@"

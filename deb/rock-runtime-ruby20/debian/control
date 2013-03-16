@@ -1,0 +1,15 @@
+Source: rock-runtime-ruby20
+Section: ruby
+Priority: extra
+Maintainer: RockStack <packages@rockstack.org>
+Build-Depends: debhelper (>= 8.0.0)
+Standards-Version: 3.9.3
+Homepage: http://www.rockstack.org
+
+Package: rock-runtime-ruby20
+Architecture: all
+Depends: ${shlibs:Depends},
+ ${misc:Depends},
+ rock-runtime-ruby20-core (>= 2.0.0p0-1~),
+ rock-runtime-ruby20-bundler (>= 1.3.4-1~)
+Description: ruby20 runtime for rock.
