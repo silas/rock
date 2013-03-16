@@ -69,7 +69,7 @@ tests.
         runtime: python27
 
         env:
-	  PORT: "${PORT:-9000}"
+          PORT: "${PORT:-9000}"
 
         run: exec hello-world
 
@@ -106,7 +106,7 @@ tests.
         runtime: python27
 
         env:
-	  PORT: "${PORT:-9000}"
+          PORT: "${PORT:-9000}"
 
         run: exec hello-world
 

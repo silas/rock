@@ -80,7 +80,7 @@ tests.
         runtime: ruby19
 
         env:
-	  PORT: "${PORT:-9000}"
+          PORT: "${PORT:-9000}"
 
         run: exec hello-world
 
@@ -141,7 +141,7 @@ tests.
         runtime: ruby19
 
         env:
-	  PORT: "${PORT:-9000}"
+          PORT: "${PORT:-9000}"
 
         run: exec hello-world
 

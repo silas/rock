@@ -89,7 +89,7 @@ This guide walks you through setting up a basic PHP web application with tests.
         runtime: php54
 
         env:
-	  PORT: "${PORT:-9000}"
+          PORT: "${PORT:-9000}"
 
         run: exec hello-world
 
@@ -146,7 +146,7 @@ This guide walks you through setting up a basic PHP web application with tests.
         runtime: php54
 
         env:
-	  PORT: "${PORT:-9000}"
+          PORT: "${PORT:-9000}"
 
         run: exec hello-world
 

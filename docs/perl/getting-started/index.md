@@ -85,7 +85,7 @@ tests.
         runtime: perl516
 
         env:
-	  PORT: "${PORT:-9000}"
+          PORT: "${PORT:-9000}"
 
         run: exec hello-world
 
@@ -124,7 +124,7 @@ tests.
         runtime: perl516
 
         env:
-	  PORT: "${PORT:-9000}"
+          PORT: "${PORT:-9000}"
 
         run: exec hello-world
 
