@@ -12,12 +12,16 @@ class RockRuntimeRuby18 < Formula
   depends_on 'gdbm'
   depends_on 'libyaml'
 
-  def rubygems_version
-    '1.8.24'
+  def abi_version
+    '1.8'
   end
 
   def bundler_version
     '1.2.3'
+  end
+
+  def rubygems_version
+    '1.8.24'
   end
 
   def install_rubygems
@@ -39,7 +43,7 @@ class RockRuntimeRuby18 < Formula
   def install_bundler
     system 'curl', '-LO', "http://rubygems.org/downloads/bundler-#{bundler_version}.gem"
 
-    ENV['GEM_HOME'] = "#{prefix}/lib/ruby/gems/1.8"
+    ENV['GEM_HOME'] = "#{prefix}/lib/ruby/gems/#{abi_version}"
 
     system 'gem', 'install',
       '--config-file', 'nofile',
@@ -48,7 +52,7 @@ class RockRuntimeRuby18 < Formula
       '--no-rdoc',
       '--no-ri',
       '--local',
-      '--install-dir', "#{prefix}/lib/ruby/gems/1.8",
+      '--install-dir', "#{prefix}/lib/ruby/gems/#{abi_version}",
       "--bindir", bin,
       "bundler-#{bundler_version}.gem"
 
@@ -76,7 +80,8 @@ class RockRuntimeRuby18 < Formula
     system './configure',
       "--prefix=#{prefix}",
       '--without-tk',
-      '--enable-shared'
+      '--enable-shared',
+      "--with-readline-dir=#{Formula.factory('readline').prefix}"
     system 'make'
     system 'make', 'install'
 
@@ -92,8 +97,8 @@ class RockRuntimeRuby18 < Formula
     runtime.write <<-EOS.undent
       env:
         PATH: "#{bin}:${PATH}"
-        RUBY_ABI: "1.8"
-        RUBYOPT: "-I#{lib}/ruby/gems/1.8/gems/bundler-#{bundler_version}/lib -rbundler/setup"
+        RUBY_ABI: "#{abi_version}"
+        RUBYOPT: "-I#{lib}/ruby/gems/#{abi_version}/gems/bundler-#{bundler_version}/lib -rbundler/setup"
     EOS
   end
 end

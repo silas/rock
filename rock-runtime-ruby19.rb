@@ -11,6 +11,11 @@ class RockRuntimeRuby19 < Formula
   depends_on 'readline'
   depends_on 'gdbm'
   depends_on 'libyaml'
+  depends_on 'openssl'
+
+  def abi_version
+    '1.9.1'
+  end
 
   def bundler_version
     '1.2.3'
@@ -19,7 +24,7 @@ class RockRuntimeRuby19 < Formula
   def install_bundler
     system 'curl', '-LO', "http://rubygems.org/downloads/bundler-#{bundler_version}.gem"
 
-    ENV['GEM_HOME'] = "#{prefix}/lib/ruby/gems/1.9.1"
+    ENV['GEM_HOME'] = "#{prefix}/lib/ruby/gems/#{abi_version}"
 
     system 'gem', 'install',
       '--config-file', 'nofile',
@@ -28,7 +33,7 @@ class RockRuntimeRuby19 < Formula
       '--no-rdoc',
       '--no-ri',
       '--local',
-      '--install-dir', "#{prefix}/lib/ruby/gems/1.9.1",
+      '--install-dir', "#{prefix}/lib/ruby/gems/#{abi_version}",
       "--bindir", bin,
       "bundler-#{bundler_version}.gem"
 
@@ -55,7 +60,9 @@ class RockRuntimeRuby19 < Formula
 
     system './configure',
       "--prefix=#{prefix}",
-      '--enable-shared'
+      '--enable-shared',
+      "--with-openssl-dir=#{Formula.factory('openssl').prefix}",
+      "--with-readline-dir=#{Formula.factory('readline').prefix}"
     system 'make'
     system 'make', 'install'
 
@@ -70,8 +77,8 @@ class RockRuntimeRuby19 < Formula
     runtime.write <<-EOS.undent
       env:
         PATH: "#{bin}:${PATH}"
-        RUBY_ABI: "1.9.1"
-        RUBYOPT: "-I#{lib}/ruby/gems/1.9.1/gems/bundler-#{bundler_version}/lib -rbundler/setup"
+        RUBY_ABI: "#{abi_version}"
+        RUBYOPT: "-I#{lib}/ruby/gems/#{abi_version}/gems/bundler-#{bundler_version}/lib -rbundler/setup"
     EOS
   end
 end

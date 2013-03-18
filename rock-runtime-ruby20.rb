@@ -11,6 +11,7 @@ class RockRuntimeRuby20 < Formula
   depends_on 'readline'
   depends_on 'gdbm'
   depends_on 'libyaml'
+  depends_on 'openssl'
 
   def abi_version
     '2.0.0'
@@ -59,7 +60,9 @@ class RockRuntimeRuby20 < Formula
 
     system './configure',
       "--prefix=#{prefix}",
-      '--enable-shared'
+      '--enable-shared',
+      "--with-openssl-dir=#{Formula.factory('openssl').prefix}",
+      "--with-readline-dir=#{Formula.factory('readline').prefix}"
     system 'make'
     system 'make', 'install'
 
