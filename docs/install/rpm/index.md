@@ -23,6 +23,7 @@ title: Install (rpm)
             rock-runtime-python27 \
             rock-runtime-python33 \
             rock-runtime-ruby18 \
-            rock-runtime-ruby19
+            rock-runtime-ruby19 \
+            rock-runtime-ruby20
 
  1. Continue to [getting started](/docs/) page
