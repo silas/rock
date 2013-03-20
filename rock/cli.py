@@ -73,9 +73,17 @@ def main(argv=None):
         argv = sys.argv[1:]
 
     # find command position
-    pos = 0
+    pos, skip_next = 0, False
     for i, arg in enumerate(argv):
-        if not arg.startswith('-'):
+        if skip_next:
+            skip_next = False
+            continue
+        elif arg.startswith('--'):
+            if arg[2:] in ('env', 'path', 'runtime'):
+                skip_next = True
+        elif arg.startswith('-'):
+            continue
+        else:
             pos = i
             break
 
