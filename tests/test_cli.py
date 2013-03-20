@@ -58,7 +58,7 @@ class CliTestCase(helper.unittest.TestCase):
             sys.stderr = stderr
 
     def test_main_valid(self):
-        cli.main(args=['runtime'])
+        cli.main(argv=['runtime'])
 
     def test_main_invalid(self):
         stderr = sys.stderr

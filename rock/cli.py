@@ -24,7 +24,7 @@ def project(args):
     return Project(config, env=args.env)
 
 
-def config(args, extra):
+def config(args, argv):
     """
     Output project configuration (json, yaml).
     """
@@ -32,7 +32,7 @@ def config(args, extra):
     parser.add_argument('--format', help='set output format',
                         choices=['json', 'yaml'], default='yaml')
 
-    sub_args = parser.parse_args(extra)
+    sub_args = parser.parse_args(argv)
 
     config = project(args).config
     config.setup()
@@ -45,7 +45,7 @@ def config(args, extra):
         stdout.write(yaml.dump(config.data))
 
 
-def env(args, extra):
+def env(args, argv):
     """
     Output project environment.
     """
@@ -53,7 +53,7 @@ def env(args, extra):
         stdout.write('export %s="%s"\n' % (name, value))
 
 
-def runtime(args, extra):
+def runtime(args, argv):
     """
     List runtimes install on system.
     """
@@ -61,7 +61,7 @@ def runtime(args, extra):
         stdout.write('%s\n' % r.name)
 
 
-def main(args=None):
+def main(argv=None):
     """
     Handle command line arguments.
     """
@@ -69,18 +69,17 @@ def main(args=None):
     rock better runtimes.
     """
 
-    if args is None:
-        args = sys.argv[1:]
+    if argv is None:
+        argv = sys.argv[1:]
 
-    add_help = True
-
-    for arg in args[1:]:
+    # find command position
+    pos = 0
+    for i, arg in enumerate(argv):
         if not arg.startswith('-'):
-            add_help = False
+            pos = i
             break
 
-    parser = argparse.ArgumentParser(prog='rock', description=description,
-                                     add_help=add_help)
+    parser = argparse.ArgumentParser(prog='rock', description=description)
 
     # general options
     parser.add_argument('-v', '--verbose', action='store_true',
@@ -97,17 +96,15 @@ def main(args=None):
                          default=os.environ.get('ROCK_ENV', 'local'))
     options.add_argument('--runtime', help='set runtime')
 
-    parser.add_argument('command', nargs='?', help='action to take')
+    parser.add_argument('command', help='action to take')
 
     try:
-        args, extra = parser.parse_known_args(args)
+        # only parse up until command
+        args = parser.parse_args(argv[:pos + 1])
         if args.command in ('config', 'env', 'runtime'):
-            globals()[args.command](args, extra)
-        elif args.command:
-            project(args).run(args.command, extra)
+            globals()[args.command](args, argv[pos + 1:])
         else:
-            parser.print_usage(file=sys.stderr)
-            parser.exit(1)
+            project(args).run(args.command, argv[pos + 1:])
     except Error, error:
         message = '%s' % error
         if not message.endswith('\n'):
