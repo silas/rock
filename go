@@ -65,12 +65,16 @@ if [[ "$( brew list )" != *berkeley-db* ]]; then
   brew install berkeley-db --without-java
 fi
 
-echo
-echo "Trying to install/update rock..."
-sudo pip install -U rock
-
-for name in $( brew list | grep -e '^rock-' ); do
+if [[ "${ROCK_SKIP_CLI}" != "true" ]]; then
   echo
-  echo "Trying to update ${name}..."
-  brew upgrade $name 2>&1 | grep -v -e '^Error: .* already installed$'
-done
+  echo "Trying to install/update rock..."
+  sudo pip install -U rock
+fi
+
+if [[ "${ROCK_SKIP_RUNTIMES}" != "true" ]]; then
+  for name in $( brew list | grep -e '^rock-' ); do
+    echo
+    echo "Trying to update ${name}..."
+    brew upgrade $name 2>&1 | grep -v -e '^Error: .* already installed$'
+  done
+fi
