@@ -1,5 +1,5 @@
 prefix=$1
-bundler_version=1.2.3
+bundler_version=1.3.4
 abi=1.9.1
 
 cat << EOF > rock.yml
