@@ -108,7 +108,7 @@ function build() {
   fi
 
   deb_search=${package}_${package_version}${package_suffix}*_${package_arch}.deb
-  match_deb=`find $pbuilder_package_mount -type f -name $deb_search`
+  match_deb=`find $pbuilder_package_mount -type f -name "$deb_search"`
   if [ "$match_deb" != '' ]
   then
     echo_normal "$match_deb found, skipping"
