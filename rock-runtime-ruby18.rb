@@ -17,7 +17,7 @@ class RockRuntimeRuby18 < Formula
   end
 
   def bundler_version
-    '1.2.3'
+    '1.3.4'
   end
 
   def rubygems_version
