@@ -2,8 +2,8 @@ require 'formula'
 
 class RockRuntimeRuby19 < Formula
   homepage 'http://www.python.org/'
-  url 'http://ftp.ruby-lang.org/pub/ruby/1.9/ruby-1.9.3-p374.tar.gz'
-  sha1 '62ec444899de428461e8476c4bca62469b331333'
+  url 'http://ftp.ruby-lang.org/pub/ruby/1.9/ruby-1.9.3-p392.tar.gz'
+  sha1 'ec75fcbd3b6b46ce6ec997ee4c86145b4abd5748'
 
   env :std
   keg_only 'rock'
@@ -18,7 +18,7 @@ class RockRuntimeRuby19 < Formula
   end
 
   def bundler_version
-    '1.2.3'
+    '1.3.4'
   end
 
   def install_bundler
