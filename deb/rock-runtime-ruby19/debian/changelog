@@ -1,3 +1,10 @@
+rock-runtime-ruby19 (1.0.0-2) unstable; urgency=low
+
+  * Ruby 1.9.3 p392
+  * Bundler 1.3.4
+
+ -- RockStack <packages@rockstack.org>  Mon, 18 Mar 2013 00:00:00 +0000
+
 rock-runtime-ruby19 (1.0.0-1) unstable; urgency=low
 
   * Initial release

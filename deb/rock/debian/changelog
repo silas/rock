@@ -1,3 +1,9 @@
+rock (0.13.1-1) unstable; urgency=low
+
+  * Fix option parsing
+
+ -- RockStack <packages@rockstack.org>  Wed, 20 Mar 2013 00:00:00 +0000
+
 rock (0.13.0-1) unstable; urgency=low
 
   * Remove subcommands

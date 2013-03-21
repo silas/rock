@@ -1,11 +1,11 @@
 %filter_from_provides /.*/d
 %filter_setup
 
-%global bundler_version 1.2.3
+%global bundler_version 1.3.4
 
 Name:           rock-runtime-ruby18
 Version:        1
-Release:        5%{?dist}
+Release:        6%{?dist}
 Summary:        ruby18 runtime for rock
 
 Group:          Development/Languages
@@ -45,6 +45,9 @@ rm -rf %{buildroot}
 %{ruby18_rootdir}/rock.yml
 
 %changelog
+* Mon Mar 18 2013 RockStack <packages@rockstack.org> - 1-6
+- Bundler 1.3.4
+
 * Sun Feb 03 2013 RockStack <packages@rockstack.org> - 1-5
 - RubyGems 1.8.25
 - Bundler 1.2.3

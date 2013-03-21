@@ -8,7 +8,7 @@
 %global ruby19_gemdir %{ruby19_rootdir}%{_prefix}/lib/ruby/gems/%{ruby19_abi}
 
 %global shortversion 1.9.3
-%global patch 374
+%global patch 392
 
 Name:           rock-runtime-ruby19-core
 Version:        %{shortversion}.%{patch}
@@ -94,6 +94,9 @@ rm -rf %{buildroot}
 %{ruby19_rootdir}%{_prefix}/lib/pkgconfig/ruby*
 
 %changelog
+* Mon Mar 18 2013 RockStack <packages@rockstack.org> - 1.9.3.392-1
+- Update to 1.9.3 p392
+
 * Sun Feb 03 2013 RockStack <packages@rockstack.org> - 1.9.3.374-1
 - Update to 1.9.3 p374
 

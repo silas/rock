@@ -1,5 +1,5 @@
 Name:           rock
-Version:        0.13.0
+Version:        0.13.1
 Release:        1%{?dist}
 Summary:        Build, test and run applications
 
@@ -40,6 +40,9 @@ nosetests
 %{python_sitelib}/%{name}-%{version}-py*.egg-info
 
 %changelog
+* Wed Mar 20 2013 RockStack <packages@rockstack.org> - 0.13.1-1
+- Fix option parsing
+
 * Wed Mar 13 2013 RockStack <packages@rockstack.org> - 0.13.0-1
 - Remove subcommands
 - Add argument parsing

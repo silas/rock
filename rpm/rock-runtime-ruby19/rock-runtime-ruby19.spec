@@ -1,11 +1,11 @@
 %filter_from_provides /.*/d
 %filter_setup
 
-%global bundler_version 1.2.3
+%global bundler_version 1.3.4
 
 Name:           rock-runtime-ruby19
 Version:        1
-Release:        5%{?dist}
+Release:        6%{?dist}
 Summary:        ruby19 runtime for rock
 
 Group:          Development/Languages
@@ -15,7 +15,7 @@ BuildArch:      noarch
 
 BuildRequires:  rock-runtime-ruby19-core-rpmbuild
 Requires:       rock-runtime-ruby19-bundler >= %{bundler_version}-1
-Requires:       rock-runtime-ruby19-core >= 1.9.3.327-1
+Requires:       rock-runtime-ruby19-core >= 1.9.3.392-1
 
 %description
 ruby19 runtime for rock.
@@ -44,8 +44,12 @@ rm -rf %{buildroot}
 %{ruby19_rootdir}/rock.yml
 
 %changelog
+* Mon Mar 18 2013 RockStack <packages@rockstack.org> - 1-6
+- Ruby 1.9.3 p392
+- Bundler 1.2.3
+
 * Sun Feb 03 2013 RockStack <packages@rockstack.org> - 1-5
-- Ruby 1.9.3 374
+- Ruby 1.9.3 p374
 - Bundler 1.2.3
 
 * Sun Nov 18 2012 RockStack <packages@rockstack.org> - 1-4
