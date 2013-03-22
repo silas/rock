@@ -3,7 +3,8 @@ import os
 from rock.exceptions import ConfigError
 
 
-ROCK_SHELL = os.environ.get('ROCK_SHELL', '/bin/bash -l -c').split()
+ROCK_SHELL = (os.environ.get('ROCK_SHELL') or '/bin/bash -c').split()
+ROCK_SHELL.insert(1, os.path.basename(ROCK_SHELL[0]))
 
 
 def isexecutable(path):
