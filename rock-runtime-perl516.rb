@@ -2,8 +2,8 @@ require 'formula'
 
 class RockRuntimePerl516 < Formula
   homepage 'http://www.perl.org/'
-  url 'http://www.cpan.org/src/5.0/perl-5.16.2.tar.bz2'
-  sha1 '674380237fa5a44447c6531e15bd3590d987e4b4'
+  url 'http://www.cpan.org/src/5.0/perl-5.16.3.tar.bz2'
+  sha1 '060bc17cf9f142d043f9bf7b861422ec624875ea'
 
   keg_only 'rock'
 
