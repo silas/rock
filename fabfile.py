@@ -9,7 +9,7 @@ def sync_local_down():
     local(rsync('%s:build/epel/6/ rpm/build/epel/6/' % env.roledefs['dl'][0]))
 
 def sync_local():
-    local(rsync('rpm/build/epel/6/ %s:build/epel/6/' % env.roledefs['dl']))
+    local(rsync('rpm/build/epel/6/ %s:build/epel/6/' % env.roledefs['dl'][0]))
 
 def sync_repo(name):
     root = '/srv/dl.rockstack.org/rpm/%s/el/6' % name
