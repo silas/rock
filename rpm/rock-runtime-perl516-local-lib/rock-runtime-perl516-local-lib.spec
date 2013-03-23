@@ -3,8 +3,8 @@
 %filter_setup
 
 Name:           rock-runtime-perl516-local-lib
-Version:        1.008004
-Release:        3%{?dist}
+Version:        1.008009
+Release:        1%{?dist}
 Summary:        A tool to manage Perl 5.16.x dependencies
 
 Group:          Development/Languages
@@ -14,8 +14,8 @@ Source0:        http://search.cpan.org/CPAN/authors/id/A/AP/APEIRON/local-lib-%{
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 
-BuildRequires:  rock-runtime-perl516-core-rpmbuild >= 5.12.2-2
-Requires:       rock-runtime-perl516-core >= 5.12.2-2
+BuildRequires:  rock-runtime-perl516-core-rpmbuild >= 5.12.3-1
+Requires:       rock-runtime-perl516-core >= 5.12.3-1
 
 %description
 Create and use a local-lib for Perl modules with PERL5LIB.
@@ -47,6 +47,9 @@ rm -rf %{buildroot}
 %{perl516_vendorarch}
 
 %changelog
+* Fri Mar 22 2013 RockStack <packages@rockstack.org> - 1.008009-1
+- Update to 1.008009
+
 * Tue Nov 20 2012 RockStack <packages@rockstack.org> - 1.008004-3
 - Fix paths for Perl 5.16.2
 

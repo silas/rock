@@ -7,7 +7,7 @@ Build-Depends: debhelper (>= 8.0.0),
  rock-runtime-perl516-local-lib,
  wget
 Standards-Version: 3.9.3
-Homepage: http://search.cpan.org/~miyagawa/carton-v0.9.4/docs/carton.pod
+Homepage: http://search.cpan.org/~miyagawa/carton/docs/carton.pod
 
 Package: rock-runtime-perl516-carton
 Architecture: any

@@ -3,7 +3,7 @@
 %filter_setup
 
 Name:           rock-runtime-perl516-cpanm
-Version:        1.5017
+Version:        1.6008
 Release:        1%{?dist}
 Summary:        A tool to manage Perl 5.16.x dependencies
 
@@ -35,6 +35,9 @@ rm -rf %{buildroot}
 %{perl516_rootdir}%{_bindir}/cpanm
 
 %changelog
+* Fri Mar 22 2013 RockStack <packages@rockstack.org> - 1.6008-1
+- Update to 1.6008
+
 * Tue Sep 11 2012 RockStack <packages@rockstack.org> - 1.5017-1
 - Update to 1.5017
 

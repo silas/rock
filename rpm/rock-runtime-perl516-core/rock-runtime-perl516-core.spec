@@ -15,8 +15,8 @@
 %global perl516_archname %{_arch}-%{_os}%{perl516_arch_stem}
 
 Name:           rock-runtime-perl516-core
-Version:        5.16.2
-Release:        2%{?dist}
+Version:        5.16.3
+Release:        1%{?dist}
 Summary:        A Perl 5.16.x runtime
 
 Group:          Development/Languages
@@ -102,6 +102,9 @@ rm -rf %{buildroot}
 %{_sysconfdir}/rpm/macros.rock-perl516
 
 %changelog
+* Fri Mar 22 2013 RockStack <packages@rockstack.org> - 5.16.3-1
+- Update to 5.16.3
+
 * Tue Nov 20 2012 RockStack <packages@rockstack.org> - 5.16.2-2
 - Fix various path issues
 

@@ -3,7 +3,7 @@
 
 Name:           rock-runtime-perl516
 Version:        1
-Release:        6%{?dist}
+Release:        7%{?dist}
 Summary:        perl516 runtime for rock
 
 Group:          Development/Languages
@@ -11,11 +11,11 @@ License:        MIT
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 
-BuildRequires:  rock-runtime-perl516-core-rpmbuild >= 5.12.2-2
-Requires:       rock-runtime-perl516-core >= 5.16.2-2
-Requires:       rock-runtime-perl516-cpanm >= 1.5017-1
-Requires:       rock-runtime-perl516-local-lib >= 1.008004-3
-Requires:       rock-runtime-perl516-carton >= 1:0.9.7-0.1
+BuildRequires:  rock-runtime-perl516-core-rpmbuild >= 5.12.3-1
+Requires:       rock-runtime-perl516-core >= 5.16.3-1
+Requires:       rock-runtime-perl516-cpanm >= 1.6008-1
+Requires:       rock-runtime-perl516-local-lib >= 1.008009-1
+Requires:       rock-runtime-perl516-carton >= 1:0.9.10-1
 
 %description
 perl516 runtime for rock.
@@ -43,6 +43,12 @@ rm -rf %{buildroot}
 %{perl516_rootdir}/rock.yml
 
 %changelog
+* Fri Mar 22 2013 RockStack <packages@rockstack.org> - 1-7
+- Update to Perl 5.16.3
+- Update to local::lib 1.008009
+- Update to cpanm 1.6008
+- Update to Carton 0.9.10
+
 * Sun Nov 18 2012 RockStack <packages@rockstack.org> - 1-6
 - Update paths
 - Expose archname
