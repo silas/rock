@@ -108,8 +108,6 @@ def main(argv=None):
         elif arg.startswith('--'):
             if arg[2:] in ('env', 'path', 'runtime'):
                 skip_next = True
-        elif arg.startswith('-'):
-            continue
         else:
             pos = i
             break
