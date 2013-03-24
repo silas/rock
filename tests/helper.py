@@ -34,6 +34,10 @@ class RuntimeTests(object):
                 dst_path=w.path)
             with open(w.join('.rock.yml'), 'w+') as f:
                 f.write('runtime: {name}'.format(name=name))
+            for command in ('build', 'test', 'clean'):
+                r = self.assertRun('rock %s --help' % command, cwd=w.path)
+                match = 'Usage: rock %s' % command
+                self.assertEqual(r.stdout.split('\n')[0].strip()[0:len(match)], match)
             self.assertRun('rock build', cwd=w.path)
             result = self.assertRun('rock run sample test', cwd=w.path)
             self.assertEquals(result.stdout.rstrip(), '<p>test</p>')
