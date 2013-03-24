@@ -65,9 +65,39 @@ def main(argv=None):
     """
     Handle command line arguments.
     """
-    description = """
-    rock better runtimes.
-    """
+
+    class ArgumentParser(argparse.ArgumentParser):
+
+        def format_usage(self):
+            text = 'usage: rock [-v] [--env=ENV] [--path=PATH] ' + \
+                   '[--runtime=RUNTIME] command\n'
+            return text
+
+        def format_help(self):
+            text = self.format_usage()
+            text += '\n'
+            text += '  -h, --help         show help message\n'
+            text += '  -v, --verbose      show script while running\n'
+            text += '  --dry-run          show script without running\n'
+            text += '  --version          show version\n'
+            text += '\n'
+            text += 'project:\n'
+            text += '  --env=ENV          set env (local)\n'
+            text += '  --path=PATH        set path\n'
+            text += '  --runtime=RUNTIME  set runtime\n'
+            text += '\n'
+            text += 'commands:\n'
+            text += '  build              run build\n'
+            text += '  test               run tests\n'
+            text += '  run                run in environment\n'
+            text += '  clean              clean project files\n'
+            text += '\n'
+            text += 'other commands:\n'
+            text += '  config             show project configuration\n'
+            text += '  env                show evaluable environment ' + \
+                    'variables\n'
+            text += '  runtime            show installed runtimes\n'
+            return text
 
     if argv is None:
         argv = sys.argv[1:]
@@ -87,24 +117,14 @@ def main(argv=None):
             pos = i
             break
 
-    parser = argparse.ArgumentParser(prog='rock', description=description)
-
-    # general options
-    parser.add_argument('-v', '--verbose', action='store_true',
-                        help='show run commands')
-    parser.add_argument('--dry-run', action='store_true',
-                        help="show commands, but don't run")
+    parser = ArgumentParser(prog='rock')
+    parser.add_argument('-v', '--verbose', action='store_true')
+    parser.add_argument('--dry-run', action='store_true')
     parser.add_argument('--version', action='version', version=__version__)
-
-    # options
-    options = parser.add_argument_group('project')
-    options.add_argument('--path', help='set path',
-                         default=os.environ.get('ROCK_PATH', ''))
-    options.add_argument('--env', help='set env',
-                         default=os.environ.get('ROCK_ENV', 'local'))
-    options.add_argument('--runtime', help='set runtime')
-
-    parser.add_argument('command', help='action to take')
+    parser.add_argument('--env', default=os.environ.get('ROCK_ENV', 'local'))
+    parser.add_argument('--path', default=os.environ.get('ROCK_PATH', ''))
+    parser.add_argument('--runtime', default=os.environ.get('ROCK_RUNTIME'))
+    parser.add_argument('command')
 
     try:
         # only parse up until command
