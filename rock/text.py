@@ -2,12 +2,12 @@ def _(text):
     return text.strip('\n')
 
 USAGE = _("""
-Usage: rock [-v] [--env=ENV] [--path=PATH] [--runtime=RUNTIME] command
+Usage: rock [--help] [--env=ENV] [--path=PATH] [--runtime=RUNTIME] command
 """)
 
 HELP = _("""
-  -h, --help         show help message
-  -v, --verbose      show script while running
+  --help             show help message
+  --verbose          show script while running
   --dry-run          show script without running
   --version          show version
 
@@ -33,7 +33,7 @@ Usage: rock config [--format=FORMAT]
 """)
 
 CONFIG_HELP = _("""
-  -h, --help         show help message
+  --help             show help message
   --format           set output format (json, yaml)
 """)
 
@@ -42,7 +42,7 @@ Usage: rock env
 """)
 
 ENV_HELP = _("""
-  -h, --help         show help message
+  --help             show help message
 """)
 
 RUNTIME_USAGE = _("""
@@ -50,5 +50,5 @@ Usage: rock runtime
 """)
 
 RUNTIME_HELP = _("""
-  -h, --help         show help message
+  --help             show help message
 """)

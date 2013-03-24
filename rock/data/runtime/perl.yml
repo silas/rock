@@ -9,6 +9,14 @@ env:
 
 build: |
 
+  if [[ "${ROCK_ARGS_HELP}" == "true" ]]; then
+    echo 'Usage: rock build [--deployment]'
+    echo
+    echo '  --help             show help message'
+    echo '  --deployment       run build in deployment mode'
+    exit
+  fi
+
   if [[ "${ROCK_ARGS_DEPLOYMENT}" != "true" ]]; then
     if [[ -f ./cpanfile ]]; then
       carton ${ROCK_CARTON_INSTALL}
@@ -24,9 +32,23 @@ build: |
 
 test: |
 
+  if [[ "${ROCK_ARGS_HELP}" == "true" ]]; then
+    echo 'Usage: rock test'
+    echo
+    echo '  --help             show help message'
+    exit
+  fi
+
   prove
 
 clean: |
+
+  if [[ "${ROCK_ARGS_HELP}" == "true" ]]; then
+    echo 'Usage: rock clean'
+    echo
+    echo '  --help             show help message'
+    exit
+  fi
 
   if [[ -d ./local ]]; then
     rm -fr ./local

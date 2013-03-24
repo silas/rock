@@ -8,6 +8,14 @@ env:
 
 build: |
 
+  if [[ "${ROCK_ARGS_HELP}" == "true" ]]; then
+    echo 'Usage: rock build [--deployment]'
+    echo
+    echo '  --help             show help message'
+    echo '  --deployment       run build in deployment mode'
+    exit
+  fi
+
   if [[ "${ROCK_ARGS_DEPLOYMENT}" != "true" ]]; then
     if [[ ! -e "./venv/bin/python" ]]; then
       pyvenv ${ROCK_PYVENV}
@@ -38,9 +46,23 @@ build: |
 
 test: |
 
+  if [[ "${ROCK_ARGS_HELP}" == "true" ]]; then
+    echo 'Usage: rock test'
+    echo
+    echo '  --help             show help message'
+    exit
+  fi
+
   python -m unittest discover ./tests
 
 clean: |
+
+  if [[ "${ROCK_ARGS_HELP}" == "true" ]]; then
+    echo 'Usage: rock clean'
+    echo
+    echo '  --help             show help message'
+    exit
+  fi
 
   if [[ -d ./venv ]]; then
     rm -fr ./venv

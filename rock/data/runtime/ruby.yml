@@ -6,6 +6,14 @@ env:
 
 build: |
 
+  if [[ "${ROCK_ARGS_HELP}" == "true" ]]; then
+    echo 'Usage: rock build [--deployment]'
+    echo
+    echo '  --help             show help message'
+    echo '  --deployment       run build in deployment mode'
+    exit
+  fi
+
   if [[ "${ROCK_ARGS_DEPLOYMENT}" != "true" ]]; then
     if [[ -f ./Gemfile || -f ./Gemfile.lock ]]; then
       bundle ${ROCK_BUNDLE_INSTALL}
@@ -21,9 +29,23 @@ build: |
 
 test: |
 
+  if [[ "${ROCK_ARGS_HELP}" == "true" ]]; then
+    echo 'Usage: rock test'
+    echo
+    echo '  --help             show help message'
+    exit
+  fi
+
   rake
 
 clean: |
+
+  if [[ "${ROCK_ARGS_HELP}" == "true" ]]; then
+    echo 'Usage: rock clean'
+    echo
+    echo '  --help             show help message'
+    exit
+  fi
 
   if [[ -d ./vendor/bundle ]]; then
     rm -fr ./vendor/bundle

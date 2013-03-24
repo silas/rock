@@ -20,7 +20,12 @@ def argument_parser(*args, **kwargs):
         def format_help(self):
             return '%s\n%s\n' % (self.format_usage(), format_help)
 
-    return ArgumentParser(*args, **kwargs)
+    kwargs['add_help'] = False
+
+    p = ArgumentParser(*args, **kwargs)
+    p.add_argument('--help', action='help')
+
+    return p
 
 
 def project(args):
@@ -110,7 +115,7 @@ def main(argv=None):
             break
 
     parser = argument_parser(prog='rock', format_usage=USAGE, format_help=HELP)
-    parser.add_argument('-v', '--verbose', action='store_true')
+    parser.add_argument('--verbose', action='store_true')
     parser.add_argument('--dry-run', action='store_true')
     parser.add_argument('--version', action='version', version=__version__)
     parser.add_argument('--env', default=os.environ.get('ROCK_ENV', 'local'))

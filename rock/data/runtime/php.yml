@@ -5,6 +5,14 @@ env:
 
 build: |
 
+  if [[ "${ROCK_ARGS_HELP}" == "true" ]]; then
+    echo 'Usage: rock build [--deployment]'
+    echo
+    echo '  --help             show help message'
+    echo '  --deployment       run build in deployment mode'
+    exit
+  fi
+
   if [[ "${ROCK_ARGS_DEPLOYMENT}" != "true" ]]; then
     if [[ -f ./composer.json ]]; then
       composer ${ROCK_COMPOSER_INSTALL}
@@ -20,9 +28,23 @@ build: |
 
 test: |
 
+  if [[ "${ROCK_ARGS_HELP}" == "true" ]]; then
+    echo 'Usage: rock test'
+    echo
+    echo '  --help             show help message'
+    exit
+  fi
+
   phpunit
 
 clean: |
+
+  if [[ "${ROCK_ARGS_HELP}" == "true" ]]; then
+    echo 'Usage: rock clean'
+    echo
+    echo '  --help             show help message'
+    exit
+  fi
 
   if [[ -d ./vendor ]]; then
     rm -fr ./vendor
