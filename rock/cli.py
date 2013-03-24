@@ -5,8 +5,22 @@ from rock import __version__
 from rock.exceptions import Error
 from rock.project import Project
 from rock.runtime import list as runtime_list
+from rock.text import *
 
-stdout = sys.stdout
+
+def argument_parser(*args, **kwargs):
+    format_usage = kwargs.pop('format_usage', None)
+    format_help = kwargs.pop('format_help', None)
+
+    class ArgumentParser(argparse.ArgumentParser):
+
+        def format_usage(self):
+            return '%s\n' % format_usage
+
+        def format_help(self):
+            return '%s\n%s\n' % (self.format_usage(), format_help)
+
+    return ArgumentParser(*args, **kwargs)
 
 
 def project(args):
@@ -28,7 +42,8 @@ def config(args, argv):
     """
     Output project configuration (json, yaml).
     """
-    parser = argparse.ArgumentParser(prog='rock config')
+    parser = argument_parser(prog='rock config', format_usage=CONFIG_USAGE,
+                             format_help=CONFIG_HELP)
     parser.add_argument('--format', help='set output format',
                         choices=['json', 'yaml'], default='yaml')
 
@@ -39,65 +54,42 @@ def config(args, argv):
 
     if sub_args.format == 'json':
         import json
-        stdout.write(json.dumps(config.data, indent=2))
+        sys.stdout.write(json.dumps(config.data, indent=2))
     else:
         import yaml
-        stdout.write(yaml.dump(config.data))
+        sys.stdout.write(yaml.dump(config.data))
 
 
 def env(args, argv):
     """
     Output project environment.
     """
+    parser = argument_parser(prog='rock env', format_usage=ENV_USAGE,
+                             format_help=ENV_HELP)
+
+    sub_args = parser.parse_args(argv)
+
     for name, value in project(args).config['env'].items():
-        stdout.write('export %s="%s"\n' % (name, value))
+        sys.stdout.write('export %s="%s"\n' % (name, value))
 
 
 def runtime(args, argv):
     """
     List runtimes install on system.
     """
+    parser = argument_parser(prog='rock runtime', format_usage=RUNTIME_USAGE,
+                             format_help=RUNTIME_HELP)
+
+    sub_args = parser.parse_args(argv)
+
     for r in runtime_list():
-        stdout.write('%s\n' % r.name)
+        sys.stdout.write('%s\n' % r.name)
 
 
 def main(argv=None):
     """
     Handle command line arguments.
     """
-
-    class ArgumentParser(argparse.ArgumentParser):
-
-        def format_usage(self):
-            text = 'usage: rock [-v] [--env=ENV] [--path=PATH] ' + \
-                   '[--runtime=RUNTIME] command\n'
-            return text
-
-        def format_help(self):
-            text = self.format_usage()
-            text += '\n'
-            text += '  -h, --help         show help message\n'
-            text += '  -v, --verbose      show script while running\n'
-            text += '  --dry-run          show script without running\n'
-            text += '  --version          show version\n'
-            text += '\n'
-            text += 'project:\n'
-            text += '  --env=ENV          set env (local)\n'
-            text += '  --path=PATH        set path\n'
-            text += '  --runtime=RUNTIME  set runtime\n'
-            text += '\n'
-            text += 'commands:\n'
-            text += '  build              run build\n'
-            text += '  test               run tests\n'
-            text += '  run                run in environment\n'
-            text += '  clean              clean project files\n'
-            text += '\n'
-            text += 'other commands:\n'
-            text += '  config             show project configuration\n'
-            text += '  env                show evaluable environment ' + \
-                    'variables\n'
-            text += '  runtime            show installed runtimes\n'
-            return text
 
     if argv is None:
         argv = sys.argv[1:]
@@ -117,7 +109,7 @@ def main(argv=None):
             pos = i
             break
 
-    parser = ArgumentParser(prog='rock')
+    parser = argument_parser(prog='rock', format_usage=USAGE, format_help=HELP)
     parser.add_argument('-v', '--verbose', action='store_true')
     parser.add_argument('--dry-run', action='store_true')
     parser.add_argument('--version', action='version', version=__version__)

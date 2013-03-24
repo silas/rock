@@ -22,7 +22,14 @@ class CliTestCase(helper.unittest.TestCase):
         def execl(*args):
             self.args = args
         utils.os.execl = execl
-        self.stdout = cli.stdout = StringIO()
+        self.old_stdout = sys.stdout
+        self.old_stderr = sys.stderr
+        self.stdout = sys.stdout = StringIO()
+        self.stderr = sys.stderr = StringIO()
+
+    def setTeardown(self):
+        sys.stdout = self.old_stdout
+        sys.stderr = self.old_stderr
 
     def test_project(self):
         self.assertTrue(isinstance(cli.project(Args()), Project))
@@ -45,6 +52,10 @@ class CliTestCase(helper.unittest.TestCase):
         cli.runtime(Args(), [])
         self.assertTrue('\ntest123\n' in self.stdout.getvalue())
 
+    def test_help(self):
+        self.assertRaises(SystemExit, cli.main, ['--help'])
+        self.assertEqual(self.stdout.getvalue(), cli.USAGE + '\n\n' + cli.HELP + '\n')
+
     def test_main_empty(self):
         stderr = sys.stderr
         argv = sys.argv
@@ -52,13 +63,13 @@ class CliTestCase(helper.unittest.TestCase):
             sys.argv = []
             sys.stderr = StringIO()
             self.assertRaises(SystemExit, cli.main)
-            self.assertTrue('usage: rock' in sys.stderr.getvalue())
+            self.assertTrue('Usage: rock' in sys.stderr.getvalue())
         finally:
             sys.argv = argv
             sys.stderr = stderr
 
     def test_main_valid(self):
-        cli.main(argv=['runtime'])
+        cli.main(argv=['-v', '--env', 'prod', 'runtime'])
 
     def test_main_invalid(self):
         stderr = sys.stderr
