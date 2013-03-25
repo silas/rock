@@ -12,7 +12,7 @@ HELP = _("""
   --version          show version
 
 project:
-  --env=ENV          set env (local)
+  --env=ENV          set env
   --path=PATH        set path
   --runtime=RUNTIME  set runtime
 

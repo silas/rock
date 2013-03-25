@@ -49,8 +49,7 @@ def config(args, argv):
     """
     parser = argument_parser(prog='rock config', format_usage=CONFIG_USAGE,
                              format_help=CONFIG_HELP)
-    parser.add_argument('--format', help='set output format',
-                        choices=['json', 'yaml'], default='yaml')
+    parser.add_argument('--format', choices=['json', 'yaml'], default='yaml')
 
     sub_args = parser.parse_args(argv)
 
