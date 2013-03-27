@@ -1,3 +1,10 @@
+rock (0.14.0-1) unstable; urgency=low
+
+  * Fix ROCK_SHELL usage
+  * Improve help
+
+ -- RockStack <packages@rockstack.org>  Tue, 26 Mar 2013 00:00:00 +0000
+
 rock (0.13.1-1) unstable; urgency=low
 
   * Fix option parsing

@@ -1,5 +1,5 @@
 Name:           rock
-Version:        0.13.1
+Version:        0.14.0
 Release:        1%{?dist}
 Summary:        Build, test and run applications
 
@@ -40,6 +40,10 @@ nosetests
 %{python_sitelib}/%{name}-%{version}-py*.egg-info
 
 %changelog
+* Tue Mar 26 2013 RockStack <packages@rockstack.org> - 0.14.0-1
+- Fix ROCK_SHELL usage
+- Improve help
+
 * Wed Mar 20 2013 RockStack <packages@rockstack.org> - 0.13.1-1
 - Fix option parsing
 
