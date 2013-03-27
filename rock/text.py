@@ -25,6 +25,7 @@ commands:
 other commands:
   config             show project configuration
   env                show evaluable environment variables
+  init               generates project skeleton
   runtime            show installed runtimes
 """)
 

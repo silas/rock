@@ -5,7 +5,7 @@ env:
 
 init: |
   if [[ "${ROCK_ARGS_HELP}" == "true" ]]; then
-    echo 'Usage: rock init [--force] [directory]'
+    echo 'Usage: rock --runtime=RUNTIME init [--force] [directory]'
     echo
     echo '  --help             show help message'
     echo '  --force            run init and overwrite existing files'
