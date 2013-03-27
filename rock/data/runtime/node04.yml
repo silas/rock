@@ -4,6 +4,58 @@ env:
   ROCK_NPM_INSTALL_DEPLOYMENT: "--verbose --no-color install"
   ROCK_NPM_REBUILD_DEPLOYMENT: "--verbose --no-color rebuild"
 
+init: |
+  if [[ "${ROCK_ARGS_HELP}" == "true" ]]; then
+    echo 'Usage: rock init [--force] [directory]'
+    echo
+    echo '  --help             show help message'
+    echo '  --force            run init and overwrite existing files'
+    exit
+  fi
+
+  export ROCK_PATH="${ROCK_ARG1:-${ROCK_PATH}}"
+
+  if [[ ! -d "${ROCK_PATH}" ]]; then
+    if [[ -e "${ROCK_PATH}" ]]; then
+      die "${ROCK_PATH} exists and is not a directory"
+    fi
+
+    mkdir -p "${ROCK_PATH}"
+  fi
+
+  cd "${ROCK_PATH}"
+
+  if [[ -n "$( ls -A )" && "${ROCK_ARGS_FORCE}" != "true" ]]; then
+    die "${ROCK_PATH} is not empty (--force to run anyway)"
+  fi
+
+  cat << EOF > ./.rock.yml
+  runtime: ${ROCK_RUNTIME}
+  EOF
+
+  cat << EOF > ./package.json
+  {
+    "name": "${ROCK_ARGS_HELP:-sample}",
+    "version": "${ROCK_ARGS_VERSION:-0.0.1}",
+    "description": "${ROCK_ARGS_DESCRIPTION}",
+    "main": "${ROCK_ARGS_MAIN:-index.js}",
+    "private": true,
+    "dependencies": {
+      "express": "< 3.0.0alpha1"
+    },
+    "devDependencies": {
+    },
+    "scripts": {
+      "test": "node test"
+    },
+    "repository": "${ROCK_ARGS_REPOSITORY}",
+    "author": "${ROCK_ARGS_AUTHOR}",
+    "license": "MIT"
+  }
+  EOF
+
+  mkdir -p ./test
+
 build: |
 
   if [[ "${ROCK_ARGS_HELP}" == "true" ]]; then
