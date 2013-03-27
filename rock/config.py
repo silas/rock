@@ -187,6 +187,7 @@ class Config(collections.Mapping):
             'env': {
                 'ROCK_ENV': self.env,
                 'ROCK_PATH': data['path'],
+                'ROCK_RUNTIME': data['runtime'],
             },
         }
         # merge runtime
