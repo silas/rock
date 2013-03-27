@@ -7,6 +7,11 @@ title: Python
 
 [Getting Started][getting-started] -- [Package Search][pypi] -- [Package Tool][pip]
 
+## Runtimes
+
+  * python33 - 3.3.x
+  * python27 - 2.7.x
+
 ## Dependency Management
 
 Python runtimes use [PyPI][pypi], [pip][pip] and [venv][venv]
