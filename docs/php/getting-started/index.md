@@ -69,7 +69,7 @@ This guide walks you through setting up a basic PHP web application with tests.
 
         #!/usr/bin/env bash
 
-        exec php -S "${HOST:-127.0.0.1}:${PORT:-8000}" -t "${PROJECT_PATH}/public"
+        exec php -S "${HOST:-127.0.0.1}:${PORT:-8000}" -t "${ROCK_PATH}/public"
 
  1. Make it executable
 

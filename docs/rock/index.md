@@ -11,7 +11,7 @@ environment variables and executing bash scripts.
 
 ## Configuration
 
-rock uses as series of configuration files to get the environment into a state
+rock uses a series of configuration files to get the environment into a state
 where applications can run. It also defines defaults for things like builds and
 tests.
 
@@ -118,7 +118,7 @@ The run command has two to primary functions, the first is to document how the
 application should be run in development mode, and the second is to allow the
 running of arbitrary commands in the project environment.
 
-Unlike the other primary commands the run command doesn't come with a default
+Unlike the other primary commands, the run command doesn't come with a default
 definition; it's up to the developer to define one.
 
     runtime: php54
