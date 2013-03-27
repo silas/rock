@@ -18,6 +18,10 @@ Install options include Debian/Ubuntu, Enterprise Linux and Homebrew.
  * [rpm](/docs/install/rpm/) - Red Hat Enterprise Linux (RHEL), CentOS,
    Oracle Linux, Scientific Linux (SL), etc...
 
+## Learning about rock
+
+Learn about the [rock](/docs/rock/) command line tool and configuration files.
+
 ## Using Runtimes
 
 Supported runtimes include multiple languages and versions and are isolated
