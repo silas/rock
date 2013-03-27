@@ -18,7 +18,7 @@ Runtime Changes
    [1.008009][perl516-local-lib], cpanm 1.5017 to [1.6008][perl516-cpanm],
    carton 0.9.7 to [0.9.10][perl516-carton]
  - Update ruby18 bundler from 1.2.3 to [1.3.4][ruby18-bundler]
- - Update ruby19 from patch 374 to [392][ruby19], 1.2.3 to
+ - Update ruby19 from patch 374 to [392][ruby19], bundler 1.2.3 to
    [1.3.4][ruby19-bundler]
 
 [diff-rock-shell]: https://github.com/rockstack/rock/compare/0.13.1...0.14.0#diff-11
