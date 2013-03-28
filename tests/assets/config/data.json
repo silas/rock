@@ -5,6 +5,7 @@
     "ROCK_PATH": "<ROOT>/tests/assets/project/simple", 
     "TEST_PATH": "test_path", 
     "FLOAT": "1.13", 
+    "ROCK_RUNTIME": "test123", 
     "INTEGER": "1", 
     "PATH": "<ROOT>/tests/assets/project/simple/bindir:/opt/rock/runtime/test123/usr/bin:${PATH}", 
     "HELLO": "world", 
