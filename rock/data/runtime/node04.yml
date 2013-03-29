@@ -38,15 +38,16 @@ init: |
     "name": "${ROCK_ARGS_HELP:-sample}",
     "version": "${ROCK_ARGS_VERSION:-0.0.1}",
     "description": "${ROCK_ARGS_DESCRIPTION}",
-    "main": "${ROCK_ARGS_MAIN:-index.js}",
+    "main": "${ROCK_ARGS_MAIN:-app.js}",
     "private": true,
     "dependencies": {
       "express": "< 3.0.0alpha1"
     },
     "devDependencies": {
+      "mocha": "*"
     },
     "scripts": {
-      "test": "node test"
+      "test": "mocha"
     },
     "repository": "${ROCK_ARGS_REPOSITORY}",
     "author": "${ROCK_ARGS_AUTHOR}",
