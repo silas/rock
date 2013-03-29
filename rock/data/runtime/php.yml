@@ -1,6 +1,6 @@
 env:
   PATH: "${ROCK_PATH}/bin:${ROCK_PATH}/vendor/bin:${PATH}"
-  ROCK_COMPOSER_INSTALL: "install"
+  ROCK_COMPOSER_INSTALL: "install --dev"
   ROCK_COMPOSER_INSTALL_DEPLOYMENT: "--verbose --no-ansi --no-interaction install"
 
 init: |
