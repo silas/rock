@@ -23,17 +23,29 @@ class RuntimeTests(object):
         self.assertFalse(r, '\n\n' + r.stdout + '\n\n' + r.stderr)
         return r
 
-    def runtime(self, name):
-        root = name.rstrip('0123456789')
-        ns = 'rock.test.runtime.{name}-'.format(name=name)
+    def workspace(self):
+        ns = 'rock.test.runtime.{name}-'.format(name=self.name)
+        return ops.workspace(prefix=ns)
 
-        project_path = os.path.join(root_path, 'assets', root)
+    def project_path(self):
+        root = self.name.rstrip('0123456789')
+        return os.path.join(root_path, 'assets', root)
 
-        with ops.workspace(prefix=ns) as w:
-            ops.run('cp -r ${src_path}/* ${dst_path}', src_path=project_path,
-                dst_path=w.path)
-            with open(w.join('.rock.yml'), 'w+') as f:
-                f.write('runtime: {name}'.format(name=name))
+    def test_full(self):
+        root = self.name.rstrip('0123456789')
+
+        with self.workspace() as w:
+            self.assertRun('rock --runtime=%s init' % self.name, cwd=w.path)
+            with open(w.join('.rock.yml')) as f:
+                self.assertEqual(f.read(), 'runtime: %s\n' % self.name)
+            for name in self.init_files:
+                self.assertTrue(os.path.isfile(w.join(name)), 'found file %s' % name)
+            for name in self.init_directories:
+                p = w.join(name)
+                self.assertTrue(os.path.isdir(p), 'found directory %s' % name)
+                ops.run('rmdir ${path}', path=p)
+            ops.run('cp -r ${src_path}/* ${dst_path}',
+                src_path=self.project_path(), dst_path=w.path)
             for command in ('build', 'test', 'clean'):
                 r = self.assertRun('rock %s --help' % command, cwd=w.path)
                 match = 'Usage: rock %s' % command

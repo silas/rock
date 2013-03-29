@@ -4,9 +4,8 @@ from helper import RuntimeTests
 class RuntimeTestCase(RuntimeTests, unittest.TestCase):
 
     name = 'node08'
-
-    def test_full(self):
-        self.runtime(self.name)
+    init_files = ['package.json']
+    init_directories = ['test']
 
 if __name__ == '__main__':
     unittest.main()
