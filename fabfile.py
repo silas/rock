@@ -5,10 +5,10 @@ env.roledefs['dl'] = ['dl.rockstack.org']
 def rsync(args):
     return 'rsync --exclude=repodata -av %s' % args
 
-def sync_local_down():
+def sync_down():
     local(rsync('%s:build/epel/6/ rpm/build/epel/6/' % env.roledefs['dl'][0]))
 
-def sync_local():
+def sync_up():
     local(rsync('rpm/build/epel/6/ %s:build/epel/6/' % env.roledefs['dl'][0]))
 
 def sync_repo(name):
