@@ -35,6 +35,7 @@ init: |
   cat << EOF > ./composer.json
   {
       "require": {
+          "slim/slim": "*"
       },
       "require-dev": {
           "phpunit/phpunit": "*"
