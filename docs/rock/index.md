@@ -17,9 +17,9 @@ tests.
 
 The three main types of configuration files are:
 
- * runtime system configuration
- * runtime application configuration
- * project configuration
+ * runtime system
+ * runtime application
+ * project
 
 The runtime system configuration files setup runtime specific environment
 variables. Normally these include the PATH variable and some architecture and
@@ -63,13 +63,21 @@ Running the test command would evaluate to something like:
 
     $ rock --dry-run test
     ...
-    export PATH="/example/bin:/example/node_modules/.bin:/opt/rock/runtime/node08/usr/bin:${PATH}"
+    export PATH="/rock-path/bin:/rock-path/node_modules/.bin:/opt/rock/runtime/node08/usr/bin:${PATH}"
     ...
     npm test
 
 ## Commands
 
-The primary rock commands are build, test, run and clean.
+The primary rock commands are init, build, test, run and clean.
+
+### init
+
+The init command create a skeleton project directory with a `.rock.yml` file,
+runtime specific project configuration file(s) (e.g. `Gemfile`, `package.json`)
+and a test directory.
+
+    $ rock --runtime=node08 init
 
 ### build
 
@@ -126,8 +134,8 @@ definition; it's up to the developer to define one.
     run: exec php -S "${HOST:-127.0.0.1}:${PORT:-8000}" -t ./public
 
 Also unlike the other commands, you can't pass arguments to the run command.
-Instead if the run command is called with arguments rock assumes your running a
-command in the project environment.
+Instead if the run command is called with arguments rock assumes you're running
+a command in the project environment.
 
     $ rock run php --version
 
