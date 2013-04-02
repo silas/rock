@@ -86,8 +86,8 @@ The build command is used to get the project into a state where it can run.
 There are two primary types of builds, a developer build (`rock build`) and a
 deployment build (`rock build --deployment`). In most runtimes the primary
 difference between the builds is that the deployment build requires a lock file
-(ex: `Gemfile.lock`, `npm-shrinkwrap.json`, etc..), but the distinction can
-also be exploited to setup things like commit hooks or build static resources.
+(e.g. `Gemfile.lock`, `npm-shrinkwrap.json`), but the distinction can also be
+exploited to setup things like commit hooks or build static resources.
 
     runtime: node08
 
