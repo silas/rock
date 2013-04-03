@@ -7,6 +7,11 @@ class RockRuntimeNode010 < Formula
 
   keg_only 'rock'
 
+  bottle do
+    url 'http://dl.rockstack.org/homebrew/bottle/rock-runtime-node010-0.10.2.mountain_lion.bottle.tar.gz'
+    sha1 'f91b4f8b355f1216219191e2b0aaabd601be7239' => :mountain_lion
+  end
+
   def install
     rock = Pathname.new('/opt/rock')
 
