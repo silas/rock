@@ -8,7 +8,7 @@ class RockRuntimePerl516 < Formula
   keg_only 'rock'
 
   bottle do
-    url 'http://dl.rockstack.org/homebrew/bottle'
+    root_url 'http://dl.rockstack.org/homebrew/bottle'
     sha1 '022e1211291b6eea342af81fd6b7a0172549f335' => :mountain_lion
   end
 

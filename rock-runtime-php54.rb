@@ -32,7 +32,7 @@ class RockRuntimePhp54 < Formula
   depends_on 'autoconf' => :build
 
   bottle do
-    url 'http://dl.rockstack.org/homebrew/bottle'
+    root_url 'http://dl.rockstack.org/homebrew/bottle'
     sha1 '435b7693fa67b834c297245ff075cb1e640eaf30' => :mountain_lion
   end
 

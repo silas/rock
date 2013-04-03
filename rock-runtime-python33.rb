@@ -9,7 +9,7 @@ class RockRuntimePython33 < Formula
   keg_only 'rock'
 
   bottle do
-    url 'http://dl.rockstack.org/homebrew/bottle'
+    root_url 'http://dl.rockstack.org/homebrew/bottle'
     sha1 'feeec20bb5a23cedda9ef6c0274ba0909cf04268' => :mountain_lion
   end
 

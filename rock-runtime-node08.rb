@@ -8,7 +8,7 @@ class RockRuntimeNode08 < Formula
   keg_only 'rock'
 
   bottle do
-    url 'http://dl.rockstack.org/homebrew/bottle'
+    root_url 'http://dl.rockstack.org/homebrew/bottle'
     sha1 'a84c21dc1495e3e400be847239fef87647eb7e99' => :mountain_lion
   end
 
