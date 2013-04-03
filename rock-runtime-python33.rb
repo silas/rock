@@ -8,6 +8,11 @@ class RockRuntimePython33 < Formula
   env :std
   keg_only 'rock'
 
+  bottle do
+    url 'http://dl.rockstack.org/homebrew/bottle'
+    sha1 'feeec20bb5a23cedda9ef6c0274ba0909cf04268' => :mountain_lion
+  end
+
   def install_distribute
     distribute_version = '0.6.28'
 

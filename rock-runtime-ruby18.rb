@@ -12,6 +12,11 @@ class RockRuntimeRuby18 < Formula
   depends_on 'gdbm'
   depends_on 'libyaml'
 
+  bottle do
+    url 'http://dl.rockstack.org/homebrew/bottle'
+    sha1 'c7fb954442e3dfd4c2a152432feac3afadd9d4a4' => :mountain_lion
+  end
+
   def abi_version
     '1.8'
   end

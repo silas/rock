@@ -13,6 +13,11 @@ class RockRuntimeRuby20 < Formula
   depends_on 'libyaml'
   depends_on 'openssl'
 
+  bottle do
+    url 'http://dl.rockstack.org/homebrew/bottle'
+    sha1 '86d305e7f09d1565c5d8711084ce1e4155c98311' => :mountain_lion
+  end
+
   def abi_version
     '2.0.0'
   end

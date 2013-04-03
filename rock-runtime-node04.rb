@@ -8,6 +8,11 @@ class RockRuntimeNode04 < Formula
   env :std
   keg_only 'rock'
 
+  bottle do
+    url 'http://dl.rockstack.org/homebrew/bottle'
+    sha1 'fc515f26d758a351c4254a13677fee1eb0699035' => :mountain_lion
+  end
+
   def install_npm
     npm_version = '1.0.106'
 
