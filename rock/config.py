@@ -34,7 +34,7 @@ class Config(collections.Mapping):
     @staticmethod
     def data_path(*args):
         return os.path.join(*(os.path.dirname(os.path.realpath(__file__)),
-            'data') + args)
+                            'data') + args)
 
     @staticmethod
     def etc_path(*args):
