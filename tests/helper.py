@@ -1,7 +1,9 @@
+from __future__ import absolute_import, print_function, unicode_literals
+
 import os
 try:
     import unittest2 as unittest
-except:
+except ImportError:
     import unittest
 from rock.config import Config
 

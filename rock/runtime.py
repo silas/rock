@@ -1,3 +1,6 @@
+from __future__ import absolute_import, print_function, unicode_literals
+
+
 import os
 from rock.config import Config
 
@@ -16,9 +19,9 @@ class Runtime(object):
         return Config.user_path(*('runtime',) + args)
 
     def path(self, *args):
-        if os.path.exists(self.user_path(self.name, 'rock.yml')):
-            return self.user_path(*(self.name,) + args)
-        return self.root_path(*(self.name,) + args)
+        if os.path.exists(Runtime.user_path(self.name, 'rock.yml')):
+            return Runtime.user_path(*(self.name,) + args)
+        return Runtime.root_path(*(self.name,) + args)
 
     def exists(self, *args):
         return os.path.exists(self.path(*args))

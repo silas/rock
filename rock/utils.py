@@ -1,5 +1,11 @@
-import StringIO
+from __future__ import absolute_import, print_function, unicode_literals
+
+
 import os
+try:
+    from io import StringIO
+except ImportError:  # pragma: no cover
+    from StringIO import StringIO
 from rock.exceptions import ConfigError
 
 
@@ -11,10 +17,20 @@ def isexecutable(path):
     return os.path.isfile(path) and os.access(path, os.X_OK)
 
 
+try:
+    basestring
+
+    def isstr(s):
+        return isinstance(s, basestring)
+except NameError:  # pragma: no cover
+    def isstr(s):
+        return isinstance(s, str)
+
+
 class Shell(object):
 
     def __init__(self):
-        self.stdin = StringIO.StringIO()
+        self.stdin = StringIO()
 
     def __enter__(self):
         return self

@@ -1,3 +1,5 @@
+from __future__ import absolute_import, print_function, unicode_literals
+
 import collections
 import copy
 import os
@@ -5,6 +7,7 @@ import re
 import string
 import yaml
 from rock.exceptions import ConfigError
+from rock.utils import isstr
 
 
 PARENT_RE = re.compile(r'\{\{\s*parent\s*\}\}', re.MULTILINE)
@@ -30,7 +33,8 @@ class Config(collections.Mapping):
 
     @staticmethod
     def data_path(*args):
-        return os.path.join(*(os.path.dirname(__file__), 'data') + args)
+        return os.path.join(*(os.path.dirname(os.path.realpath(__file__)),
+            'data') + args)
 
     @staticmethod
     def etc_path(*args):
@@ -62,7 +66,7 @@ class Config(collections.Mapping):
         try:
             with open(path) as f:
                 return yaml.safe_load(f)
-        except Exception, error:
+        except Exception as error:
             if require_parses:
                 raise ConfigError('parse error: ' + path)
 
@@ -76,7 +80,7 @@ class Config(collections.Mapping):
                 raise ConfigError('%s must be an associative array' % env)
             # evaluate env variables
             for name, value in src[env].items():
-                if not isinstance(value, basestring):
+                if not isstr(value):
                     if isinstance(value, (int, float)):
                         src[env][name] = str(value)
                     else:
@@ -94,25 +98,25 @@ class Config(collections.Mapping):
         # merge env-specific environment variables
         self.merge_env(src, dst, self.env)
         # merge sections
-        for name in src.keys():
+        for name in list(src.keys()):
             if name not in dst:
-                if isinstance(src[name], basestring):
+                if isstr(src[name]):
                     src[name] = PARENT_RE.sub('', src[name])
                 elif isinstance(src[name], dict):
                     for subname in src[name]:
                         value = src[name][subname]
-                        if isinstance(value, basestring):
+                        if isstr(value):
                             src[name][subname] = PARENT_RE.sub('', value)
                 dst[name] = src[name]
-            elif isinstance(src[name], basestring):
-                if not isinstance(dst[name], basestring):
+            elif isstr(src[name]):
+                if not isstr(dst[name]):
                     raise ConfigError('unable to merge "%s" into "str"' %
                                       type(dst[name]).__name__)
                 dst[name] = PARENT_RE.sub(dst[name], src[name])
             elif isinstance(src[name], dict):
                 dst_is_dict = isinstance(dst[name], dict)
                 for subname in src[name]:
-                    if isinstance(dst[name], basestring):
+                    if isstr(dst[name]):
                         src[name][subname] = PARENT_RE.sub(dst[name],
                                                            src[name][subname])
                     elif dst_is_dict:

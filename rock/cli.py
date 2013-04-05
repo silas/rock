@@ -1,3 +1,5 @@
+from __future__ import absolute_import, print_function, unicode_literals
+
 import argparse
 import os
 import sys
@@ -58,10 +60,10 @@ def config(args, argv):
 
     if sub_args.format == 'json':
         import json
-        sys.stdout.write(json.dumps(config.data, indent=2))
+        sys.stdout.write(u'' + json.dumps(config.data, indent=2))
     else:
         import yaml
-        sys.stdout.write(yaml.dump(config.data))
+        yaml.safe_dump(config.data, stream=sys.stdout, encoding=None)
 
 
 def env(args, argv):
@@ -127,7 +129,7 @@ def main(argv=None):
             globals()[args.command](args, argv[pos + 1:])
         else:
             project(args).run(args.command, argv[pos + 1:])
-    except Error, error:
+    except Error as error:
         message = '%s' % error
         if not message.endswith('\n'):
             message += '\n'

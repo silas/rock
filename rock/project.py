@@ -1,9 +1,12 @@
+from __future__ import absolute_import, print_function, unicode_literals
+
+
 import os
 import pipes
 import re
 from rock.config import Config
 from rock.exceptions import ConfigError
-from rock.utils import Shell
+from rock.utils import Shell, isstr
 
 NAME_RE = re.compile('^[a-zA-Z0-9_]+$')
 
@@ -21,7 +24,7 @@ class Project(object):
         def check():
             if section not in self.config:
                 raise ConfigError('section not found: %s' % section)
-            if not isinstance(self.config[section], basestring):
+            if not isstr(self.config[section]):
                 raise ConfigError('section must be a string: %s' % section)
 
         # handle run special case

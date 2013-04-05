@@ -1,9 +1,14 @@
+from __future__ import absolute_import, print_function, unicode_literals
+
 import helper
 import os
 import subprocess
 import sys
 import tempfile
-from StringIO import StringIO
+try:
+    from io import StringIO
+except ImportError:
+    from StringIO import StringIO
 from rock import cli, utils
 from rock.exceptions import ConfigError
 from rock.project import Project
@@ -35,14 +40,18 @@ class CliTestCase(helper.unittest.TestCase):
         self.assertTrue(isinstance(cli.project(Args()), Project))
 
     def test_config_json(self):
+        import json
         cli.config(Args(), ['--format=json'])
-        data = self.stdout.getvalue().strip().replace(helper.ROOT_PATH, '<ROOT>')
-        self.assertEqual(data, config_file('data.json'))
+        data1 = json.loads(self.stdout.getvalue().strip().replace(helper.ROOT_PATH, '<ROOT>'))
+        data2 = json.loads(config_file('data.json'))
+        self.assertEqual(data1, data2)
 
     def test_config_yaml(self):
+        import yaml
         cli.config(Args(), ['--format=yaml'])
-        data = self.stdout.getvalue().strip().replace(helper.ROOT_PATH, '<ROOT>')
-        self.assertEqual(data, config_file('data.yaml'))
+        data1 = yaml.safe_load(self.stdout.getvalue().strip().replace(helper.ROOT_PATH, '<ROOT>'))
+        data2 = yaml.safe_load(config_file('data.json'))
+        self.assertEqual(data1, data2)
 
     def test_env(self):
         cli.env(Args(), [])

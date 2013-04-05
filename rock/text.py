@@ -1,3 +1,6 @@
+from __future__ import absolute_import, print_function, unicode_literals
+
+
 def _(text):
     return text.strip('\n')
 
