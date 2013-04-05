@@ -1,3 +1,4 @@
+import os
 import sys
 
 from distutils.core import setup
@@ -14,6 +15,11 @@ install_requires = ['PyYAML']
 
 if sys.version_info < (2, 7):
     install_requires += ['argparse']
+
+if os.environ.get('CI') == 'true':
+    install_requires += ['coverage', 'nose', 'pep8']
+    if sys.version_info < (2, 7):
+        install_requires += ['unittest2']
 
 setup(
     name='rock',

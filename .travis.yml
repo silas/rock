@@ -5,5 +5,4 @@ python:
   - "3.3"
 install:
   - pip install . --use-mirrors
-  - pip install coverage nose pep8 unittest2 --use-mirrors
 script: nosetests && pep8 rock --show-source --show-pep8
