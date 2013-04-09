@@ -1,5 +1,5 @@
 Name:           rock
-Version:        0.14.0
+Version:        0.15.0
 Release:        1%{?dist}
 Summary:        Build, test and run applications
 
@@ -40,6 +40,12 @@ nosetests
 %{python_sitelib}/%{name}-%{version}-py*.egg-info
 
 %changelog
+* Mon Apr 01 2013 RockStack <packages@rockstack.org> - 0.15.0-1
+- Add init command
+- Add ROCK_RUNTIME to environment
+- Change rock build for php to include --dev option
+- Change rock test for php to run phpunit ./tests
+
 * Tue Mar 26 2013 RockStack <packages@rockstack.org> - 0.14.0-1
 - Fix ROCK_SHELL usage
 - Improve help

@@ -1,3 +1,12 @@
+rock (0.15.0-1) unstable; urgency=low
+
+  * Add init command
+  * Add ROCK_RUNTIME to environment
+  * Change rock build for php to include --dev option
+  * Change rock test for php to run phpunit ./tests
+
+ -- RockStack <packages@rockstack.org>  Mon, 01 Apr 2013 00:00:00 +0000
+
 rock (0.14.0-1) unstable; urgency=low
 
   * Fix ROCK_SHELL usage
