@@ -3,7 +3,7 @@
 
 Name:           rock-runtime-python33
 Version:        1
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        python33 runtime for rock
 
 Group:          Development/Languages
@@ -12,8 +12,8 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 
 BuildRequires:  rock-runtime-python33-core-rpmbuild
-Requires:       rock-runtime-python33-core >= 3.3.0-1
-Requires:       rock-runtime-python33-distribute-setup >= 0.6.34-1
+Requires:       rock-runtime-python33-core >= 3.3.1-1
+Requires:       rock-runtime-python33-distribute-setup >= 0.6.36-1
 
 %description
 python33 runtime for rock.
@@ -40,8 +40,12 @@ rm -rf %{buildroot}
 %{python33_rootdir}/rock.yml
 
 %changelog
+* Tue Apr 09 2013 RockStack <packages@rockstack.org> - 1-3
+- Python 3.3.1
+- distribute-setup 0.6.36
+
 * Sun Feb 03 2013 RockStack <packages@rockstack.org> - 1-2
-- distribute-setup 0.6.34-1
+- distribute-setup 0.6.34
 
 * Sat Sep 29 2012 RockStack <packages@rockstack.org> - 1-1
 - Initial build

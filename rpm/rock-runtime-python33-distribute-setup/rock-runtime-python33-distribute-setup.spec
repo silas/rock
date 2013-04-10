@@ -3,7 +3,7 @@
 %filter_setup
 
 Name:           rock-runtime-python33-distribute-setup
-Version:        0.6.34
+Version:        0.6.36
 Release:        1%{?dist}
 Summary:        A tool to manage Python 3.3.x dependencies
 
@@ -38,6 +38,9 @@ rm -rf %{buildroot}
 %{python33_rootdir}%{_bindir}/distribute-setup
 
 %changelog
+* Tue Apr 09 2013 RockStack <packages@rockstack.org> - 0.6.36-1
+- Update to 0.6.36
+
 * Sun Feb 03 2013 RockStack <packages@rockstack.org> - 0.6.34-1
 - Update to 0.6.34
 

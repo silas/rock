@@ -8,8 +8,8 @@
 %global python33_sitedir %{python33_libdir}/site-packages
 
 Name:           rock-runtime-python33-core
-Version:        3.3.0
-Release:        2%{?dist}
+Version:        3.3.1
+Release:        1%{?dist}
 Summary:        A Python 3.3.x runtime
 
 Group:          Development/Languages
@@ -100,7 +100,7 @@ rm -rf %{buildroot}
 %doc LICENSE README
 %{python33_rootdir}%{_bindir}
 %{python33_rootdir}%{_includedir}/python3.3m
-%{python33_rootdir}%{_mandir}/man1/python3.3*
+%{python33_rootdir}%{_mandir}/man1/python3*
 %{python33_rootdir}%{_prefix}/lib/libpython*
 %{python33_libdir}
 
@@ -110,6 +110,9 @@ rm -rf %{buildroot}
 %{python33_rootdir}%{_prefix}/lib/pkgconfig/python*.pc
 
 %changelog
+* Tue Apr 09 2013 RockStack <packages@rockstack.org> - 3.3.1-1
+- Update to 3.3.1
+
 * Sun Feb 03 2013 RockStack <packages@rockstack.org> - 3.3.0-2
 - Fix Makefile paths
 

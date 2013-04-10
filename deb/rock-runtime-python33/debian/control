@@ -10,6 +10,6 @@ Package: rock-runtime-python33
 Architecture: all
 Depends: ${shlibs:Depends},
  ${misc:Depends},
- rock-runtime-python33-core (>= 3.3.0-1~),
- rock-runtime-python33-distribute-setup (>= 0.6.34-1~)
+ rock-runtime-python33-core (>= 3.3.1-1~),
+ rock-runtime-python33-distribute-setup (>= 0.6.36-1~)
 Description: python33 runtime for rock.
