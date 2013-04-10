@@ -8,7 +8,7 @@
 %global python27_sitedir %{python27_libdir}/site-packages
 
 Name:           rock-runtime-python27-core
-Version:        2.7.3
+Version:        2.7.4
 Release:        1%{?dist}
 Summary:        A Python 2.7.x runtime
 
@@ -93,7 +93,7 @@ rm -rf %{buildroot}
 %doc LICENSE README
 %{python27_rootdir}%{_bindir}
 %{python27_rootdir}%{_includedir}/python2.7
-%{python27_rootdir}%{_mandir}/man1/python2.7*
+%{python27_rootdir}%{_mandir}/man1/python*
 %{python27_rootdir}%{_prefix}/lib/libpython*
 %{python27_libdir}
 
@@ -103,5 +103,8 @@ rm -rf %{buildroot}
 %{python27_rootdir}%{_prefix}/lib/pkgconfig/python*.pc
 
 %changelog
+* Tue Apr 09 2013 RockStack <packages@rockstack.org> - 2.7.4-1
+- Update to 2.7.4
+
 * Mon May 14 2012 RockStack <packages@rockstack.org> - 2.7.3-1
 - Initial build

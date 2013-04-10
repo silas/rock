@@ -1,3 +1,10 @@
+rock-runtime-python27 (1.0.0-2) unstable; urgency=low
+
+  * Python 2.7.4
+  * virtualenv 1.9.1
+
+ -- RockStack <packages@rockstack.org>  Tue, 09 Apr 2013 00:00:00 +0000
+
 rock-runtime-python27 (1.0.0-1) unstable; urgency=low
 
   * Initial release

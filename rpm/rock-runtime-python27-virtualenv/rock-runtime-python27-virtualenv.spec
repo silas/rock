@@ -3,14 +3,14 @@
 %filter_setup
 
 Name:           rock-runtime-python27-virtualenv
-Version:        1.8.4
+Version:        1.9.1
 Release:        1%{?dist}
 Summary:        A tool to manage Python 2.7.x dependencies
 
 Group:          Development/Languages
 License:        MIT
 URL:            http://www.virtualenv.org
-Source0:        http://pypi.python.org/packages/source/v/virtualenv/virtualenv-%{version}.tar.gz
+Source0:        https://pypi.python.org/packages/source/v/virtualenv/virtualenv-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 
@@ -47,6 +47,9 @@ rm -rf %{buildroot}
 %{python27_sitedir}/virtualenv*
 
 %changelog
+* Tue Apr 09 2013 RockStack <packages@rockstack.org> - 1.9.1-1
+- Update 1.9.1
+
 * Sun Feb 03 2013 RockStack <packages@rockstack.org> - 1.8.4-1
 - Update 1.8.4
 
