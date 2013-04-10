@@ -10,7 +10,8 @@ class RockRuntimePython27 < Formula
 
   bottle do
     root_url 'http://dl.rockstack.org/homebrew/bottle'
-    sha1 '2b2e8d83e659cbeddba581f37021a027a01fce04' => :mountain_lion
+    revision 1
+    sha1 '57894c89ae62dbe880d40f7bad99d97a533c7a2b' => :mountain_lion
   end
 
   def install_virtualenv

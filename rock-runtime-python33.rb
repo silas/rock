@@ -10,7 +10,8 @@ class RockRuntimePython33 < Formula
 
   bottle do
     root_url 'http://dl.rockstack.org/homebrew/bottle'
-    sha1 'feeec20bb5a23cedda9ef6c0274ba0909cf04268' => :mountain_lion
+    revision 1
+    sha1 'e881b9095fa9359316212e7d17e49210a003c2a3' => :mountain_lion
   end
 
   def install_distribute

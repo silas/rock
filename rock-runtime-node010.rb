@@ -9,7 +9,8 @@ class RockRuntimeNode010 < Formula
 
   bottle do
     root_url 'http://dl.rockstack.org/homebrew/bottle'
-    sha1 'f91b4f8b355f1216219191e2b0aaabd601be7239' => :mountain_lion
+    revision 1
+    sha1 '11a408e929ea8f5891a442b25a0cd89aca654202' => :mountain_lion
   end
 
   def install
