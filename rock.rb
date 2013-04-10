@@ -8,6 +8,6 @@ class Rock < Formula
   env :std
 
   def install
-    system 'python', "setup.py"
+    system 'easy_install', "setup.py"
   end
 end
