@@ -11,6 +11,7 @@ class RockRuntimeRuby18 < Formula
   depends_on 'readline'
   depends_on 'gdbm'
   depends_on 'libyaml'
+  depends_on 'curl-ca-bundle'
 
   bottle do
     root_url 'http://dl.rockstack.org/homebrew/bottle'
@@ -104,6 +105,7 @@ class RockRuntimeRuby18 < Formula
         PATH: "#{bin}:${PATH}"
         RUBY_ABI: "#{abi_version}"
         RUBYOPT: "-I#{lib}/ruby/gems/#{abi_version}/gems/bundler-#{bundler_version}/lib -rbundler/setup"
+        SSL_CERT_FILE: "#{Formula.factory('curl-ca-bundle').prefix}/share/ca-bundle.crt"
     EOS
   end
 end
