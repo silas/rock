@@ -15,7 +15,8 @@ class RockRuntimeRuby18 < Formula
 
   bottle do
     root_url 'http://dl.rockstack.org/homebrew/bottle'
-    sha1 'c7fb954442e3dfd4c2a152432feac3afadd9d4a4' => :mountain_lion
+    revision 1
+    sha1 '4c4e05ec99915c9df0e982067665ff9dd0c7079c' => :mountain_lion
   end
 
   def abi_version
