@@ -8,12 +8,6 @@ class RockRuntimePython27 < Formula
   env :std
   keg_only 'rock'
 
-  bottle do
-    root_url 'http://dl.rockstack.org/homebrew/bottle'
-    revision 1
-    sha1 '57894c89ae62dbe880d40f7bad99d97a533c7a2b' => :mountain_lion
-  end
-
   def install_virtualenv
     virtualenv_version = '1.9.1'
 

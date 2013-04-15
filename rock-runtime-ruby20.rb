@@ -14,12 +14,6 @@ class RockRuntimeRuby20 < Formula
   depends_on 'openssl'
   depends_on 'curl-ca-bundle'
 
-  bottle do
-    root_url 'http://dl.rockstack.org/homebrew/bottle'
-    revision 1
-    sha1 '900529188a8fa508a382b907bc7a451fc442f4df' => :mountain_lion
-  end
-
   def abi_version
     '2.0.0'
   end

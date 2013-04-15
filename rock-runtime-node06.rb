@@ -8,11 +8,6 @@ class RockRuntimeNode06 < Formula
   env :std
   keg_only 'rock'
 
-  bottle do
-    root_url 'http://dl.rockstack.org/homebrew/bottle'
-    sha1 'e09902b255538efe11c3d690c70ed5f91781ab1b' => :mountain_lion
-  end
-
   def install
     rock = Pathname.new('/opt/rock')
 
