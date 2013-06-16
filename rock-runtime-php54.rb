@@ -2,8 +2,8 @@ require 'formula'
 
 class RockRuntimePhp54 < Formula
   homepage 'http://www.php.net/'
-  url 'http://us.php.net/distributions/php-5.4.11.tar.bz2'
-  sha1 '85666f32bf1f2850c769fe58fed788ae8fdfa1cb'
+  url 'http://us.php.net/distributions/php-5.4.16.tar.bz2'
+  sha1 '7e70ba419778a54f5ff9d7de8d6190ca82de3786'
 
   env :std
   keg_only 'rock'
@@ -33,7 +33,7 @@ class RockRuntimePhp54 < Formula
 
   def install_composer
     phar_version = '1.0.0'
-    phar_pre = 'alpha6'
+    phar_pre = 'alpha7'
 
     system 'curl', '-Lo', "#{bin}/composer.phar", "http://getcomposer.org/download/#{phar_version}-#{phar_pre}/composer.phar"
     system 'chmod', '755', "#{bin}/composer.phar"
