@@ -1,5 +1,9 @@
 Vagrant.configure('2') do |config|
-  customize = ['modifyvm', :id, '--cpus', ENV['BUILD_CPUS'] || '4']
+  customize = [
+    'modifyvm', :id,
+    '--cpus', ENV['BUILD_CPUS'] || '4',
+    "--memory", ENV['BUILD_MEMORY'] || 1024,
+  ]
 
   config.vm.define :deb do |deb_config|
     deb_config.vm.box = 'ubuntu-quantal'
