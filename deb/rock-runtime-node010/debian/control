@@ -10,5 +10,5 @@ Package: rock-runtime-node010
 Architecture: all
 Depends: ${shlibs:Depends},
  ${misc:Depends},
- rock-runtime-node010-core (>= 0.10.3-1~)
+ rock-runtime-node010-core (>= 0.10.10-1~)
 Description: node010 runtime for rock.

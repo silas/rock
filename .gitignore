@@ -1,4 +1,5 @@
 *.bz2
+*.deb
 *.gz
 *.pyc
 *.rpm
