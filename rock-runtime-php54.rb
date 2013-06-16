@@ -19,13 +19,14 @@ class RockRuntimePhp54 < Formula
   depends_on 'homebrew/dupes/zlib'
   depends_on 'icu4c'
   depends_on 'imap-uw'
-  depends_on 'libmemcached'
   depends_on 'jpeg'
+  depends_on 'libmemcached'
   depends_on 'libpng'
   depends_on 'libxml2' unless MacOS.version >= :mountain_lion
   depends_on 'mcrypt'
   depends_on 'mysql'
   depends_on 'pcre'
+  depends_on 't1lib'
   depends_on 'unixodbc'
 
   # extensions
