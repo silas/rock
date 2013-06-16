@@ -10,8 +10,8 @@ Package: rock-runtime-php54
 Architecture: all
 Depends: ${shlibs:Depends},
  ${misc:Depends},
- rock-runtime-php54-core (>= 5.4.11-1~),
- rock-runtime-php54-composer (>= 1.0.0alpha6-1~),
+ rock-runtime-php54-core (>= 5.4.16-1~),
+ rock-runtime-php54-composer (>= 1.0.0alpha7-1~),
  rock-runtime-php54-libmemcached (>= 1.0.16-1~),
  rock-runtime-php54-memcached (>= 2.1.0-1~)
 Description: php54 runtime for rock.

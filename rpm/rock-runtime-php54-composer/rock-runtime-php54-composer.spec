@@ -2,11 +2,11 @@
 %filter_from_requires /^php.*/d; /^libphp.*/d
 %filter_setup
 
-%global pre alpha6
+%global pre alpha7
 
 Name:           rock-runtime-php54-composer
 Version:        1.0.0
-Release:        0.3.%{pre}%{?dist}
+Release:        0.4.%{pre}%{?dist}
 Summary:        A tool to manage PHP 5.4.x dependencies
 
 Group:          Development/Languages
@@ -52,6 +52,9 @@ rm -rf %{buildroot}
 %{php54_rootdir}%{_bindir}/composer
 
 %changelog
+* Sat Jun 15 2013 RockStack <packages@rockstack.org> - 1.0.0-0.4.alpha7
+- Update to alpha7
+
 * Sat Nov 17 2012 RockStack <packages@rockstack.org> - 1.0.0-0.3.alpha6
 - Update to alpha6
 - Reduces memory usage
