@@ -15,7 +15,14 @@ This is the rock development environment.
 
  1. Run the setup script
 
-        make
+        ./misc/setup
+
+ 1. Setup your env
+
+        export PATH="$( pwd )/rock/scripts:${PATH}"
+        export PYTHONPATH="$( pwd )/rock:${PYTHONPATH}"
+
+ 1. Start hacking
 
 ## Tips
 
