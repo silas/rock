@@ -1,3 +1,9 @@
+rock-runtime-python27-core (2.7.5-1) raring; urgency=low
+
+  * Update to 2.7.5
+
+ -- RockStack <packages@rockstack.org>  Sun, 04 Aug 2013 00:00:00 +0000
+
 rock-runtime-python27-core (2.7.4-1) unstable; urgency=low
 
   * Update to 2.7.4

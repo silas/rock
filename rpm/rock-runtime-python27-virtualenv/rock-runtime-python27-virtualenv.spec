@@ -3,7 +3,7 @@
 %filter_setup
 
 Name:           rock-runtime-python27-virtualenv
-Version:        1.9.1
+Version:        1.10
 Release:        1%{?dist}
 Summary:        A tool to manage Python 2.7.x dependencies
 
@@ -47,6 +47,9 @@ rm -rf %{buildroot}
 %{python27_sitedir}/virtualenv*
 
 %changelog
+* Sun Aug 04 2013 RockStack <packages@rockstack.org> - 1.10-1
+- Update 1.10
+
 * Tue Apr 09 2013 RockStack <packages@rockstack.org> - 1.9.1-1
 - Update 1.9.1
 
