@@ -1,3 +1,9 @@
+rock-runtime-ruby18-rubygems (1.8.25-2) raring; urgency=low
+
+  * Import into PPA
+
+ -- RockStack <packages@rockstack.org>  Sun, 04 Aug 2013 00:00:00 +0000
+
 rock-runtime-ruby18-rubygems (1.8.25-1) unstable; urgency=low
 
   * Initial release

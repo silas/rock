@@ -5,6 +5,7 @@
 *.rpm
 *.swp
 *.tgz
+*.upload
 *.zip
 .vagrant
 build

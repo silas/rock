@@ -1,4 +1,4 @@
 version=3
 opts=uversionmangle=s/(.*)/$1.0/ \
-  http://search.cpan.org/CPAN/authors/id/M/MI/MIYAGAWA/App-cpanminus-(.*)\.tar\.gz \
+  http://www.cpan.org/authors/id/M/MI/MIYAGAWA/App-cpanminus-(.*)\.tar\.gz \
   debian uupdate
