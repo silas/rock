@@ -11,10 +11,10 @@ that allows developers to use modern technologies and encourages
 
 ## Setting up the Stack
 
-Install options include Debian/Ubuntu, Enterprise Linux and Homebrew.
+Install options include Ubuntu, Enterprise Linux and Homebrew.
 
  * [homebrew](/docs/install/homebrew/) - OS X
- * [deb](/docs/install/deb/) - Debian, Ubuntu
+ * [deb](/docs/install/deb/) - Ubuntu
  * [rpm](/docs/install/rpm/) - Red Hat Enterprise Linux (RHEL), CentOS,
    Oracle Linux, Scientific Linux (SL), etc...
 

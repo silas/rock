@@ -12,7 +12,6 @@ title: Node
   * node010 - 0.10.x
   * node08 - 0.8.x
   * node06 - 0.6.x
-  * node04 - 0.4.x
 
 ## Dependency Management
 
