@@ -1,4 +1,0 @@
-version=3
-opts=downloadurlmangle=s#.*/v(.*)\.tar\.gz#http://registry.npmjs.org/npm/-/npm-$1.tgz# \
-  https://github.com/isaacs/npm/tags?after=v1.1.0 .*/v(1\.0\.[0-9]*)\.tar\.gz \
-  debian uupdate
