@@ -42,7 +42,7 @@ class Config(collections.Mapping):
 
     @staticmethod
     def mount_path(*args):
-        return os.path.join(*('/',) + args)
+        return os.path.join(*(os.environ.get('ROCK_MOUNT_PATH', '/'),) + args)
 
     @staticmethod
     def user_path(*args):
