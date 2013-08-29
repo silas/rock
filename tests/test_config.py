@@ -40,8 +40,8 @@ class ConfigTestCase(helper.unittest.TestCase):
         self.assertEqual(c['clean'].strip(), 'clean')
         self.assertEqual(c['test'].strip(), 'test')
         # misc
-        self.assertTrue('build' in c)
-        self.assertTrue('build' in iter(c))
+        self.assertIn('build', c)
+        self.assertIn('build', iter(c))
 
     def test_paths(self):
         paths = Config.paths('ok')

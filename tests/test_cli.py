@@ -55,11 +55,11 @@ class CliTestCase(helper.unittest.TestCase):
 
     def test_env(self):
         cli.env(Args(), [])
-        self.assertTrue('\nexport TEST_PATH="test_path"\n' in self.stdout.getvalue())
+        self.assertIn('export TEST_PATH="test_path"', self.stdout.getvalue())
 
     def test_runtime(self):
         cli.runtime(Args(), [])
-        self.assertTrue('\ntest123\n' in self.stdout.getvalue())
+        self.assertIn('test123', self.stdout.getvalue())
 
     def test_help(self):
         self.assertRaises(SystemExit, cli.main, ['--help'])
@@ -72,7 +72,7 @@ class CliTestCase(helper.unittest.TestCase):
             sys.argv = []
             sys.stderr = StringIO()
             self.assertRaises(SystemExit, cli.main)
-            self.assertTrue('Usage: rock' in sys.stderr.getvalue())
+            self.assertIn('Usage: rock', sys.stderr.getvalue())
         finally:
             sys.argv = argv
             sys.stderr = stderr
