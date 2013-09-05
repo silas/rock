@@ -8,24 +8,15 @@ title: Code
 RockStack consists of various repositories, if you want everything in one place
 see the [development environment][dev].
 
-## rock (cli)
+## Issues
 
- * [Code](https://github.com/rockstack/rock)
- * [Issues](https://github.com/rockstack/rock/issues)
+We use GitHub for [issue](https://github.com/rockstack/rock/issues) tracking.
 
-## deb/rpm packages
+## Individual Repositories
 
- * [Code](https://github.com/rockstack/packages)
- * [Issues](https://github.com/rockstack/packages/issues)
-
-## homebrew packages
-
- * [Code](https://github.com/rockstack/homebrew-rock)
- * [Issues](https://github.com/rockstack/homebrew-rock/issues)
-
-## site/docs
-
- * [Code](https://github.com/rockstack/rockstack.github.com)
- * [Issues](https://github.com/rockstack/rockstack.github.com/issues)
+ * [cli](https://github.com/rockstack/rock)
+ * [deb/rpm](https://github.com/rockstack/packages)
+ * [homebrew](https://github.com/rockstack/homebrew-rock)
+ * [site](https://github.com/rockstack/rockstack.github.com)
 
 [dev]: https://github.com/rockstack/dev#readme
