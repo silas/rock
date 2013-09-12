@@ -1,0 +1,22 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+# Sample debian/rules that uses debhelper.
+# This file was originally written by Joey Hess and Craig Small.
+# As a special exception, when this file is copied by dh-make into a
+# dh-make output file, you may use that output file without restriction.
+# This special exception was added by Craig Small in version 0.37 of dh-make.
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+url := http://dl.rockstack.org/deb
+source_file := rockstack.list
+testing_source_file := rockstack-testing.list
+dist := $(shell lsb_release -cs)
+
+override_dh_auto_build:
+	echo "deb $(url) $(dist) main" > $(source_file)
+	echo "deb $(url) $(dist)-testing main" > $(testing_source_file)
+
+%:
+	dh $@ 
