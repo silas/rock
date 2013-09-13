@@ -1,4 +1,4 @@
-rock-runtime-python33-distribute-setup (0.6.36-2) raring; urgency=low
+rock-runtime-python33-distribute-setup (0.6.36-2) unstable; urgency=low
 
   * Import into PPA
 

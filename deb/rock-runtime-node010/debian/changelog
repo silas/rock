@@ -1,10 +1,10 @@
-rock-runtime-node010 (1.0.0-9) raring; urgency=low
+rock-runtime-node010 (1.0.0-9) unstable; urgency=low
 
   * Node 0.10.18
 
  -- RockStack <packages@rockstack.org>  Wed, 11 Sep 2013 00:00:00 +0000
 
-rock-runtime-node010 (1.0.0-8) raring; urgency=low
+rock-runtime-node010 (1.0.0-8) unstable; urgency=low
 
   * Node 0.10.15
 

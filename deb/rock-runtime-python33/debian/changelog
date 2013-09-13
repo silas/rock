@@ -1,4 +1,4 @@
-rock-runtime-python33 (1.0.0-3) raring; urgency=low
+rock-runtime-python33 (1.0.0-3) unstable; urgency=low
 
   * Python 3.3.2
 
