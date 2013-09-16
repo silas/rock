@@ -12,11 +12,11 @@ This guide walks you through setting up a basic PHP web application with tests.
         $ mkdir php-example
         $ cd php-example
 
- 1. Create `.rock.yml`
+ 1. Initialize the project
 
-        runtime: php54
+        rock --runtime=php54 init
 
- 1. Create `composer.json`
+ 1. Edit `composer.json`
 
         {
             "require": {
