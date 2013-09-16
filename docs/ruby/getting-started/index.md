@@ -13,11 +13,11 @@ tests.
         $ mkdir ruby-example
         $ cd ruby-example
 
- 1. Create `.rock.yml`
+ 1. Initialize the project
 
-        runtime: ruby19
+        rock --runtime=ruby19 init
 
- 1. Create `Gemfile`
+ 1. Edit `Gemfile`
 
         source 'https://rubygems.org'
 

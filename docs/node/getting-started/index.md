@@ -13,11 +13,11 @@ tests.
         $ mkdir node-example
         $ cd node-example
 
- 1. Create `.rock.yml`
+ 1. Initialize the project
 
-        runtime: node08
+        rock --runtime=node08 init
 
- 1. Create `package.json`
+ 1. Edit `package.json`
 
         {
           "name": "helloworld",

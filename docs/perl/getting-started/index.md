@@ -13,11 +13,11 @@ tests.
         $ mkdir perl-example
         $ cd perl-example
 
- 1. Create `.rock.yml`
+ 1. Initialize the project
 
-        runtime: perl516
+        $ rock --runtime=perl516 init
 
- 1. Create `cpanfile`
+ 1. Edit `cpanfile`
 
         requires 'Dancer';
 

@@ -13,11 +13,11 @@ tests.
         $ mkdir python-example
         $ cd python-example
 
- 1. Create `.rock.yml`
+ 1. Initialize the project
 
-        runtime: python27
+        rock --runtime=python27 init
 
- 1. Create `requirements.txt`
+ 1. Edit `requirements.txt`
 
         Flask
 
