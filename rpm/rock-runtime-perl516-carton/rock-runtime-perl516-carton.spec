@@ -27,7 +27,7 @@ Source12:       http://www.cpan.org/authors/id/M/ML/MLEHMANN/JSON-XS-2.33.tar.gz
 Source13:       http://www.cpan.org/authors/id/M/MA/MAKAMAKA/JSON-2.53.tar.gz
 Source14:       http://www.cpan.org/authors/id/D/DO/DOY/Try-Tiny-0.12.tar.gz
 Source15:       http://www.cpan.org/authors/id/A/AP/APEIRON/local-lib-1.008009.tar.gz
-Source16:       http://www.cpan.org/authors/id/M/MI/MIYAGAWA/carton-v%{version}.tar.gz
+Source16:       http://backpan.perl.org/authors/id/M/MI/MIYAGAWA/carton-v%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  rock-runtime-perl516-core-rpmbuild >= 5.12.3-1
