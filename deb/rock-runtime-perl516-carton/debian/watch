@@ -1,3 +1,3 @@
 version=3
-http://www.cpan.org/authors/id/M/MI/MIYAGAWA/Carton-v(\d+\.\d+\.\d+)\.tar\.gz \
+http://www.cpan.org/authors/id/M/MI/MIYAGAWA/carton-v(\d+\.\d+\.\d+)\.tar\.gz \
   debian uupdate
