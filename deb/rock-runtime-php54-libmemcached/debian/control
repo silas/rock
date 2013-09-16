@@ -8,7 +8,7 @@ Build-Depends: debhelper (>= 8.0.0),
  python-sphinx,
  systemtap-sdt-dev,
  libevent-dev,
- libcloog-ppl0
+ libcloog-ppl-dev 
 Standards-Version: 3.9.3
 Homepage: http://libmemcached.org
 
