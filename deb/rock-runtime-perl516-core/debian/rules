@@ -25,7 +25,7 @@ perl516_arch_stem := -thread-multi
 perl516_archname := $(archname)-$(perl516_arch_stem)
 
 get-orig-source:
-	uscan --noconf --rename --repack --download-current-version --force-download --verbose $(CURDIR)
+	uscan --noconf --rename --repack --download-current-version --verbose $(CURDIR)
 
 override_dh_clean:
 	dh_clean --exclude cpan

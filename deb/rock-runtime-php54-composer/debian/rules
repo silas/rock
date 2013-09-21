@@ -16,7 +16,7 @@ version := $(shell dpkg-parsechangelog | grep Version | sed 's/.*Version: \([^-]
 phar_version := $(shell dpkg-parsechangelog | grep Version | sed 's/.*Version: \([^-]*\).*/\1/' | sed 's/alpha/-alpha/')
 
 get-orig-source:
-	uscan --noconf --rename --repack --download-current-version --force-download --verbose $(CURDIR)
+	uscan --noconf --rename --repack --download-current-version --verbose $(CURDIR)
 	tar -xvf $(CURDIR)/../rock-runtime-php54-composer_$(version).orig.tar.gz
 	wget http://www.getcomposer.org/download/$(phar_version)/composer.phar
 	mv composer.phar composer-*/

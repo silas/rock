@@ -14,7 +14,7 @@ runtime := perl516
 perl516_rootdir := /opt/rock/runtime/$(runtime)
 
 get-orig-source:
-	uscan --noconf --rename --repack --download-current-version --force-download --verbose $(CURDIR)
+	uscan --noconf --rename --repack --download-current-version --verbose $(CURDIR)
 
 dh_override_auto_build:
 	perl Makefile.pl INSTALLDIRS=vendor

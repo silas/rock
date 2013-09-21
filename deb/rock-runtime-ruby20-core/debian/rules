@@ -15,7 +15,7 @@ ruby20_rootdir := /opt/rock/runtime/$(runtime)
 install_rootdir := $(CURDIR)/debian/rock-runtime-ruby20-core
 
 get-orig-source:
-	uscan --noconf --rename --repack --download-current-version --force-download --verbose $(CURDIR)
+	uscan --noconf --rename --repack --download-current-version --verbose $(CURDIR)
 
 override_dh_auto_configure:
 	./configure \

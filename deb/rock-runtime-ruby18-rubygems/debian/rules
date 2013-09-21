@@ -16,7 +16,7 @@ abi := 1.8
 install_rootdir := $(CURDIR)/debian/rock-runtime-ruby18-rubygems
 
 get-orig-source:
-	uscan --noconf --rename --repack --download-current-version --force-download --verbose $(CURDIR)
+	uscan --noconf --rename --repack --download-current-version --verbose $(CURDIR)
 
 override_dh_auto_install:
 	mkdir -p $(install_rootdir)$(ruby18_rootdir)$(prefix)/lib/ruby/$(abi)

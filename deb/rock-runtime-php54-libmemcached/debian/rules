@@ -21,7 +21,7 @@ runtime := php54
 php54_rootdir := /opt/rock/runtime/$(runtime)
 
 get-orig-source:
-	uscan --noconf --rename --repack --download-current-version --force-download --verbose $(CURDIR)
+	uscan --noconf --rename --repack --download-current-version --verbose $(CURDIR)
 
 override_dh_auto_configure:
 	./configure \

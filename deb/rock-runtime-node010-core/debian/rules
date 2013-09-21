@@ -14,7 +14,7 @@ runtime := node010
 node010_rootdir:= /opt/rock/runtime/$(runtime)
 
 get-orig-source:
-	uscan --noconf --rename --repack --download-current-version --force-download --verbose $(CURDIR)
+	uscan --noconf --rename --repack --download-current-version --verbose $(CURDIR)
 
 # Node tests keep failing...
 override_dh_auto_test:

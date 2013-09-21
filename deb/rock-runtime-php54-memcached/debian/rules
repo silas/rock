@@ -17,7 +17,7 @@ version := $(shell dpkg-parsechangelog | grep Version | sed 's/.*Version: \([^-]
 orig_filename := rock-runtime-php54-memcached_$(version).orig.tar.gz
 
 get-orig-source:
-	uscan --noconf --rename --repack --download-current-version --force-download --verbose $(CURDIR)
+	uscan --noconf --rename --repack --download-current-version --verbose $(CURDIR)
 	tar -xvf ../$(orig_filename)
 	mv package.xml memcached-*/
 	rm -f package.xml

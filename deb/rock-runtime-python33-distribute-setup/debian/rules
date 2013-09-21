@@ -14,7 +14,7 @@ runtime := python33
 python33_rootdir := /opt/rock/runtime/$(runtime)
 
 get-orig-source:
-	uscan --noconf --rename --repack --download-current-version --force-download --verbose $(CURDIR)
+	uscan --noconf --rename --repack --download-current-version --verbose $(CURDIR)
 
 override_dh_auto_clean:
 

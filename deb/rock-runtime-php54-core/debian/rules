@@ -28,7 +28,7 @@ mysql_config := $(prefix)/bin/mysql_config
 install_rootdir := $(CURDIR)/debian/rock-runtime-php54-core
 
 get-orig-source:
-	uscan --noconf --rename --repack --download-current-version --force-download --verbose $(CURDIR)
+	uscan --noconf --rename --repack --download-current-version --verbose $(CURDIR)
 
 override_dh_auto_configure:
 	./configure \

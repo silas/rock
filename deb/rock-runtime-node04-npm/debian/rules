@@ -15,7 +15,7 @@ node04_rootdir := /opt/rock/runtime/$(runtime)
 install_rootdir := $(CURDIR)/debian/rock-runtime-node04-npm
 
 get-orig-source:
-	uscan --noconf --rename --repack --download-current-version --force-download --verbose $(CURDIR)
+	uscan --noconf --rename --repack --download-current-version --verbose $(CURDIR)
 
 override_dh_auto_clean:
 

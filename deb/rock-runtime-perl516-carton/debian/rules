@@ -16,7 +16,7 @@ install_rootdir := $(CURDIR)/debian/rock-runtime-perl516-carton
 version := $(shell dpkg-parsechangelog | grep Version | sed 's/.*Version: \([^-]*\).*/\1/')
 
 get-orig-source:
-	uscan --noconf --rename --repack --download-current-version --force-download --verbose $(CURDIR)
+	uscan --noconf --rename --repack --download-current-version --verbose $(CURDIR)
 
 override_dh_auto_build:
 	wget http://www.cpan.org/authors/id/T/TO/TOKUHIROM/Test-Requires-0.06.tar.gz

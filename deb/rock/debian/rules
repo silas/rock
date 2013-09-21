@@ -10,7 +10,7 @@
 #export DH_VERBOSE=1
 
 get-orig-source:
-	uscan --noconf --rename --repack --download-current-version --force-download --verbose $(CURDIR)
+	uscan --noconf --rename --repack --download-current-version --verbose $(CURDIR)
 
 override_dh_auto_test:
 	nosetests
