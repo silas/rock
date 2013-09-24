@@ -3,6 +3,8 @@ rock-runtime-node06-core
 rock-runtime-node06
 rock-runtime-node08-core
 rock-runtime-node08
+rock-runtime-node010-core
+rock-runtime-node010
 rock-runtime-perl516-core
 rock-runtime-perl516-cpanm
 rock-runtime-perl516-local-lib
