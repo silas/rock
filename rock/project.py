@@ -59,10 +59,12 @@ class Project(object):
             # handle arguments
             if section != 'run':
                 # raw arguments
-                shell.write("export ROCK_ARGV='%s'" %
-                            ' '.join(map(pipes.quote, argv)))
+                shell.write('export ROCK_ARGV=%s' %
+                            pipes.quote(' '.join(argv)))
+                for i, arg in enumerate(argv, 1):
+                    shell.write('ARGV[%s]=%s' % (i, pipes.quote(arg)))
                 # parse arguments
-                for i, arg in enumerate(argv):
+                for arg in argv:
                     if arg.startswith('--'):
                         name, value = arg[2:], 'true'
                         if '=' in name:
@@ -76,22 +78,23 @@ class Project(object):
                     else:
                         args.append(arg)
                 # parsed arguments
-                shell.write("export ROCK_ARGS='%s'" %
-                            ' '.join(map(pipes.quote, args)))
+                shell.write('export ROCK_ARGS=%s' %
+                            pipes.quote(' '.join(args)))
+                for i, arg in enumerate(args, 1):
+                    shell.write('ARGS[%s]=%s' % (i, pipes.quote(arg)))
                 # set zero argument to command
                 args.insert(0, section)
                 # positional arguments
                 for i, arg in enumerate(args):
-                    shell.write("export ROCK_ARG%s='%s'" %
-                                (i, pipes.quote(arg)))
+                    shell.write('export ROCK_ARG%s=%s' % (i, pipes.quote(arg)))
                 # parsed argument options
                 for name, value in opts.items():
-                    shell.write('export ROCK_ARGS_%s="%s"' %
+                    shell.write('export ROCK_ARGS_%s=%s' %
                                 (name, pipes.quote(value)))
                 # parsed options
-                shell.write("export ROCK_OPTS='%s'" %
-                            ' '.join(map(pipes.quote, opts_list)))
-                shell.write("export ROCK_CWD='%s'" % os.getcwd())
+                shell.write('export ROCK_OPTS=%s' %
+                            pipes.quote(' '.join(opts_list)))
+                shell.write('export ROCK_CWD=%s' % pipes.quote(os.getcwd()))
             # execute script
             shell.write('# script')
             shell.write(script)

@@ -35,7 +35,7 @@ class ProjectTestCase(helper.unittest.TestCase):
         self.assertEqual(data.get('ROCK_ENV'), 'export ROCK_ENV="local"')
         self.assertEqual(data.get('ROCK_ARGV'), "export ROCK_ARGV='--six --zero one --two=2 three four --five=five --six'")
         self.assertEqual(data.get('ROCK_ARGS'), "export ROCK_ARGS='one three four'")
-        self.assertEqual(data.get('ROCK_ARG0'), "export ROCK_ARG0='clean'")
+        self.assertEqual(data.get('ROCK_ARG0'), "export ROCK_ARG0=clean")
         self.assertEqual(data.get('ROCK_OPTS'), "export ROCK_OPTS='ZERO TWO FIVE SIX'")
 
     def test_run(self):
