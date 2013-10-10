@@ -87,7 +87,8 @@ class Config(collections.Mapping):
                         raise ConfigError('%s.%s must be a string' %
                                           (env, name))
                 dst['env'][name] = string.Template(
-                    src[env][name]).safe_substitute(**dst['env'])
+                    src[env][name]).safe_substitute(**dst['env']).rstrip("\n")
+
             del src[env]
 
     def merge(self, src, dst):
