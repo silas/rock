@@ -14,8 +14,6 @@ title: Install (homebrew)
  1. Install runtimes
 
         $ brew install \
-            rock-runtime-node04 \
-            rock-runtime-node06 \
             rock-runtime-node08 \
             rock-runtime-node010 \
             rock-runtime-perl516 \
