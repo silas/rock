@@ -14,29 +14,30 @@ class RockRuntimeRuby19 < Formula
   depends_on 'openssl'
   depends_on 'curl-ca-bundle'
 
+  resource 'bundler' do
+    url "https://rubygems.org/gems/bundler-1.3.4.gem"
+    sha1 'fba95c4d82d4fa287de6baea99ed31af8b8973dc'
+  end
+
   def abi_version
     '1.9.1'
   end
 
-  def bundler_version
-    '1.3.4'
-  end
-
   def install_bundler
-    system 'curl', '-LO', "http://rubygems.org/downloads/bundler-#{bundler_version}.gem"
-
     ENV['GEM_HOME'] = "#{prefix}/lib/ruby/gems/#{abi_version}"
 
-    system 'gem', 'install',
-      '--config-file', 'nofile',
-      '--force',
-      '--ignore-dependencies',
-      '--no-rdoc',
-      '--no-ri',
-      '--local',
-      '--install-dir', "#{prefix}/lib/ruby/gems/#{abi_version}",
-      "--bindir", bin,
-      "bundler-#{bundler_version}.gem"
+    resource('bundler').stage { |r|
+      system 'gem', 'install',
+        '--config-file', 'nofile',
+        '--force',
+        '--ignore-dependencies',
+        '--no-rdoc',
+        '--no-ri',
+        '--local',
+        '--install-dir', "#{prefix}/lib/ruby/gems/#{abi_version}",
+        "--bindir", bin,
+        r.cached_download
+    }
 
     system 'mv', "#{bin}/bundle", "#{bin}/rock-bundle"
 
@@ -79,7 +80,7 @@ class RockRuntimeRuby19 < Formula
       env:
         PATH: "#{bin}:${PATH}"
         RUBY_ABI: "#{abi_version}"
-        RUBYOPT: "-I#{lib}/ruby/gems/#{abi_version}/gems/bundler-#{bundler_version}/lib -rbundler/setup"
+        RUBYOPT: "-I#{lib}/ruby/gems/#{abi_version}/gems/bundler-#{resource('bundler').version}/lib -rbundler/setup"
         SSL_CERT_FILE: "#{Formula.factory('curl-ca-bundle').prefix}/share/ca-bundle.crt"
     EOS
   end
