@@ -8,17 +8,9 @@ class RockRuntimePython27 < Formula
   env :std
   keg_only 'rock'
 
-  def install_virtualenv
-    virtualenv_version = '1.9.1'
-
-    system 'curl', '-O', "https://pypi.python.org/packages/source/v/virtualenv/virtualenv-#{virtualenv_version}.tar.gz"
-    system 'tar', '-xzf', "virtualenv-#{virtualenv_version}.tar.gz"
-
-    Dir.chdir "virtualenv-#{virtualenv_version}"
-
-    system 'python', 'setup.py', 'install'
-
-    Dir.chdir '..'
+  resource 'virtualenv' do
+    url 'https://pypi.python.org/packages/source/v/virtualenv/virtualenv-1.9.1.tar.gz'
+    sha1 'b7d1704ec186a71c2fff1706896ecd294b708a55'
   end
 
   def install
@@ -31,20 +23,33 @@ class RockRuntimePython27 < Formula
 
     ENV.append 'EXTRA_CFLAGS', '-fwrapv'
 
-    system './configure', "--prefix=#{prefix}"
-    ENV.j1
+    if ENV.compiler == :clang
+      ENV.append_to_cflags '-Wno-unused-value'
+      ENV.append_to_cflags '-Wno-empty-body'
+      ENV.append_to_cflags '-Qunused-arguments'
+    else
+      ENV.append 'LDFLAGS', "-Wl,-rpath #{prefix}/lib"
+    end
+
+    unless MacOS::CLT.installed?
+      ENV.append_to_cflags "-I#{MacOS.sdk_path}/usr/include"
+    end
+
+    args = %W[
+      --prefix=#{prefix}
+      --enable-ipv6
+      --enable-shared
+    ]
+    args << '--without-gcc' if ENV.compiler == :clang
+
+    system './configure', *args
+    system 'make'
+    ENV.deparallelize
     system 'make', 'install'
-
-    ENV['LDFLAGS'] = "-Wl,-rpath #{prefix}/lib"
-
-    system './configure',
-      "--prefix=#{prefix}",
-      '--enable-ipv6',
-      '--enable-shared'
 
     ENV['PATH'] = "#{bin}:#{ENV['PATH']}"
 
-    install_virtualenv
+    resource('virtualenv').stage { system 'python', 'setup.py', 'install' }
 
     runtime = rock + 'runtime/python27'
     runtime.mkpath
