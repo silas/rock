@@ -46,7 +46,7 @@ if [[ "$( brew tap )" != *rockstack/rock* ]]; then
   brew tap rockstack/rock
 fi
 
-if ! type -f pip &>/dev/null; then
+if ! pip &>/dev/null; then
   echo
   echo 'Installing pip...'
   sudo easy_install pip
