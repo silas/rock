@@ -49,7 +49,9 @@ class RockRuntimePython27 < Formula
 
     ENV['PATH'] = "#{bin}:#{ENV['PATH']}"
 
-    resource('virtualenv').stage { system 'python', 'setup.py', 'install' }
+    resource('virtualenv').stage {
+      system 'python', 'setup.py', 'install'
+    }
 
     runtime = rock + 'runtime/python27'
     runtime.mkpath
