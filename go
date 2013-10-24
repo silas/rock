@@ -40,12 +40,6 @@ if [[ "$( brew tap )" != *homebrew/dupes* ]]; then
   brew tap homebrew/dupes
 fi
 
-if [[ "$( brew tap )" == *rockplatform/rock* ]]; then
-  echo
-  echo 'Untapping rockplatform/rock'
-  brew untap rockplatform/rock
-fi
-
 if [[ "$( brew tap )" != *rockstack/rock* ]]; then
   echo
   echo 'Tapping rockstack/rock'
