@@ -13,49 +13,45 @@ class RockRuntimeRuby18 < Formula
   depends_on 'libyaml'
   depends_on 'curl-ca-bundle'
 
+  resource 'rubygems' do
+    url 'http://production.cf.rubygems.org/rubygems/rubygems-1.8.24.tgz'
+    sha1 '30f27047e74f7943117736a0d3e224994fee0905'
+  end
+
+  resource 'bundler' do
+    url "https://rubygems.org/gems/bundler-1.3.4.gem"
+    sha1 'fba95c4d82d4fa287de6baea99ed31af8b8973dc'
+  end
+
   def abi_version
     '1.8'
   end
 
-  def bundler_version
-    '1.3.4'
-  end
-
-  def rubygems_version
-    '1.8.24'
-  end
-
   def install_rubygems
-    system 'curl', '-LO', "http://production.cf.rubygems.org/rubygems/rubygems-#{rubygems_version}.tgz"
-    system 'tar', '-xzf', "rubygems-#{rubygems_version}.tgz"
-
-    Dir.chdir "rubygems-#{rubygems_version}"
-
-    system 'ruby', 'setup.rb',
-      "--prefix=#{prefix}",
-      '--rdoc'
-
-    system "mv #{prefix}/lib/*.rb #{prefix}/lib/ruby/1.8"
-    system "mv #{prefix}/lib/{rbconfig,rubygems} #{prefix}/lib/ruby/1.8"
-
-    Dir.chdir '..'
+    resource('rubygems').stage { |r|
+      system 'ruby', 'setup.rb',
+        "--prefix=#{prefix}",
+        '--rdoc'
+      system "mv #{prefix}/lib/*.rb #{prefix}/lib/ruby/1.8"
+      system "mv #{prefix}/lib/{rbconfig,rubygems} #{prefix}/lib/ruby/1.8"
+    }
   end
 
   def install_bundler
-    system 'curl', '-LO', "http://rubygems.org/downloads/bundler-#{bundler_version}.gem"
-
     ENV['GEM_HOME'] = "#{prefix}/lib/ruby/gems/#{abi_version}"
 
-    system 'gem', 'install',
-      '--config-file', 'nofile',
-      '--force',
-      '--ignore-dependencies',
-      '--no-rdoc',
-      '--no-ri',
-      '--local',
-      '--install-dir', "#{prefix}/lib/ruby/gems/#{abi_version}",
-      "--bindir", bin,
-      "bundler-#{bundler_version}.gem"
+    resource('bundler').stage { |r|
+      system 'gem', 'install',
+        '--config-file', 'nofile',
+        '--force',
+        '--ignore-dependencies',
+        '--no-rdoc',
+        '--no-ri',
+        '--local',
+        '--install-dir', "#{prefix}/lib/ruby/gems/#{abi_version}",
+        "--bindir", bin,
+        r.cached_download
+    }
 
     system 'mv', "#{bin}/bundle", "#{bin}/rock-bundle"
 
@@ -99,7 +95,7 @@ class RockRuntimeRuby18 < Formula
       env:
         PATH: "#{bin}:${PATH}"
         RUBY_ABI: "#{abi_version}"
-        RUBYOPT: "-I#{lib}/ruby/gems/#{abi_version}/gems/bundler-#{bundler_version}/lib -rbundler/setup"
+        RUBYOPT: "-I#{lib}/ruby/gems/#{abi_version}/gems/bundler-#{resource('bundler').version}/lib -rbundler/setup"
         SSL_CERT_FILE: "#{Formula.factory('curl-ca-bundle').prefix}/share/ca-bundle.crt"
     EOS
   end
