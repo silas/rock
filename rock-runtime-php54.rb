@@ -32,34 +32,38 @@ class RockRuntimePhp54 < Formula
   # extensions
   depends_on 'autoconf' => :build
 
-  def install_composer
-    phar_version = '1.0.0'
-    phar_pre = 'alpha7'
+  resource 'composer' do
+    url 'http://getcomposer.org/download/1.0.0-alpha7/composer.phar'
+    sha1 '4f8513bea6daa4f70007e4344944c2fe458650ac'
+  end
 
-    system 'curl', '-Lo', "#{bin}/composer.phar", "http://getcomposer.org/download/#{phar_version}-#{phar_pre}/composer.phar"
+  resource 'memcached' do
+    url 'http://pecl.php.net/get/memcached-2.1.0.tgz'
+    sha1 '16fac6bfae8ec7e2367fda588b74df88c6f11a8e'
+  end
+
+  def install_composer
+    resource('composer').stage { |r|
+      system 'cp', r.cached_download, "#{bin}/composer.phar"
+    }
     system 'chmod', '755', "#{bin}/composer.phar"
     system 'ln', '-s', "#{bin}/composer.phar", "#{bin}/composer"
   end
 
   def install_memcached
-    memcached_version = '2.1.0'
-
-    system 'curl', '-LO', "http://pecl.php.net/get/memcached-#{memcached_version}.tgz"
-    system 'tar', 'xzf', "memcached-#{memcached_version}.tgz"
-
-    Dir.chdir "memcached-#{memcached_version}"
-
-    system "#{bin}/phpize"
-    system './configure', '--enable-memcached-json',
-      "--prefix=#{prefix}",
-      "--with-php-config=#{bin}/php-config",
-      "--with-libmemcached-dir=#{Formula.factory('libmemcached').prefix}"
-    system 'make'
-    system 'make', 'install'
-
-    system "echo 'extension = memcached.so' > #{lib}/php.d/memcached.ini"
-
-    Dir.chdir '..'
+    resource('memcached').stage { |r|
+      system "curl -s 'https://gist.github.com/silas/7131202/raw' | patch -p1"
+      Dir.chdir "memcached-#{r.version}"
+      system "#{bin}/phpize"
+      system './configure',
+        '--enable-memcached-json',
+        "--prefix=#{prefix}",
+        "--with-php-config=#{bin}/php-config",
+        "--with-libmemcached-dir=#{Formula.factory('libmemcached').prefix}"
+      system 'make'
+      system 'make', 'install'
+      system "echo 'extension = memcached.so' > #{lib}/php.d/memcached.ini"
+    }
   end
 
   def install
@@ -81,7 +85,6 @@ class RockRuntimePhp54 < Formula
       '--with-bz2',
       "--with-freetype-dir=#{Formula.factory('freetype').prefix}",
       "--with-png-dir=#{Formula.factory('libpng').prefix}",
-      '--with-xpm-dir=/usr',
       '--enable-gd-native-ttf',
       "--with-t1lib=#{Formula.factory('t1lib').prefix}",
       "--with-gettext=#{Formula.factory('gettext').prefix}",
