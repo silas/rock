@@ -46,12 +46,6 @@ if [[ "$( brew tap )" != *rockstack/rock* ]]; then
   brew tap rockstack/rock
 fi
 
-if ! pip &>/dev/null; then
-  echo
-  echo 'Installing pip...'
-  sudo easy_install pip
-fi
-
 # install manually so we avoid prompting user about java
 if [[ "$( brew list )" != *berkeley-db* ]]; then
   echo
@@ -61,8 +55,13 @@ fi
 
 if [[ "${ROCK_SKIP_CLI}" != "true" ]]; then
   echo
-  echo "Trying to install/update rock..."
-  sudo pip install -U rock
+  if brew info rock-cli &>/dev/null; then
+    echo "Trying to update rock..."
+    brew upgrade rock-cli 2>&1 | grep -v -e '^Error: .* already installed$'
+  else
+    echo "Trying to install rock..."
+    brew install rock-cli
+  fi
 fi
 
 if [[ "${ROCK_SKIP_RUNTIMES}" != "true" ]]; then
