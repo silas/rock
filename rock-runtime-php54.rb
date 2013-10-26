@@ -67,13 +67,6 @@ class RockRuntimePhp54 < Formula
   end
 
   def install
-    rock = Pathname.new('/opt/rock')
-
-    unless rock.directory? && rock.writable?
-      onoe "#{rock} must be a directory and writable"
-      exit 1
-    end
-
     args = [
       "--prefix=#{prefix}",
       "--sbindir=#{prefix}/bin",
@@ -175,13 +168,17 @@ class RockRuntimePhp54 < Formula
     install_composer
     install_memcached
 
-    runtime = rock + 'runtime/php54'
-    runtime.mkpath
-    runtime += 'rock.yml'
-    runtime.unlink if runtime.exist?
-    runtime.write <<-EOS.undent
+    src_yml = prefix + 'rock.yml'
+    src_yml.write <<-EOS.undent
       env:
         PATH: "#{bin}:${PATH}"
     EOS
+
+    dst_yml = var + 'rock/opt/rock/runtime/php54'
+    dst_yml.mkpath
+    dst_yml += 'rock.yml'
+    dst_yml.unlink if dst_yml.exist?
+
+    File.symlink(src_yml, dst_yml)
   end
 end

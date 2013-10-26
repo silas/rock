@@ -12,24 +12,21 @@ class RockRuntimeNode08 < Formula
   end
 
   def install
-    rock = Pathname.new('/opt/rock')
-
-    unless rock.directory? && rock.writable?
-      onoe "#{rock} must be a directory and writable"
-      exit 1
-    end
-
     system './configure', "--prefix=#{prefix}"
     system 'make', 'install'
 
-    runtime = rock + 'runtime/node08'
-    runtime.mkpath
-    runtime += 'rock.yml'
-    runtime.unlink if runtime.exist?
-    runtime.write <<-EOS.undent
+    src_yml = prefix + 'rock.yml'
+    src_yml.write <<-EOS.undent
       env:
         PATH: "#{bin}:${PATH}"
     EOS
+
+    dst_yml = var + 'rock/opt/rock/runtime/node08'
+    dst_yml.mkpath
+    dst_yml += 'rock.yml'
+    dst_yml.unlink if dst_yml.exist?
+
+    File.symlink(src_yml, dst_yml)
   end
 end
 

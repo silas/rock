@@ -51,13 +51,6 @@ class RockRuntimeRuby20 < Formula
   end
 
   def install
-    rock = Pathname.new('/opt/rock')
-
-    unless rock.directory? && rock.writable?
-      onoe "#{rock} must be a directory and writable"
-      exit 1
-    end
-
     lib.mkpath
 
     system './configure',
@@ -72,16 +65,20 @@ class RockRuntimeRuby20 < Formula
 
     install_bundler
 
-    runtime = rock + 'runtime/ruby20'
-    runtime.mkpath
-    runtime += 'rock.yml'
-    runtime.unlink if runtime.exist?
-    runtime.write <<-EOS.undent
+    src_yml = prefix + 'rock.yml'
+    src_yml.write <<-EOS.undent
       env:
         PATH: "#{bin}:${PATH}"
         RUBY_ABI: "#{abi_version}"
         RUBYOPT: "-I#{lib}/ruby/gems/#{abi_version}/gems/bundler-#{resource('bundler').version}/lib -rbundler/setup"
         SSL_CERT_FILE: "#{Formula.factory('curl-ca-bundle').prefix}/share/ca-bundle.crt"
     EOS
+
+    dst_yml = var + 'rock/opt/rock/runtime/ruby20'
+    dst_yml.mkpath
+    dst_yml += 'rock.yml'
+    dst_yml.unlink if dst_yml.exist?
+
+    File.symlink(src_yml, dst_yml)
   end
 end

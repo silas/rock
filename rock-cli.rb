@@ -2,8 +2,8 @@ require 'formula'
 
 class RockCli < Formula
   homepage 'http://www.rockstack.org/'
-  url 'https://pypi.python.org/packages/source/r/rock/rock-0.15.0.tar.gz'
-  sha1 '4b0c436329cbb13d4dd55423f12b094da6a3cc3c'
+  url 'https://pypi.python.org/packages/source/r/rock/rock-0.16.0.tar.gz'
+  sha1 'a563703c726d949f25c62e2d0ca2e8a91710644a'
 
   depends_on 'libyaml'
 
@@ -20,8 +20,19 @@ class RockCli < Formula
       system 'mv', 'venv', prefix + 'venv'
     }
 
+    mount_path = var + 'rock'
+    opt_path = mount_path + 'opt'
+    opt_rock = opt_path + 'rock'
+
+    opt_path.mkpath
+
+    unless opt_rock.exist?
+      system 'cp', '-r', '/opt/rock', opt_rock
+    end
+
     (bin + 'rock').write <<-EOS.undent
       #!/usr/bin/env bash
+      export ROCK_MOUNT_PATH='#{mount_path}'
       exec #{prefix}/venv/bin/rock "$@"
     EOS
   end

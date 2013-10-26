@@ -17,13 +17,6 @@ if ! type -f 'xcode-select' &>/dev/null ; then
   die "xcode must be installed"
 fi
 
-if [[ ! -d '/opt/rock' ]]; then
-  echo
-  echo 'Creating /opt/rock directory...'
-  sudo mkdir -p /opt/rock
-  sudo chown "$USER" /opt/rock
-fi
-
 if [[ ! -e /usr/local/bin/brew ]]; then
   echo
   echo 'Installing brew...'
