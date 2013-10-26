@@ -54,6 +54,10 @@ if [[ "$( brew list )" != *berkeley-db* ]]; then
 fi
 
 if [[ "${ROCK_SKIP_CLI}" != "true" ]]; then
+  if pip show rock | grep Name &>/dev/null; then
+    echo "Remove pip version of rock..."
+    sudo pip -q uninstall rock
+  fi
   echo
   if brew info rock-cli &>/dev/null; then
     echo "Trying to update rock..."
