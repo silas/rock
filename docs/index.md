@@ -13,10 +13,9 @@ that allows developers to use modern technologies and encourages
 
 Install options include Ubuntu, Enterprise Linux and Homebrew.
 
- * [homebrew](/docs/install/homebrew/) - OS X
- * [deb](/docs/install/deb/) - Ubuntu
- * [rpm](/docs/install/rpm/) - Red Hat Enterprise Linux (RHEL), CentOS,
-   Oracle Linux, Scientific Linux (SL), etc...
+ * [homebrew](/docs/install/homebrew/) - OS X (10.7-10.9)
+ * [deb](/docs/install/deb/) - Ubuntu LTS (12.04)
+ * [rpm](/docs/install/rpm/) - CentOS/RHEL (6)
 
 ## Learning about rock
 
