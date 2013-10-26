@@ -1,6 +1,7 @@
-auto: true
 markdown: kramdown
 safe: true
-server_port: 8000
 permalink: /news/:title/
-exclude: vendor Gemfile Gemfile.lock
+exclude:
+ - vendor
+ - Gemfile
+ - Gemfile.lock
