@@ -97,18 +97,17 @@ class RockRuntimePerl516 < Formula
     install_cpanm
     install_carton
 
-    src_yml = prefix + 'rock.yml'
-    src_yml.write <<-EOS.undent
+    (prefix + 'rock.yml').write <<-EOS.undent
       env:
         PATH: "#{bin}:${PATH}"
         PERL_ARCHNAME: "#{archname}"
     EOS
 
-    dst_yml = var + 'rock/opt/rock/runtime/perl516'
-    dst_yml.mkpath
-    dst_yml += 'rock.yml'
-    dst_yml.unlink if dst_yml.exist?
+    runtime = var + 'rock/opt/rock/runtime'
+    runtime.mkpath
+    runtime += 'perl516'
+    system 'rm', '-fr', runtime if runtime.exist?
 
-    File.symlink(src_yml, dst_yml)
+    File.symlink(prefix, runtime)
   end
 end

@@ -31,17 +31,16 @@ class RockRuntimeNode04 < Formula
 
     install_npm
 
-    src_yml = prefix + 'rock.yml'
-    src_yml.write <<-EOS.undent
+    (prefix + 'rock.yml').write <<-EOS.undent
       env:
         PATH: "#{bin}:${PATH}"
     EOS
 
-    dst_yml = var + 'rock/opt/rock/runtime/node04'
-    dst_yml.mkpath
-    dst_yml += 'rock.yml'
-    dst_yml.unlink if dst_yml.exist?
+    runtime = var + 'rock/opt/rock/runtime'
+    runtime.mkpath
+    runtime += 'node04'
+    system 'rm', '-fr', runtime if runtime.exist?
 
-    File.symlink(src_yml, dst_yml)
+    File.symlink(prefix, runtime)
   end
 end

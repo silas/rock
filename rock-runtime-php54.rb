@@ -168,17 +168,16 @@ class RockRuntimePhp54 < Formula
     install_composer
     install_memcached
 
-    src_yml = prefix + 'rock.yml'
-    src_yml.write <<-EOS.undent
+    (prefix + 'rock.yml').write <<-EOS.undent
       env:
         PATH: "#{bin}:${PATH}"
     EOS
 
-    dst_yml = var + 'rock/opt/rock/runtime/php54'
-    dst_yml.mkpath
-    dst_yml += 'rock.yml'
-    dst_yml.unlink if dst_yml.exist?
+    runtime = var + 'rock/opt/rock/runtime'
+    runtime.mkpath
+    runtime += 'php54'
+    system 'rm', '-fr', runtime if runtime.exist?
 
-    File.symlink(src_yml, dst_yml)
+    File.symlink(prefix, runtime)
   end
 end

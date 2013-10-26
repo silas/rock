@@ -65,8 +65,7 @@ class RockRuntimeRuby19 < Formula
 
     install_bundler
 
-    src_yml = prefix + 'rock.yml'
-    src_yml.write <<-EOS.undent
+    (prefix + 'rock.yml').write <<-EOS.undent
       env:
         PATH: "#{bin}:${PATH}"
         RUBY_ABI: "#{abi_version}"
@@ -74,11 +73,11 @@ class RockRuntimeRuby19 < Formula
         SSL_CERT_FILE: "#{Formula.factory('curl-ca-bundle').prefix}/share/ca-bundle.crt"
     EOS
 
-    dst_yml = var + 'rock/opt/rock/runtime/ruby19'
-    dst_yml.mkpath
-    dst_yml += 'rock.yml'
-    dst_yml.unlink if dst_yml.exist?
+    runtime = var + 'rock/opt/rock/runtime'
+    runtime.mkpath
+    runtime += 'ruby19'
+    system 'rm', '-fr', runtime if runtime.exist?
 
-    File.symlink(src_yml, dst_yml)
+    File.symlink(prefix, runtime)
   end
 end
