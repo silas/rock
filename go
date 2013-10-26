@@ -55,23 +55,21 @@ fi
 
 if [[ "${ROCK_SKIP_CLI}" != "true" ]]; then
   if pip show rock | grep Name &>/dev/null; then
+    echo
     echo "Remove pip version of rock..."
     sudo pip -q uninstall rock
   fi
-  echo
-  if brew info rock-cli &>/dev/null; then
-    echo "Trying to update rock..."
-    brew upgrade rock-cli 2>&1 | grep -v -e '^Error: .* already installed$'
-  else
+  if ! brew list | grep rock-cli &>/dev/null; then
+    echo
     echo "Trying to install rock..."
     brew install rock-cli
   fi
 fi
 
-if [[ "${ROCK_SKIP_RUNTIMES}" != "true" ]]; then
+if [[ "${ROCK_SKIP_UPGRADE}" != "true" ]]; then
+  echo
   for name in $( brew list | grep -e '^rock-' ); do
-    echo
     echo "Trying to update ${name}..."
-    brew upgrade $name 2>&1 | grep -v -e '^Error: .* already installed$'
+    brew upgrade $name 2>&1 | grep -v -e '^Error: .* already installed$' || :
   done
 fi
