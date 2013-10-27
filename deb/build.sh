@@ -72,8 +72,8 @@ build() {
 
   # values
   cd $package_root/$package
-  package_dist=$( dpkg-parsechangelog | grep Distribution | awk '{print $2}' )
-  package_version=$( dpkg-parsechangelog | grep Version | awk '{print $2}' )
+  package_dist=$( dpkg-parsechangelog | grep Distribution: | awk '{print $2}' )
+  package_version=$( dpkg-parsechangelog | grep Version: | awk '{print $2}' )
   package_arch=$( grep Architecture debian/control | head -1 | awk '{print $2}' )
 
   case $dist in
