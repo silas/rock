@@ -33,9 +33,13 @@ override_dh_auto_install:
 	  $(install_rootdir)$(python27_rootdir)$(prefix)/lib/python2.7/cgi.py
 
 	sed -i "s|$(install_rootdir)||g" \
-	  $(install_rootdir)$(python27_rootdir)$(prefix)/lib/python2.7/config/Makefile
+	  $(install_rootdir)$(python27_rootdir)$(prefix)/lib/python2.7/config/Makefile \
+      $(install_rootdir)$(python27_rootdir)$(prefix)/lib/python2.7/_sysconfigdata.py
 
-	chrpath -r $(python27_rootdir)$(prefix)/lib $(install_rootdir)$(python27_rootdir)$(prefix)/bin/python2.7
+	chrpath -r $(python27_rootdir)$(prefix)/lib \
+	  $(install_rootdir)$(python27_rootdir)$(prefix)/lib/libpython*so* \
+	  $(install_rootdir)$(python27_rootdir)$(prefix)/lib/python2.7/lib-dynload/*.so \
+	  $(install_rootdir)$(python27_rootdir)$(prefix)/bin/python2.7
 
 override_dh_auto_test:
 
