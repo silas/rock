@@ -5,6 +5,7 @@ class RockCli < Formula
   url 'https://pypi.python.org/packages/source/r/rock/rock-0.16.0.tar.gz'
   sha1 'a563703c726d949f25c62e2d0ca2e8a91710644a'
 
+  depends_on :python
   depends_on 'libyaml'
 
   resource 'virtualenv' do
@@ -14,10 +15,12 @@ class RockCli < Formula
 
   def install
     resource('virtualenv').stage { |r|
-      system 'python', 'virtualenv.py', 'venv'
-      system ". venv/bin/activate ; pip install '#{cached_download}'"
-      system 'python', 'virtualenv.py', 'venv', '--relocatable'
-      system 'mv', 'venv', prefix + 'venv'
+      python do
+          system 'python', 'virtualenv.py', 'venv'
+          system ". venv/bin/activate ; pip install '#{cached_download}'"
+          system 'python', 'virtualenv.py', 'venv', '--relocatable'
+          system 'mv', 'venv', prefix + 'venv'
+      end
     }
 
     mount_path = var + 'rock'
