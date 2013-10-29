@@ -112,3 +112,9 @@ ul.help {
   white-space: nowrap;
   border-color: #ddd;
 }
+
+div.install pre {
+  border: none;
+  background-color: #323B44;
+  color: #fff;
+}
