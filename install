@@ -1,0 +1,97 @@
+#!/usr/bin/env bash
+
+warn() { echo "$@" >&2; }
+die() { warn "$@"; exit 1; }
+
+rock_install_darwin() {
+  echo 'Installing'
+  echo 'Checking for requirements...'
+
+  if ! type -f 'xcode-select' &>/dev/null ; then
+    die "xcode must be installed"
+  fi
+
+  if [[ ! -e /usr/local/bin/brew ]]; then
+    echo
+    echo 'Installing brew...'
+    ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
+  fi
+
+  echo 'Updating brew'
+  brew update
+
+  if [[ "$( brew tap )" != *homebrew/dupes* ]]; then
+    echo 'Tapping homebrew/dupes'
+    brew tap homebrew/dupes
+  fi
+
+  if [[ "$( brew tap )" != *rockstack/rock* ]]; then
+    echo 'Tapping rockstack/rock'
+    brew tap rockstack/rock
+  fi
+
+  # install manually so we avoid prompting user about java
+  if [[ "$( brew list )" != *berkeley-db* ]]; then
+    echo "Installing berkeley-db..."
+    brew install berkeley-db --without-java
+  fi
+
+  if ! brew list | grep rock-cli &>/dev/null; then
+    echo "Trying to install rock..."
+    brew install rock-cli
+  fi
+
+  for name in $( brew list | grep -e '^rock-' ); do
+    echo "Trying to update ${name}..."
+    brew upgrade $name 2>&1 | grep -v -e '^Error: .* already installed$' || :
+  done
+}
+
+rock_install_linux_el() {
+  echo 'Installing rpm release package'
+  sudo rpm -i http://dl.rockstack.org/rpm/stable/el/rock-release.rpm
+
+  echo 'Installing rock and rock-devtools'
+  sudo yum install -y rock rock-devtools
+}
+
+rock_install_linux_ubuntu() {
+  echo 'Getting deb release package'
+  curl http://dl.rockstack.org/deb/rock-release-precise.deb -o /tmp/rock-release.deb
+
+  echo 'Installing deb release package'
+  sudo dpkg -i /tmp/rock-release.deb
+
+  echo 'Updating apt'
+  sudo apt-get update
+}
+
+rock_install_linux() {
+  echo 'Detecting Linux distro'
+
+  if grep -E '(CentOS|Red Hat Enterprise Linux).* release 6\.[0-9]+.*' /etc/redhat-release &>/dev/null; then
+    rock_install_linux_el
+  elif grep DISTRIB_CODENAME /etc/lsb-release | grep precise &>/dev/null; then
+    rock_install_linux_ubuntu
+  else
+    die 'Unsupported or undetected Linux distro'
+  fi
+}
+
+rock_install() {
+  echo 'Detecting OS'
+
+  case $( uname -s ) in
+  Darwin)
+    rock_install_darwin
+    ;;
+  Linux)
+    rock_install_linux
+    ;;
+  *)
+    die "Unknown OS: $cmd"
+    ;;
+  esac
+}
+
+rock_install "$@"
