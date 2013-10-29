@@ -110,7 +110,7 @@ This guide walks you through setting up a basic PHP web application with tests.
 
  1. Update `.rock.yml` to include an `env` and `run` section
 
-    ``` console
+    ``` yaml
     runtime: php54
 
     env:

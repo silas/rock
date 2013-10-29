@@ -23,7 +23,7 @@ tests.
 
  1. Edit `package.json`
 
-    ``` javascript
+    ``` json
     {
       "name": "helloworld",
       "description": "hello world test server",
