@@ -11,6 +11,7 @@ title: rock 0.16 and runtime updates
 
 Runtime Changes
 
+ - No longer supported: node04, node06
  - Update node08 to [0.8.26][node08]
  - Update node010 to [0.10.21][node010]
  - Update php54 to [5.4.16][php54], virtualenv to [1.10][python27-virtualenv]
