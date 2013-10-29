@@ -25,4 +25,4 @@ Enterprise Linux 6.x is currently supported.
     $ sudo yum install rock-runtime-node010
     ```
 
- 1. Continue to [getting started](/docs/) page
+ 1. Continue to [documentation](/docs/)

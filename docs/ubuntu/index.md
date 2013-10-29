@@ -27,4 +27,4 @@ Ubuntu 12.04 is currently supported.
     $ sudo apt-get install rock-runtime-node010
     ```
 
- 1. Continue to [getting started](/docs/) page
+ 1. Continue to [documentation](/docs/)
