@@ -122,8 +122,9 @@ rock_install_linux() {
 
 rock_install() {
   display 'Detecting OS'
+  os="$( uname -s )"
 
-  case $( uname -s ) in
+  case "$os" in
   Darwin)
     rock_install_darwin
     ;;
@@ -131,7 +132,7 @@ rock_install() {
     rock_install_linux
     ;;
   *)
-    die "Unknown OS: $cmd"
+    die "Unknown OS: $os"
     ;;
   esac
 }
