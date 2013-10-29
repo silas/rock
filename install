@@ -65,8 +65,8 @@ rock_install_linux_el() {
 }
 
 rock_install_linux_ubuntu() {
-  if ! dpkg -s rock-release | grep Status &>/dev/null; then
-    tmp=$( mktemp --tmpdir )
+  if ! dpkg -s rock-release 2>&1 | grep Status &>/dev/null; then
+    tmp=$( mktemp -d )
 
     display 'Getting deb release package'
     curl http://dl.rockstack.org/deb/rock-release-precise.deb -o "$tmp/rock-release.deb"
