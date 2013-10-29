@@ -1,6 +1,7 @@
 safe: true
 pygments: true
 permalink: /news/:title/
+paginate: 5
 exclude:
  - vendor
  - Gemfile

@@ -35,7 +35,7 @@ EOF{% endhighlight %}
   <div class="col-md-4">
     <h3>Help</h3>
 
-    <ul class="help">
+    <ul class="sidebar">
       <li><a href="https://github.com/rockstack">GitHub</a> &ndash; <a href="https://github.com/rockstack/rock/issues?state=open">Issues</a></li>
       <li><a href="http://groups.google.com/group/rockstack">Mailing List</a></li>
       <li><a href="http://webchat.freenode.net/?channels=rockstack&uio=d4">#rockstack</a> on Freenode</li>
@@ -58,5 +58,13 @@ EOF{% endhighlight %}
       <tr><td>✓</td><td><a href="/docs/python/">Python</a></td><td>2.7 / 3.3</td></tr>
       <tr><td>✓</td><td><a href="/docs/ruby/">Ruby</a></td><td>1.8 / 1.9 / 2.0</td></tr>
     </table>
+
+    <h3>Recent News</h3>
+
+    <ul class="sidebar">
+      {% for post in paginator.posts %}
+      <li><a href="{{ post.url }}">{{ post.date | date:"%b %d" }} &ndash; {{ post.title | truncatewords: 4 }}</a></li>
+      {% endfor %}
+    </ul>
   </div>
 </div>
