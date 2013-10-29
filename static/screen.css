@@ -2,7 +2,6 @@ body {
   font-family: Lato, Arial, Helvetica, sans-serif;
   font-size: 16px;
   line-height: 1.4;
-  color: #606060;
   margin-bottom: 20px;
 }
 
@@ -15,6 +14,9 @@ a:hover {
   color: #666;
 }
 
+.post {
+  margin-bottom: 10px;
+}
 
 .navbar-default .navbar-toggle {
   border: none;
@@ -44,6 +46,10 @@ a.btn-primary:hover {
   color: #fff;
   background-color: #252c34;
   border-color: #323B44;
+}
+
+h1, h2, h3, h4 {
+  color: #252c34;
 }
 
 h1 {
