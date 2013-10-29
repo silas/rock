@@ -3,7 +3,7 @@ body {
   font-size: 16px;
   line-height: 1.4;
   color: #606060;
-  margin-bottom: 15px;
+  margin-bottom: 40px;
 }
 
 a,
@@ -13,6 +13,19 @@ a:visited {
 
 a:hover {
   color: #666;
+}
+
+a.btn-primary,
+a.btn-primary:visited {
+  color: #fff;
+  background-color: #323B44;
+  border-color: #323B44;
+}
+
+a.btn-primary:hover {
+  color: #fff;
+  background-color: #252c34;
+  border-color: #323B44;
 }
 
 h1 {
