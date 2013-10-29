@@ -15,3 +15,4 @@ clone ${ROCK_PACKAGES-rockstack/packages}
 clone ${ROCK_HOMEBREW-rockstack/homebrew-rock} homebrew
 clone ${ROCK_TESTS-rockstack/tests}
 clone ${ROCK_SITE-rockstack/rockstack.github.com} site
+clone ${ROCK_UTILS-rockstack/utils} utils
