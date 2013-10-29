@@ -6,10 +6,18 @@ body {
   margin-bottom: 15px;
 }
 
+a,
+a:visited {
+  color: #0488cd;
+}
+
+a:hover {
+  color: #666;
+}
+
 h1 {
   font-size: 26px;
-  padding-top: 0;
-  margin-top: 0;
+  margin-top: 15px;
 }
 
 h2 {
@@ -18,9 +26,22 @@ h2 {
   margin-top: 15px;
 }
 
+.navbar-default .navbar-nav>li>a,
+.navbar-default .navbar-nav>li>a:visited,
+.navbar-header a,
+.navbar-header a:visited {
+  color: #fff;
+}
+
 .navbar-default .navbar-header a:hover,
 .navbar-default ul.nav li:hover {
-  background-color: #e7e7e7;
+  color: #fff;
+  background-color: #252c34;
+}
+
+.navbar-default {
+  background-color: #323B44;
+  color: #fff;
 }
 
 div.main {
@@ -28,7 +49,7 @@ div.main {
 }
 
 div.tagline {
-  color: #777;
+  color: #fff;
   line-height: 20px;
   padding: 15px 15px 0 0;
 }
@@ -43,4 +64,14 @@ table.supported td {
 
 ul.help {
   padding-left: 20px;
+}
+
+.highlight {
+  background-color: #f7f7f9;
+}
+
+.highlight pre {
+  background-color: transparent;
+  white-space: nowrap;
+  border-color: #ddd;
 }
