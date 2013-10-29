@@ -3,7 +3,7 @@ body {
   font-size: 16px;
   line-height: 1.4;
   color: #606060;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 
 a,
@@ -13,6 +13,24 @@ a:visited {
 
 a:hover {
   color: #666;
+}
+
+
+.navbar-default .navbar-toggle {
+  border: none;
+}
+
+.navbar-default .navbar-toggle .icon-bar,
+.navbar-default .navbar-toggle:hover {
+  background-color: #fff;
+}
+
+.navbar-default .navbar-toggle:focus {
+  background-color: #323B44;
+}
+
+.navbar-default .navbar-toggle:hover {
+  background-color: #252c34;
 }
 
 a.btn-primary,
