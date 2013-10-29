@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -o errexit
+
 warn() { echo "$@" >&2; }
 die() { warn "$@"; exit 1; }
 
@@ -48,8 +50,11 @@ rock_install_darwin() {
 }
 
 rock_install_linux_el() {
+  echo 'Installing EPEL release package'
+  sudo rpm -Uvh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
+
   echo 'Installing rpm release package'
-  sudo rpm -i http://dl.rockstack.org/rpm/stable/el/rock-release.rpm
+  sudo rpm -Uvh http://dl.rockstack.org/rpm/stable/el/rock-release.rpm
 
   echo 'Installing rock and rock-devtools'
   sudo yum install -y rock rock-devtools
