@@ -3,6 +3,7 @@ body {
   font-size: 16px;
   line-height: 1.4;
   color: #606060;
+  margin-bottom: 15px;
 }
 
 h1 {
@@ -38,4 +39,8 @@ table.supported td {
 
 .byline {
   font-style: italic;
+}
+
+ul.help {
+  padding-left: 20px;
 }

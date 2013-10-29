@@ -2,15 +2,15 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>{% if page.title %}{{ page.title }} - {% endif %}RockStack</title>
-    <!--
-    <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/7.3/styles/default.min.css" rel="stylesheet" type="text/css" >
-    -->
     <link href="/static/css/bootstrap.min.css?rev=1" rel="stylesheet">
     <link href="/static/pygments.css?rev=1" rel="stylesheet">
     <link href="/static/screen.css?rev=1" rel="stylesheet" type="text/css" >
     <link href="//fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet" type="text/css">
+    <script src="/static/js/jquery-2.0.3.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
     <!--[if lt IE 9]>
       <script src="/static/js/html5shiv.js"></script>
       <script src="/static/js/respond.min.js"></script>
@@ -18,21 +18,27 @@
   </head>
 
   <body>
-    <div class="navbar navbar-default navbar-static-top">
+    <div class="navbar navbar-default navbar-static-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
           <a class="navbar-brand" href="/">RockStack</a>
         </div>
 
-        <ul class="nav navbar-nav">
-          <li><a href="/news/">News</a></li>
-          <li><a href="/code/">Code</a></li>
-          <li><a href="/community/">Community</a></li>
-          <li><a href="/docs/">Documentation</a></li>
-        </ul>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="/news/">News</a></li>
+            <li><a href="/docs/">Documentation</a></li>
+          </ul>
 
-        <div class="navbar-right tagline">
-          <p>Rock Better Runtimes</p>
+          <div class="navbar-right tagline">
+            <p>Rock Better Runtimes</p>
+          </div>
         </div>
       </div>
     </div>
