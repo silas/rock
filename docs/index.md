@@ -19,12 +19,11 @@ $ bash -c "$(curl -fsSL https://raw.github.com/rockstack/utils/master/install)"
 
 Learn about the [rock](/docs/rock/) command line tool and configuration files.
 
-## Usage and Getting Started
+## Usage
 
-Supported runtimes include multiple languages and versions and are isolated
-from system installations and other rock runtimes.
-
-Its easy and often recommended to run all the runtimes on a single box.
+RockStack namespaces runtimes so they don't interfere with system or
+other RockStack runtimes. Its easy and often recommended to install all the
+runtimes on a single box.
 
  * [Node](/docs/node/)
  * [Perl](/docs/perl/)
