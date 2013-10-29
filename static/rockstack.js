@@ -16,5 +16,5 @@ function selectText(element) {
 }
 
 $(document).ready(function() {
-  $('#install').click(function(text) { selectText("install"); });
+  $('.install').click(function(text) { selectText("install"); });
 });
