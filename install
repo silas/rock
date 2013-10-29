@@ -69,7 +69,7 @@ rock_install_linux_ubuntu() {
     tmp=$( mktemp -d )
 
     display 'Getting deb release package'
-    curl http://dl.rockstack.org/deb/rock-release-precise.deb -o "$tmp/rock-release.deb"
+    curl -s http://dl.rockstack.org/deb/rock-release-precise.deb -o "$tmp/rock-release.deb"
 
     display 'Installing deb release package'
     sudo dpkg -i "$tmp/rock-release.deb"
