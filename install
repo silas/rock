@@ -80,6 +80,9 @@ rock_install_linux_ubuntu() {
 
   display 'Updating apt'
   sudo apt-get update
+
+  display 'Installing rock and rock-devtools'
+  sudo apt-get install -y rock rock-devtools
 }
 
 rock_install_linux() {
