@@ -2,33 +2,33 @@
 
 set -o errexit
 
+display() { echo "-----> $@"; }
 warn() { echo "$@" >&2; }
 die() { warn "$@"; exit 1; }
 
 rock_install_darwin() {
-  echo 'Installing'
-  echo 'Checking for requirements...'
+  display 'Installing'
+  display 'Checking for requirements...'
 
   if ! type -f 'xcode-select' &>/dev/null ; then
     die "xcode must be installed"
   fi
 
   if [[ ! -e /usr/local/bin/brew ]]; then
-    echo
-    echo 'Installing brew...'
+    display 'Installing brew...'
     ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
   fi
 
-  echo 'Updating brew'
+  display 'Updating brew'
   brew update
 
   if [[ "$( brew tap )" != *homebrew/dupes* ]]; then
-    echo 'Tapping homebrew/dupes'
+    display 'Tapping homebrew/dupes'
     brew tap homebrew/dupes
   fi
 
   if [[ "$( brew tap )" != *rockstack/rock* ]]; then
-    echo 'Tapping rockstack/rock'
+    display 'Tapping rockstack/rock'
     brew tap rockstack/rock
   fi
 
@@ -50,29 +50,40 @@ rock_install_darwin() {
 }
 
 rock_install_linux_el() {
-  echo 'Installing EPEL release package'
-  sudo rpm -Uvh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
+  if ! rpm -qi epel-release &>/dev/null; then
+    display 'Installing EPEL release package'
+    sudo rpm -Uvh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
+  fi
 
-  echo 'Installing rpm release package'
-  sudo rpm -Uvh http://dl.rockstack.org/rpm/stable/el/rock-release.rpm
+  if ! rpm -qi rock-release &>/dev/null; then
+    display 'Installing rpm release package'
+    sudo rpm -Uvh http://dl.rockstack.org/rpm/stable/el/rock-release.rpm
+  fi
 
-  echo 'Installing rock and rock-devtools'
+  display 'Installing rock and rock-devtools'
   sudo yum install -y rock rock-devtools
 }
 
 rock_install_linux_ubuntu() {
-  echo 'Getting deb release package'
-  curl http://dl.rockstack.org/deb/rock-release-precise.deb -o /tmp/rock-release.deb
+  if ! dpkg -s rock-release | grep Status &>/dev/null; then
+    tmp=$( mktemp --tmpdir )
 
-  echo 'Installing deb release package'
-  sudo dpkg -i /tmp/rock-release.deb
+    display 'Getting deb release package'
+    curl http://dl.rockstack.org/deb/rock-release-precise.deb -o "$tmp/rock-release.deb"
 
-  echo 'Updating apt'
+    display 'Installing deb release package'
+    sudo dpkg -i "$tmp/rock-release.deb"
+
+    rm -f "$tmp/rock-release.deb"
+    rmdir "$tmp"
+  fi
+
+  display 'Updating apt'
   sudo apt-get update
 }
 
 rock_install_linux() {
-  echo 'Detecting Linux distro'
+  display 'Detecting Linux distro'
 
   if grep -E '(CentOS|Red Hat Enterprise Linux).* release 6\.[0-9]+.*' /etc/redhat-release &>/dev/null; then
     rock_install_linux_el
@@ -84,7 +95,7 @@ rock_install_linux() {
 }
 
 rock_install() {
-  echo 'Detecting OS'
+  display 'Detecting OS'
 
   case $( uname -s ) in
   Darwin)
