@@ -47,11 +47,6 @@ rock_install_darwin() {
     brew install rock-cli
   fi
 
-  for name in $( brew list | grep -e '^rock-' ); do
-    echo "Trying to update ${name}..."
-    brew upgrade $name 2>&1 | grep -v -e '^Error: .* already installed$' || :
-  done
-
   echo
   echo 'Install runtimes'
   echo
