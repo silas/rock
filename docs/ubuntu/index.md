@@ -7,6 +7,22 @@ title: Install Ubuntu LTS
 
 Ubuntu 12.04 is currently supported.
 
+## Automatic
+
+ 1. Run installer script
+
+    ``` console
+    $ bash -c "$(curl -fsSL https://raw.github.com/rockstack/utils/master/install)"
+    ```
+
+ 1. Install whatever runtimes you'll need
+
+    ``` console
+    $ sudo apt-get install rock-runtime-node010
+    ```
+
+## Manual
+
  1. First install the release package
 
     ``` console
@@ -26,5 +42,3 @@ Ubuntu 12.04 is currently supported.
     ``` console
     $ sudo apt-get install rock-runtime-node010
     ```
-
- 1. Continue to [documentation](/docs/)

@@ -7,6 +7,22 @@ title: Install OS X
 
 OS X 10.7 - 10.9 is currently supported via Homebrew.
 
+## Automatic
+
+ 1. Run installer script
+
+    ``` console
+    $ bash -c "$(curl -fsSL https://raw.github.com/rockstack/utils/master/install)"
+    ```
+
+ 1. Install whatever runtimes you'll need
+
+    ``` console
+    $ brew install rock-runtime-node010
+    ```
+
+## Manual
+
  1. Ensure [XCode][xcode] and the Command Line Tools are installed
 
  1. Ensure [Homebrew][homebrew] is installed
@@ -50,8 +66,6 @@ OS X 10.7 - 10.9 is currently supported via Homebrew.
     ``` console
     $ brew install rock-runtime-node010
     ```
-
- 1. Continue to [documentation](/docs/)
 
 [xcode]: http://itunes.apple.com/us/app/xcode/id497799835
 [homebrew]: https://brew.sh

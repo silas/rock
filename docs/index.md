@@ -11,19 +11,17 @@ that allows developers to use modern technologies and encourages
 
 ## Install
 
-``` console
-$ bash -c "$(curl -fsSL https://raw.github.com/rockstack/utils/master/install)"
-```
+ * [CentOS/RHEL](/docs/el/)
+ * [OS X](/docs/osx/)
+ * [Ubuntu](/docs/ubuntu/)
 
 ## Command Line Tool
 
 Learn about the [rock](/docs/rock/) command line tool and configuration files.
 
-## Usage
+## Runtimes
 
-RockStack namespaces runtimes so they don't interfere with system or
-other RockStack runtimes. Its easy and often recommended to install all the
-runtimes on a single box.
+Getting started guides and information about each supported runtime.
 
  * [Node](/docs/node/)
  * [Perl](/docs/perl/)
