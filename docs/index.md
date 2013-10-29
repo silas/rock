@@ -9,19 +9,17 @@ RockStack is a collection of language runtimes and a command line tool
 that allows developers to use modern technologies and encourages
 "best practises".
 
-## Setting up the Stack
+## Install
 
-Install options include Ubuntu, Enterprise Linux and Homebrew.
+``` console
+$ bash -c "$(curl -fsSL https://raw.github.com/rockstack/utils/master/install)"
+```
 
- * [homebrew](/docs/install/homebrew/) - OS X (10.7-10.9)
- * [deb](/docs/install/deb/) - Ubuntu LTS (12.04)
- * [rpm](/docs/install/rpm/) - CentOS/RHEL (6)
-
-## Learning about rock
+## Command Line Tool
 
 Learn about the [rock](/docs/rock/) command line tool and configuration files.
 
-## Using Runtimes
+## Usage and Getting Started
 
 Supported runtimes include multiple languages and versions and are isolated
 from system installations and other rock runtimes.

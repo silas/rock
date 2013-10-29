@@ -1,27 +1,28 @@
 ---
 layout: default
-title: Install (rpm)
+title: Install CentOS/RHEL
 ---
 
-# Install (rpm)
+# Install CentOS/RHEL
 
- 1. Add repo
+Enterprise Linux 6.x is currently supported.
 
-        $ sudo rpm -i http://dl.rockstack.org/rpm/stable/el/rock-release.rpm
+ 1. First install the release package
 
- 1. Install `rock` and runtimes
+    ``` console
+    $ sudo rpm -i http://dl.rockstack.org/rpm/stable/el/rock-release.rpm
+    ```
 
-        $ sudo yum install -y \
-            rock \
-            rock-devtools \
-            rock-runtime-node08 \
-            rock-runtime-node010 \
-            rock-runtime-perl516 \
-            rock-runtime-php54 \
-            rock-runtime-python27 \
-            rock-runtime-python33 \
-            rock-runtime-ruby18 \
-            rock-runtime-ruby19 \
-            rock-runtime-ruby20
+ 1. Next install the rock command line tool and devtools
+
+    ``` console
+    $ sudo yum install rock rock-devtools
+    ```
+
+ 1. And finally install whatever runtimes you'll need
+
+    ``` console
+    $ sudo yum install rock-runtime-node010
+    ```
 
  1. Continue to [getting started](/docs/) page

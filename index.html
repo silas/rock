@@ -2,51 +2,50 @@
 layout: default
 ---
 
-<div id="home">
-  <div class="row">
-    <div class="span5">
-      <h1>One tool to <em>build</em>, <em>test</em>, and <em>run</em> your Node, Perl, PHP, Python, and Ruby apps.</h1>
+<div class="row">
+  <div class="col-lg-8">
+    <h1>Rock Better Runtimes</h1>
 
-      <p id="intro">RockStack is a collection of packaged language runtimes and a command line tool that allows developers to use modern technologies and encourages “best practices”.</p>
+    <p>RockStack is collection of packages and command line tool that allows you to build, test, and run your Node, Perl, PHP, Python, and Ruby apps in a standardized way on CentOS/RHEL, OS X and Ubuntu.</p>
 
-    </div>
-    <div class="span4">
-      <pre><code>
-  runtime: node010
-  run: node app.js
-      </code></pre>
-      <pre><code>
-  $ rock build
-  $ rock test
-  $ rock run
-  Express server listening on port 3000
-      </code></pre>
-    </div>
+    <h2>Install</h2>
+
+    {% highlight console %}$ bash -c "$(curl -fsSL https://raw.github.com/rockstack/utils/master/install)"{% endhighlight %}
+
+    <h2>Create An App</h2>
+
+    {% highlight console %}$ rock --runtime=ruby20 init{% endhighlight %}
+    {% highlight console %}$ rock build{% endhighlight %}
+    {% highlight console %}$ cat << EOF > hi.rb
+require 'sinatra'
+
+get '/hi' do
+  "Hello World!"
+end
+EOF{% endhighlight %}
+    {% highlight console %}$ rock run ruby hi.rb{% endhighlight %}
+
+    <h2>Learn More</h2>
+
+    <p>Install the packages and read the getting started guides for any one of the supported runtimes.</p>
+
+    <a href="/docs/" class="btn btn-primary">Read Documentation</a>
   </div>
+  <div class="col-lg-4">
+    <h3>Platforms</h3>
+    <table class="supported">
+      <tr><td>✓</td><td><a href="/docs/node/">CentOS/RHEL</a></td><td>6.x</td></tr>
+      <tr><td>✓</td><td><a href="/docs/perl/">OS X</a></td><td>10.7 - 10.9</td></tr>
+      <tr><td>✓</td><td><a href="/docs/perl/">Ubuntu LTS</a></td><td>12.04</td></tr>
+    </table>
 
-  <hr>
-
-  <div id="getting_started" class="row">
-    <div class="span5">
-      <h2>Getting Started</h2>
-
-      Install the packages and start a new project in any one of the supported runtimes.
-
-      <br><br>
-
-      <a href="/docs/" class="btn btn-info btn-large">More on Getting Started</a>
-
-    </div>
-    <div id="runtimes_list" class="span4">
-      <h3>Supported Runtimes</h3>
-      <table>
-        <tr><td>✓</td><td><a href="/docs/node/">Node</a></td><td>0.8 / 0.10</td></tr>
-        <tr><td>✓</td><td><a href="/docs/perl/">Perl</a></td><td>5.16</td></tr>
-        <tr><td>✓</td><td><a href="/docs/php/">PHP</a></td><td>5.4</td></tr>
-        <tr><td>✓</td><td><a href="/docs/python/">Python</a></td><td>2.7 / 3.3</td></tr>
-        <tr><td>✓</td><td><a href="/docs/ruby/">Ruby</a></td><td>1.8 / 1.9 / 2.0</td></tr>
-      </table>
-    </div>
+    <h3>Runtimes</h3>
+    <table class="supported">
+      <tr><td>✓</td><td><a href="/docs/node/">Node</a></td><td>0.8 / 0.10</td></tr>
+      <tr><td>✓</td><td><a href="/docs/perl/">Perl</a></td><td>5.16</td></tr>
+      <tr><td>✓</td><td><a href="/docs/php/">PHP</a></td><td>5.4</td></tr>
+      <tr><td>✓</td><td><a href="/docs/python/">Python</a></td><td>2.7 / 3.3</td></tr>
+      <tr><td>✓</td><td><a href="/docs/ruby/">Ruby</a></td><td>1.8 / 1.9 / 2.0</td></tr>
+    </table>
   </div>
-  <hr>
 </div>

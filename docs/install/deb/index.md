@@ -1,29 +1,30 @@
 ---
 layout: default
-title: Install (deb)
+title: Install Ubuntu LTS
 ---
 
-# Install (deb)
+# Install Ubuntu LTS
 
- 1. Add repo
+Ubuntu 12.04 is currently supported.
 
-        $ (. /etc/lsb-release ; curl http://dl.rockstack.org/deb/rock-release-${DISTRIB_CODENAME}.deb -o rock-release.deb )
-        $ sudo dpkg -i rock-release.deb
-        $ sudo apt-get update
+ 1. First install the release package
 
- 1. Install `rock` and runtimes
+    ``` console
+    $ curl http://dl.rockstack.org/deb/rock-release-precise.deb -o rock-release.deb
+    $ sudo dpkg -i rock-release.deb
+    $ sudo apt-get update
+    ```
 
-        $ sudo apt-get install -y \
-            rock \
-            rock-devtools \
-            rock-runtime-node08 \
-            rock-runtime-node010 \
-            rock-runtime-perl516 \
-            rock-runtime-php54 \
-            rock-runtime-python27 \
-            rock-runtime-python33 \
-            rock-runtime-ruby18 \
-            rock-runtime-ruby19 \
-            rock-runtime-ruby20
+ 1. Next install the rock command line tool and devtools
+
+    ``` console
+    $ sudo apt-get install rock rock-devtools
+    ```
+
+ 1. And finally install whatever runtimes you'll need
+
+    ``` console
+    $ sudo apt-get install rock-runtime-node010
+    ```
 
  1. Continue to [getting started](/docs/) page

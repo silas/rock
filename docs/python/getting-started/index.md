@@ -10,134 +10,169 @@ tests.
 
  1. Create and switch to project directory
 
-        $ mkdir python-example
-        $ cd python-example
+    ``` console
+    $ mkdir python-example
+    $ cd python-example
+    ```
 
  1. Initialize the project
 
-        rock --runtime=python27 init
+    ``` console
+    $ rock --runtime=python27 init
+    ```
 
  1. Edit `requirements.txt`
 
-        Flask
+    ```
+    Flask
+    ```
 
  1. Build project
 
-        $ rock build
+    ``` console
+    $ rock build
+    ```
 
  1. Create `helloworld.py`
 
-        from flask import Flask
+    ``` python
+    from flask import Flask
 
-        app = Flask(__name__)
+    app = Flask(__name__)
 
-        def greeting():
-            return 'Hello World'
+    def greeting():
+        return 'Hello World'
 
-        @app.route('/')
-        def index():
-            return greeting()
+    @app.route('/')
+    def index():
+        return greeting()
+    ```
 
  1. Create `bin` directory
 
-        $ mkdir bin
+    ``` console
+    $ mkdir bin
+    ```
 
  1. Create `bin/hello-world`
 
-        #!/usr/bin/env python
+    ``` python
+    #!/usr/bin/env python
 
-        import os
-        import helloworld
+    import os
+    import helloworld
 
-        port = int(os.environ.get('PORT', 8000))
+    port = int(os.environ.get('PORT', 8000))
 
-        if __name__ == '__main__':
-            helloworld.app.run(port=port)
+    if __name__ == '__main__':
+        helloworld.app.run(port=port)
+    ```
 
  1. Make it executable
 
-        $ chmod 755 bin/hello-world
+    ``` console
+    $ chmod 755 bin/hello-world
+    ```
 
  1. Start `hello-world` and kill it using Ctrl+C
 
-        $ rock run hello-world
-         * Running on http://127.0.0.1:8000/
-        ^C
+    ``` console
+    $ rock run hello-world
+     * Running on http://127.0.0.1:8000/
+    ^C
+    ```
 
  1. Update `.rock.yml` to include an `env` and `run` section
 
-        runtime: python27
+    ``` yaml
+    runtime: python27
 
-        env:
-          PORT: "${PORT:-9000}"
+    env:
+      PORT: "${PORT:-9000}"
 
-        run: exec hello-world
+    run: exec hello-world
+    ```
 
  1. Run and kill it using Ctrl+C
 
-        $ rock run
-         * Running on http://127.0.0.1:9000/
-        ^C
+    ``` console
+    $ rock run
+     * Running on http://127.0.0.1:9000/
+    ^C
+    ```
 
  1. Create `tests` directory
 
-        $ mkdir tests
+    ``` console
+    $ mkdir tests
+    ```
 
  1. Create `tests/test_greeting.py`
 
-        import unittest
-        import helloworld
+    ``` python
+    import unittest
+    import helloworld
 
-        class GreetingTestCase(unittest.TestCase):
+    class GreetingTestCase(unittest.TestCase):
 
-            def test_message(self):
-                self.assertTrue(helloworld.greeting(), 'Hello World')
+        def test_message(self):
+            self.assertTrue(helloworld.greeting(), 'Hello World')
+    ```
 
  1. Run tests
 
-        .
-        ----------------------------------------------------------------------
-        Ran 1 test in 0.000s
+    ``` console
+    $ rock test
+    .
+    ----------------------------------------------------------------------
+    Ran 1 test in 0.000s
 
-        OK
+    OK
+    ```
 
  1. Update `.rock.yml` to include a simple frontpage test
 
-        runtime: python27
+    ``` yaml
+    runtime: python27
 
-        env:
-          PORT: "${PORT:-9000}"
+    env:
+      PORT: "${PORT:-9000}"
 
-        run: exec hello-world
+    run: exec hello-world
 
-        test_frontpage: |
+    test_frontpage: |
 
-          # start server
-          rock run &>/dev/null &
+      # start server
+      rock run &>/dev/null &
 
-          # give it a second to start
-          sleep 1
+      # give it a second to start
+      sleep 1
 
-          # get frontpage body
-          body="$( curl -s 'http://127.0.0.1:9000/' )"
+      # get frontpage body
+      body="$( curl -s 'http://127.0.0.1:9000/' )"
 
-          # kill server
-          kill %1
+      # kill server
+      kill %1
 
-          # check response body
-          if [[ "$body" != 'Hello World' ]]; then
-            die "ERROR: '$body' != 'Hello World'"
-          else
-            echo 'OK'
-          fi
+      # check response body
+      if [[ "$body" != 'Hello World' ]]; then
+        die "ERROR: '$body' != 'Hello World'"
+      else
+        echo 'OK'
+      fi
+    ```
 
  1. Run `frontpage` tests
 
-        $ rock test_frontpage
-        OK
+    ``` console
+    $ rock test_frontpage
+    OK
+    ```
 
  1. Clean project root, run deployment build and run tests to ensure build worked
 
-        $ rock clean
-        $ rock build --deployment
-        $ rock test
+    ``` console
+    $ rock clean
+    $ rock build --deployment
+    $ rock test
+    ```

@@ -1,28 +1,25 @@
 ---
 layout: default
-title: Install (homebrew)
+title: Install OS X
 ---
 
-# Install (homebrew)
+OS X 10.7 - 10.9 is currently supported via Homebrew.
 
- 1. Ensure you have [XCode][xcode] installed
+# Run the setup script
 
- 1. Install base
+ 1. Ensure you have [XCode][xcode] and the Command Line Tools installed
 
-        $ curl -sL https://raw.github.com/rockstack/homebrew-rock/master/go | bash
+ 1. Run the setup script
 
- 1. Install runtimes
+    ``` console
+    $ bash -c "$( curl -fsSL https://raw.github.com/rockstack/homebrew-rock/master/go )"
+    ```
 
-        $ brew install \
-            rock-runtime-node08 \
-            rock-runtime-node010 \
-            rock-runtime-perl516 \
-            rock-runtime-php54 \
-            rock-runtime-python27 \
-            rock-runtime-python33 \
-            rock-runtime-ruby18 \
-            rock-runtime-ruby19 \
-            rock-runtime-ruby20
+ 1. And install whatever runtimes you'll need
+
+    ``` console
+    $ brew install rock-runtime-node010
+    ```
 
  1. Continue to [getting started](/docs/) page
 

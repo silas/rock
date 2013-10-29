@@ -1,0 +1,41 @@
+body {
+  font-family: Lato, Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.4;
+  color: #606060;
+}
+
+h1 {
+  font-size: 26px;
+  padding-top: 0;
+  margin-top: 0;
+}
+
+h2 {
+  font-size: 22px;
+  padding-top: 0;
+  margin-top: 15px;
+}
+
+.navbar-default .navbar-header a:hover,
+.navbar-default ul.nav li:hover {
+  background-color: #e7e7e7;
+}
+
+div.main {
+  padding: 0 15px;
+}
+
+div.tagline {
+  color: #777;
+  line-height: 20px;
+  padding: 15px 15px 0 0;
+}
+
+table.supported td {
+  padding-right: 10px;
+}
+
+.byline {
+  font-style: italic;
+}

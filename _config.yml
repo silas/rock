@@ -1,7 +1,15 @@
-markdown: kramdown
 safe: true
+pygments: true
 permalink: /news/:title/
 exclude:
  - vendor
  - Gemfile
  - Gemfile.lock
+
+markdown: redcarpet
+redcarpet:
+  extensions: 
+   - no_intra_emphasis
+   - fenced_code_blocks
+   - autolink
+   - smart
