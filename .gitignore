@@ -9,3 +9,8 @@
 *.zip
 .vagrant
 build
+build.sh
+*.changes
+*.dsc
+*.build
+*.tar.gz
