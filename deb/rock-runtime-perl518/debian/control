@@ -12,6 +12,6 @@ Depends: ${shlibs:Depends},
  ${misc:Depends},
  rock-runtime-perl518-core (>= 5.18.1-1~),
  rock-runtime-perl518-local-lib (>= 1.008023-1~),
- rock-runtime-perl518-cpanm (>= 1.6008.0-1~),
- rock-runtime-perl518-carton (>= 1.7001-1~)
+ rock-runtime-perl518-cpanm (>= 1.7001-1~),
+ rock-runtime-perl518-carton (>= 1.0.12-1~)
 Description: perl518 runtime for rock.

@@ -10,6 +10,11 @@ rock-runtime-perl516-cpanm
 rock-runtime-perl516-local-lib
 rock-runtime-perl516-carton
 rock-runtime-perl516
+rock-runtime-perl518-core
+rock-runtime-perl518-cpanm
+rock-runtime-perl518-local-lib
+rock-runtime-perl518-carton
+rock-runtime-perl518
 rock-runtime-php54-core
 rock-runtime-php54-composer
 rock-runtime-php54-libmemcached
