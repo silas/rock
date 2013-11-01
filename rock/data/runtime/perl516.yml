@@ -5,7 +5,7 @@ env:
   PERL_MM_OPT: "INSTALL_BASE=${ROCK_PATH}/local"
   PERL5LIB: "${ROCK_PATH}/lib:${ROCK_PATH}/lib/perl5/${PERL_ARCHNAME}:${ROCK_PATH}/local/lib/perl5"
   ROCK_CARTON_INSTALL: "install"
-  ROCK_CARTON_INSTALL_DEPLOYMENT: "--verbose install --deployment"
+  ROCK_CARTON_INSTALL_DEPLOYMENT: "--verbose --no-color install --deployment"
 
 init: |
   if [[ "${ROCK_ARGS_HELP}" == "true" ]]; then
@@ -58,8 +58,8 @@ build: |
       warn 'no "cpanfile" file found'
     fi
   else
-    if [[ ! -f ./cpanfile.snapshot ]]; then
-      die 'no "cpanfile.snapshot" file found'
+    if [[ ! -f ./carton.lock ]]; then
+      die 'no "carton.lock" file found'
     fi
     carton ${ROCK_CARTON_INSTALL_DEPLOYMENT}
   fi
