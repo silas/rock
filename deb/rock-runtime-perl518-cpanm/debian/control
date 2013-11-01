@@ -1,0 +1,12 @@
+Source: rock-runtime-perl518-cpanm
+Section: perl
+Priority: extra
+Maintainer: RockStack <packages@rockstack.org>
+Build-Depends: debhelper (>= 8.0.0)
+Standards-Version: 3.9.3
+Homepage: http://search.cpan.org/~miyagawa/App-cpanminus
+
+Package: rock-runtime-perl518-cpanm
+Architecture: all
+Depends: ${shlibs:Depends}, ${misc:Depends}, rock-runtime-perl518-core
+Description: cpanm - get, unpack build and install modules from CPAN

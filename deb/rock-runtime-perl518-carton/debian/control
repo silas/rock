@@ -1,0 +1,22 @@
+Source: rock-runtime-perl518-carton
+Section:  perl
+Priority: extra
+Maintainer: RockStack <packages@rockstack.org>
+Build-Depends: debhelper (>= 8.0.0),
+ rock-runtime-perl518-cpanm,
+ rock-runtime-perl518-local-lib,
+ wget
+Standards-Version: 3.9.3
+Homepage: http://search.cpan.org/~miyagawa/carton/docs/carton.pod
+
+Package: rock-runtime-perl518-carton
+Architecture: any
+Depends: ${shlibs:Depends},
+ ${misc:Depends},
+ rock-runtime-perl518-core,
+ rock-runtime-perl518-local-lib
+Description: carton is a command line tool to track the Perl module
+ dependencies for your Perl application. The managed dependencies are tracked
+ in a carton.lock file, which is meant to be version controlled, and the lock
+ file allows other developers of your application will have the exact same
+ versions of the modules.

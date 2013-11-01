@@ -1,0 +1,97 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+# Sample debian/rules that uses debhelper.
+# This file was originally written by Joey Hess and Craig Small.
+# As a special exception, when this file is copied by dh-make into a
+# dh-make output file, you may use that output file without restriction.
+# This special exception was added by Craig Small in version 0.37 of dh-make.
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+prefix := /usr
+runtime := perl518
+perl518_rootdir := /opt/rock/runtime/$(runtime)
+install_rootdir := $(CURDIR)/debian/rock-runtime-perl518-carton
+version := $(shell dpkg-parsechangelog | grep Version | sed 's/.*Version: \([^-]*\).*/\1/')
+
+get-orig-source:
+	uscan --noconf --rename --repack --download-current-version --verbose $(CURDIR)
+
+override_dh_auto_build:
+	wget http://www.cpan.org/authors/id/L/LE/LEONT/ExtUtils-InstallPaths-0.010.tar.gz
+	wget http://www.cpan.org/authors/id/L/LE/LEONT/ExtUtils-Helpers-0.021.tar.gz
+	wget http://www.cpan.org/authors/id/L/LE/LEONT/ExtUtils-Config-0.007.tar.gz
+	wget http://www.cpan.org/authors/id/O/OV/OVID/Test-Harness-3.29.tar.gz
+	wget http://www.cpan.org/authors/id/L/LE/LEONT/Module-Build-Tiny-0.030.tar.gz
+	wget http://www.cpan.org/authors/id/E/ET/ETHER/Class-Method-Modifiers-2.08.tar.gz
+	wget http://www.cpan.org/authors/id/H/HA/HAARG/Role-Tiny-1.003002.tar.gz
+	wget http://www.cpan.org/authors/id/F/FR/FREW/Sub-Exporter-Progressive-0.001011.tar.gz
+	wget http://www.cpan.org/authors/id/H/HA/HAARG/Devel-GlobalDestruction-0.11.tar.gz
+	wget http://www.cpan.org/authors/id/E/ET/ETHER/strictures-1.004004.tar.gz
+	wget http://www.cpan.org/authors/id/D/DO/DOY/Try-Tiny-0.18.tar.gz
+	wget http://www.cpan.org/authors/id/R/RJ/RJBS/Test-Fatal-0.013.tar.gz
+	wget http://www.cpan.org/authors/id/A/AD/ADAMK/List-MoreUtils-0.33.tar.gz
+	wget http://www.cpan.org/authors/id/Z/ZE/ZEFRAM/Module-Runtime-0.013.tar.gz
+	wget http://www.cpan.org/authors/id/D/DO/DOY/Dist-CheckConflicts-0.09.tar.gz
+	wget http://www.cpan.org/authors/id/M/MS/MSTROUT/Moo-1.003001.tar.gz
+	wget http://www.cpan.org/authors/id/M/MI/MIYAGAWA/Module-CPANfile-1.0002.tar.gz
+	wget http://www.cpan.org/authors/id/D/DA/DAGOLDEN/File-pushd-1.005.tar.gz
+	wget http://www.cpan.org/authors/id/M/MI/MIYAGAWA/App-cpanminus-1.7001.tar.gz
+	wget http://www.cpan.org/authors/id/H/HA/HAARG/Module-Reader-0.002000.tar.gz
+	wget http://www.cpan.org/authors/id/E/ET/ETHER/App-FatPacker-0.009018.tar.gz
+	wget http://www.cpan.org/authors/id/L/LE/LEONT/Module-Build-0.4007.tar.gz
+	wget http://www.cpan.org/authors/id/D/DA/DAGOLDEN/Path-Tiny-0.044.tar.gz
+	wget http://www.cpan.org/authors/id/D/DR/DROLSKY/Devel-StackTrace-1.30.tar.gz
+	wget http://www.cpan.org/authors/id/T/TM/TMTM/Class-Data-Inheritable-0.08.tar.gz
+	wget http://www.cpan.org/authors/id/D/DR/DROLSKY/Exception-Class-1.37.tar.gz
+	wget http://www.cpan.org/authors/id/M/MA/MAKAMAKA/JSON-2.90.tar.gz
+	wget http://www.cpan.org/authors/id/M/MI/MIYAGAWA/Carton-v1.0.12.tar.gz
+
+	cpanm -l local \
+	ExtUtils-InstallPaths-0.010.tar.gz \
+	ExtUtils-Helpers-0.021.tar.gz \
+	ExtUtils-Config-0.007.tar.gz \
+	Test-Harness-3.29.tar.gz \
+	Module-Build-Tiny-0.030.tar.gz \
+	Class-Method-Modifiers-2.08.tar.gz \
+	Role-Tiny-1.003002.tar.gz \
+	Sub-Exporter-Progressive-0.001011.tar.gz \
+	Devel-GlobalDestruction-0.11.tar.gz \
+	strictures-1.004004.tar.gz \
+	Try-Tiny-0.18.tar.gz \
+	Test-Fatal-0.013.tar.gz \
+	List-MoreUtils-0.33.tar.gz \
+	Module-Runtime-0.013.tar.gz \
+	Dist-CheckConflicts-0.09.tar.gz \
+	Moo-1.003001.tar.gz \
+	Module-CPANfile-1.0002.tar.gz \
+	File-pushd-1.005.tar.gz \
+	App-cpanminus-1.7001.tar.gz \
+	Module-Reader-0.002000.tar.gz \
+	App-FatPacker-0.009018.tar.gz \
+	Module-Build-0.4007.tar.gz \
+	Path-Tiny-0.044.tar.gz \
+	Devel-StackTrace-1.30.tar.gz \
+	Class-Data-Inheritable-0.08.tar.gz \
+	Exception-Class-1.37.tar.gz \
+	JSON-2.90.tar.gz \
+	Carton-v1.0.12.tar.gz
+  
+	cpanm -l local $(CURDIR)/../rock-runtime-perl518-carton_$(version).orig.tar.gz
+
+	bash debian/generate-bin.sh $(perl518_rootdir)$(prefix)
+	chmod 0755 carton
+
+override_dh_auto_install:
+	dh_install local/* $(perl518_rootdir)$(prefix)/lib/carton/
+	dh_install carton $(perl518_rootdir)$(prefix)/bin/
+
+override_dh_auto_test:
+	find local
+	mkdir -p blib/lib
+	cp -rf local/lib/perl5/* blib/lib/
+	dh_auto_test
+
+%:
+	PATH=$(perl518_rootdir)$(prefix)/bin:$$PATH dh $@

@@ -1,0 +1,14 @@
+Source: rock-runtime-perl518-local-lib
+Section: perl
+Priority: extra
+Maintainer: RockStack <packages@rockstack.org>
+Build-Depends: debhelper (>= 8.0.0), rock-runtime-perl518-core
+Standards-Version: 3.9.3
+Homepage: http://search.cpan.org/~apeiron/local-lib
+
+Package: rock-runtime-perl518-local-lib
+Architecture: all
+Depends: ${shlibs:Depends},
+ ${misc:Depends},
+ rock-runtime-perl518-core
+Description: Create and use a local-lib for Perl modules with PERL5LIB.

@@ -1,0 +1,3 @@
+version=3
+http://www.cpan.org/authors/id/M/MI/MIYAGAWA/App-cpanminus-(.*)\.tar\.gz \
+  debian uupdate
