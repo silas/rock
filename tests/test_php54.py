@@ -1,11 +1,12 @@
-import unittest
-from helper import RuntimeTests
+import helper
 
-class RuntimeTestCase(RuntimeTests, unittest.TestCase):
+
+class RuntimeTestCase(helper.RuntimeTests):
 
     name = 'php54'
     init_files = ['composer.json']
     init_directories = ['tests']
 
+
 if __name__ == '__main__':
-    unittest.main()
+    helper.main()

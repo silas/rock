@@ -1,11 +1,11 @@
-import unittest
-from helper import RuntimeTests
+import helper
 
-class RuntimeTestCase(RuntimeTests, unittest.TestCase):
+class RuntimeTestCase(helper.RuntimeTests):
 
     name = 'python33'
     init_files = ['requirements.txt']
     init_directories = ['tests']
 
+
 if __name__ == '__main__':
-    unittest.main()
+    helper.main()

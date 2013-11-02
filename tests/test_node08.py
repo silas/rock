@@ -1,11 +1,12 @@
-import unittest
-from helper import RuntimeTests
+import helper
 
-class RuntimeTestCase(RuntimeTests, unittest.TestCase):
+
+class RuntimeTestCase(helper.RuntimeTests):
 
     name = 'node08'
     init_files = ['package.json']
     init_directories = ['test']
 
+
 if __name__ == '__main__':
-    unittest.main()
+    helper.main()

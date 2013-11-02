@@ -1,11 +1,12 @@
-import unittest
-from helper import RuntimeTests
+import helper
 
-class RuntimeTestCase(RuntimeTests, unittest.TestCase):
+
+class RuntimeTestCase(helper.RuntimeTests):
 
     name = 'ruby20'
     init_files = ['Gemfile', 'Rakefile']
     init_directories = ['test']
 
+
 if __name__ == '__main__':
-    unittest.main()
+    helper.main()

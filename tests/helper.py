@@ -1,6 +1,13 @@
 import logging
-import ops
 import os
+from unittest import *
+
+import ops
+from nose.tools import nottest
+try:
+    from unittest2 import *
+except:
+    pass
 
 root_path = os.path.dirname(os.path.dirname(__file__))
 
@@ -9,7 +16,7 @@ try:
 except:
     pass
 
-class RuntimeTests(object):
+class RuntimeTests(TestCase):
 
     def assertRun(self, *args, **kwargs):
         kwargs['combine'] = True
