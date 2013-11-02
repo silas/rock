@@ -10,6 +10,7 @@ title: Perl
 ## Runtimes
 
   * perl516 - 5.16.x
+  * perl518 - 5.18.x
 
 ## Dependency Management
 
