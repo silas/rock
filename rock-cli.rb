@@ -2,8 +2,8 @@ require 'formula'
 
 class RockCli < Formula
   homepage 'http://www.rockstack.org/'
-  url 'https://pypi.python.org/packages/source/r/rock/rock-0.16.0.tar.gz'
-  sha1 'a563703c726d949f25c62e2d0ca2e8a91710644a'
+  url 'https://pypi.python.org/packages/source/r/rock/rock-0.17.0.tar.gz'
+  sha1 '51c941d740d71586d31ba307936f0122f6803d52'
 
   depends_on :python
   depends_on 'libyaml'
@@ -28,10 +28,6 @@ class RockCli < Formula
     opt_rock = opt_path + 'rock'
 
     opt_path.mkpath
-
-    unless opt_rock.exist?
-      system 'cp', '-r', '/opt/rock', opt_rock
-    end
 
     (bin + 'rock').write <<-EOS.undent
       #!/usr/bin/env bash
