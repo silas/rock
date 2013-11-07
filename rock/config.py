@@ -61,8 +61,7 @@ class Config(collections.Mapping):
         if not os.path.isfile(path):
             if require_exists:
                 raise ConfigError('not found: ' + path)
-            else:
-                return None
+            return
         try:
             with open(path) as f:
                 return yaml.safe_load(f)

@@ -1,6 +1,8 @@
 from __future__ import unicode_literals
 
 import os
+os.environ['ROCK_MOUNT_PATH'] = '/'
+
 try:
     import unittest2 as unittest
 except ImportError:
