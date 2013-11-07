@@ -86,7 +86,7 @@ class Config(collections.Mapping):
                         raise ConfigError('%s.%s must be a string' %
                                           (env, name))
                 dst['env'][name] = string.Template(
-                    src[env][name]).safe_substitute(**dst['env']).rstrip("\n")
+                    src[env][name]).safe_substitute(**dst['env']).rstrip('\n')
 
             del src[env]
 
@@ -136,6 +136,26 @@ class Config(collections.Mapping):
                 dst[name] = src[name]
             del src[name]
         dst.update(src)
+
+    @staticmethod
+    def evaluate(data):
+        changed = False
+        for _ in range(5):
+            changed = False
+            for n1, v1 in data.items():
+                if not isstr(v1):
+                    continue
+                n = re.escape(n1)
+                r = re.compile(r'\{\{\s*' + n + r'\s*\}\}', re.MULTILINE)
+                for n2, v2 in data.items():
+                    if not isstr(v2):
+                        continue
+                    data[n2] = r.sub(data[n1], data[n2]).rstrip('\n')
+                    changed |= v2 != data[n2]
+            if not changed:
+                break
+        if changed:
+            raise ConfigError('.rock.yml circular reference')
 
     def setup_path(self):
         if not self.data.get('path'):
@@ -201,6 +221,8 @@ class Config(collections.Mapping):
         self.merge(etc_config, self.data)
         # merge project
         self.merge(data, self.data)
+        # evaluate
+        self.evaluate(self.data)
 
     def __contains__(self, *args, **kwargs):
         self.setup()
