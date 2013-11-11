@@ -70,6 +70,9 @@ h2 {
   color: #fff;
 }
 
+.navbar-default .navbar-nav>li>a:hover,
+.navbar-default .navbar-nav>li>a:focus,
+.navbar-default .navbar-header a:focus,
 .navbar-default .navbar-header a:hover,
 .navbar-default ul.nav li:hover {
   color: #fff;
