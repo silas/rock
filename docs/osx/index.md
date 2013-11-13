@@ -49,12 +49,6 @@ OS X 10.7 - 10.9 is currently supported via Homebrew.
     $ brew tap rockstack/rock
     ```
 
- 1. Optionally install berkeley-db now to avoid Java prompts
-
-    ``` console
-    $ brew install berkeley-db --without-java
-    ```
-
  1. Install rock command line tool
 
     ``` console
