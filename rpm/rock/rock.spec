@@ -1,5 +1,5 @@
 Name:           rock
-Version:        0.16.0
+Version:        0.17.0
 Release:        1%{?dist}
 Summary:        Build, test and run applications
 
@@ -40,6 +40,9 @@ nosetests
 %{python_sitelib}/%{name}-%{version}-py*.egg-info
 
 %changelog
+* Fri Nov 01 2013 RockStack <packages@rockstack.org> - 0.17.0-1
+- Add support for perl518
+
 * Sat Oct 26 2013 RockStack <packages@rockstack.org> - 0.16.0-1
 - Add Python 3 support
 - Make rock mount configurable
