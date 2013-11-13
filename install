@@ -36,12 +36,6 @@ rock_install_darwin() {
     brew tap rockstack/rock
   fi
 
-  # install manually so we avoid prompting user about java
-  if [[ "$( brew list )" != *berkeley-db* ]]; then
-    echo "Installing berkeley-db..."
-    brew install berkeley-db --without-java
-  fi
-
   if ! brew list | grep rock-cli &>/dev/null; then
     echo "Trying to install rock..."
     brew install rock-cli
