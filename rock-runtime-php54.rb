@@ -1,5 +1,9 @@
 require 'formula'
 
+def postgres_installed?
+  `which pg_config`.length > 0
+end
+
 class RockRuntimePhp54 < Formula
   homepage 'http://www.php.net/'
   url 'http://us.php.net/distributions/php-5.4.16.tar.bz2'
@@ -26,6 +30,7 @@ class RockRuntimePhp54 < Formula
   depends_on 'mcrypt'
   depends_on 'mysql'
   depends_on 'pcre'
+  depends_on 'postgresql' unless postgres_installed?
   depends_on 't1lib'
   depends_on 'unixodbc'
 
@@ -147,6 +152,16 @@ class RockRuntimePhp54 < Formula
 
     unless MacOS.version >= :mountain_lion
       args << "--with-libxml-dir=#{Formula.factory('libxml2').prefix}"
+    end
+
+    if postgres_installed?
+      if File.directory?(Formula.factory('postgresql').opt_prefix.to_s)
+        args << "--with-pgsql=#{Formula.factory('postgresql').opt_prefix}"
+        args << "--with-pdo-pgsql=#{Formula.factory('postgresql').opt_prefix}"
+      else
+        args << "--with-pgsql=#{`pg_config --includedir`}"
+        args << "--with-pdo-pgsql=#{`which pg_config`}"
+      end
     end
 
     system './configure', *args
