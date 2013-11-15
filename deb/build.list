@@ -20,6 +20,11 @@ rock-runtime-php54-composer
 rock-runtime-php54-libmemcached
 rock-runtime-php54-memcached
 rock-runtime-php54
+rock-runtime-php55-core
+rock-runtime-php55-composer
+rock-runtime-php55-libmemcached
+rock-runtime-php55-memcached
+rock-runtime-php55
 rock-runtime-python27-core
 rock-runtime-python27-virtualenv
 rock-runtime-python27

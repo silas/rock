@@ -1,0 +1,44 @@
+Source: rock-runtime-php55-libmemcached
+Section: php
+Priority: extra
+Maintainer: RockStack <packages@rockstack.org>
+Build-Depends: debhelper (>= 8.0.0),
+ flex,
+ bison,
+ python-sphinx,
+ systemtap-sdt-dev,
+ libevent-dev,
+ libcloog-ppl-dev 
+Standards-Version: 3.9.3
+Homepage: http://libmemcached.org
+
+Package: rock-runtime-php55-libmemcached
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: libmemcached is a C/C++ client library and tools for the memcached
+ server (http://memcached.org/). It has been designed to be light on memory
+ usage, and provide full access to server side methods.
+ It also implements several command line tools:
+ memcapable  Checking a Memcached server capibilities and compatibility
+ memcat      Copy the value of a key to standard output
+ memcp       Copy data to a server
+ memdump     Dumping your server
+ memerror    Translate an error code to a string
+ memexist    Check for the existance of a key
+ memflush    Flush the contents of your servers
+ memparse    Parse an option string
+ memping     Test to see if a server is available.
+ memrm       Remove a key(s) from the server
+ memslap     Generate testing loads on a memcached cluster
+ memstat     Dump the stats of your servers to standard output
+ memtouch    Touches a key
+
+Package: rock-runtime-php55-libmemcached-dev
+Architecture: any
+Depends: ${shlibs:Depends},
+ ${misc:Depends},
+ rock-runtime-php55-libmemcached
+Description: This package contains the header files and development libraries
+ for rock-runtime-php55-libmemcached. If you like to develop programs using 
+ rock-runtime-php55-libmemcached, you will need to 
+ install rock-runtime-php55-libmemcached-dev.

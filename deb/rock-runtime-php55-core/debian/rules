@@ -1,0 +1,119 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+# Sample debian/rules that uses debhelper.
+# This file was originally written by Joey Hess and Craig Small.
+# As a special exception, when this file is copied by dh-make into a
+# dh-make output file, you may use that output file without restriction.
+# This special exception was added by Craig Small in version 0.37 of dh-make.
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+prefix := /usr
+
+ifeq ($(shell dpkg --print-architecture),amd64)
+libname := lib/x86_64-linux-gnu
+else
+libname := lib/i386-linux-gnu
+endif
+
+ifneq ($(shell egrep "squeeze|^6\.0\.[0-9]*" /etc/debian_version),)
+libname := lib
+endif
+
+runtime := php55
+php55_rootdir := /opt/rock/runtime/$(runtime)
+php55_libdir := $(php55_rootdir)$(prefix)/lib
+mysql_config := $(prefix)/bin/mysql_config
+install_rootdir := $(CURDIR)/debian/rock-runtime-php55-core
+
+get-orig-source:
+	uscan --noconf --rename --repack --download-current-version --verbose $(CURDIR)
+
+override_dh_auto_configure:
+	./configure \
+    --prefix=$(php55_rootdir)$(prefix) \
+    --sbindir=$(php55_rootdir)/bin \
+    --with-libdir=$(libname) \
+    --includedir=$(prefix)/include \
+    --with-config-file-scan-dir=$(php55_libdir)/php.d \
+    --disable-debug \
+    --disable-static \
+    --with-pic \
+    --enable-zip=shared \
+    --with-bz2 \
+    --with-freetype-dir=$(prefix) \
+    --with-png-dir=$(prefix) \
+    --with-xpm-dir=$(prefix) \
+    --enable-gd-native-ttf \
+    --with-t1lib=$(prefix) \
+    --with-gettext \
+    --with-gmp \
+    --with-iconv \
+    --with-jpeg-dir=$(prefix) \
+    --with-openssl \
+    --with-pcre-regex \
+    --with-zlib \
+    --enable-exif \
+    --enable-ftp \
+    --enable-sockets \
+    --enable-shmop \
+    --enable-calendar \
+    --with-libxml-dir=$(prefix) \
+    --enable-xml \
+    --with-mhash \
+    --enable-pcntl \
+    --enable-mbstring=shared \
+    --enable-mbregex \
+    --with-gd=shared \
+    --enable-bcmath=shared \
+    --enable-dba=shared \
+    --with-db4=$(prefix) \
+    --with-xmlrpc=shared \
+    --with-ldap=shared \
+    --with-ldap-sasl \
+    --with-mysql=shared,mysqlnd \
+    --with-mysqli=shared,mysqlnd \
+    --with-mysql-sock=$(shell mysql_config --socket || echo /var/lib/mysql/mysql.sock) \
+    --with-pdo-mysql=shared,$(mysql_config) \
+    --with-pdo-sqlite=shared,$(prefix) \
+    --enable-dom=shared \
+    --with-pgsql=shared \
+    --enable-wddx=shared \
+    --with-snmp=shared,$(prefix) \
+    --enable-soap=shared \
+    --with-xsl=shared,$(prefix) \
+    --enable-xmlreader=shared \
+    --enable-xmlwriter=shared \
+    --with-curl=shared,$(prefix) \
+    --with-sqlite3=shared,$(prefix) \
+    --enable-json=shared \
+    --with-libedit \
+    --with-pspell=shared \
+    --enable-phar=shared \
+    --with-mcrypt=shared,$(prefix) \
+    --with-kerberos \
+    --with-tidy=shared,$(prefix) \
+    --enable-sysvmsg=shared \
+    --enable-sysvshm=shared \
+    --enable-sysvsem=shared \
+    --enable-posix=shared \
+    --enable-fileinfo=shared \
+    --enable-intl=shared \
+    --with-icu-dir=$(prefix) \
+    --with-enchant=shared,$(prefix) \
+    --enable-pdo=shared \
+    --disable-cgi \
+    --enable-fpm \
+    --with-pear
+
+override_dh_auto_test:
+
+override_dh_auto_install:
+	make -j1 install INSTALL_ROOT=$(install_rootdir)
+	echo 'date.timezone = UTC' > $(install_rootdir)$(php55_libdir)/php.ini
+	mkdir -p $(install_rootdir)$(php55_libdir)/php.d
+	$(CURDIR)/debian/generate-extensions.sh $(install_rootdir)$(php55_libdir)
+	
+%:
+	dh $@

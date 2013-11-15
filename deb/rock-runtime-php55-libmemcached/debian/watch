@@ -1,0 +1,3 @@
+version=3
+https://launchpad.net/libmemcached/+download .*/libmemcached-(.*)\.tar\.gz \
+  debian uupdate

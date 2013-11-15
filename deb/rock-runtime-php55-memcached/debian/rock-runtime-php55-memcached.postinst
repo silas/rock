@@ -1,0 +1,3 @@
+/opt/rock/runtime/php55/usr/bin/pecl install --nodeps --soft --force \
+  --register-only --nobuild \
+  /opt/rock/runtime/php55/usr/lib/php/.pkgxml/memcached.xml >/dev/null || :
