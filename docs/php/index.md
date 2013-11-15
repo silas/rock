@@ -10,6 +10,7 @@ title: PHP
 ## Runtimes
 
   * php54 - 5.4.x
+  * php55 - 5.5.x
 
 ## Dependency Management
 
