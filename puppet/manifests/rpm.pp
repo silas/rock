@@ -1,19 +1,18 @@
-yumrepo { 'sewell':
-  enabled  => 1,
-  gpgcheck => 0,
-  baseurl  => 'http://dl.sewell.org/rpm/sewell/fedora/$releasever/$basearch',
-}
-
 $packages = [ 
-  'brpm',
+  'createrepo',
+  'curl',
   'fedora-packager',
   'mock',
+  'python-pip',
   'vim-enhanced',
 ]
 
 package { $packages:
   ensure  => latest,
-  require => Yumrepo['sewell'],
+}->
+package { 'ops':
+  ensure   => latest,
+  provider => 'pip'
 }
 
 exec { 'vagrant_mock':
@@ -21,4 +20,20 @@ exec { 'vagrant_mock':
   unless  => 'getent group mock | grep vagrant',
   path    => $::path,
   require => Package['mock'],
+}
+
+exec { 'brpm':
+  command => 'bash -c \'
+    echo "#!/usr/bin/env python" > /usr/local/bin/brpm
+    curl -s https://raw.github.com/silas/brpm/master/brpm.py >> /usr/local/bin/brpm
+  \'',
+  unless  => 'test -f /usr/local/bin/brpm',
+  path    => $::path,
+  require => Package['curl'],
+}
+
+file { '/usr/local/bin/brpm':
+  owner   => 'root',
+  mode    => '755',
+  require => Exec['brpm'],
 }

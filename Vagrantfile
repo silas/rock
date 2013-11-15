@@ -18,8 +18,8 @@ Vagrant.configure('2') do |config|
   end
 
   config.vm.define :rpm do |rpm_config|
-    rpm_config.vm.box = 'fedora-17'
-    rpm_config.vm.box_url = 'http://dl.sewell.org/vagrant/fedora-17-x86_64.box'
+    rpm_config.vm.box = 'fedora-18'
+    rpm_config.vm.box_url = 'http://puppet-vagrant-boxes.puppetlabs.com/fedora-18-x64-vbox4210.box'
     rpm_config.vm.provider :virtualbox do |v|
       v.customize customize
     end
