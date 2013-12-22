@@ -20,7 +20,7 @@ rock_install_darwin() {
 
   if [[ ! -e /usr/local/bin/brew ]]; then
     display 'Installing brew...'
-    ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
+    ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
   fi
 
   display 'Updating brew'
