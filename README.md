@@ -7,9 +7,9 @@ running applications.
 
 This work is licensed under the MIT License (see the LICENSE file).
 
-## Gravatar Icon
+## Icon
 
-The Gravatar [icon][icon] is by [Anuar Zhumaev][anuar].
+The rock [icon][icon] was created by [Anuar Zhumaev][anuar].
 
 [icon]: http://thenounproject.com/term/rock/16776/
 [anuar]: http://thenounproject.com/yxorama/
