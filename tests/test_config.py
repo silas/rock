@@ -69,6 +69,11 @@ class ConfigTestCase(helper.unittest.TestCase):
         with self.assertRaisesRegexp(ConfigError, r'^unable to merge') as a:
             c['test_dict_to_dict']
 
+    def test_include(self):
+        c = self.setup('include')
+        self.assertEqual(c['one'], 'one')
+        self.assertEqual(c['two'], 'two-one-two')
+
     def test_simple1(self):
         c = self.setup()
         self.full(c)
