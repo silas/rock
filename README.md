@@ -13,4 +13,4 @@ The [icon][icon] was created by [Anuar Zhumaev][icon-author] ([CC BY 3.0][icon-l
 
 [icon]: http://thenounproject.com/term/rock/5846/
 [icon-author]: http://thenounproject.com/yxorama/
-[icon-license]: https://creativecommons.org/licenses/by/3./us/
+[icon-license]: https://creativecommons.org/licenses/by/3.0/us/
