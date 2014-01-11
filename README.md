@@ -9,7 +9,8 @@ This work is licensed under the MIT License (see the LICENSE file).
 
 ## Icon
 
-The rock [icon][icon] was created by [Anuar Zhumaev][anuar].
+The [icon][icon] was created by [Anuar Zhumaev][icon-author] ([CC BY 3.0][icon-license]).
 
-[icon]: http://thenounproject.com/term/rock/16776/
-[anuar]: http://thenounproject.com/yxorama/
+[icon]: http://thenounproject.com/term/rock/5846/
+[icon-author]: http://thenounproject.com/yxorama/
+[icon-license]: https://creativecommons.org/licenses/by/3./us/
