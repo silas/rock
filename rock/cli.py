@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 
 import argparse
+import locale
 import os
 import sys
 from rock import __version__
@@ -99,6 +100,9 @@ def main(argv=None):
 
     if argv is None:
         argv = sys.argv[1:]
+        encoding = locale.getdefaultlocale()[1]
+        if encoding:
+            argv = [a.decode(encoding) for a in sys.argv[1:]]
 
     # find command position
     pos, skip_next = 0, False
