@@ -1,5 +1,6 @@
 env:
   PATH: "${ROCK_PATH}/bin:${ROCK_PATH}/local/bin:${PATH}"
+  PERL_CPANM_HOME: "${HOME}/.cpanm_${ROCK_RUNTIME}"
   PERL_LOCAL_LIB_ROOT: "${ROCK_PATH}/local"
   PERL_MB_OPT: "--install_base ${ROCK_PATH}/local"
   PERL_MM_OPT: "INSTALL_BASE=${ROCK_PATH}/local"
