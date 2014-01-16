@@ -1,13 +1,11 @@
 from __future__ import unicode_literals
 
-
 import os
 try:
     from io import StringIO
 except ImportError:  # pragma: no cover
     from StringIO import StringIO
 from rock.exceptions import ConfigError
-
 
 ROCK_SHELL = (os.environ.get('ROCK_SHELL') or '/bin/bash -c').split()
 ROCK_SHELL.insert(1, os.path.basename(ROCK_SHELL[0]))

@@ -9,7 +9,6 @@ import yaml
 from rock.exceptions import ConfigError
 from rock.utils import isstr
 
-
 PARENT_RE = re.compile(r'\{\{\s*parent\s*\}\}', re.MULTILINE)
 
 
