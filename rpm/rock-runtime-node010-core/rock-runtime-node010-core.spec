@@ -63,6 +63,7 @@ rm -rf %{buildroot}
 %{node010_rootdir}%{_bindir}/npm
 %{node010_rootdir}%{_mandir}/man1/node.1*
 %{node010_rootdir}%{_prefix}/lib/node_modules
+%{node010_rootdir}%{_includedir}/node
 
 %files rpmbuild
 %defattr(-,root,root,-)

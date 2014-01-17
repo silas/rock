@@ -22,7 +22,7 @@ Source0:        http://ftp.ruby-lang.org/pub/ruby/1.8/ruby-%{shortversion}-p%{pa
 Patch0:         ruby-1.8.7-p370-ext-dl.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-BuildRequires:  patchelf
+BuildRequires:  chrpath
 
 BuildRequires:  autoconf
 BuildRequires:  gdbm-devel
@@ -63,7 +63,7 @@ rm -rf %{buildroot}
 
 %{__make} install DESTDIR=%{buildroot}
 
-patchelf --set-rpath %{ruby18_rootdir}%{_prefix}/lib %{buildroot}%{ruby18_rootdir}%{_bindir}/ruby*
+chrpath -r %{ruby18_rootdir}%{_prefix}/lib %{buildroot}%{ruby18_rootdir}%{_bindir}/ruby*
 
 # skip buildroot/rpath check
 export QA_SKIP_BUILD_ROOT=1

@@ -15,10 +15,10 @@ Summary:        A Python 3.3.x runtime
 Group:          Development/Languages
 License:        Python
 URL:            http://www.python.org
-Source0:        http://www.python.org/ftp/python/%{version}/Python-%{version}.tar.bz2
+Source0:        http://www.python.org/ftp/python/%{version}/Python-%{version}.tgz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-BuildRequires:  patchelf
+BuildRequires:  chrpath
 
 BuildRequires:  autoconf
 BuildRequires:  bzip2
@@ -79,7 +79,7 @@ sed -i 's|^#! /usr/local/bin/python|#!/usr/bin/env python|g' \
 
 sed -i "s|%{buildroot}||g" %{buildroot}%{python33_rootdir}%{_prefix}/lib/python3.3/config-3.3m/Makefile
 
-patchelf --set-rpath %{python33_rootdir}/usr/lib %{buildroot}%{python33_rootdir}%{_bindir}/python3.3
+chrpath -r %{python33_rootdir}/usr/lib %{buildroot}%{python33_rootdir}%{_bindir}/python3.3
 
 # skip buildroot/rpath check
 export QA_SKIP_BUILD_ROOT=1

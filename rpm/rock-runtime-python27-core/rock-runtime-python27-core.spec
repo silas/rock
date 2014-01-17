@@ -15,10 +15,10 @@ Summary:        A Python 2.7.x runtime
 Group:          Development/Languages
 License:        Python
 URL:            http://www.python.org
-Source0:        http://www.python.org/ftp/python/%{version}/Python-%{version}.tar.bz2
+Source0:        http://www.python.org/ftp/python/%{version}/Python-%{version}.tgz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-BuildRequires:  patchelf
+BuildRequires:  chrpath
 
 BuildRequires:  autoconf
 BuildRequires:  bzip2
@@ -72,7 +72,7 @@ sed -i 's|^#! /usr/local/bin/python|#!/usr/bin/env python|g' \
 
 sed -i "s|%{buildroot}||g" %{buildroot}%{python27_rootdir}%{_prefix}/lib/python2.7/config/Makefile
 
-patchelf --set-rpath %{python27_rootdir}/usr/lib %{buildroot}%{python27_rootdir}%{_bindir}/python2.7
+chrpath -r %{python27_rootdir}/usr/lib %{buildroot}%{python27_rootdir}%{_bindir}/python2.7
 
 # skip buildroot/rpath check
 export QA_SKIP_BUILD_ROOT=1

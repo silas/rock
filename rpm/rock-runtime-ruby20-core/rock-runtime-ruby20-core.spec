@@ -21,7 +21,7 @@ URL:            http://ruby-lang.org
 Source0:        http://ftp.ruby-lang.org/pub/ruby/2.0/ruby-%{shortversion}-p%{patch}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-BuildRequires:  patchelf
+BuildRequires:  chrpath
 
 BuildRequires:  autoconf
 BuildRequires:  gdbm-devel
@@ -61,7 +61,7 @@ rm -rf %{buildroot}
 
 %{__make} install DESTDIR=%{buildroot}
 
-patchelf --set-rpath %{ruby20_rootdir}%{_prefix}/lib %{buildroot}%{ruby20_rootdir}%{_bindir}/ruby*
+chrpath -r %{ruby20_rootdir}%{_prefix}/lib %{buildroot}%{ruby20_rootdir}%{_bindir}/ruby*
 
 # skip buildroot/rpath check
 export QA_SKIP_BUILD_ROOT=1
