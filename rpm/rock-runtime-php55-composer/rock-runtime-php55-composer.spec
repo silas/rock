@@ -2,12 +2,12 @@
 %filter_from_requires /^php.*/d; /^libphp.*/d
 %filter_setup
 
-%global pre alpha7
+%global pre alpha8
 
 Name:           rock-runtime-php55-composer
 Version:        1.0.0
-Release:        0.4.%{pre}%{?dist}
-Summary:        A tool to manage PHP 5.4.x dependencies
+Release:        0.5.%{pre}%{?dist}
+Summary:        A tool to manage PHP 5.5.x dependencies
 
 Group:          Development/Languages
 License:        MIT
@@ -52,5 +52,8 @@ rm -rf %{buildroot}
 %{php55_rootdir}%{_bindir}/composer
 
 %changelog
+* Thu Jan 16 2014 RockStack <packages@rockstack.org> - 1.0.0-0.5.alpha8
+- Update to 1.0.0 alpha8
+
 * Thu Nov 14 2013 RockStack <packages@rockstack.org> - 1.0.0-0.4.alpha7
 - Initial build

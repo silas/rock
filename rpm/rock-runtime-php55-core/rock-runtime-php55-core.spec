@@ -13,7 +13,7 @@
 %global php55_libdir %{php55_rootdir}%{_prefix}/lib
 
 Name:           rock-runtime-php55-core
-Version:        5.5.6
+Version:        5.5.8
 Release:        1%{?dist}
 Summary:        A PHP 5.5.x runtime
 
@@ -254,5 +254,8 @@ rm -rf %{buildroot}
 %{_sysconfdir}/rpm/macros.rock-php55
 
 %changelog
+* Thu Jan 16 2014 RockStack <packages@rockstack.org> - 5.5.8-1
+- Update to 5.5.8
+
 * Thu Nov 14 2013 RockStack <packages@rockstack.org> - 5.5.6-1
 - Initial build
