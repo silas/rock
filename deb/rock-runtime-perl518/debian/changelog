@@ -1,3 +1,9 @@
+rock-runtime-perl518 (1.0.0-2) unstable; urgency=low
+
+  * Perl 5.18.2
+
+ -- RockStack <packages@rockstack.org>  Thu, 16 Jan 2014 00:00:00 +0000
+
 rock-runtime-perl518 (1.0.0-1) unstable; urgency=low
 
   * Initial release

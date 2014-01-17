@@ -3,7 +3,7 @@
 
 Name:           rock-runtime-perl518
 Version:        1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        perl518 runtime for rock
 
 Group:          Development/Languages
@@ -11,8 +11,8 @@ License:        MIT
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 
-BuildRequires:  rock-runtime-perl518-core-rpmbuild >= 5.18.1-1
-Requires:       rock-runtime-perl518-core >= 5.18.1-1
+BuildRequires:  rock-runtime-perl518-core-rpmbuild >= 5.18.2-1
+Requires:       rock-runtime-perl518-core >= 5.18.2-1
 Requires:       rock-runtime-perl518-cpanm >= 1.7001-1
 Requires:       rock-runtime-perl518-local-lib >= 1.008023-1
 Requires:       rock-runtime-perl518-carton >= 1.0.12-1
@@ -43,5 +43,8 @@ rm -rf %{buildroot}
 %{perl518_rootdir}/rock.yml
 
 %changelog
+* Thu Jan 16 2014 RockStack <packages@rockstack.org> - 1-2
+- Perl 5.18.2
+
 * Thu Oct 31 2013 RockStack <packages@rockstack.org> - 1-1
 - Initial build

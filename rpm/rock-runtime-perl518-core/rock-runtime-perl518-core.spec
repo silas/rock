@@ -15,7 +15,7 @@
 %global perl518_archname %{_arch}-%{_os}%{perl518_arch_stem}
 
 Name:           rock-runtime-perl518-core
-Version:        5.18.1
+Version:        5.18.2
 Release:        1%{?dist}
 Summary:        A Perl 5.18.x runtime
 
@@ -102,5 +102,8 @@ rm -rf %{buildroot}
 %{_sysconfdir}/rpm/macros.rock-perl518
 
 %changelog
+* Thu Jan 16 2014 RockStack <packages@rockstack.org> - 5.18.2-1
+- Update to 5.18.2
+
 * Thu Oct 31 2013 RockStack <packages@rockstack.org> - 5.18.1-1
 - Initial build
