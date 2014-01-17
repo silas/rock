@@ -35,7 +35,7 @@ override_dh_auto_configure:
     --prefix=$(php54_rootdir)$(prefix) \
     --sbindir=$(php54_rootdir)/bin \
     --with-libdir=$(libname) \
-    --includedir=$(prefix)/include \
+    --includedir=$(php54_rootdir)$(prefix)/include \
     --with-config-file-scan-dir=$(php54_libdir)/php.d \
     --disable-debug \
     --disable-static \
@@ -114,6 +114,7 @@ override_dh_auto_install:
 	echo 'date.timezone = UTC' > $(install_rootdir)$(php54_libdir)/php.ini
 	mkdir -p $(install_rootdir)$(php54_libdir)/php.d
 	$(CURDIR)/debian/generate-extensions.sh $(install_rootdir)$(php54_libdir)
-	
+	find $(install_rootdir) -maxdepth 1 -name '.*' -exec rm -fr {} \;
+
 %:
 	dh $@
