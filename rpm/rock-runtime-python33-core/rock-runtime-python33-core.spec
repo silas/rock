@@ -8,7 +8,7 @@
 %global python33_sitedir %{python33_libdir}/site-packages
 
 Name:           rock-runtime-python33-core
-Version:        3.3.2
+Version:        3.3.3
 Release:        1%{?dist}
 Summary:        A Python 3.3.x runtime
 
@@ -110,6 +110,9 @@ rm -rf %{buildroot}
 %{python33_rootdir}%{_prefix}/lib/pkgconfig/python*.pc
 
 %changelog
+* Thu Jan 16 2014 RockStack <packages@rockstack.org> - 3.3.3-1
+- Update to 3.3.3
+
 * Sun Aug 04 2013 RockStack <packages@rockstack.org> - 3.3.2-1
 - Update to 3.3.2
 
