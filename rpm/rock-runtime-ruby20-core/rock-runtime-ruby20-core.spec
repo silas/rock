@@ -8,7 +8,7 @@
 %global ruby20_gemdir %{ruby20_rootdir}%{_prefix}/lib/ruby/gems/%{ruby20_abi}
 
 %global shortversion 2.0.0
-%global patch 247
+%global patch 353
 
 Name:           rock-runtime-ruby20-core
 Version:        %{shortversion}.%{patch}
@@ -94,6 +94,9 @@ rm -rf %{buildroot}
 %{ruby20_rootdir}%{_prefix}/lib/pkgconfig/ruby*
 
 %changelog
+* Thu Jan 16 2014 RockStack <packages@rockstack.org> - 2.0.0.353-1
+- Update to patch 353
+
 * Thu Oct 03 2013 RockStack <packages@rockstack.org> - 2.0.0.247-1
 - Update to patch 247
 

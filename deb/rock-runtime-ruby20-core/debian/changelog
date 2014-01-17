@@ -1,6 +1,12 @@
+rock-runtime-ruby20-core (2.0.0p353-1) unstable; urgency=low
+
+  * Update to 2.0.0 p353
+
+ -- RockStack <packages@rockstack.org>  Thu, 16 Jan 2014 00:00:00 +0000
+
 rock-runtime-ruby20-core (2.0.0p247-1) unstable; urgency=low
 
-  * Bump to p247
+  * Update to 2.0.0 p247
 
  -- RockStack <packages@rockstack.org>  Mon, 23 Sep 2013 00:00:00 +0000
 

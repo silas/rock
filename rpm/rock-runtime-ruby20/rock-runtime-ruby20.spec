@@ -5,7 +5,7 @@
 
 Name:           rock-runtime-ruby20
 Version:        1
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        ruby20 runtime for rock
 
 Group:          Development/Languages
@@ -15,7 +15,7 @@ BuildArch:      noarch
 
 BuildRequires:  rock-runtime-ruby20-core-rpmbuild
 Requires:       rock-runtime-ruby20-bundler >= %{bundler_version}-1
-Requires:       rock-runtime-ruby20-core >= 2.0.0.247-1
+Requires:       rock-runtime-ruby20-core >= 2.0.0.353-1
 
 %description
 ruby20 runtime for rock.
@@ -44,6 +44,9 @@ rm -rf %{buildroot}
 %{ruby20_rootdir}/rock.yml
 
 %changelog
+* Thu Jan 16 2014 RockStack <packages@rockstack.org> - 1-3
+- Ruby patch 353
+
 * Thu Oct 03 2013 RockStack <packages@rockstack.org> - 1-2
 - Ruby patch 247
 
