@@ -19,23 +19,22 @@ get-orig-source:
 	uscan --noconf --rename --repack --download-current-version --verbose $(CURDIR)
 
 override_dh_auto_build:
-	wget http://www.cpan.org/authors/id/T/TO/TOKUHIROM/Test-Requires-0.06.tar.gz
-	wget http://www.cpan.org/authors/id/D/DA/DAGOLDEN/Capture-Tiny-0.21.tar.gz
-	wget http://www.cpan.org/authors/id/M/MI/MIYAGAWA/App-cpanminus-1.6008.tar.gz
-	wget http://www.cpan.org/authors/id/D/DA/DAGOLDEN/CPAN-Meta-YAML-0.008.tar.gz
-	wget http://www.cpan.org/authors/id/M/MI/MIYAGAWA/Module-CPANfile-0.9010.tar.gz
-	wget http://www.cpan.org/authors/id/D/DA/DAGOLDEN/Parse-CPAN-Meta-1.4404.tar.gz
-	wget http://www.cpan.org/authors/id/D/DA/DAGOLDEN/CPAN-Meta-Requirements-2.122.tar.gz
-	wget http://www.cpan.org/authors/id/D/DA/DAGOLDEN/CPAN-Meta-2.120921.tar.gz
-	wget http://www.cpan.org/authors/id/T/TM/TMTM/Class-Data-Inheritable-0.08.tar.gz
-	wget http://www.cpan.org/authors/id/D/DR/DROLSKY/Devel-StackTrace-1.30.tar.gz
-	wget http://www.cpan.org/authors/id/D/DR/DROLSKY/Exception-Class-1.37.tar.gz
-	wget http://www.cpan.org/authors/id/M/ML/MLEHMANN/common-sense-3.6.tar.gz
-	wget http://www.cpan.org/authors/id/M/ML/MLEHMANN/JSON-XS-2.33.tar.gz
-	wget http://www.cpan.org/authors/id/M/MA/MAKAMAKA/JSON-2.53.tar.gz
-	wget http://www.cpan.org/authors/id/D/DO/DOY/Try-Tiny-0.12.tar.gz
-	wget http://www.cpan.org/authors/id/A/AP/APEIRON/local-lib-1.008009.tar.gz
-
+	wget http://backpan.perl.org/authors/id/T/TO/TOKUHIROM/Test-Requires-0.06.tar.gz
+	wget http://backpan.perl.org/authors/id/D/DA/DAGOLDEN/Capture-Tiny-0.21.tar.gz
+	wget http://backpan.perl.org/authors/id/M/MI/MIYAGAWA/App-cpanminus-1.6008.tar.gz
+	wget http://backpan.perl.org/authors/id/D/DA/DAGOLDEN/CPAN-Meta-YAML-0.008.tar.gz
+	wget http://backpan.perl.org/authors/id/M/MI/MIYAGAWA/Module-CPANfile-0.9010.tar.gz
+	wget http://backpan.perl.org/authors/id/D/DA/DAGOLDEN/Parse-CPAN-Meta-1.4404.tar.gz
+	wget http://backpan.perl.org/authors/id/D/DA/DAGOLDEN/CPAN-Meta-Requirements-2.122.tar.gz
+	wget http://backpan.perl.org/authors/id/D/DA/DAGOLDEN/CPAN-Meta-2.120921.tar.gz
+	wget http://backpan.perl.org/authors/id/T/TM/TMTM/Class-Data-Inheritable-0.08.tar.gz
+	wget http://backpan.perl.org/authors/id/D/DR/DROLSKY/Devel-StackTrace-1.30.tar.gz
+	wget http://backpan.perl.org/authors/id/D/DR/DROLSKY/Exception-Class-1.37.tar.gz
+	wget http://backpan.perl.org/authors/id/M/ML/MLEHMANN/common-sense-3.6.tar.gz
+	wget http://backpan.perl.org/authors/id/M/ML/MLEHMANN/JSON-XS-2.33.tar.gz
+	wget http://backpan.perl.org/authors/id/M/MA/MAKAMAKA/JSON-2.53.tar.gz
+	wget http://backpan.perl.org/authors/id/D/DO/DOY/Try-Tiny-0.12.tar.gz
+	wget http://backpan.perl.org/authors/id/A/AP/APEIRON/local-lib-1.008009.tar.gz
 
 	cpanm -l local \
 	Test-Requires-0.06.tar.gz \
