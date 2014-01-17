@@ -3,8 +3,8 @@ env:
   PYTHONPATH: "${ROCK_PATH}:${PYTHONPATH}"
   ROCK_PIP_INSTALL: "install -r ./requirements.txt"
   ROCK_PIP_INSTALL_DEPLOYMENT: "--verbose install -r ./requirements.txt"
-  ROCK_VIRTUALENV: "--distribute ./venv"
-  ROCK_VIRTUALENV_DEPLOYMENT: "--verbose --distribute ./venv"
+  ROCK_PYVENV: "./venv"
+  ROCK_PYVENV_DEPLOYMENT: "./venv"
 
 init: |
   if [[ "${ROCK_ARGS_HELP}" == "true" ]]; then
@@ -52,8 +52,11 @@ build: |
   fi
 
   if [[ "${ROCK_ARGS_DEPLOYMENT}" != "true" ]]; then
-    if [[ ! -f ./venv/bin/activate ]]; then
-      virtualenv ${ROCK_VIRTUALENV}
+    if [[ ! -e "./venv/bin/python" ]]; then
+      pyvenv ${ROCK_PYVENV}
+      distribute-setup
+      rm -f distribute-*.gz
+      easy_install pip
     fi
     if [[ -f ./requirements.txt ]]; then
       pip ${ROCK_PIP_INSTALL}
@@ -67,11 +70,13 @@ build: |
     if [[ ! -f ./requirements.txt ]]; then
       die 'no "requirements.txt" file found'
     fi
-    if [[ ! -f ./venv/bin/activate ]]; then
-      virtualenv ${ROCK_VIRTUALENV_DEPLOYMENT}
+    if [[ ! -e ./venv/bin/python ]]; then
+      pyvenv ${ROCK_PYVENV_DEPLOYMENT}
+      distribute-setup
+      rm -f distribute-*.gz
+      easy_install --verbose pip
     fi
     pip ${ROCK_PIP_INSTALL_DEPLOYMENT}
-    virtualenv --relocatable ./venv
   fi
 
 test: |
