@@ -1,3 +1,9 @@
+rock-runtime-node010 (1.0.0-11) unstable; urgency=low
+
+  * Node 0.10.24
+
+ -- RockStack <packages@rockstack.org>  Thu, 16 Nov 2014 00:00:00 +0000
+
 rock-runtime-node010 (1.0.0-10) unstable; urgency=low
 
   * Node 0.10.21
