@@ -18,7 +18,7 @@ class RockRuntimeNode04 < Formula
 
     system './configure', "--prefix=#{prefix}"
     system 'make', 'install'
-    system "echo 'prefix = #{prefix}' > #{prefix}/lib/node_modules/npm/npmrc"
+    system "echo 'prefix = #{prefix}' > #{lib}/node_modules/npm/npmrc"
 
     Dir.chdir '..'
   end

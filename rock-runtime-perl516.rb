@@ -58,11 +58,11 @@ class RockRuntimePerl516 < Formula
 
     ENV['HOME'] = home
 
-    system 'mv', 'local', "#{prefix}/lib/carton"
+    system 'mv', 'local', "#{lib}/carton"
 
     (bin + 'carton').write <<-EOS.undent
       #!/usr/bin/env bash
-      perl -Mlocal::lib=#{prefix}/lib/carton #{prefix}/lib/carton/bin/carton "$@"
+      perl -Mlocal::lib=#{lib}/carton #{lib}/carton/bin/carton "$@"
     EOS
 
     system 'chmod', '755', "#{bin}/carton"
@@ -77,10 +77,10 @@ class RockRuntimePerl516 < Formula
       "-Dsiteprefix=#{prefix}/local",
       "-Dsitelib=#{prefix}/local/share/perl5",
       "-Dsitearch=#{prefix}/local/lib/perl5",
-      "-Dprivlib=#{prefix}/share/perl5",
-      "-Dvendorlib=#{prefix}/share/perl5",
-      "-Darchlib=#{prefix}/lib/perl5",
-      "-Dvendorarch=#{prefix}/lib/perl5/vendor_perl",
+      "-Dprivlib=#{share}/perl5",
+      "-Dvendorlib=#{share}/perl5",
+      "-Darchlib=#{lib}/perl5",
+      "-Dvendorarch=#{lib}/perl5/vendor_perl",
       "-Darchname=#{archname}",
       '-Dman3ext=3pm',
       '-Dusethreads',

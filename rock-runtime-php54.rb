@@ -74,7 +74,7 @@ class RockRuntimePhp54 < Formula
   def install
     args = [
       "--prefix=#{prefix}",
-      "--sbindir=#{prefix}/bin",
+      "--sbindir=#{bin}",
       '--with-libdir=lib',
       '--disable-debug',
       '--disable-static',

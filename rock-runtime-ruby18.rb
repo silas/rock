@@ -32,13 +32,13 @@ class RockRuntimeRuby18 < Formula
       system 'ruby', 'setup.rb',
         "--prefix=#{prefix}",
         '--rdoc'
-      system "mv #{prefix}/lib/*.rb #{prefix}/lib/ruby/1.8"
-      system "mv #{prefix}/lib/{rbconfig,rubygems} #{prefix}/lib/ruby/1.8"
+      system "mv #{lib}/*.rb #{lib}/ruby/1.8"
+      system "mv #{lib}/{rbconfig,rubygems} #{lib}/ruby/1.8"
     }
   end
 
   def install_bundler
-    ENV['GEM_HOME'] = "#{prefix}/lib/ruby/gems/#{abi_version}"
+    ENV['GEM_HOME'] = "#{lib}/ruby/gems/#{abi_version}"
 
     resource('bundler').stage { |r|
       system 'gem', 'install',
@@ -48,7 +48,7 @@ class RockRuntimeRuby18 < Formula
         '--no-rdoc',
         '--no-ri',
         '--local',
-        '--install-dir', "#{prefix}/lib/ruby/gems/#{abi_version}",
+        '--install-dir', "#{lib}/ruby/gems/#{abi_version}",
         "--bindir", bin,
         r.cached_download
     }

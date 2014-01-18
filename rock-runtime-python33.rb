@@ -21,7 +21,7 @@ class RockRuntimePython33 < Formula
       ENV.append_to_cflags '-Wno-empty-body'
       ENV.append_to_cflags '-Qunused-arguments'
     else
-      ENV.append 'LDFLAGS', "-Wl,-rpath #{prefix}/lib"
+      ENV.append 'LDFLAGS', "-Wl,-rpath #{lib}"
     end
 
     unless MacOS::CLT.installed?

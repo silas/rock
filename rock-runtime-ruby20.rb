@@ -24,7 +24,7 @@ class RockRuntimeRuby20 < Formula
   end
 
   def install_bundler
-    ENV['GEM_HOME'] = "#{prefix}/lib/ruby/gems/#{abi_version}"
+    ENV['GEM_HOME'] = "#{lib}/ruby/gems/#{abi_version}"
 
     resource('bundler').stage { |r|
       system 'gem', 'install',
@@ -34,7 +34,7 @@ class RockRuntimeRuby20 < Formula
         '--no-rdoc',
         '--no-ri',
         '--local',
-        '--install-dir', "#{prefix}/lib/ruby/gems/#{abi_version}",
+        '--install-dir', "#{lib}/ruby/gems/#{abi_version}",
         "--bindir", bin,
         r.cached_download
     }
