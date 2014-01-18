@@ -6,8 +6,8 @@ end
 
 class RockRuntimePhp55 < Formula
   homepage 'http://www.php.net/'
-  url 'http://us.php.net/distributions/php-5.5.6.tar.bz2'
-  sha1 '02a30f72b1d6876a41b48548d4f95bf2b4761147'
+  url 'http://us.php.net/distributions/php-5.5.8.tgz'
+  sha1 '94800df241864a2c66fd01adca3d22247dc1a8d5'
 
   env :std
   keg_only 'rock'
@@ -38,8 +38,8 @@ class RockRuntimePhp55 < Formula
   depends_on 'autoconf' => :build
 
   resource 'composer' do
-    url 'http://getcomposer.org/download/1.0.0-alpha7/composer.phar'
-    sha1 '4f8513bea6daa4f70007e4344944c2fe458650ac'
+    url 'http://getcomposer.org/download/1.0.0-alpha8/composer.phar'
+    sha1 '6eefa41101a2d1a424c3d231a1f202dfe6f09cf8'
   end
 
   resource 'memcached' do
