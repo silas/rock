@@ -2,8 +2,8 @@ require 'formula'
 
 class RockRuntimePython33 < Formula
   homepage 'http://www.python.org/'
-  url 'http://www.python.org/ftp/python/3.3.1/Python-3.3.1.tar.bz2'
-  sha1 'bec78674847a4dacc4717c93b32b6b07adb90afe'
+  url 'http://www.python.org/ftp/python/3.3.3/Python-3.3.3.tgz'
+  sha1 '6c1e974bb40f6e0554d4fe665a864f31ae54e9d5'
 
   env :std
   keg_only 'rock'
