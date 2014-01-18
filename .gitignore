@@ -1,8 +1,9 @@
 *swp
 .DS_Store
-homebrew
-packages
-rock
-site
-tests
-utils
+/dockerfiles
+/homebrew
+/packages
+/rock
+/site
+/tests
+/utils
