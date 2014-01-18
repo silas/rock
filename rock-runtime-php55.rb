@@ -6,7 +6,7 @@ end
 
 class RockRuntimePhp55 < Formula
   homepage 'http://www.php.net/'
-  url 'http://us.php.net/distributions/php-5.5.8.tgz'
+  url 'http://us.php.net/distributions/php-5.5.8.tar.bz2'
   sha1 '94800df241864a2c66fd01adca3d22247dc1a8d5'
 
   env :std
