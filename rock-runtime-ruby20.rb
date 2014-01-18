@@ -2,8 +2,8 @@ require 'formula'
 
 class RockRuntimeRuby20 < Formula
   homepage 'http://www.python.org/'
-  url 'http://ftp.ruby-lang.org/pub/ruby/2.0/ruby-2.0.0-p195.tar.gz'
-  sha1 '4935832c49d48e177dcf46d801faff29f11be811'
+  url 'http://ftp.ruby-lang.org/pub/ruby/2.0/ruby-2.0.0-p353.tar.gz'
+  sha1 '7f2c8b8f5682aabc1114f44d36d314c6c37c11b8'
 
   env :std
   keg_only 'rock'
