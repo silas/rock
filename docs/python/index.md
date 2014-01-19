@@ -14,8 +14,7 @@ title: Python
 
 ## Dependency Management
 
-Python runtimes use [PyPI][pypi], [pip][pip] and [venv][venv]
-([virtualenv][virtualenv] for python27).
+Python runtimes use [PyPI][pypi], [pip][pip], and [virtualenv][virtualenv].
 
 [getting-started]: /docs/python/getting-started/
 [pypi]: http://pypi.python.org/pypi
