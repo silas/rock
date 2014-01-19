@@ -5,15 +5,14 @@ title: rock
 
 # rock
 
-The rock command line tool is used to build, test and run applications in
+The rock command line tool is used to build, test, and run applications in
 RockStack. It does this by merging configuration files, manipulating
-environment variables and executing bash scripts.
+environment variables, and executing bash scripts.
 
 ## Configuration
 
 rock uses a series of configuration files to get the environment into a state
-where applications can run. It also defines defaults for things like builds and
-tests.
+where an application can run. It also defines default build and test tasks.
 
 The three main types of configuration files are:
 
@@ -32,11 +31,11 @@ env:
 ```
 
 The default runtime application configuration files are shipped with the rock
-command line tool, but can be extended or overridden on a system, user and
+command line tool, but can be extended or overridden on a system, user, and
 project basis. These files define how applications in a particular runtime are
 built and tested. They can be found in the data/runtime directory in the rock
 installation and can be extended from `/etc/rock/runtime/<runtime>.yml`,
-`~/.rock/runtime/<runtime>.yml` and `.rock.yml`.
+`~/.rock/runtime/<runtime>.yml`, and `.rock.yml`.
 
 ``` yaml
 env:
@@ -61,9 +60,8 @@ build: |
   make static
 ```
 
-All of these files a parsed and merged in the same way, the difference between
-them is the order in which they are evaluated and the content they normally
-contain.
+All of these files a parsed and merged using the same rules, the difference is
+in the order in which they are evaluated and the content they normally contain.
 
 Running the test command would evaluate to something like:
 
@@ -77,12 +75,12 @@ npm test
 
 ## Commands
 
-The primary rock commands are init, build, test, run and clean.
+The primary rock commands are init, build, test, run, and clean.
 
 ### init
 
 The init command create a skeleton project directory with a `.rock.yml` file,
-runtime specific project configuration file(s) (e.g. `Gemfile`, `package.json`)
+runtime specific project configuration file(s) (e.g. `Gemfile`, `package.json`),
 and a test directory.
 
 ``` console
@@ -93,11 +91,12 @@ $ rock --runtime=node08 init
 
 The build command is used to get the project into a state where it can run.
 
-There are two primary types of builds, a developer build (`rock build`) and a
+There are two primary types of builds, a developer build (`rock build`), and a
 deployment build (`rock build --deployment`). In most runtimes the primary
-difference between the builds is that the deployment build requires a lock file
-(e.g. `Gemfile.lock`, `npm-shrinkwrap.json`), but the distinction can also be
-exploited to setup things like commit hooks or build static resources.
+difference between these builds is the requirement of a lock file in the
+deployment build (e.g. `Gemfile.lock`, `npm-shrinkwrap.json`), but the
+distinction can also be exploited to setup things like commit hooks or build
+static resources.
 
 ``` yaml
 runtime: node08
@@ -115,7 +114,7 @@ build: |
 ### test
 
 The test command is used to test the project, using a built-in (or the most
-normal) tool.
+standard) tool.
 
 In many projects this section will be overridden to use whatever framework,
 tool or options the project requires.
@@ -143,7 +142,7 @@ application should be run in development mode, and the second is to allow the
 running of arbitrary commands in the project environment.
 
 Unlike the other primary commands, the run command doesn't come with a default
-definition; it's up to the developer to define one.
+definition; it's up to the developer to define it.
 
 ``` yaml
 runtime: php54
