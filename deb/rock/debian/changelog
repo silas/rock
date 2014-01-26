@@ -1,3 +1,11 @@
+rock (0.18.0-1) unstable; urgency=low
+
+  * Add include sections
+  * Fix locale issue in argmuents
+  * Namespace perl cpanm cache directories
+
+ -- RockStack <packages@rockstack.org>  Sat, 18 Jan 2014 00:00:00 +0000
+
 rock (0.17.0-1) unstable; urgency=low
 
   * Add perl518 support

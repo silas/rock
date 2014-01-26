@@ -1,5 +1,5 @@
 Name:           rock
-Version:        0.17.0
+Version:        0.18.0
 Release:        1%{?dist}
 Summary:        Build, test and run applications
 
@@ -40,6 +40,11 @@ nosetests
 %{python_sitelib}/%{name}-%{version}-py*.egg-info
 
 %changelog
+* Sat Jan 18 2014 RockStack <packages@rockstack.org> - 0.18.0-1
+- Add include sections
+- Fix locale issue in argmuents
+- Namespace perl cpanm cache directories
+
 * Fri Nov 01 2013 RockStack <packages@rockstack.org> - 0.17.0-1
 - Add support for perl518
 
