@@ -1,4 +1,6 @@
 *.pyc
 *swp
 .vagrant
+deb
+rpm
 venv
