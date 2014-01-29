@@ -9,7 +9,7 @@
 
 Name:           rock-runtime-python27-core
 Version:        2.7.6
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A Python 2.7.x runtime
 
 Group:          Development/Languages
@@ -70,7 +70,9 @@ rm -rf %{buildroot}
 sed -i 's|^#! /usr/local/bin/python|#!/usr/bin/env python|g' \
   %{buildroot}%{python27_rootdir}%{_prefix}/lib/python2.7/cgi.py
 
-sed -i "s|%{buildroot}||g" %{buildroot}%{python27_rootdir}%{_prefix}/lib/python2.7/config/Makefile
+sed -i "s|%{buildroot}||g" \
+  %{buildroot}%{python27_rootdir}%{_prefix}/lib/python2.7/config/Makefile \
+  %{buildroot}%{python27_rootdir}%{_prefix}/lib/python2.7/_sysconfigdata.py
 
 chrpath -r %{python27_rootdir}/usr/lib %{buildroot}%{python27_rootdir}%{_bindir}/python2.7
 
@@ -103,6 +105,9 @@ rm -rf %{buildroot}
 %{python27_rootdir}%{_prefix}/lib/pkgconfig/python*.pc
 
 %changelog
+* Wed Jan 29 2014 Allan Feid <afeid@shutterstock.com> - 2.7.6-2
+- Make sure to remove buildroot from _sysconfigdata.py
+
 * Thu Jan 16 2014 RockStack <packages@rockstack.org> - 2.7.6-1
 - Update to 2.7.6
 
