@@ -9,7 +9,7 @@
 
 Name:           rock-runtime-python33-core
 Version:        3.3.3
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A Python 3.3.x runtime
 
 Group:          Development/Languages
@@ -77,7 +77,9 @@ popd
 sed -i 's|^#! /usr/local/bin/python|#!/usr/bin/env python|g' \
   %{buildroot}%{python33_rootdir}%{_prefix}/lib/python3.3/cgi.py
 
-sed -i "s|%{buildroot}||g" %{buildroot}%{python33_rootdir}%{_prefix}/lib/python3.3/config-3.3m/Makefile
+sed -i "s|%{buildroot}||g" \
+  %{buildroot}%{python33_rootdir}%{_prefix}/lib/python3.3/config-3.3m/Makefile \
+  %{buildroot}%{python33_rootdir}%{_prefix}/lib/python3.3/_sysconfigdata.py
 
 chrpath -r %{python33_rootdir}/usr/lib %{buildroot}%{python33_rootdir}%{_bindir}/python3.3
 
@@ -110,6 +112,9 @@ rm -rf %{buildroot}
 %{python33_rootdir}%{_prefix}/lib/pkgconfig/python*.pc
 
 %changelog
+* Wed Jan 29 2014 RockStack <packages@rockstack.org> - 3.3.3-2
+- Fix _sysconfigdata.py config data
+
 * Thu Jan 16 2014 RockStack <packages@rockstack.org> - 3.3.3-1
 - Update to 3.3.3
 
