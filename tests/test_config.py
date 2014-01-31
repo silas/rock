@@ -138,3 +138,9 @@ class ConfigTestCase(helper.unittest.TestCase):
         c = self.setup('badenv2')
         with self.assertRaisesRegexp(ConfigError, r'env.one must be a string') as a:
             c['path']
+
+    def test_escape(self):
+        c = self.setup('escape')
+        self.assertEqual(c['env']['HELLO'], 'world \\')
+        self.assertEqual(c['build'], 'build \\ post \\')
+        self.assertEqual(c['run'], 'run \\\nrun \\\n\nrun \\')

@@ -11,10 +11,11 @@ class RuntimeTestCase(helper.unittest.TestCase):
 
     def test_list(self):
         rs = runtime.list()
-        self.assertEqual(rs[0].name, 'parent123')
-        self.assertEqual(rs[1].name, 'parse123')
-        self.assertEqual(rs[2].name, 'test123')
-        self.assertEqual(rs[3].name, 'user123')
+        self.assertEqual(rs[0].name, 'escape123')
+        self.assertEqual(rs[1].name, 'parent123')
+        self.assertEqual(rs[2].name, 'parse123')
+        self.assertEqual(rs[3].name, 'test123')
+        self.assertEqual(rs[4].name, 'user123')
         @staticmethod
         def not_found():
             return '/tmp/this-should-not-exist'

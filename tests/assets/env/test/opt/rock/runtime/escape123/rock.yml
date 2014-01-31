@@ -1,0 +1,8 @@
+env:
+  HELLO: "PARENT \\"
+  PATH: "/opt/rock/runtime/escape123/usr/bin:${PATH}"
+
+build: "build \\"
+
+run: |
+  run \

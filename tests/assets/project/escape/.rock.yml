@@ -1,0 +1,11 @@
+env:
+  HELLO: "world \\"
+
+runtime: escape123
+
+build: "{{ parent }} post \\"
+
+run: |
+  run \
+  {{ parent }}
+  run \
