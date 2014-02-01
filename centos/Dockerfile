@@ -16,6 +16,6 @@ RUN yum install -y \
     rock-runtime-php55 \
     rock-runtime-python27 \
     rock-runtime-python33 \
-    rock-runtime-ruby18 \
     rock-runtime-ruby19 \
-    rock-runtime-ruby20
+    rock-runtime-ruby20 \
+    rock-runtime-ruby21
