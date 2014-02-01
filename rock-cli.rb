@@ -2,7 +2,7 @@ require 'formula'
 
 class RockCli < Formula
   homepage 'http://www.rockstack.org/'
-  url 'https://pypi.python.org/packages/source/r/rock/rock-0.18.0.tar.gz'
+  url 'https://pypi.python.org/packages/source/r/rock/rock-0.18.1.tar.gz'
   sha1 '214e13e4a248133ddefd8acc3b637e62c8076ca9'
 
   depends_on :python
