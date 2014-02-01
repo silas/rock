@@ -26,6 +26,6 @@ clone ${ROCK_RUNTIME_PHP54-rockstack/rock-runtime-php54} runtime-php54
 clone ${ROCK_RUNTIME_PHP55-rockstack/rock-runtime-php55} runtime-php55
 clone ${ROCK_RUNTIME_PYTHON27-rockstack/rock-runtime-python27} runtime-python27
 clone ${ROCK_RUNTIME_PYTHON33-rockstack/rock-runtime-python33} runtime-python33
-clone ${ROCK_RUNTIME_RUBY18-rockstack/rock-runtime-ruby18} runtime-ruby18
 clone ${ROCK_RUNTIME_RUBY19-rockstack/rock-runtime-ruby19} runtime-ruby19
 clone ${ROCK_RUNTIME_RUBY20-rockstack/rock-runtime-ruby20} runtime-ruby20
+clone ${ROCK_RUNTIME_RUBY21-rockstack/rock-runtime-ruby21} runtime-ruby21
