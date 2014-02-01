@@ -25,8 +25,8 @@ except NameError:  # pragma: no cover
         return isinstance(s, str)
 
 
-def raw(value):
-    return value.replace('\\', '\\\\')
+def raw(text):
+    return text.replace('\\', '\\\\')
 
 
 class Shell(object):
