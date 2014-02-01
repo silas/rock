@@ -25,6 +25,10 @@ except NameError:  # pragma: no cover
         return isinstance(s, str)
 
 
+def raw(value):
+    return value.replace('\\', '\\\\')
+
+
 class Shell(object):
 
     def __init__(self):

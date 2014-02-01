@@ -7,7 +7,7 @@ import re
 import string
 import yaml
 from rock.exceptions import ConfigError
-from rock.utils import isstr
+from rock.utils import isstr, raw
 
 PARENT_RE = re.compile(r'\{\{\s*parent\s*\}\}', re.MULTILINE)
 
@@ -111,22 +111,17 @@ class Config(collections.Mapping):
                 if not isstr(dst[name]):
                     raise ConfigError('unable to merge "%s" into "str"' %
                                       type(dst[name]).__name__)
-                dst[name] = PARENT_RE.sub(
-                    dst[name].encode('unicode_escape'),
-                    src[name]
-                )
+                dst[name] = PARENT_RE.sub(raw(dst[name]), src[name])
             elif isinstance(src[name], dict):
                 dst_is_dict = isinstance(dst[name], dict)
                 for subname in src[name]:
                     if isstr(dst[name]):
-                        src[name][subname] = PARENT_RE.sub(
-                            dst[name].encode('unicode_escape'),
-                            src[name][subname]
-                        )
+                        src[name][subname] = PARENT_RE.sub(raw(dst[name]),
+                                                           src[name][subname])
                     elif dst_is_dict:
                         if subname in dst[name]:
                             src[name][subname] = PARENT_RE.sub(
-                                dst[name][subname].encode('unicode_escape'),
+                                raw(dst[name][subname]),
                                 src[name][subname],
                             )
                             del dst[name][subname]
@@ -154,10 +149,7 @@ class Config(collections.Mapping):
                 for n2, v2 in data.items():
                     if not isstr(v2):
                         continue
-                    data[n2] = r.sub(
-                        data[n1].encode('unicode_escape'),
-                        data[n2]
-                    ).rstrip('\n')
+                    data[n2] = r.sub(raw(data[n1]), data[n2]).rstrip('\n')
                     changed |= v2 != data[n2]
             if not changed:
                 break
