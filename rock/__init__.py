@@ -6,4 +6,4 @@
 from __future__ import unicode_literals
 
 __copyright__ = '2014, Silas Sewell'
-__version__ = '0.18.0'
+__version__ = '0.18.1'
