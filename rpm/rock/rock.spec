@@ -1,5 +1,5 @@
 Name:           rock
-Version:        0.18.0
+Version:        0.18.1
 Release:        1%{?dist}
 Summary:        Build, test and run applications
 
@@ -40,6 +40,9 @@ nosetests
 %{python_sitelib}/%{name}-%{version}-py*.egg-info
 
 %changelog
+* Fri Jan 29 2014 RockStack <packages@rockstack.org> - 0.18.1-1
+- Fix escaping issue
+
 * Sat Jan 18 2014 RockStack <packages@rockstack.org> - 0.18.0-1
 - Add include sections
 - Fix locale issue in argmuents

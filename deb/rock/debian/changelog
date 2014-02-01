@@ -1,3 +1,9 @@
+rock (0.18.1-1) unstable; urgency=low
+
+  * Fix escaping issue
+
+ -- RockStack <packages@rockstack.org>  Fri, 29 Jan 2014 00:00:00 +0000
+
 rock (0.18.0-1) unstable; urgency=low
 
   * Add include sections
