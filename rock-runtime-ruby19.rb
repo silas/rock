@@ -56,8 +56,8 @@ class RockRuntimeRuby19 < Formula
     system './configure',
       "--prefix=#{prefix}",
       '--enable-shared',
-      "--with-openssl-dir=#{Formula.factory('openssl').prefix}",
-      "--with-readline-dir=#{Formula.factory('readline').prefix}"
+      "--with-opt-dir=#{Formula.factory('openssl').opt_prefix}",
+      "--with-opt-dir=#{Formula.factory('readline').prefix}"
     system 'make'
     system 'make', 'install'
 
