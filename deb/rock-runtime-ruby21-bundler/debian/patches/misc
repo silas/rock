@@ -1,0 +1,23 @@
+diff -ru bundler-1.5.2.orig/bundler.gemspec bundler-1.5.2/bundler.gemspec
+--- bundler-1.5.2.orig/bundler.gemspec	2014-02-01 21:08:18.999080156 +0000
++++ bundler-1.5.2/bundler.gemspec	2014-02-01 21:09:22.273572521 +0000
+@@ -3,6 +3,9 @@
+ $:.unshift lib unless $:.include?(lib)
+ require 'bundler/version'
+ 
++Encoding.default_external = Encoding::UTF_8
++Encoding.default_internal = Encoding::UTF_8
++
+ Gem::Specification.new do |spec|
+   spec.name        = 'bundler'
+   spec.version     = Bundler::VERSION
+@@ -19,8 +22,7 @@
+   spec.add_development_dependency 'ronn', '~> 0.7.3'
+   spec.add_development_dependency 'rspec', '~> 2.11'
+ 
+-  spec.files       = `git ls-files -z`.split("\x0")
+-  spec.files      += Dir.glob('lib/bundler/man/**/*') # man/ is ignored by git
++  spec.files       = `find .`.split("\n") rescue ''
+   spec.test_files  = spec.files.grep(%r{^spec/})
+ 
+   spec.executables   = %w(bundle bundler)

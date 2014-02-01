@@ -1,0 +1,15 @@
+Source: rock-runtime-ruby21
+Section: ruby
+Priority: extra
+Maintainer: RockStack <packages@rockstack.org>
+Build-Depends: debhelper (>= 8.0.0)
+Standards-Version: 3.9.3
+Homepage: http://www.rockstack.org
+
+Package: rock-runtime-ruby21
+Architecture: all
+Depends: ${shlibs:Depends},
+ ${misc:Depends},
+ rock-runtime-ruby21-core (>= 2.0.0p353-1~),
+ rock-runtime-ruby21-bundler (>= 1.3.4-1~)
+Description: ruby21 runtime for rock.
