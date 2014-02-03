@@ -3,7 +3,7 @@ require 'formula'
 class RockCli < Formula
   homepage 'http://www.rockstack.org/'
   url 'https://pypi.python.org/packages/source/r/rock/rock-0.18.1.tar.gz'
-  sha1 '214e13e4a248133ddefd8acc3b637e62c8076ca9'
+  sha1 '643940afc92cc2a90323dfd09482bd82d2ee296e'
 
   depends_on :python
   depends_on 'libyaml'
