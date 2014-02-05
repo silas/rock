@@ -73,9 +73,6 @@ build: |
     else
       warn 'no "package.json" file found'
     fi
-    if [[ "${ROCK_NPM_SHRINKWRAP}" != "false" ]]; then
-      npm shrinkwrap
-    fi
   else
     if [[ ! -f ./npm-shrinkwrap.json ]]; then
       die 'no "npm-shrinkwrap.json" file found'
