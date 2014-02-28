@@ -18,6 +18,8 @@ except:
 
 class RuntimeTests(TestCase):
 
+    create_lock = None
+
     def assertRun(self, *args, **kwargs):
         kwargs['combine'] = True
         r = ops.run(*args, **kwargs)
@@ -61,6 +63,8 @@ class RuntimeTests(TestCase):
             result = self.assertRun('rock run sample test', cwd=w.path)
             self.assertEquals(result.stdout.rstrip(), '<p>test</p>')
             self.assertRun('rock test', cwd=w.path)
+            if self.create_lock:
+                self.assertRun(self.create_lock, cwd=w.path)
             self.assertRun('rock clean', cwd=w.path)
             self.assertNotRun('rock test', cwd=w.path)
             self.assertRun('rock build --deployment', cwd=w.path)
