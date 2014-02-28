@@ -1,5 +1,6 @@
 env:
   PATH: "${ROCK_PATH}/bin:${ROCK_PATH}/node_modules/.bin:${PATH}"
+  NPM_CONFIG_CACHE: "${HOME}/.npm_${ROCK_RUNTIME}"
   ROCK_NPM_INSTALL: "install"
   ROCK_NPM_INSTALL_DEPLOYMENT: "--verbose --no-color install"
   ROCK_NPM_REBUILD_DEPLOYMENT: "--verbose --no-color rebuild"
