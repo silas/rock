@@ -5,7 +5,7 @@ set -e
 # Constants
 ARCHS=( i386 amd64 )
 ALL_ARCH=i386
-DISTS=( precise )
+DISTS=( trusty)
 ROOT_DIR=/root/rock-build
 PBUILDER_DIR=${ROOT_DIR}/pbuilder
 PBUILDER_MOUNT=${ROOT_DIR}/apt
