@@ -11,7 +11,6 @@ class RockRuntimeRuby18 < Formula
   depends_on 'readline'
   depends_on 'gdbm'
   depends_on 'libyaml'
-  depends_on 'curl-ca-bundle'
 
   resource 'rubygems' do
     url 'http://production.cf.rubygems.org/rubygems/rubygems-1.8.24.tgz'
@@ -85,7 +84,6 @@ class RockRuntimeRuby18 < Formula
         PATH: "#{bin}:${PATH}"
         RUBY_ABI: "#{abi_version}"
         RUBYOPT: "-I#{lib}/ruby/gems/#{abi_version}/gems/bundler-#{resource('bundler').version}/lib -rbundler/setup"
-        SSL_CERT_FILE: "#{Formula.factory('curl-ca-bundle').prefix}/share/ca-bundle.crt"
     EOS
 
     runtime = var + 'rock/opt/rock/runtime'

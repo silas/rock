@@ -15,7 +15,6 @@ class RockRuntimeRuby21 < Formula
   depends_on 'gdbm'
   depends_on 'libyaml'
   depends_on 'openssl'
-  depends_on 'curl-ca-bundle'
 
   resource 'bundler' do
     url 'https://rubygems.org/gems/bundler-1.5.2.gem'
@@ -73,7 +72,6 @@ class RockRuntimeRuby21 < Formula
         PATH: "#{bin}:${PATH}"
         RUBY_ABI: "#{abi_version}"
         RUBYOPT: "-I#{lib}/ruby/gems/#{abi_version}/gems/bundler-#{resource('bundler').version}/lib -rbundler/setup"
-        SSL_CERT_FILE: "#{Formula.factory('curl-ca-bundle').prefix}/share/ca-bundle.crt"
     EOS
 
     runtime = var + 'rock/opt/rock/runtime'
