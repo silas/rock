@@ -111,7 +111,7 @@ class ConfigTestCase(helper.unittest.TestCase):
 
     def test_runtime_notfound(self):
         c = self.setup('runtime_notfound')
-        with self.assertRaisesRegexp(ConfigError, r"runtime path doesn't exist") as a:
+        with self.assertRaisesRegexp(ConfigError, r"none runtime path doesn't exist") as a:
             c['path']
 
     def test_runtime_config_notfound(self):
