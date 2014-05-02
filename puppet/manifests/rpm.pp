@@ -25,7 +25,7 @@ exec { 'vagrant_mock':
 exec { 'brpm':
   command => 'bash -c \'
     echo "#!/usr/bin/env python" > /usr/local/bin/brpm
-    curl -s https://raw.github.com/silas/brpm/master/brpm.py >> /usr/local/bin/brpm
+    curl -Ls https://raw.github.com/silas/brpm/master/brpm.py >> /usr/local/bin/brpm
   \'',
   unless  => 'test -f /usr/local/bin/brpm',
   path    => $::path,
