@@ -17,15 +17,3 @@ clone ${ROCK_TESTS-rockstack/tests}
 clone ${ROCK_SITE-rockstack/rockstack.github.com} site
 clone ${ROCK_UTILS-rockstack/utils} utils
 clone ${ROCK_DOCKERFILES-rockstack/dockerfiles}
-
-clone ${ROCK_RUNTIME_NODE08-rockstack/rock-runtime-node08} runtime-node08
-clone ${ROCK_RUNTIME_NODE010-rockstack/rock-runtime-node010} runtime-node010
-clone ${ROCK_RUNTIME_PERL516-rockstack/rock-runtime-perl516} runtime-perl516
-clone ${ROCK_RUNTIME_PERL518-rockstack/rock-runtime-perl518} runtime-perl518
-clone ${ROCK_RUNTIME_PHP54-rockstack/rock-runtime-php54} runtime-php54
-clone ${ROCK_RUNTIME_PHP55-rockstack/rock-runtime-php55} runtime-php55
-clone ${ROCK_RUNTIME_PYTHON27-rockstack/rock-runtime-python27} runtime-python27
-clone ${ROCK_RUNTIME_PYTHON33-rockstack/rock-runtime-python33} runtime-python33
-clone ${ROCK_RUNTIME_RUBY19-rockstack/rock-runtime-ruby19} runtime-ruby19
-clone ${ROCK_RUNTIME_RUBY20-rockstack/rock-runtime-ruby20} runtime-ruby20
-clone ${ROCK_RUNTIME_RUBY21-rockstack/rock-runtime-ruby21} runtime-ruby21
