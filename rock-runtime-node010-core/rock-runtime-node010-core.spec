@@ -5,7 +5,7 @@
 %global node010_rootdir /opt/rock/runtime/%{runtime}
 
 Name:           rock-runtime-node010-core
-Version:        0.10.26
+Version:        0.10.29
 Release:        1%{?dist}
 Summary:        A Node.js 0.10.x runtime
 
@@ -70,6 +70,9 @@ rm -rf %{buildroot}
 %{_sysconfdir}/rpm/macros.rock-node010
 
 %changelog
+* Thu Jun 26 2014 RockStack <packages@rockstack.org> - 0.10.29-1
+- Update to 0.10.29
+
 * Fri Feb 28 2014 RockStack <packages@rockstack.org> - 0.10.26-1
 - Update to 0.10.26
 
