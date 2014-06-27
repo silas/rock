@@ -1,10 +1,9 @@
 *swp
 .DS_Store
-/dockerfiles
+/docker-centos
 /homebrew
-/packages
 /rock
-/runtime-*
+/rpms
 /site
 /tests
 /utils
