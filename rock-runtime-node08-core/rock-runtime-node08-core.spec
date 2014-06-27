@@ -5,7 +5,7 @@
 %global node08_rootdir /opt/rock/runtime/%{runtime}
 
 Name:           rock-runtime-node08-core
-Version:        0.8.26
+Version:        0.8.27
 Release:        1%{?dist}
 Summary:        A Node.js 0.8.x runtime
 
@@ -72,6 +72,9 @@ rm -rf %{buildroot}
 %{_sysconfdir}/rpm/macros.rock-node08
 
 %changelog
+* Thu Jun 26 2014 RockStack <packages@rockstack.org> - 0.8.27-1
+- Update to 0.8.27
+
 * Sat Oct 19 2013 RockStack <packages@rockstack.org> - 0.8.26-1
 - Update to 0.8.26
 
