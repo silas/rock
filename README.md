@@ -13,6 +13,12 @@ $ pip install coverage pep8 nose
 $ nosetests && pep8 rock --show-source --show-pep8
 ```
 
+## Publish
+
+``` console
+$ python setup.py sdist upload
+```
+
 ## License
 
 This work is licensed under the MIT License (see the LICENSE file).
