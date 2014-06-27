@@ -13,7 +13,6 @@ that allows developers to use modern technologies and encourages
 
  * [CentOS/RHEL](/docs/el/)
  * [OS X](/docs/osx/)
- * [Ubuntu](/docs/ubuntu/)
 
 ## Command Line Tool
 

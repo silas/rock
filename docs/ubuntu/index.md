@@ -3,6 +3,8 @@ layout: default
 title: Install Ubuntu LTS
 ---
 
+*NOTE: Ubuntu is no longer supported.*
+
 # Install Ubuntu LTS
 
 Ubuntu 12.04 is currently supported.
