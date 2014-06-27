@@ -3,7 +3,6 @@ env:
   NPM_CONFIG_CACHE: "${HOME}/.npm_${ROCK_RUNTIME}"
   ROCK_NPM_INSTALL: "install"
   ROCK_NPM_INSTALL_DEPLOYMENT: "--no-color install"
-  ROCK_NPM_REBUILD_DEPLOYMENT: "--no-color rebuild"
 
 init: |
   if [[ "${ROCK_ARGS_HELP}" == "true" ]]; then
@@ -79,7 +78,6 @@ build: |
       die 'no "npm-shrinkwrap.json" file found'
     fi
     npm ${ROCK_NPM_INSTALL_DEPLOYMENT}
-    npm ${ROCK_NPM_REBUILD_DEPLOYMENT}
   fi
 
 test: |
