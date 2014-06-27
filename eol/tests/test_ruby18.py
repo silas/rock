@@ -1,7 +1,6 @@
 import helper
 
 
-@helper.skip('unmaintained')
 class RuntimeTestCase(helper.RuntimeTests):
 
     name = 'ruby18'
