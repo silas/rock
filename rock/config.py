@@ -199,7 +199,9 @@ class Config(collections.Mapping):
             data_path = self.data_path('runtime', file_name)
         # ensure runtime exists
         if not os.path.isdir(runtime.path()):
-            raise ConfigError("runtime path doesn't exist")
+            raise ConfigError(
+                "%s runtime path doesn't exist" % data['runtime']
+            )
         # parse configs
         runtime_config = self.parse(runtime.path('rock.yml'))
         rock_config = self.parse(data_path, require_exists=False)
