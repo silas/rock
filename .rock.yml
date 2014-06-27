@@ -1,3 +1,3 @@
-runtime: ruby19
+runtime: ruby21
 
 run: exec jekyll serve --watch --port ${HTTP_PORT-8000}
