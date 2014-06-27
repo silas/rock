@@ -74,6 +74,24 @@ rock_install_linux_el() {
 }
 
 rock_install_linux_ubuntu() {
+  if [[ "$ROCK_INSTALL_SKIP_WARNING" != 'true' ]]; then
+    echo
+    echo '##      ##    ###    ########  ##    ## #### ##    ##  ######   '
+    echo '##  ##  ##   ## ##   ##     ## ###   ##  ##  ###   ## ##    ##  '
+    echo '##  ##  ##  ##   ##  ##     ## ####  ##  ##  ####  ## ##        '
+    echo '##  ##  ## ##     ## ########  ## ## ##  ##  ## ## ## ##   #### '
+    echo '##  ##  ## ######### ##   ##   ##  ####  ##  ##  #### ##    ##  '
+    echo '##  ##  ## ##     ## ##    ##  ##   ###  ##  ##   ### ##    ##  '
+    echo ' ###  ###  ##     ## ##     ## ##    ## #### ##    ##  ######   '
+    echo
+    read -p 'Ubuntu support is no longer maintained, continue anyway (y/n)? ' -n 1 -r CONFIRM
+    echo
+    if [[ "$CONFIRM" != 'y' ]]; then
+      die 'Exiting...'
+    fi
+    echo
+  fi
+
   if ! dpkg -s rock-release 2>&1 | grep Status &>/dev/null; then
     tmp=$( mktemp -d )
 
