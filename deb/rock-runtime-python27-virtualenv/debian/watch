@@ -1,3 +1,0 @@
-version=3
-https://pypi.python.org/packages/source/v/virtualenv/virtualenv-(.*).tar.gz \
-  debian uupdate

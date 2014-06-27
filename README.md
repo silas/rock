@@ -1,7 +1,6 @@
-Rock Packages
-=============
+# rpms
 
-Rock system packages.
+RockStack rpms for CentOS.
 
 ## License
 

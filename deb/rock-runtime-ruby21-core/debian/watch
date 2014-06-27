@@ -1,4 +1,0 @@
-version=3
-opts=uversionmangle=s/(.*)/$1$2/ \
-  http://ftp.ruby-lang.org/pub/ruby/2.1/ruby-(.*).tar.gz \
-  debian uupdate

@@ -1,5 +1,0 @@
-version=3
-opts=downloadurlmangle=s#.*v(0\.8\.[0-9]*).*#http://nodejs.org/dist/v$1/node-v$1.tar.gz#\
-,filenamemangle=s#v(0\.8\.[0-9]*).*#node-v$1.tar.gz# \
-  http://nodejs.org/dist v(0\.8\.[0-9]*)/ \
-  debian uupdate

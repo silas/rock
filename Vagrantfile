@@ -1,25 +1,38 @@
 Vagrant.configure('2') do |config|
-  customize = [
-    'modifyvm', :id,
-    '--cpus', ENV['BUILD_CPUS'] || '4',
-    '--memory', ENV['BUILD_MEMORY'] || 1024,
-  ]
+  config.vm.box = 'fedora-20'
+  config.vm.box_url = 'http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_fedora-20_chef-provisionerless.box'
 
-  config.vm.define :deb do |deb_config|
-    deb_config.vm.box = 'ubuntu-13_10'
-    deb_config.vm.box_url = 'http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-13.10_chef-provisionerless.box'
-    deb_config.vm.provider :virtualbox do |v|
-      v.customize customize
-    end
-    deb_config.vm.provision 'shell', path: 'misc/deb.sh'
+  config.vm.provider :virtualbox do |v|
+    v.customize ['modifyvm', :id, '--cpus', ENV['BUILD_CPUS'] || '4']
+    v.customize ['modifyvm', :id, '--memory', ENV['BUILD_MEMORY'] || 1024]
+    v.customize ['modifyvm', :id, '--natdnshostresolver1', 'on']
+    v.customize ['modifyvm', :id, '--natdnsproxy1', 'on']
+    v.customize ['setextradata', :id, 'VBoxInternal2/SharedFoldersEnableSymlinksCreate/v-root', '1']
   end
 
-  config.vm.define :rpm do |rpm_config|
-    rpm_config.vm.box = 'fedora-20'
-    rpm_config.vm.box_url = 'http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_fedora-20_chef-provisionerless.box'
-    rpm_config.vm.provider :virtualbox do |v|
-      v.customize customize
-    end
-    rpm_config.vm.provision 'shell', path: 'misc/rpm.sh'
-  end
+  config.vm.provision :shell, inline: <<-eof
+    set -o errexit
+
+    yum clean all
+
+    yum update -y vim-minimal
+
+    yum install -y \
+      createrepo \
+      curl \
+      fedora-packager \
+      mock \
+      python-pip \
+      vim
+
+    pip install ops
+
+    usermod vagrant -G mock
+
+    echo '#!/usr/bin/env python' > /usr/local/bin/brpm
+
+    curl -Ls https://github.com/silas/brpm/raw/master/brpm.py >> /usr/local/bin/brpm
+
+    chmod 755 /usr/local/bin/brpm
+  eof
 end

@@ -1,4 +1,0 @@
-version=3
-opts=uversionmangle=s/(.*)/$1.0/ \
-  http://search.cpan.org/CPAN/authors/id/A/AP/APEIRON/local-lib-(.*)\.tar\.gz \
-  debian uupdate
