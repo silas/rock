@@ -12,7 +12,7 @@ Enterprise Linux 6.x is currently supported.
  1. Run installer script
 
     ``` console
-    $ bash -c "$(curl -fsSL https://raw.github.com/rockstack/utils/master/install)"
+    $ bash -c "$(curl -fsSL https://github.com/rockstack/utils/raw/master/install)"
     ```
 
  1. Install whatever runtimes you'll need

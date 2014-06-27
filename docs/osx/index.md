@@ -12,7 +12,7 @@ OS X 10.7 - 10.9 is currently supported via Homebrew.
  1. Run installer script
 
     ``` console
-    $ bash -c "$(curl -fsSL https://raw.github.com/rockstack/utils/master/install)"
+    $ bash -c "$(curl -fsSL https://github.com/rockstack/utils/raw/master/install)"
     ```
 
  1. Install whatever runtimes you'll need
@@ -28,7 +28,7 @@ OS X 10.7 - 10.9 is currently supported via Homebrew.
  1. Ensure [Homebrew][homebrew] is installed
 
     ``` console
-    $ ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
+    $ ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
     ```
 
  1. Ensure Homebrew is up-to-date
