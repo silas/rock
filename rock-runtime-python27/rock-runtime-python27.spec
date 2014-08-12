@@ -3,7 +3,7 @@
 
 Name:           rock-runtime-python27
 Version:        1
-Release:        10%{?dist}
+Release:        11%{?dist}
 Summary:        python27 runtime for rock
 
 Group:          Development/Languages
@@ -12,8 +12,8 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 
 BuildRequires:  rock-runtime-python27-core-rpmbuild
-Requires:       rock-runtime-python27-core >= 2.7.6-2
-Requires:       rock-runtime-python27-virtualenv >= 1.11-1
+Requires:       rock-runtime-python27-core >= 2.7.8-1
+Requires:       rock-runtime-python27-virtualenv >= 1.11.6-1
 
 %description
 python27 runtime for rock.
@@ -40,6 +40,10 @@ rm -rf %{buildroot}
 %{python27_rootdir}/rock.yml
 
 %changelog
+* Mon Aug 11 2014 RockStack <packages@rockstack.org> - 1-11
+- Python 2.7.8
+- virtualenv 1.11.6
+
 * Wed Jan 29 2014 RockStack <packages@rockstack.org> - 1-10
 - Fix build path issue in core
 

@@ -8,8 +8,8 @@
 %global python27_sitedir %{python27_libdir}/site-packages
 
 Name:           rock-runtime-python27-core
-Version:        2.7.6
-Release:        2%{?dist}
+Version:        2.7.8
+Release:        1%{?dist}
 Summary:        A Python 2.7.x runtime
 
 Group:          Development/Languages
@@ -105,6 +105,9 @@ rm -rf %{buildroot}
 %{python27_rootdir}%{_prefix}/lib/pkgconfig/python*.pc
 
 %changelog
+* Mon Aug 11 2014 RockStack <packages@rockstack.org> - 2.7.8-1
+- Update to 2.7.8
+
 * Wed Jan 29 2014 Allan Feid <afeid@shutterstock.com> - 2.7.6-2
 - Make sure to remove buildroot from _sysconfigdata.py
 
