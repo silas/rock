@@ -1,7 +1,7 @@
 %filter_from_provides /.*/d
 %filter_setup
 
-%global bundler_version 1.5.2
+%global bundler_version 1.6.5
 
 Name:           rock-runtime-ruby21
 Version:        1
@@ -15,7 +15,7 @@ BuildArch:      noarch
 
 BuildRequires:  rock-runtime-ruby21-core-rpmbuild
 Requires:       rock-runtime-ruby21-bundler >= %{bundler_version}-1
-Requires:       rock-runtime-ruby21-core >= 2.1.0-1
+Requires:       rock-runtime-ruby21-core >= 2.1.2-1
 
 %description
 ruby21 runtime for rock.
@@ -44,5 +44,9 @@ rm -rf %{buildroot}
 %{ruby21_rootdir}/rock.yml
 
 %changelog
+* Wed Aug 06 2014 RockStack <packages@rockstack.org> - 1-2
+- Ruby 2.1.2
+- Bundler 1.6.5
+
 * Sat Feb 01 2014 RockStack <packages@rockstack.org> - 1-1
 - Initial build

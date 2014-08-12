@@ -7,7 +7,7 @@
 %global ruby21_abi 2.1.0
 %global ruby21_gemdir %{ruby21_rootdir}%{_prefix}/lib/ruby/gems/%{ruby21_abi}
 
-%global shortversion 2.1.0
+%global shortversion 2.1.2
 %global patch 0
 
 Name:           rock-runtime-ruby21-core
@@ -19,8 +19,6 @@ Group:          Development/Languages
 License:        Ruby or BSD
 URL:            http://ruby-lang.org
 Source0:        http://ftp.ruby-lang.org/pub/ruby/2.1/ruby-%{shortversion}.tar.gz
-# https://github.com/rubygems/rubygems/commit/f5bbf838c8b13369a61c6756355305388df5824f
-Patch0:         rubygems-local.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  chrpath
@@ -49,7 +47,6 @@ This packages contains resources for building %{name} RPMs.
 
 %prep
 %setup -q -n ruby-%{shortversion}
-%patch0 -p1
 
 %build
 ./configure \
@@ -97,5 +94,8 @@ rm -rf %{buildroot}
 %{ruby21_rootdir}%{_prefix}/lib/pkgconfig/ruby*
 
 %changelog
+* Wed Aug 06 2014 RockStack <packages@rockstack.org> - 2.1.2-1
+- Update to 2.1.2
+
 * Sat Feb 01 2014 RockStack <packages@rockstack.org> - 2.1.0-1
 - Initial package
