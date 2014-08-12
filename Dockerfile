@@ -12,10 +12,11 @@ RUN yum install -y \
     rock-runtime-node010 \
     rock-runtime-perl516 \
     rock-runtime-perl518 \
+    rock-runtime-perl520 \
     rock-runtime-php54 \
     rock-runtime-php55 \
     rock-runtime-python27 \
-    rock-runtime-python33 \
+    rock-runtime-python34 \
     rock-runtime-ruby19 \
     rock-runtime-ruby20 \
     rock-runtime-ruby21
