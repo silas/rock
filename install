@@ -4,7 +4,7 @@ set -e -o pipefail
 
 trap 'echo interrupted; exit' INT
 
-RUNTIMES='node08 node010 perl516 perl518 php54 php55 python27 python33 ruby19 ruby20 ruby21'
+RUNTIMES='node08 node010 perl516 perl518 perl520 php54 php55 python27 python34 ruby19 ruby20 ruby21'
 
 display() { echo "-----> $@"; }
 warn() { echo "$@" >&2; }
