@@ -1,6 +1,7 @@
 *.pyc
 *swp
 .vagrant
+build
 deb
 rpm
 venv
