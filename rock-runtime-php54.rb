@@ -6,8 +6,8 @@ end
 
 class RockRuntimePhp54 < Formula
   homepage 'http://www.php.net/'
-  url 'http://us.php.net/distributions/php-5.4.24.tar.bz2'
-  sha1 '0f6c16e393a837b1576e3a332ade6ae7c1f5305b'
+  url 'http://us.php.net/distributions/php-5.4.31.tar.bz2'
+  sha1 '46cb2a7827fa3af4980462f62190b96cc283ec99'
 
   env :std
   keg_only 'rock'
