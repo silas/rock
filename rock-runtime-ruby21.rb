@@ -2,14 +2,11 @@ require 'formula'
 
 class RockRuntimeRuby21 < Formula
   homepage 'http://www.python.org/'
-  url 'http://ftp.ruby-lang.org/pub/ruby/2.1/ruby-2.1.0.tar.gz'
-  sha1 '99114e71c7765b5bdc0414c189a338f6f21fb51d'
+  url 'http://ftp.ruby-lang.org/pub/ruby/2.1/ruby-2.1.2.tar.gz'
+  sha1 'b818d56b4638f1949239038623b761517d4a5686'
 
   env :std
   keg_only 'rock'
-
-  # https://github.com/rubygems/rubygems/commit/f5bbf838c8b13369a61c6756355305388df5824f
-  def patches; DATA; end
 
   depends_on 'readline'
   depends_on 'gdbm'
@@ -17,8 +14,8 @@ class RockRuntimeRuby21 < Formula
   depends_on 'openssl'
 
   resource 'bundler' do
-    url 'https://rubygems.org/gems/bundler-1.5.2.gem'
-    sha1 '78a9fe1161407778f437fae39cb5ac51127f4635'
+    url 'https://rubygems.org/gems/bundler-1.6.5.gem'
+    sha1 'e2d879350fcc417c5b8868bc52ab9309f0a7fae6'
   end
 
   def abi_version
@@ -82,67 +79,3 @@ class RockRuntimeRuby21 < Formula
     File.symlink(prefix, runtime)
   end
 end
-
-__END__
-diff -ru ruby-2.1.0.orig/lib/rubygems/commands/install_command.rb ruby-2.1.0/lib/rubygems/commands/install_command.rb
---- ruby-2.1.0.orig/lib/rubygems/commands/install_command.rb	2014-02-01 13:34:30.000000000 -0800
-+++ ruby-2.1.0/lib/rubygems/commands/install_command.rb	2014-02-01 13:35:58.000000000 -0800
-@@ -228,7 +228,18 @@
-   def install_gem_without_dependencies name, req # :nodoc:
-     gem = nil
- 
--    if remote? then
-+    if local? then
-+      if name =~ /\.gem$/ and File.file? name then
-+        source = Gem::Source::SpecificFile.new name
-+        spec = source.spec
-+      else
-+        source = Gem::Source::Local.new
-+        spec = source.find_gem name, req
-+      end
-+      gem = source.download spec if spec
-+    end
-+
-+    if remote? and not gem then
-       dependency = Gem::Dependency.new name, req
-       dependency.prerelease = options[:prerelease]
- 
-@@ -236,13 +247,6 @@
-       gem = fetcher.download_to_cache dependency
-     end
- 
--    if local? and not gem then
--      source = Gem::Source::Local.new
--      spec = source.find_gem name, req
--
--      gem = source.download spec
--    end
--
-     inst = Gem::Installer.new gem, options
-     inst.install
- 
-diff -ru ruby-2.1.0.orig/test/rubygems/test_gem_commands_install_command.rb ruby-2.1.0/test/rubygems/test_gem_commands_install_command.rb
---- ruby-2.1.0.orig/test/rubygems/test_gem_commands_install_command.rb	2014-02-01 13:34:30.000000000 -0800
-+++ ruby-2.1.0/test/rubygems/test_gem_commands_install_command.rb	2014-02-01 13:35:58.000000000 -0800
-@@ -559,6 +559,20 @@
-     assert_equal %w[a-2], @cmd.installed_specs.map { |spec| spec.full_name }
-   end
- 
-+  def test_install_gem_ignore_dependencies_specific_file
-+    spec = quick_spec 'a', 2
-+
-+    util_build_gem spec
-+
-+    FileUtils.mv spec.cache_file, @tempdir
-+
-+    @cmd.options[:ignore_dependencies] = true
-+
-+    @cmd.install_gem File.join(@tempdir, spec.file_name), nil
-+
-+    assert_equal %w[a-2], @cmd.installed_specs.map { |spec| spec.full_name }
-+  end
-+
-   def test_parses_requirement_from_gemname
-     spec_fetcher do |fetcher|
-       fetcher.gem 'a', 2
-Only in ruby-2.1.0/test/rubygems: test_gem_commands_install_command.rb.orig
