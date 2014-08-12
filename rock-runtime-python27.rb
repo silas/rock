@@ -2,15 +2,15 @@ require 'formula'
 
 class RockRuntimePython27 < Formula
   homepage 'http://www.python.org/'
-  url 'http://www.python.org/ftp/python/2.7.6/Python-2.7.6.tgz'
-  sha1 '8328d9f1d55574a287df384f4931a3942f03da64'
+  url 'http://www.python.org/ftp/python/2.7.8/Python-2.7.8.tgz'
+  sha1 '511960dd78451a06c9df76509635aeec05b2051a'
 
   env :std
   keg_only 'rock'
 
   resource 'virtualenv' do
-    url 'https://pypi.python.org/packages/source/v/virtualenv/virtualenv-1.11.tar.gz'
-    sha1 '1f61baf4963a4bbea116049f6970962d6add641f'
+    url 'https://pypi.python.org/packages/source/v/virtualenv/virtualenv-1.11.6.tar.gz'
+    sha1 'd3f8e94bf825cc999924e276c8f1c63b8eeb0715'
   end
 
   def install
