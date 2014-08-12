@@ -9,4 +9,5 @@
 *.zip
 .vagrant
 build
+cpanm
 fabfile.py
