@@ -1,5 +1,5 @@
 Name:           rock
-Version:        0.19.0
+Version:        0.20.0
 Release:        1%{?dist}
 Summary:        Build, test and run applications
 
@@ -40,6 +40,10 @@ nosetests
 %{python_sitelib}/%{name}-%{version}-py*.egg-info
 
 %changelog
+* Tue Aug 12 2014 RockStack <packages@rockstack.org> - 0.20.0-1
+- Make runtime optional
+- Support bare runtimes
+
 * Thu Jun 26 2014 RockStack <packages@rockstack.org> - 0.19.0-1
 - Make node runtime builds less verbose
 - Improve missing runtime error
