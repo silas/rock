@@ -11,7 +11,6 @@ title: Perl
 
   * perl520 - 5.20.x
   * perl518 - 5.18.x
-  * perl516 - 5.16.x
 
 ## Dependency Management
 

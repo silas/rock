@@ -11,7 +11,6 @@ title: Ruby
 
   * ruby21 - 2.1.x
   * ruby20 - 2.0.x
-  * ruby19 - 1.9.x
 
 ## Dependency Management
 
