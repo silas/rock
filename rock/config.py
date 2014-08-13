@@ -6,6 +6,7 @@ import os
 import re
 import string
 import yaml
+from rock import constants
 from rock.exceptions import ConfigError
 from rock.utils import isstr, raw
 
@@ -41,7 +42,7 @@ class Config(collections.Mapping):
 
     @staticmethod
     def mount_path(*args):
-        return os.path.join(*(os.environ.get('ROCK_MOUNT_PATH', '/'),) + args)
+        return os.path.join(*(constants.MOUNT_PATH,) + args)
 
     @staticmethod
     def user_path(*args):

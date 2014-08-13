@@ -1,7 +1,8 @@
 from __future__ import unicode_literals
 
 import helper
-from rock import utils
+import uuid
+from rock import constants, utils
 from rock.exceptions import ConfigError
 
 
@@ -24,7 +25,12 @@ class UtilsTestCase(helper.unittest.TestCase):
         s.__exit__('type', 'value', 'tracebook')
 
     def test_noshell(self):
-        utils.ROCK_SHELL = '/tmp/hopefully-no-exists'
-        s = utils.Shell()
-        s.__enter__()
-        self.assertRaises(ConfigError, s.__exit__, 'type', 'value', 'tracebook')
+        previous_shell = constants.SHELL
+        try:
+            name = '%s' % uuid.uuid4()
+            constants.SHELL = ['/bin/%s' % name, name]
+            s = utils.Shell()
+            s.__enter__()
+            self.assertRaises(ConfigError, s.__exit__, 'type', 'value', 'tracebook')
+        finally:
+            constants.SHELL = previous_shell
