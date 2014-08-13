@@ -186,10 +186,15 @@ class Config(collections.Mapping):
             data.update(self.data)
         else:
             data = copy.deepcopy(self.data)
+        # no runtime
+        has_runtime = 'runtime' in data
+        if not has_runtime:
+            data['runtime'] = '__none__'
         # project
-        for name in ('path', 'runtime'):
-            if name not in data:
-                raise ConfigError('%s is required' % name)
+        if not data.get('path'):
+            raise ConfigError('path is required')
+        if not os.path.isdir(data['path']):
+            raise ConfigError('path is not a directory')
         # paths
         runtime = self.runtime(data['runtime'])
         etc_path = self.etc_path('runtime')
@@ -199,12 +204,13 @@ class Config(collections.Mapping):
             file_name = data['runtime'].rstrip('0123456789') + '.yml'
             data_path = self.data_path('runtime', file_name)
         # ensure runtime exists
-        if not os.path.isdir(runtime.path()):
+        if has_runtime and not os.path.isdir(runtime.path()):
             raise ConfigError(
                 "%s runtime path doesn't exist" % data['runtime']
             )
         # parse configs
-        runtime_config = self.parse(runtime.path('rock.yml'))
+        runtime_config = self.parse(runtime.path('rock.yml'),
+                                    require_exists=has_runtime)
         rock_config = self.parse(data_path, require_exists=False)
         etc_config = self.parse(os.path.join(etc_path, runtime_yml),
                                 require_exists=False)

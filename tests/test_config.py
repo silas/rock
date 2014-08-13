@@ -97,18 +97,6 @@ class ConfigTestCase(helper.unittest.TestCase):
         finally:
             os.chdir(cwd)
 
-    def test_no_valid_config(self):
-        rock_path = tempfile.mkdtemp()
-        cwd = os.getcwd()
-        try:
-            os.chdir(rock_path)
-            c = self.setup('path', config={})
-            with self.assertRaisesRegexp(ConfigError, r"runtime is required") as a:
-                c['path']
-        finally:
-            os.chdir(cwd)
-            shutil.rmtree(rock_path)
-
     def test_runtime_notfound(self):
         c = self.setup('runtime_notfound')
         with self.assertRaisesRegexp(ConfigError, r"none runtime path doesn't exist") as a:
