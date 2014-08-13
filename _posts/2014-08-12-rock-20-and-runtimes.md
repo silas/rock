@@ -5,8 +5,8 @@ title: rock 0.20, and runtime changes
 
 [rock 0.20][pypi] ([diff][diff]) released.
 
- - make runtime optional
- - add bare runtimes: node, perl, php, python, and ruby (sets default tasks, but uses whatever is installed in your `PATH`)
+ - Add bare runtimes: node, perl, php, python, and ruby (sets default tasks, but uses whatever is installed in your PATH)
+ - Change runtime to be optional
 
 Runtime Changes
 
