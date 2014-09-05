@@ -2,8 +2,8 @@ require 'formula'
 
 class RockRuntimeNode010 < Formula
   homepage 'http://nodejs.org/'
-  url 'http://nodejs.org/dist/v0.10.30/node-v0.10.30.tar.gz'
-  sha1 'bcef88d76c39147c79a28aa9e5d484564eb3ba7e'
+  url 'http://nodejs.org/dist/v0.10.31/node-v0.10.31.tar.gz'
+  sha1 '80f2160b0525763b557742aa73d8dacf1a71e53c'
 
   keg_only 'rock'
 
