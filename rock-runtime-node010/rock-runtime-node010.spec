@@ -3,7 +3,7 @@
 
 Name:           rock-runtime-node010
 Version:        1
-Release:        15%{?dist}
+Release:        16%{?dist}
 Summary:        node010 runtime for rock
 
 Group:          Development/Languages
@@ -12,7 +12,7 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 
 BuildRequires:  rock-runtime-node010-core-rpmbuild
-Requires:       rock-runtime-node010-core >= 0.10.30-1
+Requires:       rock-runtime-node010-core >= 0.10.31-1
 
 %description
 node010 runtime for rock.
@@ -39,6 +39,9 @@ rm -rf %{buildroot}
 %{node010_rootdir}/rock.yml
 
 %changelog
+* Thu Sep 04 2014 RockStack <packages@rockstack.org> - 1-16
+- Node 0.10.31
+
 * Mon Aug 11 2014 RockStack <packages@rockstack.org> - 1-15
 - Node 0.10.30
 
@@ -69,7 +72,7 @@ rm -rf %{buildroot}
 * Sat Apr 27 2013 RockStack <packages@rockstack.org> - 1-6
 - Node 0.10.5
 
-* Sun Apr 15 2013 RockStack <packages@rockstack.org> - 1-5
+* Mon Apr 15 2013 RockStack <packages@rockstack.org> - 1-5
 - Node 0.10.4
 
 * Tue Apr 09 2013 RockStack <packages@rockstack.org> - 1-4
