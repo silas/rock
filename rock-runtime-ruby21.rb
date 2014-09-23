@@ -2,8 +2,8 @@ require 'formula'
 
 class RockRuntimeRuby21 < Formula
   homepage 'http://www.python.org/'
-  url 'http://ftp.ruby-lang.org/pub/ruby/2.1/ruby-2.1.2.tar.gz'
-  sha1 'b818d56b4638f1949239038623b761517d4a5686'
+  url 'http://ftp.ruby-lang.org/pub/ruby/2.1/ruby-2.1.3.tar.gz'
+  sha1 'ca6e120e5a2ee7deb3a7493696b5bbc28bfc2236'
 
   env :std
   keg_only 'rock'
@@ -14,8 +14,8 @@ class RockRuntimeRuby21 < Formula
   depends_on 'openssl'
 
   resource 'bundler' do
-    url 'https://rubygems.org/gems/bundler-1.6.5.gem'
-    sha1 'e2d879350fcc417c5b8868bc52ab9309f0a7fae6'
+    url 'https://rubygems.org/gems/bundler-1.7.3.gem'
+    sha1 '618fdf76f35e873e490e15cdac87be7f7247f81b'
   end
 
   def abi_version
