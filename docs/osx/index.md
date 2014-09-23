@@ -5,7 +5,7 @@ title: Install OS X
 
 # Install OS X
 
-OS X 10.7 - 10.9 is currently supported via Homebrew.
+OS X 10.8 / 10.9 is currently supported via Homebrew.
 
 ## Automatic
 

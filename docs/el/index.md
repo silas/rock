@@ -5,7 +5,7 @@ title: Install CentOS/RHEL
 
 # Install CentOS/RHEL
 
-Enterprise Linux 6.x is currently supported.
+Enterprise Linux 6.x / 7.x is currently supported.
 
 ## Automatic
 
