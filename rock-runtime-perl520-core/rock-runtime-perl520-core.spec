@@ -15,7 +15,7 @@
 %global perl520_archname %{_arch}-%{_os}%{perl520_arch_stem}
 
 Name:           rock-runtime-perl520-core
-Version:        5.20.0
+Version:        5.20.1
 Release:        1%{?dist}
 Summary:        A Perl 5.20.x runtime
 
@@ -102,5 +102,8 @@ rm -rf %{buildroot}
 %{_sysconfdir}/rpm/macros.rock-perl520
 
 %changelog
+* Mon Sep 22 2014 RockStack <packages@rockstack.org> - 5.20.1-1
+- Update to 5.20.1
+
 * Mon Aug 11 2014 RockStack <packages@rockstack.org> - 5.20.0-1
 - Update to 5.20.0
