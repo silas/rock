@@ -3,7 +3,7 @@
 %filter_setup
 
 Name:           rock-runtime-ruby21-bundler
-Version:        1.6.5
+Version:        1.7.3
 Release:        1%{?dist}
 Summary:        A tool to manage Ruby 2.1.x dependencies
 
@@ -58,6 +58,9 @@ rm -rf %{buildroot}
 %{ruby21_rootdir}%{_bindir}/rock-bundle
 
 %changelog
+* Mon Sep 22 2014 RockStack <packages@rockstack.org> - 1.7.3-1
+- Update to 1.7.3
+
 * Wed Aug 06 2014 RockStack <packages@rockstack.org> - 1.6.5-1
 - Update to 1.6.5
 

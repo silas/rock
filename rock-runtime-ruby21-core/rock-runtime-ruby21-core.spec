@@ -7,7 +7,7 @@
 %global ruby21_abi 2.1.0
 %global ruby21_gemdir %{ruby21_rootdir}%{_prefix}/lib/ruby/gems/%{ruby21_abi}
 
-%global shortversion 2.1.2
+%global shortversion 2.1.3
 %global patch 0
 
 Name:           rock-runtime-ruby21-core
@@ -94,6 +94,9 @@ rm -rf %{buildroot}
 %{ruby21_rootdir}%{_prefix}/lib/pkgconfig/ruby*
 
 %changelog
+* Mon Sep 22 2014 RockStack <packages@rockstack.org> - 2.1.3-1
+- Update to 2.1.3
+
 * Wed Aug 06 2014 RockStack <packages@rockstack.org> - 2.1.2-1
 - Update to 2.1.2
 
