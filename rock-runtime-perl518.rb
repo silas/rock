@@ -10,7 +10,7 @@ class RockRuntimePerl518 < Formula
   def install_local_lib
     local_lib_version = '1.008023'
 
-    system 'curl', '-LO', "http://www.cpan.org/authors/id/E/ET/ETHER/local-lib-#{local_lib_version}.tar.gz"
+    system 'curl', '-LO', "http://backpan.cpan.org/authors/id/E/ET/ETHER/local-lib-#{local_lib_version}.tar.gz"
     system 'tar', '-xzf', "local-lib-#{local_lib_version}.tar.gz"
 
     Dir.chdir "local-lib-#{local_lib_version}"
@@ -31,7 +31,7 @@ class RockRuntimePerl518 < Formula
   def install_carton
     carton_version = '1.0.12'
 
-    url = 'http://www.cpan.org/authors/id'
+    url = 'http://backpan.cpan.org/authors/id'
 
     urls = [
       "#{url}/G/GA/GAAS/WWW-RobotRules-6.02.tar.gz",
