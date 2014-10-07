@@ -10,7 +10,7 @@ Summary:        A tool to manage Perl 5.16.x dependencies
 Group:          Development/Languages
 License:        (GPL+ or Artistic) and (GPLv2+ or Artistic) and Copyright Only and MIT and Public Domain and UCD
 URL:            http://search.cpan.org/~miyagawa/App-cpanminus
-Source0:        https://raw.github.com/miyagawa/cpanminus/%{version}/cpanm
+Source0:        https://raw.githubusercontent.com/miyagawa/cpanminus/%{version}/cpanm
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 

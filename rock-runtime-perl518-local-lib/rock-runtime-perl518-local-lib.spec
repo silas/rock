@@ -10,7 +10,7 @@ Summary:        A tool to manage Perl 5.18.x dependencies
 Group:          Development/Languages
 License:        GPL+ or Artistic
 URL:            http://search.cpan.org/~apeiron/local-lib
-Source0:        http://www.cpan.org/authors/id/E/ET/ETHER/local-lib-%{version}.tar.gz
+Source0:        http://backpan.perl.org/authors/id/E/ET/ETHER/local-lib-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 

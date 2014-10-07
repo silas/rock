@@ -2,7 +2,7 @@
 %filter_from_requires /^perl.*/d
 %filter_setup
 
-%global cpan_url http://www.cpan.org/authors/id
+%global cpan_url http://backpan.cpan.org/authors/id
 
 Name:           rock-runtime-perl518-carton
 Version:        1.0.12

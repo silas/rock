@@ -157,6 +157,9 @@ rm -rf %{buildroot}
 %{php55_libdir}/libmemcachedutil.so
 %{php55_libdir}/pkgconfig/libmemcached.pc
 %{php55_rootdir}%{_datadir}/aclocal/ax_libmemcached.m4
+%if !0%{?el6}
+%{php55_rootdir}%{_mandir}
+%endif
 
 
 %changelog
