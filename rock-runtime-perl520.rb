@@ -1,37 +1,37 @@
-require 'formula'
+require "formula"
 
 class RockRuntimePerl520 < Formula
-  homepage 'http://www.perl.org/'
-  url 'http://www.cpan.org/src/5.0/perl-5.20.1.tar.bz2'
-  sha1 'cd424d1520ba2686fe5d4422565aaf880e9467f6'
+  homepage "http://www.perl.org/"
+  url "http://www.cpan.org/src/5.0/perl-5.20.1.tar.bz2"
+  sha256 "ede5ded37e7fb6139b04728cfca826f17076f9888dbfd100a56834dbeb04657c"
 
-  keg_only 'rock'
+  keg_only "rock"
 
   def install_local_lib
-    local_lib_version = '2.000012'
+    local_lib_version = "2.000012"
 
-    system 'curl', '-LO', "http://search.cpan.org/CPAN/authors/id/H/HA/HAARG/local-lib-#{local_lib_version}.tar.gz"
-    system 'tar', '-xzf', "local-lib-#{local_lib_version}.tar.gz"
+    system "curl", "-LO", "http://search.cpan.org/CPAN/authors/id/H/HA/HAARG/local-lib-#{local_lib_version}.tar.gz"
+    system "tar", "-xzf", "local-lib-#{local_lib_version}.tar.gz"
 
     Dir.chdir "local-lib-#{local_lib_version}"
 
-    system 'perl', 'Makefile.PL'
-    system 'make', 'install'
+    system "perl", "Makefile.PL"
+    system "make", "install"
 
-    Dir.chdir '..'
+    Dir.chdir ".."
   end
 
   def install_cpanm
-    cpanm_version = '1.7102'
+    cpanm_version = "1.7102"
 
-    system 'curl', '-Lo', "#{bin}/cpanm", "https://raw.github.com/miyagawa/cpanminus/#{cpanm_version}/cpanm"
-    system 'chmod', '755', "#{bin}/cpanm"
+    system "curl", "-Lo", "#{bin}/cpanm", "https://raw.github.com/miyagawa/cpanminus/#{cpanm_version}/cpanm"
+    system "chmod", "755", "#{bin}/cpanm"
   end
 
   def install_carton
-    carton_version = '1.0.12'
+    carton_version = "1.0.12"
 
-    url = 'http://www.cpan.org/authors/id'
+    url = "http://www.cpan.org/authors/id"
 
     urls = [
       "#{url}/D/DA/DAGOLDEN/File-pushd-1.009.tar.gz",
@@ -63,27 +63,27 @@ class RockRuntimePerl520 < Formula
       "#{url}/M/MI/MIYAGAWA/Carton-v#{carton_version}.tar.gz",
     ]
 
-    home = ENV['HOME']
-    ENV['HOME'] = Dir.getwd
+    home = ENV["HOME"]
+    ENV["HOME"] = Dir.getwd
 
-    system 'cpanm', '-l', 'local', '--notest', *urls
+    system "cpanm", "-l", "local", "--notest", *urls
 
-    ENV['HOME'] = home
+    ENV["HOME"] = home
 
-    system 'mv', 'local', "#{lib}/carton"
+    system "mv", "local", "#{lib}/carton"
 
-    (bin + 'carton').write <<-EOS.undent
+    (bin + "carton").write <<-EOS.undent
       #!/usr/bin/env bash
       perl -Mlocal::lib=#{lib}/carton #{lib}/carton/bin/carton "$@"
     EOS
 
-    system 'chmod', '755', "#{bin}/carton"
+    system "chmod", "755", "#{bin}/carton"
   end
 
   def install
-    archname='darwin-thread-multi-2level'
+    archname="darwin-thread-multi-2level"
 
-    system './Configure', '-des',
+    system "./Configure", "-des",
       "-Dprefix=#{prefix}",
       "-Dvendorprefix=#{prefix}",
       "-Dsiteprefix=#{prefix}/local",
@@ -94,31 +94,31 @@ class RockRuntimePerl520 < Formula
       "-Darchlib=#{lib}/perl5",
       "-Dvendorarch=#{lib}/perl5/vendor_perl",
       "-Darchname=#{archname}",
-      '-Dman3ext=3pm',
-      '-Dusethreads',
-      '-Duseithreads',
-      '-Duselargefiles',
-      '-Duseperl'
+      "-Dman3ext=3pm",
+      "-Dusethreads",
+      "-Duseithreads",
+      "-Duselargefiles",
+      "-Duseperl"
 
-    system 'make'
-    system 'make', 'install'
+    system "make"
+    system "make", "install"
 
-    ENV['PATH'] = "#{bin}:#{ENV['PATH']}"
+    ENV["PATH"] = "#{bin}:#{ENV["PATH"]}"
 
     install_local_lib
     install_cpanm
     install_carton
 
-    (prefix + 'rock.yml').write <<-EOS.undent
+    (prefix + "rock.yml").write <<-EOS.undent
       env:
         PATH: "#{bin}:${PATH}"
         PERL_ARCHNAME: "#{archname}"
     EOS
 
-    runtime = var + 'rock/opt/rock/runtime'
+    runtime = var + "rock/opt/rock/runtime"
     runtime.mkpath
-    runtime += 'perl520'
-    system 'rm', '-fr', runtime if runtime.exist?
+    runtime += "perl520"
+    system "rm", "-fr", runtime if runtime.exist?
 
     File.symlink(prefix, runtime)
   end
