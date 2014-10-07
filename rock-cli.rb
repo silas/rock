@@ -1,37 +1,27 @@
-require 'formula'
+require "formula"
 
 class RockCli < Formula
-  homepage 'http://www.rockstack.org/'
-  url 'https://pypi.python.org/packages/source/r/rock/rock-0.20.0.tar.gz'
-  sha1 'f03931a2198c84698c206d62e65a791903cf3b2c'
+  homepage "http://www.rockstack.org/"
+  url "https://pypi.python.org/packages/source/r/rock/rock-0.20.0.tar.gz"
+  sha256 "d18b2d21cae03360985e1cbdf4b836e884c0b6a2ad124611dcd17c54b7b77845"
 
   depends_on :python
-  depends_on 'libyaml'
+  depends_on "libyaml"
 
-  resource 'virtualenv' do
-    url 'https://pypi.python.org/packages/source/v/virtualenv/virtualenv-1.11.6.tar.gz'
-    sha1 'd3f8e94bf825cc999924e276c8f1c63b8eeb0715'
+  resource "PyYAML" do
+    url "https://pypi.python.org/packages/source/P/PyYAML/PyYAML-3.11.tar.gz"
+    sha256 "c36c938a872e5ff494938b33b14aaa156cb439ec67548fcab3535bb78b0846e8"
   end
 
   def install
-    resource('virtualenv').stage { |r|
-      python do
-          system 'python', 'virtualenv.py', 'venv'
-          system ". venv/bin/activate ; pip install '#{cached_download}'"
-          system 'python', 'virtualenv.py', 'venv', '--relocatable'
-          prefix.install 'venv'
-      end
-    }
+    ENV.prepend_create_path "PYTHONPATH", libexec + "lib/python2.7/site-packages"
+    ENV.prepend_create_path "PYTHONPATH", prefix + "lib/python2.7/site-packages"
 
-    mount_path = var + 'rock'
-    opt_path = mount_path + 'opt'
+    install_args = "setup.py", "install", "--prefix=#{libexec}"
+    resource("PyYAML").stage { system "python", *install_args }
 
-    opt_path.mkpath
+    system "python", "setup.py", "install", "--prefix=#{libexec}"
 
-    (bin + 'rock').write <<-EOS.undent
-      #!/usr/bin/env bash
-      export ROCK_MOUNT_PATH='#{mount_path}'
-      exec #{prefix}/venv/bin/rock "$@"
-    EOS
+    (bin/"rock").write_env_script libexec/"bin/rock", :PYTHONPATH => ENV["PYTHONPATH"]
   end
 end
