@@ -16,6 +16,7 @@ class RockCli < Formula
   def install
     ENV.prepend_create_path "PYTHONPATH", libexec + "lib/python2.7/site-packages"
     ENV.prepend_create_path "PYTHONPATH", prefix + "lib/python2.7/site-packages"
+    ENV.prepend_create_path "ROCK_MOUNT_PATH", mount_path
 
     install_args = "setup.py", "install", "--prefix=#{libexec}"
     resource("PyYAML").stage { system "python", *install_args }
