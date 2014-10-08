@@ -14,15 +14,19 @@ class RockCli < Formula
   end
 
   def install
+    mount_path = var + 'rock'
+    opt_path = mount_path + 'opt'
+
+    opt_path.mkpath
+
     ENV.prepend_create_path "PYTHONPATH", libexec + "lib/python2.7/site-packages"
     ENV.prepend_create_path "PYTHONPATH", prefix + "lib/python2.7/site-packages"
-    ENV.prepend_create_path "ROCK_MOUNT_PATH", mount_path
 
     install_args = "setup.py", "install", "--prefix=#{libexec}"
     resource("PyYAML").stage { system "python", *install_args }
 
     system "python", "setup.py", "install", "--prefix=#{libexec}"
 
-    (bin/"rock").write_env_script libexec/"bin/rock", :PYTHONPATH => ENV["PYTHONPATH"]
+    (bin/"rock").write_env_script libexec/"bin/rock", :PYTHONPATH => ENV["PYTHONPATH"], :ROCK_MOUNT_PATH => mount_path
   end
 end
