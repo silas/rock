@@ -10,7 +10,7 @@ class RockRuntimePerl520 < Formula
   def install_local_lib
     local_lib_version = "2.000012"
 
-    system "curl", "-LO", "http://search.cpan.org/CPAN/authors/id/H/HA/HAARG/local-lib-#{local_lib_version}.tar.gz"
+    system "curl", "-LO", "http://backpan.cpan.org/authors/id/H/HA/HAARG/local-lib-#{local_lib_version}.tar.gz"
     system "tar", "-xzf", "local-lib-#{local_lib_version}.tar.gz"
 
     Dir.chdir "local-lib-#{local_lib_version}"
@@ -31,7 +31,7 @@ class RockRuntimePerl520 < Formula
   def install_carton
     carton_version = "1.0.12"
 
-    url = "http://www.cpan.org/authors/id"
+    url = "http://backpan.cpan.org/authors/id"
 
     urls = [
       "#{url}/D/DA/DAGOLDEN/File-pushd-1.009.tar.gz",
