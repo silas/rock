@@ -1,8 +1,8 @@
-FROM centos:centos6
+FROM centos:centos7
 
 MAINTAINER RockStack <packages@rockstack.org>
 
-RUN rpm -Uvh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
+RUN rpm -Uvh http://download.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-2.noarch.rpm
 RUN rpm -Uvh http://dl.rockstack.org/rpm/stable/el/rock-release.rpm
 
 RUN yum install -y \
