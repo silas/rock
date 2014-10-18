@@ -14,14 +14,14 @@ class RockRuntimePython34 < Formula
   end
 
   def install
-    ENV.append 'EXTRA_CFLAGS', '-fwrapv'
+    ENV.append 'EXTRA_CFLAGS', '-frwapv' if OS.mac? && MacOS.version <= :mavericks
 
     if ENV.compiler == :clang
       ENV.append_to_cflags '-Wno-unused-value'
       ENV.append_to_cflags '-Wno-empty-body'
       ENV.append_to_cflags '-Qunused-arguments'
     else
-      ENV.append 'LDFLAGS', "-Wl,-rpath #{lib}"
+      ENV.append 'LDFLAGS', "-Wl,-rpath=#{lib}"
     end
 
     unless MacOS::CLT.installed?
