@@ -4,7 +4,7 @@ set -e -o pipefail
 
 trap 'echo interrupted; exit' INT
 
-RUNTIMES='node08 node010 perl516 perl518 php54 php55 python27 python33 ruby19 ruby20 ruby21'
+RUNTIMES='node08 node010 perl518 perl520 php54 php55 python27 python34 ruby20 ruby21'
 
 display() { echo "-----> $@"; }
 warn() { echo "$@" >&2; }
@@ -50,12 +50,25 @@ rock_install_darwin() {
   echo
 }
 
-rock_install_linux_el() {
+rock_install_linux_el_6() {
   if ! rpm -qi epel-release &>/dev/null; then
     display 'Installing EPEL release package'
     sudo rpm -Uvh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
   fi
 
+  rock_install_linux_el
+}
+
+rock_install_linux_el_7() {
+  if ! rpm -qi epel-release &>/dev/null; then
+    display 'Installing EPEL release package'
+    sudo rpm -Uvh http://download.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-1.noarch.rpm
+  fi
+
+  rock_install_linux_el
+}
+
+rock_install_linux_el() {
   if ! rpm -qi rock-release &>/dev/null; then
     display 'Installing rpm release package'
     sudo rpm -Uvh http://dl.rockstack.org/rpm/stable/el/rock-release.rpm
@@ -74,6 +87,24 @@ rock_install_linux_el() {
 }
 
 rock_install_linux_ubuntu() {
+  if [[ "$ROCK_INSTALL_SKIP_WARNING" != 'true' ]]; then
+    echo
+    echo '##      ##    ###    ########  ##    ## #### ##    ##  ######   '
+    echo '##  ##  ##   ## ##   ##     ## ###   ##  ##  ###   ## ##    ##  '
+    echo '##  ##  ##  ##   ##  ##     ## ####  ##  ##  ####  ## ##        '
+    echo '##  ##  ## ##     ## ########  ## ## ##  ##  ## ## ## ##   #### '
+    echo '##  ##  ## ######### ##   ##   ##  ####  ##  ##  #### ##    ##  '
+    echo '##  ##  ## ##     ## ##    ##  ##   ###  ##  ##   ### ##    ##  '
+    echo ' ###  ###  ##     ## ##     ## ##    ## #### ##    ##  ######   '
+    echo
+    read -p 'Ubuntu support is no longer maintained, continue anyway (y/n)? ' -n 1 -r CONFIRM
+    echo
+    if [[ "$CONFIRM" != 'y' ]]; then
+      die 'Exiting...'
+    fi
+    echo
+  fi
+
   if ! dpkg -s rock-release 2>&1 | grep Status &>/dev/null; then
     tmp=$( mktemp -d )
 
@@ -106,8 +137,10 @@ rock_install_linux() {
   display 'Detecting Linux distro'
 
   if grep -E '(CentOS|Red Hat Enterprise Linux).* release 6\.[0-9]+.*' /etc/redhat-release &>/dev/null; then
-    rock_install_linux_el
-  elif grep DISTRIB_CODENAME /etc/lsb-release | grep precise &>/dev/null; then
+    rock_install_linux_el_6
+  elif grep -E '(CentOS|Red Hat Enterprise Linux).* release 7\.[0-9]+.*' /etc/redhat-release &>/dev/null; then
+    rock_install_linux_el_7
+  elif grep DISTRIB_CODENAME /etc/lsb-release 2>/dev/null | grep precise &>/dev/null; then
     rock_install_linux_ubuntu
   else
     die 'Unsupported or undetected Linux distro'
