@@ -28,7 +28,7 @@ OS X 10.8 / 10.9 is currently supported via Homebrew.
  1. Ensure [Homebrew][homebrew] is installed
 
     ``` console
-    $ ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+    $ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     ```
 
  1. Ensure Homebrew is up-to-date
