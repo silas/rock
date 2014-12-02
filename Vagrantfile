@@ -32,7 +32,7 @@ Vagrant.configure('2') do |config|
     c.vm.provision :shell, inline: <<-eof
       set -o errexit
       rpm -qi epel-release &>/dev/null || \
-        rpm -Uvh http://mirror.pnl.gov/epel/7/x86_64/e/epel-release-7-1.noarch.rpm
+        rpm -Uvh http://download.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-2.noarch.rpm
       yum clean all
       yum install -y curl git python-virtualenv vim
       rm -fr /opt/tests
