@@ -3,7 +3,7 @@
 
 Name:           rock-runtime-php54
 Version:        1
-Release:        14%{?dist}
+Release:        15%{?dist}
 Summary:        php54 runtime for rock
 
 Group:          Development/Languages
@@ -12,8 +12,8 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 
 BuildRequires:  rock-runtime-php54-core-rpmbuild
-Requires:       rock-runtime-php54-composer >= 1.0.0-0.4
-Requires:       rock-runtime-php54-core >= 5.4.31-1
+Requires:       rock-runtime-php54-composer >= 1.0.0-0.5
+Requires:       rock-runtime-php54-core >= 5.4.35-1
 Requires:       rock-runtime-php54-libmemcached >= 1.0.16-1
 Requires:       rock-runtime-php54-memcached >= 2.1.0-8
 
@@ -42,6 +42,9 @@ rm -rf %{buildroot}
 %{php54_rootdir}/rock.yml
 
 %changelog
+* Tue Dec 02 2014 RockStack <packages@rockstack.org> - 1-15
+- PHP 5.4.35
+
 * Mon Aug 11 2014 RockStack <packages@rockstack.org> - 1-14
 - PHP 5.4.31
 
