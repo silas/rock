@@ -6,8 +6,8 @@ end
 
 class RockRuntimePhp54 < Formula
   homepage 'http://www.php.net/'
-  url 'http://us.php.net/distributions/php-5.4.31.tar.bz2'
-  sha1 '46cb2a7827fa3af4980462f62190b96cc283ec99'
+  url 'http://us.php.net/distributions/php-5.4.35.tar.bz2'
+  sha1 '3f76d6b381a03b0be575cffa23eece30c43bc402'
 
   env :std
   keg_only 'rock'
@@ -29,6 +29,7 @@ class RockRuntimePhp54 < Formula
   depends_on 'libxml2' unless MacOS.version >= :mountain_lion
   depends_on 'mcrypt'
   depends_on 'mysql'
+  depends_on 'openssl' if build.include?('with-homebrew-openssl')
   depends_on 'pcre'
   depends_on 'postgresql' unless postgres_installed?
   depends_on 't1lib'
@@ -38,8 +39,8 @@ class RockRuntimePhp54 < Formula
   depends_on 'autoconf' => :build
 
   resource 'composer' do
-    url 'http://getcomposer.org/download/1.0.0-alpha7/composer.phar'
-    sha1 '4f8513bea6daa4f70007e4344944c2fe458650ac'
+    url 'http://getcomposer.org/download/1.0.0-alpha8/composer.phar'
+    sha1 '6eefa41101a2d1a424c3d231a1f202dfe6f09cf8'
   end
 
   resource 'memcached' do
@@ -121,7 +122,7 @@ class RockRuntimePhp54 < Formula
       '--enable-dom=shared',
       '--with-pgsql=shared',
       '--enable-wddx=shared',
-      '--with-snmp=shared,/usr',
+      '--without-snmp',  #  https://github.com/Homebrew/homebrew-php/issues/1311
       '--enable-soap=shared',
       '--with-xsl=shared,/usr',
       '--enable-xmlreader=shared',
