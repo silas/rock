@@ -121,7 +121,7 @@ class RockRuntimePhp55 < Formula
       '--enable-dom=shared',
       '--with-pgsql=shared',
       '--enable-wddx=shared',
-      '--with-snmp=shared,/usr',
+      '--without-snmp',  #  https://github.com/Homebrew/homebrew-php/issues/1311
       '--enable-soap=shared',
       '--with-xsl=shared,/usr',
       '--enable-xmlreader=shared',
