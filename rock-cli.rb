@@ -2,8 +2,8 @@ require "formula"
 
 class RockCli < Formula
   homepage "http://www.rockstack.org/"
-  url "https://pypi.python.org/packages/source/r/rock/rock-0.20.0.tar.gz"
-  sha256 "d18b2d21cae03360985e1cbdf4b836e884c0b6a2ad124611dcd17c54b7b77845"
+  url "https://pypi.python.org/packages/source/r/rock/rock-0.20.1.tar.gz"
+  sha256 "18f6d441a5794aed2c6c724073bd9f8526cb211ce04ef8284e047d9badc560b6"
 
   depends_on :python
   depends_on "libyaml"
