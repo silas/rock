@@ -100,7 +100,11 @@ def main(argv=None):
 
     if argv is None:
         argv = sys.argv[1:]
-        encoding = locale.getdefaultlocale()[1]
+        encoding = None
+        try:
+            encoding = locale.getdefaultlocale()[1]
+        except ValueError:
+            pass
         if encoding:
             argv = [a.decode(encoding) for a in sys.argv[1:]]
 
