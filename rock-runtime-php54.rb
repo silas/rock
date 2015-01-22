@@ -1,9 +1,5 @@
 require 'formula'
 
-def postgres_installed?
-  `which pg_config`.length > 0
-end
-
 class RockRuntimePhp54 < Formula
   homepage 'http://www.php.net/'
   url 'http://us.php.net/distributions/php-5.4.35.tar.bz2'
@@ -31,9 +27,10 @@ class RockRuntimePhp54 < Formula
   depends_on 'mysql'
   depends_on 'openssl' if build.include?('with-homebrew-openssl')
   depends_on 'pcre'
-  depends_on 'postgresql' unless postgres_installed?
   depends_on 't1lib'
   depends_on 'unixodbc'
+
+  depends_on :postgresql => :optional
 
   # extensions
   depends_on 'autoconf' => :build
@@ -155,7 +152,7 @@ class RockRuntimePhp54 < Formula
       args << "--with-libxml-dir=#{Formula.factory('libxml2').prefix}"
     end
 
-    if postgres_installed?
+    if build.with? 'postgresql'
       if File.directory?(Formula.factory('postgresql').opt_prefix.to_s)
         args << "--with-pgsql=#{Formula.factory('postgresql').opt_prefix}"
         args << "--with-pdo-pgsql=#{Formula.factory('postgresql').opt_prefix}"
