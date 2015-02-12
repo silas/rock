@@ -9,7 +9,7 @@ title: Python
 
 ## Runtimes
 
-  * python33 - 3.4.x
+  * python34 - 3.4.x
   * python27 - 2.7.x
 
 ## Dependency Management
