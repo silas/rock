@@ -1,5 +1,5 @@
 Name:           rock
-Version:        0.20.0
+Version:        0.20.1
 Release:        1%{?dist}
 Summary:        Build, test and run applications
 
@@ -40,6 +40,9 @@ nosetests
 %{python_sitelib}/%{name}-%{version}-py*.egg-info
 
 %changelog
+* Mon Feb 16 2015 RockStack <packages@rockstack.org> - 0.20.1-1
+- Handle invalid locale exception
+
 * Tue Aug 12 2014 RockStack <packages@rockstack.org> - 0.20.0-1
 - Make runtime optional
 - Support bare runtimes
@@ -48,7 +51,7 @@ nosetests
 - Make node runtime builds less verbose
 - Improve missing runtime error
 
-* Fri Jan 29 2014 RockStack <packages@rockstack.org> - 0.18.1-1
+* Sun Jan 29 2014 RockStack <packages@rockstack.org> - 0.18.1-1
 - Fix escaping issue
 
 * Sat Jan 18 2014 RockStack <packages@rockstack.org> - 0.18.0-1
@@ -135,10 +138,10 @@ nosetests
 * Wed Sep 12 2012 RockStack <packages@rockstack.org> - 0.6.0-1
 - Update to 0.6.0
 
-* Sat Aug 19 2012 RockStack <packages@rockstack.org> - 0.5.0-1
+* Sun Aug 19 2012 RockStack <packages@rockstack.org> - 0.5.0-1
 - Update to 0.5.0
 
-* Fri Aug 18 2012 RockStack <packages@rockstack.org> - 0.4.0-1
+* Sat Aug 18 2012 RockStack <packages@rockstack.org> - 0.4.0-1
 - Update to 0.4.0
 
 * Mon Aug 06 2012 RockStack <packages@rockstack.org> - 0.3.1-1
