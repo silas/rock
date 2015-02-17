@@ -2,3 +2,4 @@ source "http://rubygems.org"
 
 gem 'kramdown'
 gem 'rake'
+gem 'test-unit'
