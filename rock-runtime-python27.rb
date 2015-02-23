@@ -14,7 +14,7 @@ class RockRuntimePython27 < Formula
   end
 
   def install
-    ENV.append 'EXTRA_CFLAGS', '-frwapv' if OS.mac? && MacOS.version <= :mavericks
+    ENV.append 'EXTRA_CFLAGS', '-frwapv' if OS.mac? && ENV.compiler != :clang
 
     if ENV.compiler == :clang
       ENV.append_to_cflags '-Wno-unused-value'
