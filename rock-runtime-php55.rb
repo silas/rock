@@ -10,7 +10,7 @@ class RockRuntimePhp55 < Formula
 
   skip_clean ['bin', 'sbin']
 
-  depends_on 'berkeley-db'
+  depends_on 'berkeley-db4'
   depends_on 'curl'
   depends_on 'enchant'
   depends_on 'freetype'
@@ -106,7 +106,7 @@ class RockRuntimePhp55 < Formula
       '--with-gd=shared',
       '--enable-bcmath=shared',
       '--enable-dba=shared',
-      "--with-db4=#{Formula.factory('berkeley-db').prefix}",
+      "--with-db4=#{Formula.factory('berkeley-db4').prefix}",
       '--with-xmlrpc=shared',
       '--with-ldap=shared',
       '--with-ldap-sasl',
