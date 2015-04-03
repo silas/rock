@@ -116,7 +116,6 @@ class RockRuntimePhp55 < Formula
       "--with-pdo-mysql=#{Formula.factory('mysql').bin}/mysql_config",
       '--with-pdo-sqlite=/usr',
       '--enable-dom=shared',
-      '--with-pgsql=shared',
       '--enable-wddx=shared',
       '--without-snmp',  #  https://github.com/Homebrew/homebrew-php/issues/1311
       '--enable-soap=shared',
