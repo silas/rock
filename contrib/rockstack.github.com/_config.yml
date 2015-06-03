@@ -1,0 +1,16 @@
+safe: true
+pygments: true
+permalink: /news/:title/
+paginate: 5
+exclude:
+ - vendor
+ - Gemfile
+ - Gemfile.lock
+
+markdown: redcarpet
+redcarpet:
+  extensions: 
+   - no_intra_emphasis
+   - fenced_code_blocks
+   - autolink
+   - smart
