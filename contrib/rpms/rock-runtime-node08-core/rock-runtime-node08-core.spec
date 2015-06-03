@@ -1,0 +1,108 @@
+%filter_from_provides /.*/d
+%filter_setup
+
+%global runtime node08
+%global node08_rootdir /opt/rock/runtime/%{runtime}
+
+Name:           rock-runtime-node08-core
+Version:        0.8.28
+Release:        1%{?dist}
+Summary:        A Node.js 0.8.x runtime
+
+Group:          Development/Languages
+License:        MIT
+URL:            http://nodejs.org
+Source0:        http://nodejs.org/dist/v%{version}/node-v%{version}.tar.gz
+BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
+BuildRequires:  libevent-devel
+BuildRequires:  openssl-devel
+BuildRequires:  python
+Requires:       man
+
+%description
+Node is an evented I/O framework for the V8 JavaScript engine.
+
+%package        rpmbuild
+Summary:        RPM build files for %{name}
+Group:          Development/Libraries
+Requires:       %{name} = %{version}-%{release}
+
+%description    rpmbuild
+Node is an evented I/O framework for the V8 JavaScript engine.
+
+This packages contains resources for building %{name} RPMs.
+
+%prep
+%setup -q -n node-v%{version}
+
+%build
+./configure --prefix=%{node08_rootdir}%{_prefix}
+
+%{__make}
+
+%install
+rm -rf %{buildroot}
+
+%{__make} install DESTDIR=%{buildroot}
+
+rm -f %{buildroot}%{node08_rootdir}%{_prefix}/lib/dtrace/node.d
+
+mkdir -p %{buildroot}%{_sysconfdir}/rpm
+
+cat > %{buildroot}%{_sysconfdir}/rpm/macros.rock-node08 << EOF
+%%node08_rootdir %{node08_rootdir}
+EOF
+
+%clean
+rm -rf %{buildroot}
+
+%files
+%defattr(-,root,root,-)
+%doc AUTHORS ChangeLog LICENSE README.md
+%{node08_rootdir}%{_bindir}/node
+%{node08_rootdir}%{_bindir}/node-waf
+%{node08_rootdir}%{_bindir}/npm
+%{node08_rootdir}%{_includedir}/node
+%{node08_rootdir}%{_mandir}/man1/node.1*
+%{node08_rootdir}%{_prefix}/lib/node
+%{node08_rootdir}%{_prefix}/lib/node_modules
+
+%files rpmbuild
+%defattr(-,root,root,-)
+%{_sysconfdir}/rpm/macros.rock-node08
+
+%changelog
+* Mon Aug 11 2014 RockStack <packages@rockstack.org> - 0.8.28-1
+- Update to 0.8.28
+
+* Thu Jun 26 2014 RockStack <packages@rockstack.org> - 0.8.27-1
+- Update to 0.8.27
+
+* Sat Oct 19 2013 RockStack <packages@rockstack.org> - 0.8.26-1
+- Update to 0.8.26
+
+* Sun Mar 17 2013 RockStack <packages@rockstack.org> - 0.8.22-1
+- Update to 0.8.22
+
+* Sun Feb 03 2013 RockStack <packages@rockstack.org> - 0.8.18-1
+- Update to 0.8.18
+
+* Sat Nov 17 2012 RockStack <packages@rockstack.org> - 0.8.14-1
+- Update to 0.8.14
+
+* Sat Sep 29 2012 RockStack <packages@rockstack.org> - 0.8.11-1
+- Update to 0.8.11
+
+* Tue Sep 11 2012 RockStack <packages@rockstack.org> - 0.8.9-1
+- Update to 0.8.9
+
+* Fri Aug 10 2012 RockStack <packages@rockstack.org> - 0.8.6-1
+- Update to 0.8.6
+
+* Tue Jul 10 2012 RockStack <packages@rockstack.org> - 0.8.1-2
+- Add man requirement
+- Add rpm macro
+
+* Sat Jun 30 2012 RockStack <packages@rockstack.org> - 0.8.1-1
+- Initial build

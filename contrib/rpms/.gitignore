@@ -1,0 +1,13 @@
+*.bz2
+*.deb
+*.gz
+*.pyc
+*.rpm
+*.swp
+*.tgz
+*.upload
+*.zip
+.vagrant
+build
+cpanm
+fabfile.py

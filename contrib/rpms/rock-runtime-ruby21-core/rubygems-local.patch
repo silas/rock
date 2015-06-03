@@ -1,0 +1,62 @@
+diff -ru ruby-2.1.0.orig/lib/rubygems/commands/install_command.rb ruby-2.1.0/lib/rubygems/commands/install_command.rb
+--- ruby-2.1.0.orig/lib/rubygems/commands/install_command.rb	2014-02-01 13:34:30.000000000 -0800
++++ ruby-2.1.0/lib/rubygems/commands/install_command.rb	2014-02-01 13:35:58.000000000 -0800
+@@ -228,7 +228,18 @@
+   def install_gem_without_dependencies name, req # :nodoc:
+     gem = nil
+ 
+-    if remote? then
++    if local? then
++      if name =~ /\.gem$/ and File.file? name then
++        source = Gem::Source::SpecificFile.new name
++        spec = source.spec
++      else
++        source = Gem::Source::Local.new
++        spec = source.find_gem name, req
++      end
++      gem = source.download spec if spec
++    end
++
++    if remote? and not gem then
+       dependency = Gem::Dependency.new name, req
+       dependency.prerelease = options[:prerelease]
+ 
+@@ -236,13 +247,6 @@
+       gem = fetcher.download_to_cache dependency
+     end
+ 
+-    if local? and not gem then
+-      source = Gem::Source::Local.new
+-      spec = source.find_gem name, req
+-
+-      gem = source.download spec
+-    end
+-
+     inst = Gem::Installer.new gem, options
+     inst.install
+ 
+diff -ru ruby-2.1.0.orig/test/rubygems/test_gem_commands_install_command.rb ruby-2.1.0/test/rubygems/test_gem_commands_install_command.rb
+--- ruby-2.1.0.orig/test/rubygems/test_gem_commands_install_command.rb	2014-02-01 13:34:30.000000000 -0800
++++ ruby-2.1.0/test/rubygems/test_gem_commands_install_command.rb	2014-02-01 13:35:58.000000000 -0800
+@@ -559,6 +559,20 @@
+     assert_equal %w[a-2], @cmd.installed_specs.map { |spec| spec.full_name }
+   end
+ 
++  def test_install_gem_ignore_dependencies_specific_file
++    spec = quick_spec 'a', 2
++
++    util_build_gem spec
++
++    FileUtils.mv spec.cache_file, @tempdir
++
++    @cmd.options[:ignore_dependencies] = true
++
++    @cmd.install_gem File.join(@tempdir, spec.file_name), nil
++
++    assert_equal %w[a-2], @cmd.installed_specs.map { |spec| spec.full_name }
++  end
++
+   def test_parses_requirement_from_gemname
+     spec_fetcher do |fetcher|
+       fetcher.gem 'a', 2
+Only in ruby-2.1.0/test/rubygems: test_gem_commands_install_command.rb.orig
