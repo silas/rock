@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+clone() {
+  src="$1"
+  dst="${2-$( basename $src )}"
+  if [[ ! -e "$dst" ]]; then
+      git clone "git@github.com:${src}.git" "$dst"
+  fi
+}
+
+mkdir -p misc/modules
+
+clone ${ROCK_PYTHON-rockstack/rock}
+clone ${ROCK_RPMS-rockstack/rpms}
+clone ${ROCK_HOMEBREW-rockstack/homebrew-rock} homebrew
+clone ${ROCK_TESTS-rockstack/tests}
+clone ${ROCK_SITE-rockstack/rockstack.github.com} site
+clone ${ROCK_UTILS-rockstack/utils} utils
+clone ${ROCK_DOCKER_CENTOS-rockstack/docker-centos}

@@ -1,0 +1,9 @@
+*swp
+.DS_Store
+/docker-centos
+/homebrew
+/rock
+/rpms
+/site
+/tests
+/utils
