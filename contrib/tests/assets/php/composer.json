@@ -1,0 +1,6 @@
+{
+    "require": {
+        "phpunit/phpunit": "*",
+        "dflydev/markdown": "*"
+    }
+}

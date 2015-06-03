@@ -1,0 +1,9 @@
+{
+  "name": "sample",
+  "description": "Rock sample",
+  "version": "0.0.1",
+  "author": "Jane Smith <jane@example.org>",
+  "dependencies": { "markdown": "*" },
+  "scripts": { "test": "node test.js" },
+  "main": "./sample"
+}
